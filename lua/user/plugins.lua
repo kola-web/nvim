@@ -75,7 +75,8 @@ return packer.startup(function(use)
 	-- Colorschemes
 	use({ "folke/tokyonight.nvim" })
 	use({ "lunarvim/darkplus.nvim" })
-	use({ "sainnhe/everforest" })
+	use({ "projekt0n/github-nvim-theme" })
+	use({ "Mofiqul/dracula.nvim" })
 
 	-- cmp plugins
 	use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
@@ -91,6 +92,7 @@ return packer.startup(function(use)
 
 	-- LSP
 	-- use { "williamboman/nvim-lsp-installer",  } -- simple to use language server installer
+	use({ "onsails/lspkind-nvim" }) -- vscode-like pictograms
 	use({ "neovim/nvim-lspconfig" }) -- enable LSP
 	use({ "williamboman/mason.nvim" })
 	use({ "williamboman/mason-lspconfig.nvim" })
@@ -98,6 +100,7 @@ return packer.startup(function(use)
 	use({ "RRethy/vim-illuminate" })
 	use({ "windwp/nvim-ts-autotag" })
 	use({ "b0o/schemastore.nvim" })
+	use({ "glepnir/lspsaga.nvim" })
 
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim" })

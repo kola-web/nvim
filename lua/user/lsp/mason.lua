@@ -9,6 +9,7 @@ local servers = {
 	"yamlls",
 	"volar",
 	"emmet_ls",
+	"eslint",
 }
 
 local settings = {
