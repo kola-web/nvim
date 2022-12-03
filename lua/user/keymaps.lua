@@ -46,8 +46,8 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<tab>", ":bnext<CR>", opts)
-keymap("n", "<S-tab>", ":bprevious<CR>", opts)
+keymap("n", "<tab>", "::BufferLineCycleNext<CR><CR>", opts)
+keymap("n", "<S-tab>", "::BufferLineCyclePrev<CR><CR>", opts)
 
 -- Better paste
 keymap("v", "p", '"_dP', opts)
