@@ -13,8 +13,16 @@ if not kind_status_ok then
 	return
 end
 
-require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets/" })
-require("luasnip.loaders.from_vscode").lazy_load({ paths = "/mnt/c/Users/l1556/AppData/Roaming/Code/User/snippets" })
+local has = vim.fn.has
+local is_mac = has("macunix")
+local is_linux = has("linux")
+
+if is_mac then
+	require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets/" })
+end
+if is_linux then
+	require("luasnip.loaders.from_vscode").lazy_load({ paths = "/mnt/c/Users/l1556/AppData/Roaming/Code/User/snippets" })
+end
 require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
