@@ -5,5 +5,5 @@ if not status_ok then
 end
 
 npairs.setup({
-  disable_filetype = { "TelescopePrompt" , "vim" },
+	disable_filetype = { "TelescopePrompt", "vim" },
 })
