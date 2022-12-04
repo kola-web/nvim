@@ -4,5 +4,4 @@ if not present then
 	return
 end
 
-marks.setup({
-})
+marks.setup({})

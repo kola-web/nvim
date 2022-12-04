@@ -75,8 +75,6 @@ return packer.startup(function(use)
 	-- Colorschemes
 	use({ "folke/tokyonight.nvim" })
 	use({ "lunarvim/darkplus.nvim" })
-	use({ "projekt0n/github-nvim-theme" })
-	use({ "Mofiqul/dracula.nvim" })
 
 	-- cmp plugins
 	use({ "hrsh7th/nvim-cmp" }) -- The completion plugin

@@ -186,11 +186,11 @@ local mappings = {
 
 	l = {
 		name = "LSP",
-		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+		a = { "<cmd>Lspsaga code_action<CR>", "Code Action" },
 		e = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "diagnostic_setloclist" },
 		f = { "<cmd>lua vim.diagnostic.open_float()<cr>", "diagnostic_float" },
-		n = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Netx Errors" },
-		p = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Errors" },
+		n = { "<cmd>Lspsaga diagnostic_jump_next<CR>", "Netx Errors" },
+		N = { "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Prev Errors" },
 		r = { "<cmd>lua vim.lsp.buf.references()<cr>", "Rename" },
 		s = { "<cmd>lua Lspsaga signature_help()<cr>", "signature" },
 		t = { "<cmd>Telescope filetypes<cr>", "filetypes" },
