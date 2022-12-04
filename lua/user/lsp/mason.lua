@@ -1,3 +1,10 @@
+local null_servers = {
+	"prettier",
+	"stylua",
+	"shellcheck",
+	"shfmt",
+}
+
 local servers = {
 	"sumneko_lua",
 	"cssls",
@@ -28,6 +35,10 @@ local settings = {
 require("mason").setup(settings)
 require("mason-lspconfig").setup({
 	ensure_installed = servers,
+	automatic_installation = true,
+})
+require("mason-null-ls").setup({
+	ensure_installed = null_servers,
 	automatic_installation = true,
 })
 
