@@ -295,4 +295,4 @@ local vmappings = {
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
-ghich_key.register(vmappings, vopts)
+which_key.register(vmappings, vopts)
