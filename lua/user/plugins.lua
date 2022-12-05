@@ -100,7 +100,6 @@ return packer.startup(function(use)
 	use({ "RRethy/vim-illuminate" })
 	use({ "windwp/nvim-ts-autotag" })
 	use({ "b0o/schemastore.nvim" })
-	use({ "glepnir/lspsaga.nvim" })
 
 	-- Telescope
 	use({ "nvim-telescope/telescope.nvim" })

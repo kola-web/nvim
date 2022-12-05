@@ -186,16 +186,16 @@ local mappings = {
 
 	l = {
 		name = "LSP",
-		a = { "<cmd>Lspsaga code_action<CR>", "Code Action" },
+		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 		e = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "diagnostic_setloclist" },
-		f = { "<cmd>lua vim.diagnostic.open_float()<cr>", "diagnostic_float" },
-		n = { "<cmd>Lspsaga diagnostic_jump_next<CR>", "Netx Errors" },
-		N = { "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Prev Errors" },
-		r = { "<cmd>lua vim.lsp.buf.references()<cr>", "Rename" },
-		s = { "<cmd>lua Lspsaga signature_help()<cr>", "signature" },
+		i = { "<cmd>LspInfo<cr>", "LspInfo" },
+		I = { "<cmd>LspInstallInfo<cr>", "LspInstallInfo" },
+		j = { "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", "Netx Errors" },
+		k = { "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", "Prev Errors" },
+		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+		s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "signature" },
 		t = { "<cmd>Telescope filetypes<cr>", "filetypes" },
-		D = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "type_definition" },
-		R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+		d = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "type_definition" },
 	},
 
 	s = {

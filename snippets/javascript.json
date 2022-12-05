@@ -1,0 +1,34 @@
+{
+  "Print to console": {
+    "scope": "javascript,typescript",
+    "prefix": "cl clg",
+    "body": [
+      "console.log($1)"
+    ],
+    "description": "Log output to console"
+  },
+  "wx.ajax": {
+    "scope": "javascript,typescript",
+    "prefix": "wxa",
+    "body": [
+      "wx.ajax({",
+      "  method: \"GET\",",
+      "  url: \"\",",
+      "  data: {},",
+      "}).then((res) => {",
+      "  console.log(\"res: \", res);",
+      "});",
+      ""
+    ],
+    "description": "ajax"
+  },
+  "e.currentTarget.dataset": {
+    "scope": "javascript,typescript",
+    "prefix": "wxt",
+    "body": [
+      "const {$1} = e.currentTarget.dataset;",
+      ""
+    ],
+    "description": ""
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "kola-snippets",
+  "author": "kola",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "vue"
+        ],
+        "path": "./vue.json"
+      },
+      {
+        "language": [
+          "json"
+        ],
+        "path": "./json.json"
+      },
+      {
+        "language": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "svelte"
+        ],
+        "path": "./javascript.json"
+      }
+    ]
+  }
+}
