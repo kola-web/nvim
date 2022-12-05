@@ -208,6 +208,21 @@ local mappings = {
 			"Colorscheme",
 		},
 		t = { "<cmd>TodoTelescope<cr>", "todoList" },
+		f = {
+			function()
+				require("telescope").extensions.file_browser.file_browser({
+					path = "%:p:h",
+					cwd = vim.fn.expand("%:p:h"),
+					respect_gitignore = false,
+					hidden = true,
+					grouped = true,
+					previewer = false,
+					initial_mode = "normal",
+					layout_config = { height = 40 },
+				})
+			end,
+			"file_browser",
+		},
 		c = { "<cmd>Telescope themes<cr>", "todoList" },
 		h = { "<cmd>Telescope help_tags<cr>", "Help" },
 		i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
@@ -280,4 +295,4 @@ local vmappings = {
 
 which_key.setup(setup)
 which_key.register(mappings, opts)
-which_key.register(vmappings, vopts)
+ghich_key.register(vmappings, vopts)
