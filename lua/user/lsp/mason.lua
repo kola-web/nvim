@@ -14,9 +14,10 @@ local servers = {
 	"bashls",
 	"jsonls",
 	"yamlls",
-	"volar",
+	-- "volar",
 	"emmet_ls",
 	"eslint",
+  "vuels",
 }
 
 local settings = {
