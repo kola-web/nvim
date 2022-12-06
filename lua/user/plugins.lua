@@ -119,6 +119,9 @@ return packer.startup(function(use)
 	-- mark
 	use({ "chentoast/marks.nvim" })
 
+	-- code run
+	use({ "CRAG666/code_runner.nvim", requires = "nvim-lua/plenary.nvim" })
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then

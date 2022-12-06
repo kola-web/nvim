@@ -144,12 +144,11 @@ local mappings = {
 
 	r = {
 		name = "Replace",
-		r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
-		w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
-		f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
 		d = { "<cmd>%s/div/view/g<cr>", "Node" },
-		p = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', "Node" },
-		i = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', "Node" },
+		p = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', "px-->rpx" },
+		i = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', "px-->rem" },
+		c = { "<cmd>RunClose <cr>", "run close" },
+		r = { "<cmd>RunFile <cr>", "run file" },
 	},
 
 	g = {
