@@ -43,6 +43,7 @@ cmp.setup({
 		{ name = "path" },
 	}),
 	formatting = {
+		fields = { "kind", "abbr", "menu" },
 		format = lspkind.cmp_format({ with_text = false, maxwidth = 50 }),
 	},
 })
