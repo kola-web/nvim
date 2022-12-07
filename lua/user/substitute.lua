@@ -7,7 +7,7 @@ substitute.setup({
 	on_substitute = nil,
 	yank_substituted_text = false,
 	range = {
-		prefix = "s",
+		prefix = "x",
 		prompt_current_text = false,
 		confirm = false,
 		complete_word = false,

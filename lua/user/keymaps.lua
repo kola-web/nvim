@@ -71,6 +71,8 @@ keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", opts)
 keymap("n", "ga", "<cmd>TextCaseOpenTelescope<CR>", opts)
 keymap("v", "ga", "<cmd>TextCaseOpenTelescope<CR>", opts)
 
+-- sneak
+
 -- Telescope
 -- keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
 -- keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
