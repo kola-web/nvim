@@ -3,6 +3,7 @@ local null_servers = {
 	"stylua",
 	"shellcheck",
 	"shfmt",
+	"deno",
 }
 
 local servers = {
@@ -17,7 +18,7 @@ local servers = {
 	-- "volar",
 	"emmet_ls",
 	"eslint",
-  "vuels",
+	"vuels",
 }
 
 local settings = {
