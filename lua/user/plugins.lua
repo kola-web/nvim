@@ -122,6 +122,9 @@ return packer.startup(function(use)
 	-- code run
 	use({ "CRAG666/code_runner.nvim", requires = "nvim-lua/plenary.nvim" })
 
+  -- markdown
+	use({ "ellisonleao/glow.nvim" })
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
