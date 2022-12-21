@@ -93,6 +93,7 @@ return packer.startup(function(use)
 	use({ "neovim/nvim-lspconfig" }) -- enable LSP
 	use({ "williamboman/mason.nvim" })
 	use({ "williamboman/mason-lspconfig.nvim" })
+	use({ "j-hui/fidget.nvim" })
 	use({ "jayp0521/mason-null-ls.nvim" })
 	use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
 	use({ "RRethy/vim-illuminate" })
@@ -122,7 +123,7 @@ return packer.startup(function(use)
 	-- code run
 	use({ "CRAG666/code_runner.nvim", requires = "nvim-lua/plenary.nvim" })
 
-  -- markdown
+	-- markdown
 	use({ "ellisonleao/glow.nvim" })
 
 	-- Automatically set up your configuration after cloning packer.nvim
