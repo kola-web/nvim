@@ -4,8 +4,8 @@ local keymap = vim.keymap.set
 local opts = { silent = true }
 
 --Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
+keymap('', '<Space>', '<Nop>', opts)
+vim.g.mapleader = ' '
 
 -- Modes
 --   normal_mode = "n",
@@ -16,60 +16,60 @@ vim.g.mapleader = " "
 --   command_mode = "c",
 
 -- All
-keymap("", "<S-l>", "$", opts)
-keymap("", "<S-h>", "^", opts)
+keymap('', '<S-l>', '$', opts)
+keymap('', '<S-h>', '^', opts)
 
 -- Normal --
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+keymap('n', '<C-h>', '<C-w>h', opts)
+keymap('n', '<C-j>', '<C-w>j', opts)
+keymap('n', '<C-k>', '<C-w>k', opts)
+keymap('n', '<C-l>', '<C-w>l', opts)
 
-keymap("n", "<C-m>", "<Ignore><Plug>(matchup-%)", opts)
-keymap("n", "<C-z>", "<nop>", opts)
-keymap("n", "(", "<cmd>BufferLineMovePrev<cr>", opts)
-keymap("n", ")", "<cmd>BufferLineMoveNext<cr>", opts)
+keymap('n', '<C-m>', '<Ignore><Plug>(matchup-%)', opts)
+keymap('n', '<C-z>', '<nop>', opts)
+keymap('n', '(', '<cmd>BufferLineMovePrev<cr>', opts)
+keymap('n', ')', '<cmd>BufferLineMoveNext<cr>', opts)
 
 -- vue jump
-keymap("n", "]h", "/<templacet<cr>", opts)
-keymap("n", "]H", "/</templacet<cr>", opts)
-keymap("n", "]s", "/<script<cr>", opts)
-keymap("n", "]S", "/</script<cr>", opts)
-keymap("n", "]c", "/<style<cr>", opts)
-keymap("n", "]C", "/</style<cr>", opts)
+keymap('n', ']h', '/<templacet<cr>', opts)
+keymap('n', ']H', '/</templacet<cr>', opts)
+keymap('n', ']s', '/<script<cr>', opts)
+keymap('n', ']S', '/</script<cr>', opts)
+keymap('n', ']c', '/<style<cr>', opts)
+keymap('n', ']C', '/</style<cr>', opts)
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap('n', '<C-Up>', ':resize -2<CR>', opts)
+keymap('n', '<C-Down>', ':resize +2<CR>', opts)
+keymap('n', '<C-Left>', ':vertical resize -2<CR>', opts)
+keymap('n', '<C-Right>', ':vertical resize +2<CR>', opts)
 
 -- Navigate buffers
-keymap("n", "<tab>", "::BufferLineCycleNext<CR><CR>", opts)
-keymap("n", "<S-tab>", "::BufferLineCyclePrev<CR><CR>", opts)
+keymap('n', '<tab>', '::BufferLineCycleNext<CR><CR>', opts)
+keymap('n', '<S-tab>', '::BufferLineCyclePrev<CR><CR>', opts)
 
 -- Better paste
-keymap("v", "p", '"_dP', opts)
+keymap('v', 'p', '"_dP', opts)
 
 -- Insert --
 -- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
+keymap('i', 'jk', '<ESC>', opts)
 
 -- Visual --
 -- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
+keymap('v', '<', '<gv', opts)
+keymap('v', '>', '>gv', opts)
 
 -- substitute
-keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", opts)
-keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", opts)
-keymap("n", "S", "<cmd>lua require('substitute').eol()<cr>", opts)
-keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", opts)
+keymap('n', 's', "<cmd>lua require('substitute').operator()<cr>", opts)
+keymap('n', 'ss', "<cmd>lua require('substitute').line()<cr>", opts)
+keymap('n', 'S', "<cmd>lua require('substitute').eol()<cr>", opts)
+keymap('x', 's', "<cmd>lua require('substitute').visual()<cr>", opts)
 
 -- textcase
-keymap("n", "ga", "<cmd>TextCaseOpenTelescope<CR>", opts)
-keymap("v", "ga", "<cmd>TextCaseOpenTelescope<CR>", opts)
+keymap('n', 'ga', '<cmd>TextCaseOpenTelescope<CR>', opts)
+keymap('v', 'ga', '<cmd>TextCaseOpenTelescope<CR>', opts)
 
 -- sneak
 
@@ -99,7 +99,7 @@ keymap("v", "ga", "<cmd>TextCaseOpenTelescope<CR>", opts)
 
 -- neovide
 vim.g.neovide_input_use_logo = 1
-vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
