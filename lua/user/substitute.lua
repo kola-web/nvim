@@ -1,21 +1,22 @@
-local status_ok, substitute = pcall(require, "substitute")
+local status_ok, substitute = pcall(require, 'substitute')
 if not status_ok then
-	return
+  return
 end
 
-substitute.setup({
-	on_substitute = nil,
-	yank_substituted_text = false,
-	range = {
-		prefix = "x",
-		prompt_current_text = false,
-		confirm = false,
-		complete_word = false,
-		motion1 = false,
-		motion2 = false,
-		suffix = "",
-	},
-	exchange = {
-		motion = true,
-	},
-})
+substitute.setup {
+  on_substitute = nil,
+  yank_substituted_text = false,
+  range = {
+    prefix = 'S',
+    prompt_current_text = false,
+    confirm = false,
+    complete_word = false,
+    motion1 = false,
+    motion2 = false,
+    suffix = '',
+  },
+  exchange = {
+    motion = true,
+  },
+}
+

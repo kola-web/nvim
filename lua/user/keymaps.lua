@@ -67,11 +67,11 @@ keymap('n', 'ss', "<cmd>lua require('substitute').line()<cr>", opts)
 keymap('n', 'S', "<cmd>lua require('substitute').eol()<cr>", opts)
 keymap('x', 's', "<cmd>lua require('substitute').visual()<cr>", opts)
 
--- textcase
-keymap('n', 'ga', '<cmd>TextCaseOpenTelescope<CR>', opts)
-keymap('v', 'ga', '<cmd>TextCaseOpenTelescope<CR>', opts)
+--abolish.vim
+keymap('n', 'ga', '<Plug>(abolish-coerce-word)')
+keymap('v', 'ga', '<Plug>(abolish-coerce)')
 
--- sneak
+
 
 -- Telescope
 -- keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)

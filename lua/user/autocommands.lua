@@ -1,46 +1,44 @@
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = {
-		"Jaq",
-		"qf",
-		"help",
-		"man",
-		"lspinfo",
-		"spectre_panel",
-		"lir",
-		"DressingSelect",
-		"tsplayground",
-		"Markdown",
-	},
-	callback = function()
-		vim.cmd([[
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = {
+    'Jaq',
+    'qf',
+    'help',
+    'man',
+    'lspinfo',
+    'spectre_panel',
+    'lir',
+    'DressingSelect',
+    'tsplayground',
+  },
+  callback = function()
+    vim.cmd [[
       nnoremap <silent> <buffer> q :close<CR> 
       set nobuflisted 
-    ]])
-	end,
+    ]]
+  end,
 })
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "*" },
-	callback = function()
-		vim.cmd([[
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = { '*' },
+  callback = function()
+    vim.cmd [[
        set formatoptions-=cro
-    ]])
-	end,
+    ]]
+  end,
 })
 
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-	callback = function()
-		vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
-	end,
+vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
+  callback = function()
+    vim.highlight.on_yank { higroup = 'Visual', timeout = 200 }
+  end,
 })
 
-
-vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = {
-		"Markdown",
-	},
-	callback = function()
-		vim.cmd([[
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  pattern = {
+    'Markdown',
+  },
+  callback = function()
+    vim.cmd [[
       "autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
       inoremap <buffer> ,f <Esc>/<++><CR>:nohlsearch<CR>"_c4l
       inoremap <buffer> <c-e> <Esc>/<++><CR>:nohlsearch<CR>"_c4l
@@ -59,7 +57,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
       inoremap <buffer> ,3 ###<Space><Enter><++><Esc>kA
       inoremap <buffer> ,4 ####<Space><Enter><++><Esc>kA
       inoremap <buffer> ,l --------<Enter>
-    ]])
-	end,
+    ]]
+  end,
 })
 

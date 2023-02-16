@@ -58,6 +58,7 @@ return packer.startup(function(use)
   use { 'goolord/alpha-nvim' }
   use { 'folke/which-key.nvim' }
   use { 'aserowy/tmux.nvim' }
+  use { 'windwp/nvim-spectre' }
 
   use { 'kola-web/vim-indent-object' }
   use { 'kana/vim-textobj-user' }
@@ -66,13 +67,15 @@ return packer.startup(function(use)
   use { 'wellle/targets.vim' }
   use { 'tpope/vim-repeat' }
   use { 'tpope/vim-surround' }
+  use { 'tpope/vim-abolish' }
   use { 'gbprod/substitute.nvim' }
-  use { 'johmsalas/text-case.nvim' }
   use { 'andymass/vim-matchup' }
+  use { 'ggandor/lightspeed.nvim' }
 
   -- Colorschemes
   use { 'folke/tokyonight.nvim' }
   use { 'catppuccin/nvim', as = 'catppuccin' }
+  use { 'lunarvim/Onedarker.nvim' }
 
   -- cmp plugins
   use { 'hrsh7th/nvim-cmp' } -- The completion plugin
@@ -115,9 +118,9 @@ return packer.startup(function(use)
   use { 'lewis6991/gitsigns.nvim' }
 
   -- DAP
-  use { 'mfussenegger/nvim-dap' }
-  use { 'rcarriga/nvim-dap-ui' }
-  use { 'ravenxrz/DAPInstall.nvim' }
+  -- use { 'mfussenegger/nvim-dap' }
+  -- use { 'rcarriga/nvim-dap-ui' }
+  -- use { 'ravenxrz/DAPInstall.nvim' }
 
   -- mark
   use { 'chentoast/marks.nvim' }

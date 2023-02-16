@@ -50,6 +50,5 @@ telescope.setup {
   },
 }
 
-telescope.load_extension 'textcase'
 telescope.load_extension 'file_browser'
 telescope.load_extension("ui-select")

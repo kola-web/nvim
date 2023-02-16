@@ -222,7 +222,7 @@ local mappings = {
       end,
       'file_browser',
     },
-    c = { '<cmd>Telescope themes<cr>', 'todoList' },
+    c = { '<cmd>Telescope colorscheme<cr>', 'colorscheme' },
     h = { '<cmd>Telescope help_tags<cr>', 'Help' },
     i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", 'Media' },
     l = { '<cmd>Telescope resume<cr>', 'Last Search' },
@@ -231,6 +231,24 @@ local mappings = {
     R = { '<cmd>Telescope registers<cr>', 'Registers' },
     k = { '<cmd>Telescope keymaps<cr>', 'Keymaps' },
     C = { '<cmd>Telescope commands<cr>', 'Commands' },
+    s = {
+      function()
+        require('spectre').open()
+      end,
+      'replace',
+    },
+    w = {
+      function()
+        require('spectre').open_visual { select_word = true }
+      end,
+      'replace',
+    },
+    p = {
+      function()
+        require('spectre').open_file_search()
+      end,
+      'replace',
+    },
   },
 
   S = {
@@ -281,7 +299,13 @@ local vopts = {
 
 local vmappings = {
   ['/'] = { "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", 'Comment' },
-  s = { "<esc><cmd>'<,'>SnipRun<cr>", 'Run range' },
+  S = { "<esc><cmd>'<,'>SnipRun<cr>", 'Run range' },
+  s = {
+    function()
+      require('spectre').open()
+    end,
+    'replace',
+  },
 }
 
 which_key.setup(setup)
