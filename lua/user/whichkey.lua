@@ -84,7 +84,7 @@ local mappings = {
   ['w'] = { '<cmd>w!<CR>', 'Save' },
   ['q'] = { '<cmd>q!<CR>', 'Quit' },
   -- ["c"] = { "<cmd>bd<CR>", "Close Buffer" },
-  ['c'] = { '<cmd>bd<CR>', 'Close Buffer' },
+  ['c'] = { "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>", 'Close Buffer' },
   ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
   ['o'] = { '<cmd>Telescope lsp_document_symbols<CR>', 'Symbols' },
   ['R'] = { '<cmd>lua require("renamer").rename()<cr>', 'Rename' },
@@ -285,6 +285,14 @@ local mappings = {
     name = 'Treesitter',
     h = { '<cmd>TSHighlightCapturesUnderCursor<cr>', 'Highlight' },
     p = { '<cmd>TSPlaygroundToggle<cr>', 'Playground' },
+  },
+  [' '] = {
+    name = 'hop',
+    w = { '<cmd>HopWord<cr>', 'HopWord' },
+    s = { '<cmd>HopChar2<cr>', 'HopChar2' },
+    ['/'] = { '<cmd>HopPattern<cr>', 'HopPattern' },
+    l = { '<cmd>HopLine<cr>', 'HopLine' },
+    L = { '<cmd>HopLine<cr>', 'HopLineStart' },
   },
 }
 

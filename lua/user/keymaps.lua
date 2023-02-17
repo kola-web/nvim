@@ -1,7 +1,7 @@
 -- Shorten function name
 local keymap = vim.keymap.set
 -- Silent keymap option
-local opts = { silent = true }
+local opts = { silent = true, noremap = true }
 
 --Remap space as leader key
 keymap('', '<Space>', '<Nop>', opts)
@@ -66,12 +66,14 @@ keymap('n', 's', "<cmd>lua require('substitute').operator()<cr>", opts)
 keymap('n', 'ss', "<cmd>lua require('substitute').line()<cr>", opts)
 keymap('n', 'S', "<cmd>lua require('substitute').eol()<cr>", opts)
 keymap('x', 's', "<cmd>lua require('substitute').visual()<cr>", opts)
+vim.keymap.set('n', 'sx', "<cmd>lua require('substitute.exchange').operator()<cr>", opts)
+vim.keymap.set('n', 'sxx', "<cmd>lua require('substitute.exchange').line()<cr>", opts)
+vim.keymap.set('x', 'X', "<cmd>lua require('substitute.exchange').visual()<cr>", opts)
+vim.keymap.set('n', 'sxc', "<cmd>lua require('substitute.exchange').cancel()<cr>", opts)
 
 --abolish.vim
 keymap('n', 'ga', '<Plug>(abolish-coerce-word)')
 keymap('v', 'ga', '<Plug>(abolish-coerce)')
-
-
 
 -- Telescope
 -- keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)

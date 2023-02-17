@@ -15,8 +15,4 @@ substitute.setup {
     motion2 = false,
     suffix = '',
   },
-  exchange = {
-    motion = true,
-  },
 }
-

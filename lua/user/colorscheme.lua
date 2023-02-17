@@ -1,5 +1,5 @@
-local colorscheme = 'tokyonight-night'
--- local colorscheme = "catppuccin-frappe"
+-- local colorscheme = 'tokyonight-night'
+local colorscheme = "catppuccin-mocha"
 -- local colorscheme = "solarized"
 -- local colorscheme = "onedarker"
 

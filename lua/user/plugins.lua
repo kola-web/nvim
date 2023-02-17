@@ -51,10 +51,10 @@ return packer.startup(function(use)
   use { 'JoosepAlviste/nvim-ts-context-commentstring' }
   use { 'kyazdani42/nvim-web-devicons' }
   use { 'kyazdani42/nvim-tree.lua' }
+  use { 'famiu/bufdelete.nvim' }
   use { 'akinsho/bufferline.nvim' }
   use { 'nvim-lualine/lualine.nvim' }
   use { 'lewis6991/impatient.nvim' }
-  use { 'lukas-reineke/indent-blankline.nvim' }
   use { 'goolord/alpha-nvim' }
   use { 'folke/which-key.nvim' }
   use { 'aserowy/tmux.nvim' }
@@ -70,7 +70,7 @@ return packer.startup(function(use)
   use { 'tpope/vim-abolish' }
   use { 'gbprod/substitute.nvim' }
   use { 'andymass/vim-matchup' }
-  use { 'ggandor/lightspeed.nvim' }
+  use { 'phaazon/hop.nvim', branch = 'v2' }
 
   -- Colorschemes
   use { 'folke/tokyonight.nvim' }
@@ -113,6 +113,7 @@ return packer.startup(function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
   }
+  use { 'lukas-reineke/indent-blankline.nvim' }
 
   -- Git
   use { 'lewis6991/gitsigns.nvim' }
