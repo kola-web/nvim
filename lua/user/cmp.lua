@@ -13,6 +13,19 @@ if not kind_status_ok then
   return
 end
 
+local function border(hl_name)
+  return {
+    { '╭', hl_name },
+    { '─', hl_name },
+    { '╮', hl_name },
+    { '│', hl_name },
+    { '╯', hl_name },
+    { '─', hl_name },
+    { '╰', hl_name },
+    { '│', hl_name },
+  }
+end
+
 require('luasnip.loaders.from_vscode').lazy_load()
 require('luasnip.loaders.from_vscode').lazy_load { paths = '~/.config/nvim/snippets/' }
 
@@ -41,16 +54,19 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'buffer' },
     { name = 'path' },
+    { name = 'cmp_tabnine' },
   },
   formatting = {
     fields = { 'kind', 'abbr', 'menu' },
     format = lspkind.cmp_format { with_text = false, maxwidth = 50 },
   },
   window = {
-    documentation = false,
     completion = {
-      border = 'rounded',
-      winhighlight = 'NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None',
+      border = border 'CmpBorder',
+      winhighlight = 'Normal:CmpPmenu,CursorLine:PmenuSel,Search:None',
+    },
+    documentation = {
+      border = border 'CmpDocBorder',
     },
   },
 }

@@ -59,6 +59,7 @@ return packer.startup(function(use)
   use { 'folke/which-key.nvim' }
   use { 'aserowy/tmux.nvim' }
   use { 'windwp/nvim-spectre' }
+  -- use { 'editorconfig/editorconfig-vim' }
 
   use { 'kola-web/vim-indent-object' }
   use { 'kana/vim-textobj-user' }
@@ -75,7 +76,7 @@ return packer.startup(function(use)
   -- Colorschemes
   use { 'folke/tokyonight.nvim' }
   use { 'catppuccin/nvim', as = 'catppuccin' }
-  use { 'lunarvim/Onedarker.nvim' }
+  use { 'projekt0n/github-nvim-theme' }
 
   -- cmp plugins
   use { 'hrsh7th/nvim-cmp' } -- The completion plugin
@@ -85,6 +86,7 @@ return packer.startup(function(use)
   use { 'hrsh7th/cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-nvim-lua' }
   use { 'hrsh7th/cmp-cmdline' }
+  use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
 
   -- snippets
   use { 'L3MON4D3/LuaSnip' } --snippet engine
