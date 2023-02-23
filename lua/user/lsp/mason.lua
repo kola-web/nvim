@@ -18,7 +18,7 @@ local servers = {
   -- "volar",
   'emmet_ls',
   'eslint',
-  'vuels',
+  'volar',
 }
 
 local settings = {

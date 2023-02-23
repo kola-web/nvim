@@ -11,7 +11,7 @@ telescope.setup {
     -- prompt_prefix = " ",
     prompt_prefix = '',
     selection_caret = ' ',
-    path_display = { 'smart' },
+    -- path_display = { 'smart' },
     file_ignore_patterns = { '.git/', 'node_modules' },
 
     mappings = {
@@ -51,4 +51,4 @@ telescope.setup {
 }
 
 telescope.load_extension 'file_browser'
-telescope.load_extension("ui-select")
+telescope.load_extension 'ui-select'
