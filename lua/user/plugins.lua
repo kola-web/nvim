@@ -59,6 +59,7 @@ return packer.startup(function(use)
   use { 'folke/which-key.nvim' }
   use { 'aserowy/tmux.nvim' }
   use { 'windwp/nvim-spectre' }
+  use { 'norcalli/nvim-colorizer.lua' }
   -- use { 'editorconfig/editorconfig-vim' }
 
   use { 'kola-web/vim-indent-object' }
@@ -91,7 +92,6 @@ return packer.startup(function(use)
   -- snippets
   use { 'L3MON4D3/LuaSnip' } --snippet engine
   use { 'rafamadriz/friendly-snippets' } -- a bunch of snippets to use
-  use { 'ishan9299/nvim-solarized-lua' }
 
   -- LSP
   -- use { "williamboman/nvim-lsp-installer",  } -- simple to use language server installer
@@ -110,6 +110,7 @@ return packer.startup(function(use)
   use { 'nvim-telescope/telescope.nvim' }
   use { 'nvim-telescope/telescope-file-browser.nvim' }
   use { 'nvim-telescope/telescope-ui-select.nvim' }
+  use { 'ibhagwan/fzf-lua' }
 
   -- Treesitter
   use {

@@ -81,6 +81,9 @@ keymap('v', 'ga', '<Plug>(abolish-coerce)')
 -- keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 -- keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 
+-- fzf-lua
+keymap('t', '<esc>', [[<C-\><C-n>]])
+
 -- Git
 -- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
