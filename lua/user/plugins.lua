@@ -102,7 +102,6 @@ return packer.startup(function(use)
   use { 'j-hui/fidget.nvim' }
   use { 'jayp0521/mason-null-ls.nvim' }
   use { 'jose-elias-alvarez/null-ls.nvim' } -- for formatters and linters
-  use { 'RRethy/vim-illuminate' }
   use { 'windwp/nvim-ts-autotag' }
   use { 'b0o/schemastore.nvim' }
 
@@ -110,7 +109,7 @@ return packer.startup(function(use)
   use { 'nvim-telescope/telescope.nvim' }
   use { 'nvim-telescope/telescope-file-browser.nvim' }
   use { 'nvim-telescope/telescope-ui-select.nvim' }
-  use { 'ibhagwan/fzf-lua' }
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- Treesitter
   use {

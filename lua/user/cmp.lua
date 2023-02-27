@@ -111,12 +111,7 @@ cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
     { name = 'path' },
   }, {
-    {
-      name = 'cmdline',
-      option = {
-        ignore_cmds = { 'Man', '!' },
-      },
-    },
+    { name = 'cmdline', option = { ignore_cmds = { 'Man', '!' } } },
   }),
 })
 vim.cmd [[

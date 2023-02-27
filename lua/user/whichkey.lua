@@ -89,12 +89,8 @@ local mappings = {
   ['o'] = { '<cmd>Telescope lsp_document_symbols<CR>', 'Symbols' },
   ['R'] = { '<cmd>lua require("renamer").rename()<cr>', 'Rename' },
   ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
-  -- ['f'] = {
-  --   '<cmd> Telescope find_files <CR>',
-  --   'Find files',
-  -- },
   ['f'] = {
-    '<cmd> FzfLua files <CR>',
+    '<cmd> Telescope find_files <CR>',
     'Find files',
   },
   ['F'] = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
