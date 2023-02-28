@@ -55,23 +55,31 @@ local function lsp_keymaps(bufnr)
   -- keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   -- keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 
-  keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
-  keymap(bufnr, 'n', 'gD', '<cmd>Telescope lsp_declarations<CR>', opts)
+  keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  keymap(bufnr, 'n', 'gI', '<cmd>Telescope lsp_implementations<CR>', opts)
+  keymap(bufnr, 'n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
   keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
   keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  -- keymap(bufnr, 'n', '<M-f>', '<cmd>Format<cr>', opts)
-  -- keymap(bufnr, 'n', '<M-a>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 end
+
+vim.diagnostic.config {
+  virtual_text = {
+    source = 'always', -- Or "if_many"
+  },
+  float = {
+    source = 'always', -- Or "if_many"
+  },
+}
 
 M.capabilities = cmp_nvim_lsp.default_capabilities()
 
 M.on_attach = function(client, bufnr)
+  lsp_keymaps(bufnr)
+
   client.server_capabilities.documentFormattingProvider = false -- 0.8 and later
 
-  lsp_keymaps(bufnr)
   local status_ok, illuminate = pcall(require, 'illuminate')
   if not status_ok then
     return

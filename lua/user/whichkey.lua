@@ -87,7 +87,6 @@ local mappings = {
   ['c'] = { "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>", 'Close Buffer' },
   ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
   ['o'] = { '<cmd>Telescope lsp_document_symbols<CR>', 'Symbols' },
-  ['R'] = { '<cmd>lua require("renamer").rename()<cr>', 'Rename' },
   ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
   ['f'] = {
     '<cmd> Telescope find_files <CR>',
@@ -187,14 +186,15 @@ local mappings = {
     name = 'LSP',
     a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code Action' },
     e = { '<cmd>lua vim.diagnostic.setloclist()<cr>', 'diagnostic_setloclist' },
-    i = { '<cmd>LspInfo<cr>', 'LspInfo' },
     I = { '<cmd>LspInstallInfo<cr>', 'LspInstallInfo' },
     j = { '<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>', 'Netx Errors' },
     k = { '<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>', 'Prev Errors' },
     r = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename' },
     s = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'signature' },
     t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
-    d = { '<cmd>lua vim.diagnostic.setloclist()<CR>', 'type_definition' },
+    d = { '<cmd>lua vim.lsp.buf.type_definition<CR>', 'type_definition' },
+    i = { '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'incoming_calls' },
+    o = { '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'outgoing_calls' },
   },
 
   s = {

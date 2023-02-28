@@ -4,27 +4,16 @@ if not status_ok then
 end
 
 configs.setup {
-  ensure_installed = {
-    'markdown',
-    'markdown_inline',
-    'tsx',
-    'toml',
-    'fish',
-    'php',
-    'json',
-    'yaml',
-    'swift',
-    'css',
-    'html',
-    'lua',
+  ensure_installed = 'all',
+  sync_install = false,
+  matchup = {
+    enable = true, -- mandatory, false will disable the whole extension
+    disable_virtual_text = true,
   },
-  indent = {
-    enable = true,
-    disable = {},
-  },
+  indent = { enable = true, disable = { 'python', 'css', 'rust' } },
   highlight = {
     enable = true, -- false will disable the whole extension
-    disable = {}, -- list of language that will be disabled
+    disable = { 'markdown' },
   },
   autopairs = {
     enable = true,
