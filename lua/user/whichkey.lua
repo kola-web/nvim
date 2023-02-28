@@ -94,7 +94,6 @@ local mappings = {
   },
   ['F'] = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
   ['m'] = { '<cmd>lua vim.lsp.buf.format { async = true }<cr>', 'Format' },
-  ['z'] = { '<cmd>ZenMode<cr>', 'Zen' },
   [';'] = { '<cmd>Trouble<cr>', 'Trouble' },
 
   b = {
@@ -126,7 +125,18 @@ local mappings = {
       'Sort by language',
     },
   },
-
+  d = {
+    name = 'Debug',
+    b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", 'Breakpoint' },
+    c = { "<cmd>lua require'dap'.continue()<cr>", 'Continue' },
+    i = { "<cmd>lua require'dap'.step_into()<cr>", 'Into' },
+    o = { "<cmd>lua require'dap'.step_over()<cr>", 'Over' },
+    O = { "<cmd>lua require'dap'.step_out()<cr>", 'Out' },
+    r = { "<cmd>lua require'dap'.repl.toggle()<cr>", 'Repl' },
+    l = { "<cmd>lua require'dap'.run_last()<cr>", 'Last' },
+    u = { "<cmd>lua require'dapui'.toggle()<cr>", 'UI' },
+    x = { "<cmd>lua require'dap'.terminate()<cr>", 'Exit' },
+  },
   p = {
     name = 'Projects',
     p = { '<cmd>Telescope oldfiles<cr>', 'history file' },
@@ -184,15 +194,14 @@ local mappings = {
 
   l = {
     name = 'LSP',
-    a = { '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code Action' },
-    e = { '<cmd>lua vim.diagnostic.setloclist()<cr>', 'diagnostic_setloclist' },
+    a = { '<cmd>Lspsaga code_action<cr>', 'Code Action' },
+    d = { '<cmd>lua vim.diagnostic.setloclist()<cr>', 'diagnostic_setloclist' },
     I = { '<cmd>LspInstallInfo<cr>', 'LspInstallInfo' },
     j = { '<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>', 'Netx Errors' },
     k = { '<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>', 'Prev Errors' },
     r = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename' },
     s = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'signature' },
     t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
-    d = { '<cmd>lua vim.lsp.buf.type_definition<CR>', 'type_definition' },
     i = { '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'incoming_calls' },
     o = { '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'outgoing_calls' },
   },

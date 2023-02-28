@@ -55,13 +55,14 @@ local function lsp_keymaps(bufnr)
   -- keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   -- keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 
-  keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  keymap(bufnr, 'n', 'gD', '<cmd>Lspsaga goto_type_definition<CR>', opts)
+  keymap(bufnr, 'n', 'gd', '<cmd>Lspsaga goto_definition<CR>', opts)
   keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   keymap(bufnr, 'n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
-  keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-  keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  keymap(bufnr, 'n', 'gr', '<cmd>Lspsaga lsp_finder<CR>', opts)
+  keymap(bufnr, 'n', 'gl', '<cmd>Lspsaga show_line_diagnostics<CR>', opts)
   keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  keymap(bufnr, 'n', 'gp', '<cmd>Lspsaga peek_definition<CR>', opts)
 end
 
 vim.diagnostic.config {

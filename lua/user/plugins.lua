@@ -104,6 +104,7 @@ return packer.startup(function(use)
   use { 'jose-elias-alvarez/null-ls.nvim' } -- for formatters and linters
   use { 'windwp/nvim-ts-autotag' }
   use { 'b0o/schemastore.nvim' }
+  use { 'glepnir/lspsaga.nvim', branch = 'main' }
 
   -- Telescope
   use { 'nvim-telescope/telescope.nvim' }
@@ -121,9 +122,9 @@ return packer.startup(function(use)
   use { 'lewis6991/gitsigns.nvim' }
 
   -- DAP
-  -- use { 'mfussenegger/nvim-dap' }
-  -- use { 'rcarriga/nvim-dap-ui' }
-  -- use { 'ravenxrz/DAPInstall.nvim' }
+  use { 'mfussenegger/nvim-dap' }
+  use { 'rcarriga/nvim-dap-ui' }
+  use { 'ravenxrz/DAPInstall.nvim' }
 
   -- mark
   use { 'chentoast/marks.nvim' }
