@@ -13,7 +13,7 @@ configs.setup {
   indent = { enable = true, disable = { 'python', 'css', 'rust' } },
   highlight = {
     enable = true, -- false will disable the whole extension
-    disable = { 'markdown' },
+    -- disable = { 'markdown' },
   },
   autopairs = {
     enable = true,

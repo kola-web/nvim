@@ -16,6 +16,7 @@ telescope.setup {
       '.git',
       '.svn',
       'node_modules',
+      'miniprogram_npm',
     },
     mappings = {
       i = {

@@ -78,6 +78,8 @@ return packer.startup(function(use)
   use { 'folke/tokyonight.nvim' }
   use { 'catppuccin/nvim', as = 'catppuccin' }
   use { 'projekt0n/github-nvim-theme' }
+  use { 'tjdevries/colorbuddy.nvim' }
+  use { 'svrana/neosolarized.nvim' }
 
   -- cmp plugins
   use { 'hrsh7th/nvim-cmp' } -- The completion plugin
@@ -113,9 +115,7 @@ return packer.startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- Treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter',
-  }
+  use { 'nvim-treesitter/nvim-treesitter' }
   use { 'lukas-reineke/indent-blankline.nvim' }
 
   -- Git
