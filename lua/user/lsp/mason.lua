@@ -19,6 +19,7 @@ local servers = {
   'emmet_ls',
   'eslint',
   'volar',
+  'marksman',
 }
 
 local settings = {

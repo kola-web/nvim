@@ -5,12 +5,9 @@ if not status_cmp_ok then
   return
 end
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = true,
-  update_in_insert = false,
-  virtual_text = { spacing = 4, prefix = '●' },
-  severity_sort = true,
-})
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
   local signs = {
@@ -25,12 +22,20 @@ M.setup = function()
   end
 
   local config = {
-    virtual_text = {
-      prefix = '●',
+    virtual_text = false, -- disable virtual text
+    signs = {
+      active = signs, -- show signs
     },
     update_in_insert = true,
+    underline = true,
+    severity_sort = true,
     float = {
-      source = 'always', -- Or "if_many"
+      focusable = true,
+      style = 'minimal',
+      border = 'rounded',
+      source = 'always',
+      header = '',
+      prefix = '',
     },
   }
 
@@ -74,13 +79,10 @@ vim.diagnostic.config {
   },
 }
 
-M.capabilities = cmp_nvim_lsp.default_capabilities()
-
 M.on_attach = function(client, bufnr)
-  lsp_keymaps(bufnr)
-
   client.server_capabilities.documentFormattingProvider = false -- 0.8 and later
 
+  lsp_keymaps(bufnr)
   local status_ok, illuminate = pcall(require, 'illuminate')
   if not status_ok then
     return

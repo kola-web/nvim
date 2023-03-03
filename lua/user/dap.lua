@@ -15,7 +15,7 @@ end
 
 dap_install.setup {}
 
-dap_install.config('lua', {})
+dap_install.config('python', {})
 -- add other configs here
 
 dapui.setup {

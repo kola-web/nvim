@@ -3,6 +3,8 @@ if not status_ok then
   return
 end
 
+local fun = require 'user.function'
+
 local setup = {
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
@@ -135,11 +137,13 @@ local mappings = {
     r = { "<cmd>lua require'dap'.repl.toggle()<cr>", 'Repl' },
     l = { "<cmd>lua require'dap'.run_last()<cr>", 'Last' },
     u = { "<cmd>lua require'dapui'.toggle()<cr>", 'UI' },
-    x = { "<cmd>lua require'dap'.terminate()<cr>", 'Exit' },
+    t = { "<cmd>lua require'dap'.terminate()<cr>", 'Exit' },
   },
   p = {
     name = 'Projects',
     p = { '<cmd>Telescope oldfiles<cr>', 'history file' },
+    m = { '<cmd>PeekOpen<cr>', 'PeekOpen' },
+    c = { '<cmd>PeekClose<cr>', 'PeekClose' },
   },
 
   P = {
@@ -204,6 +208,12 @@ local mappings = {
     t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
     i = { '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'incoming_calls' },
     o = { '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'outgoing_calls' },
+    c = {
+      function()
+        fun.compare_to_clipboard()
+      end,
+      'clip',
+    },
   },
 
   s = {

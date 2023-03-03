@@ -90,6 +90,7 @@ return packer.startup(function(use)
   use { 'hrsh7th/cmp-nvim-lua' }
   use { 'hrsh7th/cmp-cmdline' }
   use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
+  use { 'RRethy/vim-illuminate' }
 
   -- snippets
   use { 'L3MON4D3/LuaSnip' } --snippet engine
@@ -133,12 +134,7 @@ return packer.startup(function(use)
   use { 'CRAG666/code_runner.nvim', requires = 'nvim-lua/plenary.nvim' }
 
   -- markdown
-  use {
-    'iamcco/markdown-preview.nvim',
-    run = function()
-      vim.fn['mkdp#util#install']()
-    end,
-  }
+  use { 'toppair/peek.nvim', run = 'deno task --quiet build:fast' }
   use { 'dhruvasagar/vim-table-mode' }
 
   -- Automatically set up your configuration after cloning packer.nvim
