@@ -3,8 +3,7 @@
 -- require 'user.colorscheme.catppuccin'
 -- local colorscheme = "onedarker"
 -- local colorscheme = 'github_*'
-local colorscheme = 'neosolarized'
-require 'user.colorscheme.neosolarized-rc'
+local colorscheme = 'gruvbox'
 
 local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
 if not status_ok then

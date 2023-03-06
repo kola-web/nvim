@@ -42,6 +42,7 @@ vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters
 vim.opt.linebreak = true
 vim.opt.foldmethod = 'indent'
 vim.opt.foldlevel = 99
+vim.o.background = "dark"                        -- or "light" for light mode
 
 -- neovide
 vim.g.neovide_cursor_vfx_mode = ''

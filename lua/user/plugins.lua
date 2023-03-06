@@ -28,7 +28,6 @@ local status_ok, packer = pcall(require, 'packer')
 if not status_ok then
   return
 end
-
 -- Have packer use a popup window
 packer.init {
   display = {
@@ -78,8 +77,7 @@ return packer.startup(function(use)
   use { 'folke/tokyonight.nvim' }
   use { 'catppuccin/nvim', as = 'catppuccin' }
   use { 'projekt0n/github-nvim-theme' }
-  use { 'tjdevries/colorbuddy.nvim' }
-  use { 'svrana/neosolarized.nvim' }
+  use { 'ellisonleao/gruvbox.nvim' }
 
   -- cmp plugins
   use { 'hrsh7th/nvim-cmp' } -- The completion plugin
@@ -114,6 +112,7 @@ return packer.startup(function(use)
   use { 'nvim-telescope/telescope-file-browser.nvim' }
   use { 'nvim-telescope/telescope-ui-select.nvim' }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use { 'ibhagwan/fzf-lua' }
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter' }
