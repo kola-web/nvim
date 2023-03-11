@@ -15,11 +15,11 @@ local servers = {
   'bashls',
   'jsonls',
   'yamlls',
-  -- "volar",
   'emmet_ls',
   'eslint',
   'volar',
   'marksman',
+  'intelephense',
 }
 
 local settings = {

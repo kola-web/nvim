@@ -45,5 +45,8 @@ vim.opt.foldlevel = 99
 vim.o.background = "dark"                        -- or "light" for light mode
 
 -- neovide
-vim.g.neovide_cursor_vfx_mode = ''
-vim.g.neovide_cursor_animation_length = 0
+if vim.g.neovide then
+    -- Put anything you want to happen only in Neovide here
+    vim.g.neovide_cursor_vfx_mode = ''
+    vim.g.neovide_cursor_animation_length = 0
+end

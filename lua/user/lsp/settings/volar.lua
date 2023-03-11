@@ -1,26 +1,22 @@
-local util = require("lspconfig.util")
-local function get_typescript_server_path(root_dir)
-	local global_ts = "/Users/lijialin/.local/share/nvim/mason/packages/vue-language-server/node_modules/typescript/lib"
-	-- Alternative location if installed as root:
-	-- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
-	local found_ts = ""
-	local function check_dir(path)
-		found_ts = util.path.join(path, "node_modules", "typescript", "lib")
-		if util.path.exists(found_ts) then
-			return path
-		end
-	end
+local function get_ts_server_path(root_dir)
+  local util = require('lspconfig.util')
+  local project_root = util.find_node_modules_ancestor(root_dir)
 
-	if util.search_ancestors(root_dir, check_dir) then
-		return found_ts
-	else
-		return global_ts
-	end
+  local local_tsserverlib = project_root ~= nil
+    and util.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js')
+  local global_tsserverlib = '~/.npm/lib/node_modules/typescript/lib/tsserverlibrary.js'
+
+  if local_tsserverlib and util.path.exists(local_tsserverlib) then
+    return local_tsserverlib
+  else
+    return global_tsserverlib
+  end
 end
 
 return {
-	-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-	-- on_new_config = function(new_config, new_root_dir)
-	-- 	new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
-	-- end,
+  config = {
+    on_new_config = function(new_config, new_root_dir)
+      new_config.init_options.typescript.serverPath = get_ts_server_path(new_root_dir)
+    end,
+  },
 }
