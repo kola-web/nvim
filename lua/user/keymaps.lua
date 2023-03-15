@@ -33,8 +33,8 @@ keymap('n', '(', '<cmd>BufferLineMovePrev<cr>', opts)
 keymap('n', ')', '<cmd>BufferLineMoveNext<cr>', opts)
 
 -- vue jump
-keymap('n', ']h', '/<templacet<cr>', opts)
-keymap('n', ']H', '/</templacet<cr>', opts)
+keymap('n', ']h', '/<template<cr>', opts)
+keymap('n', ']H', '/</template<cr>', opts)
 keymap('n', ']s', '/<script<cr>', opts)
 keymap('n', ']S', '/</script<cr>', opts)
 keymap('n', ']c', '/<style<cr>', opts)
