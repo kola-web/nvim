@@ -49,7 +49,7 @@ require('lazy').setup {
   { 'folke/tokyonight.nvim' },
   { 'catppuccin/nvim', name = 'catppuccin' },
   { 'ellisonleao/gruvbox.nvim' },
-  { 'shaunsingh/solarized.nvim' },
+  { 'Mofiqul/dracula.nvim' },
 
   -- cmp plugins
   { 'hrsh7th/nvim-cmp' }, -- The completion plugin
