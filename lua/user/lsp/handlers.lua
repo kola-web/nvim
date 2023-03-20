@@ -11,10 +11,10 @@ M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
   local signs = {
-    { name = 'DiagnosticSignError', text = '' },
-    { name = 'DiagnosticSignWarn', text = '' },
-    { name = 'DiagnosticSignHint', text = '' },
-    { name = 'DiagnosticSignInfo', text = '' },
+    { name = 'DiagnosticSignError', text = '', type = 'Error' },
+    { name = 'DiagnosticSignWarn', text = '', type = 'Warn' },
+    { name = 'DiagnosticSignHint', text = '', type = 'Hint' },
+    { name = 'DiagnosticSignInfo', text = '', type = 'Info' },
   }
 
   for _, sign in ipairs(signs) do
@@ -22,7 +22,7 @@ M.setup = function()
   end
 
   local config = {
-    virtual_text = false, -- disable virtual text
+    virtual_text = true, -- disable virtual text
     signs = {
       active = signs, -- show signs
     },
@@ -69,15 +69,6 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   keymap(bufnr, 'n', 'gp', '<cmd>Lspsaga peek_definition<CR>', opts)
 end
-
-vim.diagnostic.config {
-  virtual_text = {
-    source = 'always', -- Or "if_many"
-  },
-  float = {
-    source = 'always', -- Or "if_many"
-  },
-}
 
 M.on_attach = function(client, bufnr)
   client.server_capabilities.documentFormattingProvider = false -- 0.8 and later

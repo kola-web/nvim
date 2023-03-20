@@ -12,9 +12,8 @@ npairs.setup {
     javascript = { "string", "template_string" },
     java = false,
   },
-
   fast_wrap = {
-    map = "<M-e>",
+    map = nil,
     chars = { "{", "[", "(", '"', "'" },
     pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
     offset = 0, -- Offset from pattern match

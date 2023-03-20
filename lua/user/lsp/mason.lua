@@ -19,7 +19,6 @@ local servers = {
   'eslint',
   'volar',
   'marksman',
-  'intelephense',
 }
 
 local settings = {

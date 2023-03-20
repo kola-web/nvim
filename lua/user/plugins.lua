@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
+  { 'folke/lazy.nvim', tag = 'stable' },
   -- My plugins here
   { 'nvim-lua/plenary.nvim' }, -- Useful lua functions used by lots of plugins
   { 'windwp/nvim-autopairs' }, -- Autopairs, integrates with both cmp and treesitter
@@ -20,15 +21,15 @@ require('lazy').setup {
   { 'kyazdani42/nvim-web-devicons' },
   { 'kyazdani42/nvim-tree.lua' },
   { 'famiu/bufdelete.nvim' },
-  { 'akinsho/bufferline.nvim' },
+  { 'akinsho/bufferline.nvim', branch = 'main' },
   { 'nvim-lualine/lualine.nvim' },
   { 'lewis6991/impatient.nvim' },
-  { 'goolord/alpha-nvim' },
+  { 'goolord/alpha-nvim', event = 'VimEnter' },
   { 'folke/which-key.nvim' },
   { 'aserowy/tmux.nvim' },
   { 'windwp/nvim-spectre' },
   { 'norcalli/nvim-colorizer.lua' },
-  --  { 'editorconfig/editorconfig-vim' },
+  { 'LunarVim/bigfile.nvim', event = { 'FileReadPre', 'BufReadPre', 'User FileOpened' } },
 
   { 'kana/vim-textobj-user' },
   { 'kola-web/vim-indent-object' },
@@ -42,12 +43,13 @@ require('lazy').setup {
   { 'gbprod/substitute.nvim' },
   { 'andymass/vim-matchup' },
   { 'phaazon/hop.nvim', branch = 'v2' },
+  { 'mg979/vim-visual-multi' },
 
   -- Colorschemes
   { 'folke/tokyonight.nvim' },
-  { 'catppuccin/nvim', as = 'catppuccin' },
-  { 'projekt0n/github-nvim-theme' },
+  { 'catppuccin/nvim', name = 'catppuccin' },
   { 'ellisonleao/gruvbox.nvim' },
+  { 'shaunsingh/solarized.nvim' },
 
   -- cmp plugins
   { 'hrsh7th/nvim-cmp' }, -- The completion plugin
@@ -57,8 +59,7 @@ require('lazy').setup {
   { 'hrsh7th/cmp-nvim-lsp' },
   { 'hrsh7th/cmp-nvim-lua' },
   { 'hrsh7th/cmp-cmdline' },
-  { 'tzachar/cmp-tabnine', build = './install.sh' },
-  { 'RRethy/vim-illuminate' },
+  { 'RRethy/vim-illuminate', lazy = true },
 
   -- snippets
   { 'L3MON4D3/LuaSnip' }, --snippet engine
@@ -67,14 +68,14 @@ require('lazy').setup {
   -- LSP
   --  { "williamboman/nvim-lsp-installer",  }, -- simple to  language server installer
   { 'onsails/lspkind-nvim' }, -- vscode-like pictograms
-  { 'neovim/nvim-lspconfig' }, -- enable LSP
-  { 'williamboman/mason.nvim' },
+  { 'neovim/nvim-lspconfig', lazy = true, dependencies = { 'mason-lspconfig.nvim' } }, -- enable LSP
+  { 'williamboman/mason.nvim', lazy = true },
   { 'williamboman/mason-lspconfig.nvim' },
   { 'j-hui/fidget.nvim' },
   { 'jayp0521/mason-null-ls.nvim' },
-  { 'jose-elias-alvarez/null-ls.nvim' }, -- for formatters and linters
+  { 'jose-elias-alvarez/null-ls.nvim', lazy = true, dependencies = { 'mason-null-ls.nvim' } }, -- for formatters and linters
   { 'windwp/nvim-ts-autotag' },
-  { 'b0o/schemastore.nvim' },
+  { 'b0o/schemastore.nvim', lazy = true },
   { 'glepnir/lspsaga.nvim', branch = 'main' },
 
   -- Telescope
@@ -86,15 +87,15 @@ require('lazy').setup {
 
   -- Treesitter
   { 'nvim-treesitter/nvim-treesitter' },
-  { 'lukas-reineke/indent-blankline.nvim' },
+  { 'lukas-reineke/indent-blankline.nvim', event = 'User FileOpened' },
 
   -- Git
   { 'lewis6991/gitsigns.nvim' },
 
   -- DAP
-  { 'mfussenegger/nvim-dap' },
-  { 'rcarriga/nvim-dap-ui' },
-  { 'ravenxrz/DAPInstall.nvim' },
+  { 'mfussenegger/nvim-dap', lazy = true },
+  { 'rcarriga/nvim-dap-ui', lazy = true },
+  { 'ravenxrz/DAPInstall.nvim', lazy = true },
 
   -- mark
   { 'chentoast/marks.nvim' },

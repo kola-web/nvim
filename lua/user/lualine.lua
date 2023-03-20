@@ -16,6 +16,12 @@ local diagnostics = {
   always_visible = true,
 }
 
+local lazy = {
+  require('lazy.status').updates,
+  cond = require('lazy.status').has_updates,
+  color = { fg = '#ff9e64' },
+}
+
 local diff = {
   'diff',
   colored = false,
@@ -51,7 +57,7 @@ lualine.setup {
     lualine_a = { 'mode' },
     lualine_b = { 'branch' },
     lualine_c = { diagnostics },
-    lualine_x = { diff, spaces, 'encoding', filetype },
+    lualine_x = { lazy, diff, spaces, 'encoding', filetype, 'filesize' },
     lualine_y = { location },
     lualine_z = { 'progress' },
   },
