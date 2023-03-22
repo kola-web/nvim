@@ -19,6 +19,8 @@ local servers = {
   'eslint',
   'volar',
   'marksman',
+  'docker_compose_language_service',
+  'dockerls',
 }
 
 local settings = {

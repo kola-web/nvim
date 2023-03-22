@@ -84,7 +84,8 @@ local mappings = {
   ['a'] = { '<cmd>Alpha<cr>', 'Alpha' },
   ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
   ['w'] = { '<cmd>w!<CR>', 'Save' },
-  ['q'] = { '<cmd>q!<CR>', 'Quit' },
+  -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
+  ['q'] = { '<cmd>Telescope diagnostics<CR>', 'diagnostic' },
   -- ["c"] = { "<cmd>bd<CR>", "Close Buffer" },
   ['c'] = { "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>", 'Close Buffer' },
   ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
@@ -205,15 +206,15 @@ local mappings = {
 
   l = {
     name = 'LSP',
-    a = { '<cmd>Lspsaga code_action<cr>', 'Code Action' },
+    a = { '<cmd>vim.lsp.buf.code_action()<cr>', 'Code Action' },
     d = { '<cmd>lua vim.diagnostic.setloclist()<cr>', 'diagnostic_setloclist' },
-    I = { '<cmd>LspInstallInfo<cr>', 'LspInstallInfo' },
-    j = { '<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>', 'Netx Errors' },
-    k = { '<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>', 'Prev Errors' },
-    r = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename' },
     s = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'signature' },
+    n = { '<cmd>vim.diagnostic.goto_next()<cr>', 'Netx Errors' },
+    N = { '<cmd>vim.diagnostic.goto_prev()<cr>', 'Prev Errors' },
+    r = { '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename' },
     t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
     i = { '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'incoming_calls' },
+    I = { '<cmd>LspInstallInfo<cr>', 'LspInstallInfo' },
     o = { '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'outgoing_calls' },
     c = {
       function()

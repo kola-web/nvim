@@ -48,7 +48,7 @@ require('lazy').setup {
   -- Colorschemes
   { 'folke/tokyonight.nvim' },
   { 'catppuccin/nvim', name = 'catppuccin' },
-  { 'ellisonleao/gruvbox.nvim' },
+  { 'sainnhe/gruvbox-material' },
   { 'Mofiqul/dracula.nvim' },
 
   -- cmp plugins
@@ -76,7 +76,6 @@ require('lazy').setup {
   { 'jose-elias-alvarez/null-ls.nvim', lazy = true, dependencies = { 'mason-null-ls.nvim' } }, -- for formatters and linters
   { 'windwp/nvim-ts-autotag' },
   { 'b0o/schemastore.nvim', lazy = true },
-  { 'glepnir/lspsaga.nvim', branch = 'main' },
 
   -- Telescope
   { 'nvim-telescope/telescope.nvim' },
@@ -99,6 +98,7 @@ require('lazy').setup {
 
   -- mark
   { 'chentoast/marks.nvim' },
+  { 'folke/todo-comments.nvim' },
 
   -- code run
   { 'CRAG666/code_runner.nvim' },
