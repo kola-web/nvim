@@ -76,6 +76,7 @@ require('lazy').setup {
   { 'jose-elias-alvarez/null-ls.nvim', lazy = true, dependencies = { 'mason-null-ls.nvim' } }, -- for formatters and linters
   { 'windwp/nvim-ts-autotag' },
   { 'b0o/schemastore.nvim', lazy = true },
+  { 'glepnir/lspsaga.nvim', event = 'BufRead', dependencies = { 'nvim-web-devicons', 'nvim-treesitter' } },
 
   -- Telescope
   { 'nvim-telescope/telescope.nvim' },

@@ -51,14 +51,15 @@ M.setup = function()
 end
 
 local function lsp_keymaps(bufnr)
-  local opts = { noremap = true, silent = true }
-  local keymap = vim.api.nvim_buf_set_keymap
-  keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  keymap(bufnr, 'n', 'gs', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  -- local opts = { noremap = true, silent = true }
+  -- local keymap = vim.api.nvim_buf_set_keymap
+  -- keymap(bufnr, 'n', 'gD', '<cmd>Telescope lsp_declarations<CR>', opts)
+  -- keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
+  -- keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- keymap(bufnr, 'n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
+  -- keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
+  -- keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  -- keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 end
 
 M.on_attach = function(client, bufnr)
