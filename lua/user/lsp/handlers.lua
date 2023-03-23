@@ -56,9 +56,9 @@ local function lsp_keymaps(bufnr)
   -- keymap(bufnr, 'n', 'gD', '<cmd>Telescope lsp_declarations<CR>', opts)
   -- keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
   -- keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- keymap(bufnr, 'n', 'gK', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   -- keymap(bufnr, 'n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
   -- keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-  -- keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   -- keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 end
 
