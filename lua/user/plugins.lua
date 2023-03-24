@@ -67,7 +67,6 @@ require('lazy').setup {
   { 'rafamadriz/friendly-snippets' }, -- a bunch of snippets to
 
   -- LSP
-  --  { "williamboman/nvim-lsp-installer",  }, -- simple to  language server installer
   { 'onsails/lspkind-nvim' }, -- vscode-like pictograms
   { 'neovim/nvim-lspconfig', lazy = true, dependencies = { 'mason-lspconfig.nvim' } }, -- enable LSP
   { 'williamboman/mason.nvim', lazy = true },

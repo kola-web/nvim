@@ -4,6 +4,7 @@ local null_servers = {
   'shellcheck',
   'shfmt',
   'deno',
+  'editorconfig_checker',
 }
 
 local servers = {

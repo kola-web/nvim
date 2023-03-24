@@ -4,7 +4,9 @@ if not status_ok then
 end
 
 -- default config:
-peek.setup {}
+peek.setup {
+  syntax = false,
+}
 -- vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
 -- vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
 
