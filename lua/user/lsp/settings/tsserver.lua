@@ -9,6 +9,7 @@ end
 
 return {
   init_options = {
+    hostInfo = 'neovim',
     locale = 'zh-CN',
   },
   commands = {

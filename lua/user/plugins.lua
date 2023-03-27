@@ -92,11 +92,6 @@ require('lazy').setup {
   -- Git
   { 'lewis6991/gitsigns.nvim' },
 
-  -- DAP
-  { 'mfussenegger/nvim-dap', lazy = true },
-  { 'rcarriga/nvim-dap-ui', lazy = true },
-  { 'ravenxrz/DAPInstall.nvim', lazy = true },
-
   -- mark
   { 'chentoast/marks.nvim' },
   { 'folke/todo-comments.nvim' },
