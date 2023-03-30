@@ -84,12 +84,11 @@ local mappings = {
   ['a'] = { '<cmd>Alpha<cr>', 'Alpha' },
   ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
   ['w'] = { '<cmd>w!<CR>', 'Save' },
-  -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
-  ['q'] = { '<cmd>Telescope diagnostics<CR>', 'diagnostic' },
+  ['q'] = { '<cmd>q!<CR>', 'Quit' },
   -- ["c"] = { "<cmd>bd<CR>", "Close Buffer" },
   ['c'] = { "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>", 'Close Buffer' },
   ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
-  ['o'] = { '<cmd>Telescope lsp_document_symbols<CR>', 'Symbols' },
+  ['o'] = { '<cmd>Lspsaga outline<CR>', 'Symbols' },
   ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
   -- ['f'] = {
   --   '<cmd> Telescope find_files <CR>',
@@ -138,7 +137,6 @@ local mappings = {
     m = { '<cmd>PeekOpen<cr>', 'PeekOpen' },
     c = { '<cmd>PeekClose<cr>', 'PeekClose' },
   },
-
   P = {
     name = 'Plugins',
     i = { '<cmd>Lazy install<cr>', 'Install' },
@@ -195,11 +193,12 @@ local mappings = {
   l = {
     name = 'LSP',
     a = { '<cmd>Lspsaga code_action<cr>', 'Code Action' },
-    d = { '<cmd>lua vim.diagnostic.setloclist()<cr>', 'diagnostic_setloclist' },
+    d = { '<cmd>Lspsaga show_buf_diagnostics<cr>', 'diagnostic_setloclist' },
     s = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'signature' },
     n = { '<cmd>Lspsaga diagnostic_jump_next<cr>', 'Netx Errors' },
     N = { '<cmd>Lspsaga diagnostic_jump_prev<cr>', 'Prev Errors' },
     r = { '<cmd>Lspsaga rename<cr>', 'Rename' },
+    R = { '<cmd>Lspsaga rename ++project<cr>', 'All Rename' },
     t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
     i = { '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'incoming_calls' },
     I = { '<cmd>LspInstallInfo<cr>', 'LspInstallInfo' },

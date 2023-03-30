@@ -20,6 +20,5 @@ null_ls.setup {
 
     formatting.shfmt,
     code_actions.shellcheck.with { diagnostics_format = '#{m} [#{c}]' },
-    diagnostics.editorconfig_checker,
   },
 }

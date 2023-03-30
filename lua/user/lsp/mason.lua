@@ -1,12 +1,3 @@
-local null_servers = {
-  'prettier',
-  'stylua',
-  'shellcheck',
-  'shfmt',
-  'deno',
-  'editorconfig_checker',
-}
-
 local servers = {
   'lua_ls',
   'cssls',
@@ -20,8 +11,17 @@ local servers = {
   'eslint',
   'volar',
   'marksman',
+  'intelephense',
   'docker_compose_language_service',
   'dockerls',
+}
+
+local null_servers = {
+  'prettier',
+  'stylua',
+  'shellcheck',
+  'shfmt',
+  'deno',
 }
 
 local settings = {
