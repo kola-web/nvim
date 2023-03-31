@@ -12,4 +12,11 @@ M.compare_to_clipboard = function()
   vim.cmd 'diffthis'
 end
 
+M.is_vue = function()
+  local util = require 'lspconfig.util'
+  local vue_path = util.path.join(project_root, 'node_modules', 'vue')
+  local is_vue = vim.fn.isdirectory(vue_path) == 1
+  return is_vue
+end
+
 return M

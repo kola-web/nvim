@@ -19,6 +19,8 @@ vim.g.mapleader = ' '
 keymap('', '<S-l>', '$', opts)
 keymap('', '<S-h>', '^', opts)
 
+keymap('n', 'B', '<cmd>enew<cr>', opts)
+
 -- Normal --
 -- Better window navigation
 keymap('n', '<C-h>', '<C-w>h', opts)

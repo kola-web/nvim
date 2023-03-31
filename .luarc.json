@@ -1,2 +1,6 @@
 {
+    "diagnostics.globals": [
+        "vim",
+        "project_root"
+    ]
 }

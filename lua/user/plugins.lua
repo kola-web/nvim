@@ -47,10 +47,7 @@ require('lazy').setup {
 
   -- Colorschemes
   { 'folke/tokyonight.nvim' },
-  { 'catppuccin/nvim', name = 'catppuccin' },
   { 'sainnhe/gruvbox-material' },
-  { 'Mofiqul/dracula.nvim' },
-  { 'Tsuzat/NeoSolarized.nvim' },
 
   -- cmp plugins
   { 'hrsh7th/nvim-cmp' }, -- The completion plugin

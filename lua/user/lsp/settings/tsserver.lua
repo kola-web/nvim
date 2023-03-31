@@ -1,3 +1,4 @@
+local fun = require 'user.function'
 local function organize_imports()
   local params = {
     command = '_typescript.organizeImports',
@@ -8,6 +9,7 @@ local function organize_imports()
 end
 
 return {
+  filetypes = fun.is_vue() and { 'null' } or { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
   init_options = {
     hostInfo = 'neovim',
     locale = 'zh-CN',

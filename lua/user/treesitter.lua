@@ -4,7 +4,33 @@ if not status_ok then
 end
 
 configs.setup {
-  ensure_installed = 'all',
+  ensure_installed = {
+    'bash',
+    'dart',
+    'diff',
+    'dockerfile',
+    'fish',
+    'gitignore',
+    'html',
+    'javascript',
+    'css',
+    'jq',
+    'json',
+    'json5',
+    'jsdoc',
+    'lua',
+    'luadoc',
+    'markdown',
+    'markdown_inline',
+    'php',
+    'phpdoc',
+    'tsx',
+    'vim',
+    'vue',
+    'toml',
+    'typescript',
+    'yaml',
+  },
   sync_install = false,
   matchup = {
     enable = true, -- mandatory, false will disable the whole extension
