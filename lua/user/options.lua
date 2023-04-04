@@ -1,52 +1,52 @@
-vim.opt.backup = false                          -- creates a backup file
-vim.opt.clipboard = "unnamedplus"               -- allows neovim to access the system clipboard
-vim.opt.cmdheight = 1                           -- more space in the neovim command line for displaying messages
-vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
-vim.opt.conceallevel = 0                        -- so that `` is visible in markdown files
-vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
-vim.opt.hlsearch = true                         -- highlight all matches on previous search pattern
-vim.opt.ignorecase = true                       -- ignore case in search patterns
-vim.opt.mouse = "a"                             -- allow the mouse to be used in neovim
-vim.opt.pumheight = 10                          -- pop up menu height
-vim.opt.showmode = false                        -- we don't need to see things like -- INSERT -- anymore
-vim.opt.showtabline = 0                         -- always show tabs
-vim.opt.smartcase = true                        -- smart case
-vim.opt.smartindent = true                      -- make indenting smarter again
-vim.opt.splitbelow = true                       -- force all horizontal splits to go below current window
-vim.opt.splitright = true                       -- force all vertical splits to go to the right of current window
-vim.opt.swapfile = false                        -- creates a swapfile
-vim.opt.termguicolors = true                    -- set term gui colors (most terminals support this)
-vim.opt.timeoutlen = 1000                       -- time to wait for a mapped sequence to complete (in milliseconds)
-vim.opt.undofile = true                         -- enable persistent undo
-vim.opt.updatetime = 300                        -- faster completion (4000ms default)
-vim.opt.writebackup = false                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-vim.opt.expandtab = true                        -- convert tabs to spaces
-vim.opt.shiftwidth = 2                          -- the number of spaces inserted for each indentation
-vim.opt.tabstop = 2                             -- insert 2 spaces for a tab
-vim.opt.cursorline = true                       -- highlight the current line
-vim.opt.number = true                           -- set numbered lines
-vim.opt.laststatus = 3                          -- only the last window will always have a status line
-vim.opt.showcmd = false                         -- hide (partial) command in the last line of the screen (for performance)
-vim.opt.ruler = false                           -- hide the line and column number of the cursor position
-vim.opt.numberwidth = 4                         -- minimal number of columns to use for the line number {default 4}
-vim.opt.signcolumn = "yes"                      -- always show the sign column, otherwise it would shift the text each time
-vim.opt.wrap = false                            -- display lines as one long line
-vim.opt.scrolloff = 8                           -- minimal number of screen lines to keep above and below the cursor
-vim.opt.sidescrolloff = 8                       -- minimal number of screen columns to keep to the left and right of the cursor if wrap is `false`
-vim.opt.guifont = "FiraCode Nerd Font:h17"      -- the font used in graphical neovim applications
-vim.opt.fillchars.eob=" "                       -- show empty lines at the end of a buffer as ` ` {default `~`}
-vim.opt.shortmess:append "c"                    -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
-vim.opt.whichwrap:append("<,>,[,],h,l")         -- keys allowed to move to the previous/next line when the beginning/end of line is reached
-vim.opt.iskeyword:append("-,#")                   -- treats words with `-` as single words
-vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
-vim.opt.linebreak = true
-vim.opt.foldmethod = 'indent'
-vim.opt.foldlevel = 99
-vim.o.background = "dark"                        -- or "light" for light mode
+vim.opt.backup = false                          -- 不创建备份文件
+vim.opt.clipboard = 'unnamedplus'               -- 允许 Neovim 访问系统剪贴板
+vim.opt.cmdheight = 1                           -- 命令行高度，用于显示信息
+vim.opt.completeopt = { 'menuone', 'noselect' } -- 自动补全菜单选项
+vim.opt.conceallevel = 0                        -- 在 markdown 文件中显示 `` 符号
+vim.opt.fileencoding = 'utf-8'                  -- 文件编码为 UTF-8
+vim.opt.hlsearch = true                         -- 高亮搜索结果
+vim.opt.ignorecase = true                       -- 忽略搜索中的大小写
+vim.opt.mouse = 'a'                             -- 允许使用鼠标
+vim.opt.pumheight = 10                          -- 弹出菜单的高度
+vim.opt.showmode = false                        -- 隐藏 -- INSERT -- 等模式信息
+vim.opt.showtabline = 0                         -- 总是显示标签页
+vim.opt.smartcase = true                        -- 智能匹配大小写
+vim.opt.smartindent = true                      -- 智能缩进
+vim.opt.splitbelow = true                       -- 水平分屏在下方
+vim.opt.splitright = true                       -- 垂直分屏在右侧
+vim.opt.swapfile = false                        -- 不创建交换文件
+vim.opt.termguicolors = true                    -- 支持终端图形颜色
+vim.opt.timeoutlen = 1000                       -- 映射键时等待的时间（毫秒）
+vim.opt.undofile = true                         -- 启用持久化撤销
+vim.opt.updatetime = 300                        -- 自动完成等待时间（默认为 4000 毫秒）
+vim.opt.writebackup = false                     -- 如果文件正在被其他程序编辑（或在编辑时写入文件），则不允许编辑
+vim.opt.expandtab = true                        -- 将制表符转换为空格
+vim.opt.shiftwidth = 2                          -- 每次缩进的空格数
+vim.opt.tabstop = 2                             -- 缩进时的空格数
+vim.opt.cursorline = true                       -- 高亮当前行
+vim.opt.number = true                           -- 显示行号
+vim.opt.laststatus = 3                          -- 只有最后一个窗口始终显示状态栏
+vim.opt.showcmd = false                         -- 隐藏命令行中的（部分）命令
+vim.opt.ruler = false                           -- 隐藏光标所在位置的行号和列号
+vim.opt.numberwidth = 4                         -- 行号最小宽度（默认为 4）
+vim.opt.signcolumn = 'yes'                      -- 总是显示标记列
+vim.opt.wrap = false                            -- 将行作为一行显示
+vim.opt.scrolloff = 8                           -- 光标距离屏幕顶部和底部的最小行数
+vim.opt.sidescrolloff = 8                       -- 当 wrap=false 时，光标距离屏幕左侧和
+vim.opt.guifont = 'FiraCode Nerd Font:h17'      -- 在图形化的 neovim 应用程序中使用的字体
+vim.opt.fillchars.eob = ' '                     -- 将缓冲区末尾的空行显示为 ` `，默认为 `~`
+vim.opt.shortmess:append 'c'                    -- 隐藏所有的自动完成信息，例如 "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
+vim.opt.whichwrap:append '<,>,[,],h,l'          -- 允许在到达行首/行尾时使用的键
+vim.opt.iskeyword:append '-,#'                  -- 将包含 `-,#` 的单词视为单个单词
+vim.opt.formatoptions:remove { 'c', 'r', 'o' }  -- 这是一个描述自动格式化方式的字母序列
+vim.opt.linebreak = true                        -- 自动将行换行
+vim.opt.foldmethod = 'indent'                   -- 使用缩进来自动折叠代码块
+vim.opt.foldlevel = 99                          -- 打开文件时默认折叠级别
+vim.o.background = 'dark'                       -- 设置背景颜色为深色模式，或设置为 "light" 来使用浅色模式
 
 -- neovide
 if vim.g.neovide then
-    -- Put anything you want to happen only in Neovide here
-    vim.g.neovide_cursor_vfx_mode = ''
-    vim.g.neovide_cursor_animation_length = 0
+  -- Put anything you want to happen only in Neovide here
+  vim.g.neovide_cursor_vfx_mode = ''
+  vim.g.neovide_cursor_animation_length = 0
 end

@@ -1,6 +1,6 @@
 local M = {}
 
-local status_cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_cmp_ok then
   return
 end
@@ -11,14 +11,14 @@ M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
   local signs = {
-    { name = 'DiagnosticSignError', text = '', type = 'Error' },
-    { name = 'DiagnosticSignWarn', text = '', type = 'Warn' },
-    { name = 'DiagnosticSignHint', text = '', type = 'Hint' },
-    { name = 'DiagnosticSignInfo', text = '', type = 'Info' },
+    { name = "DiagnosticSignError", text = "", type = "Error" },
+    { name = "DiagnosticSignWarn", text = "", type = "Warn" },
+    { name = "DiagnosticSignHint", text = "", type = "Hint" },
+    { name = "DiagnosticSignInfo", text = "", type = "Info" },
   }
 
   for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
 
   local config = {
@@ -31,22 +31,22 @@ M.setup = function()
     severity_sort = true,
     float = {
       focusable = true,
-      style = 'minimal',
-      border = 'rounded',
-      source = 'always',
-      header = '',
-      prefix = '',
+      style = "minimal",
+      border = "rounded",
+      source = "always",
+      header = "",
+      prefix = "",
     },
   }
 
   vim.diagnostic.config(config)
 
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = 'rounded',
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "rounded",
   })
 
-  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = 'rounded',
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = "rounded",
   })
 end
 
@@ -63,10 +63,15 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-  client.server_capabilities.documentFormattingProvider = false -- 0.8 and later
+  -- lua_ls
+  local arr = {}
+  local noFormat = not table.concat(arr, ","):find(client.name)
+  if noFormat then
+    client.server_capabilities.documentFormattingProvider = false -- 0.8 and later
+  end
 
   lsp_keymaps(bufnr)
-  local status_ok, illuminate = pcall(require, 'illuminate')
+  local status_ok, illuminate = pcall(require, "illuminate")
   if not status_ok then
     return
   end

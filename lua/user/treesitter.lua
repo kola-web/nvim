@@ -14,6 +14,7 @@ configs.setup {
     'html',
     'javascript',
     'css',
+    'scss',
     'jq',
     'json',
     'json5',
