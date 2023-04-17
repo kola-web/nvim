@@ -1,9 +1,9 @@
-local status_ok, which_key = pcall(require, 'which-key')
+local status_ok, which_key = pcall(require, "which-key")
 if not status_ok then
   return
 end
 
-local fun = require 'user.function'
+local fun = require "user.function"
 
 local setup = {
   plugins = {
@@ -36,17 +36,17 @@ local setup = {
     -- ["<tab>"] = "TAB",
   },
   icons = {
-    breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
-    separator = '➜', -- symbol used between a key and it's label
-    group = '+', -- symbol prepended to a group
+    breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+    separator = "➜", -- symbol used between a key and it's label
+    group = "+", -- symbol prepended to a group
   },
   popup_mappings = {
-    scroll_down = '<c-d>', -- binding to scroll down inside the popup
-    scroll_up = '<c-u>', -- binding to scroll up inside the popup
+    scroll_down = "<c-d>", -- binding to scroll down inside the popup
+    scroll_up = "<c-u>", -- binding to scroll up inside the popup
   },
   window = {
-    border = 'rounded', -- none, single, double, shadow
-    position = 'bottom', -- bottom, top
+    border = "rounded", -- none, single, double, shadow
+    position = "bottom", -- bottom, top
     margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
     padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
     winblend = 0,
@@ -55,10 +55,10 @@ local setup = {
     height = { min = 4, max = 25 }, -- min and max height of the columns
     width = { min = 20, max = 50 }, -- min and max width of the columns
     spacing = 3, -- spacing between columns
-    align = 'center', -- align columns left, center or right
+    align = "center", -- align columns left, center or right
   },
   ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
-  hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ ' }, -- hide mapping boilerplate
+  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
   show_help = false, -- show help message on the command line when the popup is visible
   -- triggers = "auto", -- automatically setup triggers
   -- triggers = {"<leader>"} -- or specify a list manually
@@ -66,14 +66,14 @@ local setup = {
     -- list of mode / prefixes that should never be hooked by WhichKey
     -- this is mostly relevant for key maps that start with a native binding
     -- most people should not need to change this
-    i = { 'j', 'k' },
-    v = { 'j', 'k' },
+    i = { "j", "k" },
+    v = { "j", "k" },
   },
 }
 
 local opts = {
-  mode = 'n', -- NORMAL mode
-  prefix = '<leader>',
+  mode = "n", -- NORMAL mode
+  prefix = "<leader>",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
   silent = true, -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
@@ -81,223 +81,222 @@ local opts = {
 }
 
 local mappings = {
-  ['a'] = { '<cmd>Alpha<cr>', 'Alpha' },
-  ['e'] = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
-  ['w'] = { '<cmd>w!<CR>', 'Save' },
-  ['q'] = { '<cmd>q!<CR>', 'Quit' },
-  -- ["c"] = { "<cmd>bd<CR>", "Close Buffer" },
-  ['c'] = { "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>", 'Close Buffer' },
-  ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
-  ['o'] = { '<cmd>Lspsaga outline<CR>', 'Symbols' },
-  ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
+  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+  ["w"] = { "<cmd>w!<CR>", "Save" },
+  -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
+  ["c"] = { "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>", "Close Buffer" },
+  ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+  ["o"] = { "<cmd>Lspsaga outline<CR>", "Symbols" },
+  ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', "Comment" },
   -- ['f'] = {
   --   '<cmd> Telescope find_files <CR>',
   --   'Find files',
   -- },
-  ['f'] = {
-    '<cmd> FzfLua files <CR>',
-    'Find files',
+  ["f"] = {
+    "<cmd> FzfLua files <CR>",
+    "Find files",
   },
-  ['F'] = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
-  ['m'] = { '<cmd>lua vim.lsp.buf.format { async = true }<cr>', 'Format' },
-  [';'] = { '<cmd>Trouble<cr>', 'Trouble' },
+  ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+  ["m"] = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "Format" },
+  [";"] = { "<cmd>Alpha<cr>", "Alpha" },
 
   b = {
-    name = 'Buffers',
+    name = "Buffers",
     b = {
       "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-      'Buffers',
+      "Buffers",
     },
     o = {
-      '<cmd>BufferLineCloseLeft<cr><cmd>BufferLineCloseRight<cr>',
-      'closeOtherBuffer',
+      "<cmd>BufferLineCloseLeft<cr><cmd>BufferLineCloseRight<cr>",
+      "closeOtherBuffer",
     },
-    j = { '<cmd>BufferLinePick<cr>', 'Jump' },
+    j = { "<cmd>BufferLinePick<cr>", "Jump" },
     c = {
-      '<cmd>BufferLinePickClose<cr>',
-      'Pick which buffer to close',
+      "<cmd>BufferLinePickClose<cr>",
+      "Pick which buffer to close",
     },
-    h = { '<cmd>BufferLineCloseLeft<cr>', 'Close all to the left' },
+    h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
     l = {
-      '<cmd>BufferLineCloseRight<cr>',
-      'Close all to the right',
+      "<cmd>BufferLineCloseRight<cr>",
+      "Close all to the right",
     },
     D = {
-      '<cmd>BufferLineSortByDirectory<cr>',
-      'Sort by directory',
+      "<cmd>BufferLineSortByDirectory<cr>",
+      "Sort by directory",
     },
     L = {
-      '<cmd>BufferLineSortByExtension<cr>',
-      'Sort by language',
+      "<cmd>BufferLineSortByExtension<cr>",
+      "Sort by language",
     },
   },
   p = {
-    name = 'Projects',
-    p = { '<cmd>Telescope oldfiles<cr>', 'history file' },
-    m = { '<cmd>PeekOpen<cr>', 'PeekOpen' },
-    c = { '<cmd>PeekClose<cr>', 'PeekClose' },
+    name = "Projects",
+    p = { "<cmd>Telescope oldfiles<cr>", "history file" },
+    m = { "<cmd>PeekOpen<cr>", "PeekOpen" },
+    c = { "<cmd>PeekClose<cr>", "PeekClose" },
   },
   P = {
-    name = 'Plugins',
-    i = { '<cmd>Lazy install<cr>', 'Install' },
-    s = { '<cmd>Lazy sync<cr>', 'Sync' },
-    S = { '<cmd>Lazy clear<cr>', 'Status' },
-    c = { '<cmd>Lazy clean<cr>', 'Clean' },
-    u = { '<cmd>Lazy update<cr>', 'Update' },
-    p = { '<cmd>Lazy profile<cr>', 'Profile' },
-    l = { '<cmd>Lazy log<cr>', 'Log' },
-    d = { '<cmd>Lazy debug<cr>', 'Debug' },
+    name = "Plugins",
+    i = { "<cmd>Lazy install<cr>", "Install" },
+    s = { "<cmd>Lazy sync<cr>", "Sync" },
+    S = { "<cmd>Lazy clear<cr>", "Status" },
+    c = { "<cmd>Lazy clean<cr>", "Clean" },
+    u = { "<cmd>Lazy update<cr>", "Update" },
+    p = { "<cmd>Lazy profile<cr>", "Profile" },
+    l = { "<cmd>Lazy log<cr>", "Log" },
+    d = { "<cmd>Lazy debug<cr>", "Debug" },
   },
 
   r = {
-    name = 'Replace',
-    d = { '<cmd>%s/div/view/g<cr>', 'Node' },
-    p = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', 'px-->rpx' },
-    i = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', 'px-->rem' },
-    c = { '<cmd>RunClose <cr>', 'run close' },
-    r = { '<cmd>RunFile <cr>', 'run file' },
+    name = "Replace",
+    d = { "<cmd>%s/div/view/g<cr>", "Node" },
+    p = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', "px-->rpx" },
+    i = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', "px-->rem" },
+    c = { "<cmd>RunClose <cr>", "run close" },
+    r = { "<cmd>RunFile <cr>", "run file" },
   },
 
   g = {
-    name = 'Git',
-    g = { '<cmd>lua _LAZYGIT_TOGGLE()<CR>', 'Lazygit' },
-    j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next Hunk' },
-    k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev Hunk' },
-    l = { '<cmd>GitBlameToggle<cr>', 'Blame' },
-    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", 'Preview Hunk' },
-    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", 'Reset Hunk' },
-    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", 'Reset Buffer' },
-    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", 'Stage Hunk' },
+    name = "Git",
+    g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+    j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+    k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+    l = { "<cmd>GitBlameToggle<cr>", "Blame" },
+    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
     u = {
       "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-      'Undo Stage Hunk',
+      "Undo Stage Hunk",
     },
-    o = { '<cmd>Telescope git_status<cr>', 'Open changed file' },
-    b = { '<cmd>Telescope git_branches<cr>', 'Checkout branch' },
-    c = { '<cmd>Telescope git_commits<cr>', 'Checkout commit' },
+    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
     d = {
-      '<cmd>Gitsigns diffthis HEAD<cr>',
-      'Diff',
+      "<cmd>Gitsigns diffthis HEAD<cr>",
+      "Diff",
     },
     G = {
-      name = 'Gist',
-      a = { '<cmd>Gist -b -a<cr>', 'Create Anon' },
-      d = { '<cmd>Gist -d<cr>', 'Delete' },
-      f = { '<cmd>Gist -f<cr>', 'Fork' },
-      g = { '<cmd>Gist -b<cr>', 'Create' },
-      l = { '<cmd>Gist -l<cr>', 'List' },
-      p = { '<cmd>Gist -b -p<cr>', 'Create Private' },
+      name = "Gist",
+      a = { "<cmd>Gist -b -a<cr>", "Create Anon" },
+      d = { "<cmd>Gist -d<cr>", "Delete" },
+      f = { "<cmd>Gist -f<cr>", "Fork" },
+      g = { "<cmd>Gist -b<cr>", "Create" },
+      l = { "<cmd>Gist -l<cr>", "List" },
+      p = { "<cmd>Gist -b -p<cr>", "Create Private" },
     },
   },
 
   l = {
-    name = 'LSP',
-    a = { '<cmd>Lspsaga code_action<cr>', 'Code Action' },
-    d = { '<cmd>Lspsaga show_buf_diagnostics<cr>', 'diagnostic_setloclist' },
-    s = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'signature' },
-    n = { '<cmd>Lspsaga diagnostic_jump_next<cr>', 'Netx Errors' },
-    N = { '<cmd>Lspsaga diagnostic_jump_prev<cr>', 'Prev Errors' },
-    r = { '<cmd>Lspsaga rename<cr>', 'Rename' },
-    R = { '<cmd>Lspsaga rename ++project<cr>', 'All Rename' },
-    t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
-    i = { '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'incoming_calls' },
-    I = { '<cmd>LspInstallInfo<cr>', 'LspInstallInfo' },
-    o = { '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'outgoing_calls' },
+    name = "LSP",
+    a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+    d = { "<cmd>TroubleToggle<cr>", "diagnostic_setloclist" },
+    s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "signature" },
+    n = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Netx Errors" },
+    N = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev Errors" },
+    r = { "<cmd>Lspsaga rename<cr>", "Rename" },
+    R = { "<cmd>Lspsaga rename ++project<cr>", "All Rename" },
+    t = { "<cmd>Telescope filetypes<cr>", "filetypes" },
+    i = { "<cmd>lua vim.lsp.buf.incoming_calls()<CR>", "incoming_calls" },
+    I = { "<cmd>LspInstallInfo<cr>", "LspInstallInfo" },
+    o = { "<cmd>lua vim.lsp.buf.outgoing_calls()<CR>", "outgoing_calls" },
     c = {
       function()
         fun.compare_to_clipboard()
       end,
-      'clip',
+      "clip",
     },
   },
 
   s = {
-    name = 'Search',
-    b = { '<cmd>Telescope git_branches<cr>', 'Checkout branch' },
+    name = "Search",
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     T = {
       function()
-        require('base46').toggle_theme()
+        require("base46").toggle_theme()
       end,
-      'Colorscheme',
+      "Colorscheme",
     },
-    t = { '<cmd>TodoTelescope<cr>', 'todoList' },
+    t = { "<cmd>TodoTelescope<cr>", "todoList" },
     f = {
       function()
-        require('telescope').extensions.file_browser.file_browser {
-          path = '%:p:h',
-          cwd = vim.fn.expand '%:p:h',
+        require("telescope").extensions.file_browser.file_browser {
+          path = "%:p:h",
+          cwd = vim.fn.expand "%:p:h",
           respect_gitignore = false,
           hidden = true,
           grouped = true,
           previewer = false,
-          initial_mode = 'normal',
+          initial_mode = "normal",
           layout_config = { height = 40 },
         }
       end,
-      'file_browser',
+      "file_browser",
     },
-    c = { '<cmd>Telescope colorscheme<cr>', 'colorscheme' },
-    h = { '<cmd>Telescope help_tags<cr>', 'Help' },
-    i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", 'Media' },
-    l = { '<cmd>Telescope resume<cr>', 'Last Search' },
-    M = { '<cmd>Telescope man_pages<cr>', 'Man Pages' },
-    r = { '<cmd>Telescope oldfiles<cr>', 'Recent File' },
-    R = { '<cmd>Telescope registers<cr>', 'Registers' },
-    k = { '<cmd>Telescope keymaps<cr>', 'Keymaps' },
-    C = { '<cmd>Telescope commands<cr>', 'Commands' },
+    c = { "<cmd>Telescope colorscheme<cr>", "colorscheme" },
+    h = { "<cmd>Telescope help_tags<cr>", "Help" },
+    i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", "Media" },
+    l = { "<cmd>Telescope resume<cr>", "Last Search" },
+    M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+    r = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
+    R = { "<cmd>Telescope registers<cr>", "Registers" },
+    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+    C = { "<cmd>Telescope commands<cr>", "Commands" },
     s = {
       function()
-        require('spectre').open()
+        require("spectre").open()
       end,
-      'replace',
+      "replace",
     },
     w = {
       function()
-        require('spectre').open_visual { select_word = true }
+        require("spectre").open_visual { select_word = true }
       end,
-      'replace',
+      "replace",
     },
     p = {
       function()
-        require('spectre').open_file_search()
+        require("spectre").open_file_search()
       end,
-      'replace',
+      "replace",
     },
   },
 
   S = {
-    name = 'SnipRun',
-    c = { '<cmd>SnipClose<cr>', 'Close' },
-    n = { '<cmd>%SnipRun<cr>', 'Run File' },
-    i = { '<cmd>SnipInfo<cr>', 'Info' },
-    m = { '<cmd>SnipReplMemoryClean<cr>', 'Mem Clean' },
-    r = { '<cmd>SnipReset<cr>', 'Reset' },
-    t = { '<cmd>SnipRunToggle<cr>', 'Toggle' },
-    x = { '<cmd>SnipTerminate<cr>', 'Terminate' },
+    name = "SnipRun",
+    c = { "<cmd>SnipClose<cr>", "Close" },
+    n = { "<cmd>%SnipRun<cr>", "Run File" },
+    i = { "<cmd>SnipInfo<cr>", "Info" },
+    m = { "<cmd>SnipReplMemoryClean<cr>", "Mem Clean" },
+    r = { "<cmd>SnipReset<cr>", "Reset" },
+    t = { "<cmd>SnipRunToggle<cr>", "Toggle" },
+    x = { "<cmd>SnipTerminate<cr>", "Terminate" },
   },
 
   u = {
-    name = 'Update',
-    u = { '<cmd> :NvChadUpdate <CR>', '  update nvchad' },
+    name = "Update",
+    u = { "<cmd> :NvChadUpdate <CR>", "  update nvchad" },
   },
   T = {
-    name = 'Treesitter',
-    h = { '<cmd>TSHighlightCapturesUnderCursor<cr>', 'Highlight' },
-    p = { '<cmd>TSPlaygroundToggle<cr>', 'Playground' },
+    name = "Treesitter",
+    h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" },
+    l = { "<cmd>TSNodeUnderCursor<cr>", "UnderCursor" },
+    p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" },
   },
-  [' '] = {
-    name = 'hop',
-    w = { '<cmd>HopWord<cr>', 'HopWord' },
-    s = { '<cmd>HopChar2<cr>', 'HopChar2' },
-    ['/'] = { '<cmd>HopPattern<cr>', 'HopPattern' },
-    l = { '<cmd>HopLine<cr>', 'HopLine' },
-    L = { '<cmd>HopLine<cr>', 'HopLineStart' },
+  [" "] = {
+    name = "hop",
+    w = { "<cmd>HopWord<cr>", "HopWord" },
+    s = { "<cmd>HopChar2<cr>", "HopChar2" },
+    ["/"] = { "<cmd>HopPattern<cr>", "HopPattern" },
+    l = { "<cmd>HopLine<cr>", "HopLine" },
+    L = { "<cmd>HopLine<cr>", "HopLineStart" },
   },
 }
 
 local vopts = {
-  mode = 'v', -- VISUAL mode
-  prefix = '<leader>',
+  mode = "v", -- VISUAL mode
+  prefix = "<leader>",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
   silent = true, -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
@@ -305,13 +304,13 @@ local vopts = {
 }
 
 local vmappings = {
-  ['/'] = { "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", 'Comment' },
-  S = { "<esc><cmd>'<,'>SnipRun<cr>", 'Run range' },
+  ["/"] = { "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", "Comment" },
+  S = { "<esc><cmd>'<,'>SnipRun<cr>", "Run range" },
   s = {
     function()
-      require('spectre').open()
+      require("spectre").open()
     end,
-    'replace',
+    "replace",
   },
 }
 

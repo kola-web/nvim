@@ -5,7 +5,7 @@ vim.opt.completeopt = { 'menuone', 'noselect' } -- 自动补全菜单选项
 vim.opt.conceallevel = 0                        -- 在 markdown 文件中显示 `` 符号
 vim.opt.fileencoding = 'utf-8'                  -- 文件编码为 UTF-8
 vim.opt.hlsearch = true                         -- 高亮搜索结果
-vim.opt.ignorecase = true                       -- 忽略搜索中的大小写
+vim.opt.ignorecase = false                      -- 忽略搜索中的大小写
 vim.opt.mouse = 'a'                             -- 允许使用鼠标
 vim.opt.pumheight = 10                          -- 弹出菜单的高度
 vim.opt.showmode = false                        -- 隐藏 -- INSERT -- 等模式信息
@@ -25,6 +25,7 @@ vim.opt.shiftwidth = 2                          -- 每次缩进的空格数
 vim.opt.tabstop = 2                             -- 缩进时的空格数
 vim.opt.cursorline = true                       -- 高亮当前行
 vim.opt.number = true                           -- 显示行号
+vim.opt.relativenumber = true
 vim.opt.laststatus = 3                          -- 只有最后一个窗口始终显示状态栏
 vim.opt.showcmd = false                         -- 隐藏命令行中的（部分）命令
 vim.opt.ruler = false                           -- 隐藏光标所在位置的行号和列号
@@ -49,4 +50,16 @@ if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
   vim.g.neovide_cursor_vfx_mode = ''
   vim.g.neovide_cursor_animation_length = 0
+
+  vim.g.neovide_input_use_logo = 1 -- enable use of the logo (cmd) key
+  vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+  vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+  vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
+  vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+  vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+  vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+  vim.keymap.set('t', '<D-v>', [['<C-\><C-N>"'.nr2char(getchar()).'pi']], { expr = true })
+  vim.keymap.set('i', '<D-v>', '<ESC>"+pA') -- Paste insert mode
+  vim.opt.linespace = 14
 end
+

@@ -1,5 +1,6 @@
 {
   "diagnostics.globals": ["vim", "project_root"],
   "workspace.library": [],
-  "diagnostics.disable": ["param-type-mismatch"]
+  "diagnostics.disable": ["param-type-mismatch",
+        "deprecated"]
 }

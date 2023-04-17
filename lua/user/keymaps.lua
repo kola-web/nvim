@@ -4,8 +4,8 @@ local keymap = vim.keymap.set
 local opts = { silent = true, noremap = true }
 
 --Remap space as leader key
-keymap('', '<Space>', '<Nop>', opts)
-vim.g.mapleader = ' '
+keymap("", "<Space>", "<Nop>", opts)
+vim.g.mapleader = " "
 
 -- Modes
 --   normal_mode = "n",
@@ -16,67 +16,67 @@ vim.g.mapleader = ' '
 --   command_mode = "c",
 
 -- All
-keymap('', '<S-l>', '$', opts)
-keymap('', '<S-h>', '^', opts)
+keymap("", "<S-l>", "$", opts)
+keymap("", "<S-h>", "^", opts)
 
-keymap('n', 'B', '<cmd>enew<cr>', opts)
+keymap("n", "B", "<cmd>enew<cr>", opts)
 
 -- Normal --
 -- Better window navigation
-keymap('n', '<C-h>', '<C-w>h', opts)
-keymap('n', '<C-j>', '<C-w>j', opts)
-keymap('n', '<C-k>', '<C-w>k', opts)
-keymap('n', '<C-l>', '<C-w>l', opts)
-keymap({ 'n', 't' }, '<C-q>', '<C-w><C-w>', opts)
+keymap("n", "<C-h>", "<C-w>h", opts)
+keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-k>", "<C-w>k", opts)
+keymap("n", "<C-l>", "<C-w>l", opts)
+keymap({ "n", "t" }, "<C-q>", "<C-w><C-w>", opts)
 
-keymap('n', '<C-m>', '<Ignore><Plug>(matchup-%)', opts)
-keymap('n', '<C-z>', '<nop>', opts)
-keymap('n', '(', '<cmd>BufferLineMovePrev<cr>', opts)
-keymap('n', ')', '<cmd>BufferLineMoveNext<cr>', opts)
+keymap("n", "<C-m>", "<Ignore><Plug>(matchup-%)", opts)
+keymap("n", "<C-z>", "<nop>", opts)
+keymap("n", "(", "<cmd>BufferLineMovePrev<cr>", opts)
+keymap("n", ")", "<cmd>BufferLineMoveNext<cr>", opts)
 
 -- vue jump
-keymap('n', ']h', '/<template<cr>', opts)
-keymap('n', ']H', '/</template<cr>', opts)
-keymap('n', ']s', '/<script<cr>', opts)
-keymap('n', ']S', '/</script<cr>', opts)
-keymap('n', ']c', '/<style<cr>', opts)
-keymap('n', ']C', '/</style<cr>', opts)
+keymap("n", "]h", "/<template<cr>", opts)
+keymap("n", "]H", "/</template<cr>", opts)
+keymap("n", "]s", "/<script<cr>", opts)
+keymap("n", "]S", "/</script<cr>", opts)
+keymap("n", "]c", "/<style<cr>", opts)
+keymap("n", "]C", "/</style<cr>", opts)
 
 -- Resize with arrows
-keymap('n', '<C-Up>', ':resize -2<CR>', opts)
-keymap('n', '<C-Down>', ':resize +2<CR>', opts)
-keymap('n', '<C-Left>', ':vertical resize -2<CR>', opts)
-keymap('n', '<C-Right>', ':vertical resize +2<CR>', opts)
+keymap("n", "<C-Up>", ":resize -2<CR>", opts)
+keymap("n", "<C-Down>", ":resize +2<CR>", opts)
+keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap('n', '<tab>', '::BufferLineCycleNext<CR><CR>', opts)
-keymap('n', '<S-tab>', '::BufferLineCyclePrev<CR><CR>', opts)
+keymap("n", "<tab>", "::BufferLineCycleNext<CR><CR>", opts)
+keymap("n", "<S-tab>", "::BufferLineCyclePrev<CR><CR>", opts)
 
 -- Better paste
-keymap('v', 'p', '"_dP', opts)
+keymap("v", "p", '"_dP', opts)
 
 -- Insert --
 -- Press jk fast to enter
-keymap('i', 'jk', '<ESC>', opts)
+keymap("i", "jk", "<ESC>", opts)
 
 -- Visual --
 -- Stay in indent mode
-keymap('v', '<', '<gv', opts)
-keymap('v', '>', '>gv', opts)
+keymap("v", "<", "<gv", opts)
+keymap("v", ">", ">gv", opts)
 
 -- substitute
-keymap('n', 's', "<cmd>lua require('substitute').operator()<cr>", opts)
-keymap('n', 'ss', "<cmd>lua require('substitute').line()<cr>", opts)
-keymap('n', 'S', "<cmd>lua require('substitute').eol()<cr>", opts)
-keymap('x', 's', "<cmd>lua require('substitute').visual()<cr>", opts)
-vim.keymap.set('n', 'sx', "<cmd>lua require('substitute.exchange').operator()<cr>", opts)
-vim.keymap.set('n', 'sxx', "<cmd>lua require('substitute.exchange').line()<cr>", opts)
-vim.keymap.set('x', 'X', "<cmd>lua require('substitute.exchange').visual()<cr>", opts)
-vim.keymap.set('n', 'sxc', "<cmd>lua require('substitute.exchange').cancel()<cr>", opts)
+keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", opts)
+keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", opts)
+keymap("n", "S", "<cmd>lua require('substitute').eol()<cr>", opts)
+keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", opts)
+vim.keymap.set("n", "sx", "<cmd>lua require('substitute.exchange').operator()<cr>", opts)
+vim.keymap.set("n", "sxx", "<cmd>lua require('substitute.exchange').line()<cr>", opts)
+vim.keymap.set("x", "X", "<cmd>lua require('substitute.exchange').visual()<cr>", opts)
+vim.keymap.set("n", "sxc", "<cmd>lua require('substitute.exchange').cancel()<cr>", opts)
 
 --abolish.vim
-keymap('n', 'ga', '<Plug>(abolish-coerce-word)')
-keymap('v', 'ga', '<Plug>(abolish-coerce)')
+keymap("n", "ga", "<Plug>(abolish-coerce-word)")
+keymap("v", "ga", "<Plug>(abolish-coerce)")
 
 -- Telescope
 -- keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
@@ -85,7 +85,7 @@ keymap('v', 'ga', '<Plug>(abolish-coerce)')
 -- keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 
 -- fzf-lua
-keymap('t', '<esc>', [[<C-\><C-n>]])
+keymap("t", "<esc>", [[<C-\><C-n>]])
 
 -- Git
 -- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
@@ -105,9 +105,3 @@ keymap('t', '<esc>', [[<C-\><C-n>]])
 -- keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 -- keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
--- neovide
-vim.g.neovide_input_use_logo = 1
-vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
