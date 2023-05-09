@@ -17,7 +17,7 @@ local servers = {
 }
 
 local null_servers = {
-  'prettier',
+  'prettierd',
   'shellcheck',
   'shfmt',
   'deno',

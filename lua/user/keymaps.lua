@@ -27,7 +27,6 @@ keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
-keymap({ "n", "t" }, "<C-q>", "<C-w><C-w>", opts)
 
 keymap("n", "<C-m>", "<Ignore><Plug>(matchup-%)", opts)
 keymap("n", "<C-z>", "<nop>", opts)

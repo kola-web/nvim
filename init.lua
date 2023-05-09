@@ -27,9 +27,12 @@ require "user.marks"
 require "user.todo-rc"
 require "user.code-run"
 require "user.hop"
-require "user.colorizer"
+require "user.colorizer-rc"
 require "user.peek-rc"
 require "user.illuminate-rc"
 require "user.bigfile-rc"
 require "user.lspsaga-rc"
 require "user.trouble-rc"
+require "user.eyeliner-rc"
+
+

@@ -16,8 +16,8 @@ require("lazy").setup {
   -- My plugins here
   { "nvim-lua/plenary.nvim" }, -- Useful lua functions used by lots of plugins
   { "windwp/nvim-autopairs" }, -- Autopairs, integrates with both cmp and treesitter
+  { "JoosepAlviste/nvim-ts-context-commentstring", build = ":TSUpdate" },
   { "numToStr/Comment.nvim" },
-  { "JoosepAlviste/nvim-ts-context-commentstring" },
   { "kyazdani42/nvim-web-devicons" },
   { "kyazdani42/nvim-tree.lua" },
   { "famiu/bufdelete.nvim" },
@@ -30,6 +30,7 @@ require("lazy").setup {
   { "windwp/nvim-spectre" },
   { "norcalli/nvim-colorizer.lua" },
   { "LunarVim/bigfile.nvim", event = { "FileReadPre", "BufReadPre", "User FileOpened" } },
+  { "jinh0/eyeliner.nvim" },
 
   { "kana/vim-textobj-user" },
   { "kola-web/vim-indent-object" },
@@ -48,6 +49,7 @@ require("lazy").setup {
   -- Colorschemes
   { "sainnhe/gruvbox-material" },
   { "ishan9299/nvim-solarized-lua" },
+  { "EdenEast/nightfox.nvim" },
 
   -- cmp plugins
   { "hrsh7th/nvim-cmp" }, -- The completion plugin
@@ -56,7 +58,10 @@ require("lazy").setup {
   { "saadparwaiz1/cmp_luasnip" }, -- snippet completions
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/cmp-nvim-lua" },
+  { "hrsh7th/cmp-nvim-lsp-signature-help" },
   { "hrsh7th/cmp-cmdline" },
+  { "hrsh7th/cmp-calc" },
+  { "hrsh7th/cmp-nvim-lsp-document-symbol" },
   { "RRethy/vim-illuminate", lazy = true },
 
   -- snippets
@@ -72,7 +77,7 @@ require("lazy").setup {
       "mason-lspconfig.nvim",
     },
   }, -- enable LSP
-  { "williamboman/mason.nvim", lazy = true },
+  { "williamboman/mason.nvim", build = ":MasonUpdate" },
   { "williamboman/mason-lspconfig.nvim" },
   { "j-hui/fidget.nvim" },
   { "jayp0521/mason-null-ls.nvim" },
@@ -102,7 +107,7 @@ require("lazy").setup {
   { "ibhagwan/fzf-lua" },
 
   -- Treesitter
-  { "nvim-treesitter/nvim-treesitter" },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { "nvim-treesitter/playground" },
   { "lukas-reineke/indent-blankline.nvim", event = "User FileOpened" },
 

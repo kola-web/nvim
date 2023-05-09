@@ -1,4 +1,4 @@
-local null_ls_status_ok, null_ls = pcall(require, 'null-ls')
+local null_ls_status_ok, null_ls = pcall(require, "null-ls")
 if not null_ls_status_ok then
   return
 end
@@ -14,13 +14,14 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup {
   debug = false,
   sources = {
-    formatting.prettier.with {
-      Args = '--html-whitespace-sensitivity ignore --trailing-comma all --singleAttributePerLine false',
-    },
+    -- formatting.prettierd.with {
+    --   Args = '--html-whitespace-sensitivity ignore --trailing-comma all --singleAttributePerLine false',
+    -- },
+    formatting.prettierd,
 
     formatting.stylua,
 
     formatting.shfmt,
-    code_actions.shellcheck.with { diagnostics_format = '#{m} [#{c}]' },
+    code_actions.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
   },
 }

@@ -30,6 +30,7 @@ configs.setup {
     "vue",
     "toml",
     "typescript",
+    "tsx",
     "yaml",
   },
   sync_install = false,
@@ -56,7 +57,6 @@ configs.setup {
   },
   context_commentstring = {
     enable = true,
-    enable_autocmd = false,
   },
   playground = {
     enable = true,
