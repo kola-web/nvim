@@ -1,24 +1,14 @@
-local fun = require 'user.function'
-local function organize_imports()
-  local params = {
-    command = '_typescript.organizeImports',
-    arguments = { vim.api.nvim_buf_get_name(0) },
-    title = '',
-  }
-  vim.lsp.buf.execute_command(params)
-end
+local fun = require "user.function"
 
 return {
-  filetypes = fun.is_vue() and { 'null' } or { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+  filetypes = fun.is_vue() and { "null" }
+    or { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+  single_file_support = false,
   init_options = {
-    hostInfo = 'neovim',
-    locale = 'zh-CN',
-  },
-  commands = {
-    -- 使用 :OrganizeImports 对import进行排序
-    OrganizeImports = {
-      organize_imports,
-      description = 'Organize Imports',
+    hostInfo = "neovim",
+    locale = "zh-CN",
+    preferences = {
+      importModuleSpecifierPreference = "non-relative",
     },
   },
 }

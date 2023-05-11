@@ -30,7 +30,6 @@ require("lazy").setup {
   { "windwp/nvim-spectre" },
   { "norcalli/nvim-colorizer.lua" },
   { "LunarVim/bigfile.nvim", event = { "FileReadPre", "BufReadPre", "User FileOpened" } },
-  { "jinh0/eyeliner.nvim" },
 
   { "kana/vim-textobj-user" },
   { "kola-web/vim-indent-object" },
@@ -98,6 +97,8 @@ require("lazy").setup {
       "nvim-treesitter",
     },
   },
+  -- { "Exafunction/codeium.vim" },
+  { "jcdickinson/codeium.nvim" },
 
   -- Telescope
   { "nvim-telescope/telescope.nvim" },

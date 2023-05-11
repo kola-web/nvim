@@ -33,6 +33,5 @@ require "user.illuminate-rc"
 require "user.bigfile-rc"
 require "user.lspsaga-rc"
 require "user.trouble-rc"
-require "user.eyeliner-rc"
-
+require "user.codeium-rc"
 

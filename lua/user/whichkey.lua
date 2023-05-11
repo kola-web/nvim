@@ -151,7 +151,7 @@ local mappings = {
     name = "Replace",
     d = { "<cmd>%s/div/view/g<cr>", "Node" },
     p = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', "px-->rpx" },
-    i = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', "px-->rem" },
+    o = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', "px-->rem" },
     c = { "<cmd>RunClose <cr>", "run close" },
     r = { "<cmd>RunFile <cr>", "run file" },
   },
@@ -284,6 +284,9 @@ local mappings = {
     l = { "<cmd>TSNodeUnderCursor<cr>", "UnderCursor" },
     p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" },
   },
+  q = {
+    t = { "<cmd>.!pbpaste | quicktype -l typescript --just-types  <cr>", "typescript" },
+  },
   [" "] = {
     name = "hop",
     w = { "<cmd>HopWord<cr>", "HopWord" },
@@ -311,6 +314,9 @@ local vmappings = {
       require("spectre").open()
     end,
     "replace",
+  },
+  q = {
+    t = { "<esc><cmd>'<,'>!quicktype -l typescript --just-types <cr>", "quicktype" },
   },
 }
 
