@@ -43,9 +43,9 @@ local spaces = function()
   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
--- local codeium = function()
---   return vim.fn["codeium#GetStatusString"]()
--- end
+local codeium = function()
+  return vim.fn["codeium#GetStatusString"]()
+end
 
 lualine.setup {
   options = {
@@ -61,7 +61,7 @@ lualine.setup {
     lualine_a = { "mode" },
     lualine_b = { "branch" },
     lualine_c = { diagnostics },
-    lualine_x = { lazy, diff, spaces, "encoding", filetype, "filesize" },
+    lualine_x = { codeium, lazy, diff, spaces, "encoding", filetype, "filesize" },
     lualine_y = { location },
     lualine_z = { "progress" },
   },

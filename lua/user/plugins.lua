@@ -47,8 +47,7 @@ require("lazy").setup {
 
   -- Colorschemes
   { "sainnhe/gruvbox-material" },
-  { "ishan9299/nvim-solarized-lua" },
-  { "EdenEast/nightfox.nvim" },
+  { "lifepillar/vim-solarized8" },
 
   -- cmp plugins
   { "hrsh7th/nvim-cmp" }, -- The completion plugin
@@ -101,7 +100,7 @@ require("lazy").setup {
   { "jcdickinson/codeium.nvim" },
 
   -- Telescope
-  { "nvim-telescope/telescope.nvim" },
+  { "nvim-telescope/telescope.nvim", tag = "0.1.1" },
   { "nvim-telescope/telescope-file-browser.nvim" },
   { "nvim-telescope/telescope-ui-select.nvim" },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },

@@ -1,4 +1,5 @@
 local cmp_kinds = {
+  Codeium = "",
   Text = "  ",
   Method = "  ",
   Function = "  ",
@@ -24,7 +25,6 @@ local cmp_kinds = {
   Event = "  ",
   Operator = "  ",
   TypeParameter = "  ",
-  Codeium = "",
 }
 
 return cmp_kinds
