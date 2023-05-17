@@ -36,6 +36,7 @@ require("lazy").setup {
   { "kana/vim-textobj-entire", dependencies = { "kana/vim-textobj-user" } },
   { "whatyouhide/vim-textobj-xmlattr", dependencies = { "kana/vim-textobj-user" } },
   { "glts/vim-textobj-comment", dependencies = { "kana/vim-textobj-user" } },
+  -- { "chrisgrieser/nvim-various-textobjs" },
   { "wellle/targets.vim" },
   { "tpope/vim-repeat" },
   { "tpope/vim-surround" },
@@ -48,6 +49,7 @@ require("lazy").setup {
   -- Colorschemes
   { "sainnhe/gruvbox-material" },
   { "lifepillar/vim-solarized8" },
+  { "folke/tokyonight.nvim" },
 
   -- cmp plugins
   { "hrsh7th/nvim-cmp" }, -- The completion plugin
@@ -59,7 +61,6 @@ require("lazy").setup {
   { "hrsh7th/cmp-nvim-lsp-signature-help" },
   { "hrsh7th/cmp-cmdline" },
   { "hrsh7th/cmp-calc" },
-  { "hrsh7th/cmp-nvim-lsp-document-symbol" },
   { "RRethy/vim-illuminate", lazy = true },
 
   -- snippets
@@ -75,6 +76,7 @@ require("lazy").setup {
       "mason-lspconfig.nvim",
     },
   }, -- enable LSP
+  { "jose-elias-alvarez/typescript.nvim" },
   { "williamboman/mason.nvim", build = ":MasonUpdate" },
   { "williamboman/mason-lspconfig.nvim" },
   { "j-hui/fidget.nvim" },
@@ -98,6 +100,7 @@ require("lazy").setup {
   },
   -- { "Exafunction/codeium.vim" },
   { "jcdickinson/codeium.nvim" },
+  { "jose-elias-alvarez/typescript.nvim" },
 
   -- Telescope
   { "nvim-telescope/telescope.nvim", tag = "0.1.1" },

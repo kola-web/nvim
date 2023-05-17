@@ -51,14 +51,17 @@ cmp.setup {
     ["<tab>"] = cmp.mapping.confirm { select = true },
   },
   sources = cmp.config.sources {
-    { name = "codeium" },
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "nvim_lua" },
-    { name = "path" },
+    {
+      name = "nvim_lsp",
+      priority = 10,
+    },
+    { name = "codeium", priority = 9 },
+    { name = "luasnip", priority = 7, max_item_count = 5 },
+    { name = "buffer", priority = 7, keyword_length = 5, max_item_count = 5 },
+    { name = "nvim_lua", priority = 5 },
+    { name = "path", priority = 4 },
+    { name = "calc", priority = 3 },
     { name = "nvim_lsp_signature_help" },
-    { name = "calc" },
   },
   formatting = {
     fields = { "kind", "abbr" },
@@ -71,12 +74,10 @@ cmp.setup {
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ "/", "?" }, {
-  -- mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = "nvim_lsp_document_symbol" },
-  }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources {
     { name = "buffer" },
-  }),
+  },
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).

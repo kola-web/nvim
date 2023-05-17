@@ -1,31 +1,50 @@
-vim.api.nvim_create_autocmd({ "FileType" }, {
+local function augroup(name)
+  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+end
+
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  group = augroup "checktime",
+  command = "checktime",
+})
+
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup "close_with_q",
   pattern = {
-    "Jaq",
-    "qf",
+    "PlenaryTestPopup",
     "help",
-    "man",
     "lspinfo",
+    "man",
+    "notify",
+    "qf",
     "spectre_panel",
-    "lir",
-    "DressingSelect",
+    "startuptime",
     "tsplayground",
-    "Markdown",
-    "",
+    "checkhealth",
   },
-  callback = function()
-    vim.cmd [[
-      nnoremap <silent> <buffer> q :close<CR> 
-      set nobuflisted 
-    ]]
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
 
 -- Automatically close tab/vim when nvim-tree is the last window in the tab
 vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
 
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup "highlight_yank",
   callback = function()
-    vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
+    vim.highlight.on_yank()
+  end,
+})
+
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  group = augroup "resize_splits",
+  callback = function()
+    vim.cmd "tabdo wincmd ="
   end,
 })
 
@@ -57,3 +76,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--   buffer = bufnr,
+--   callback = function()
+--     local opts = {
+--       focusable = false,
+--       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+--       border = "rounded",
+--       source = "always",
+--       prefix = " ",
+--       scope = "cursor",
+--     }
+--     vim.diagnostic.open_float(nil, opts)
+--   end,
+-- })

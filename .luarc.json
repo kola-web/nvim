@@ -1,5 +1,6 @@
 {
-  "diagnostics.globals": ["vim", "project_root"],
+  "diagnostics.globals": ["vim", "project_root",
+        "bufnr"],
   "workspace.library": [],
   "diagnostics.disable": ["param-type-mismatch",
         "deprecated"]
