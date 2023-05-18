@@ -76,7 +76,6 @@ require("lazy").setup {
       "mason-lspconfig.nvim",
     },
   }, -- enable LSP
-  { "jose-elias-alvarez/typescript.nvim" },
   { "williamboman/mason.nvim", build = ":MasonUpdate" },
   { "williamboman/mason-lspconfig.nvim" },
   { "j-hui/fidget.nvim" },
@@ -98,8 +97,8 @@ require("lazy").setup {
       "nvim-treesitter",
     },
   },
-  -- { "Exafunction/codeium.vim" },
-  { "jcdickinson/codeium.nvim" },
+  { "Exafunction/codeium.vim" },
+  -- { "jcdickinson/codeium.nvim" },
   { "jose-elias-alvarez/typescript.nvim" },
 
   -- Telescope
