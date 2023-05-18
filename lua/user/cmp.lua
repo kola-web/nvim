@@ -12,7 +12,6 @@ local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   return
 end
--- local icons = require "user.lspkind-rc"
 
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_vscode").lazy_load { paths = "~/.config/nvim/snippets/" }
@@ -89,13 +88,6 @@ cmp.setup {
       return kind
     end,
   },
-  -- formatting = {
-  --   fields = { "kind", "abbr" },
-  --   format = function(_, vim_item)
-  --     vim_item.kind = icons[vim_item.kind] or ""
-  --     return vim_item
-  --   end,
-  -- },
 }
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
@@ -109,7 +101,8 @@ cmp.setup.cmdline({ "/", "?" }, {
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
+  sources = cmp.config.sources {
     { name = "path" },
-  }, { { name = "cmdline", option = { ignore_cmds = { "Man", "!" } } } }),
+    { name = "cmdline" },
+  },
 })

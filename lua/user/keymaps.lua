@@ -51,6 +51,10 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "<tab>", "::BufferLineCycleNext<CR><CR>", opts)
 keymap("n", "<S-tab>", "::BufferLineCyclePrev<CR><CR>", opts)
 
+-- smart n/N
+keymap("n", "n", vim.v.searchforward == 1 and "n" or "N", opts)
+keymap("n", "N", vim.v.searchforward == 1 and "N" or "n", opts)
+
 -- Better paste
 keymap("v", "p", '"_dP', opts)
 
@@ -79,3 +83,7 @@ keymap("v", "ga", "<Plug>(abolish-coerce)")
 
 -- fzf-lua
 keymap("t", "<esc>", [[<C-\><C-n>]])
+
+-- 聪明地使用命令行历史
+-- keymap("c", "<C-n>", "<down>", opts)
+-- keymap("c", "<C-p>", "<up>", opts)

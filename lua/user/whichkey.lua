@@ -154,6 +154,7 @@ local mappings = {
     o = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', "px-->rem" },
     c = { "<cmd>RunClose <cr>", "run close" },
     r = { "<cmd>RunFile <cr>", "run file" },
+    m = { "<cmd><c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>", "run file" },
   },
 
   g = {
