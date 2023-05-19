@@ -48,7 +48,7 @@ require("lazy").setup {
 
   -- Colorschemes
   { "sainnhe/gruvbox-material" },
-  { "lifepillar/vim-solarized8" },
+  { "sainnhe/everforest" },
   { "folke/tokyonight.nvim" },
 
   -- cmp plugins
@@ -98,8 +98,6 @@ require("lazy").setup {
     },
   },
   { "Exafunction/codeium.vim" },
-  -- { "jcdickinson/codeium.nvim" },
-  { "jose-elias-alvarez/typescript.nvim" },
 
   -- Telescope
   { "nvim-telescope/telescope.nvim", tag = "0.1.1" },

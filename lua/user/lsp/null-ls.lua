@@ -17,7 +17,6 @@ null_ls.setup {
     -- formatting.prettierd.with {
     --   Args = '--html-whitespace-sensitivity ignore --trailing-comma all --singleAttributePerLine false',
     -- },
-    require "typescript.extensions.null-ls.code-actions",
     formatting.prettier,
 
     formatting.stylua,

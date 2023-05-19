@@ -20,7 +20,6 @@ local null_servers = {
   "prettier",
   "shellcheck",
   "shfmt",
-  "deno",
 }
 
 local settings = {
@@ -66,7 +65,7 @@ for _, server in pairs(servers) do
     opts = vim.tbl_deep_extend("force", conf_opts, opts)
   end
 
-  if server ~= "tsserver" then
-    lspconfig[server].setup(opts)
-  end
+  -- if server ~= "tsserver" then
+  -- end
+  lspconfig[server].setup(opts)
 end
