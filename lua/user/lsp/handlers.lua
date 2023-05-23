@@ -66,16 +66,12 @@ M.on_attach = function(client, bufnr)
   -- lua_ls
   local arr = {}
   local noFormat = not table.concat(arr, ","):find(client.name)
+
   if noFormat then
     client.server_capabilities.documentFormattingProvider = false -- 0.8 and later
   end
 
   lsp_keymaps(bufnr)
-  local status_ok, illuminate = pcall(require, "illuminate")
-  if not status_ok then
-    return
-  end
-  illuminate.on_attach(client)
 end
 
 return M

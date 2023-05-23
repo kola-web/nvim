@@ -36,3 +36,4 @@ require "user.lspsaga-rc"
 require "user.trouble-rc"
 require "user.codeium-rc"
 require "user.fidget-rc"
+
