@@ -6,8 +6,8 @@ end
 lspkind.init {
   preset = "codicons",
   mode = "symbol_text",
-  -- symbol_map = {
-  --   Codeium = "",
+  symbol_map = {
+    Codeium = "",
   --   Text = "  ",
   --   Method = "  ",
   --   Function = "  ",
@@ -33,5 +33,5 @@ lspkind.init {
   --   Event = "  ",
   --   Operator = "  ",
   --   TypeParameter = "  ",
-  -- },
+  },
 }

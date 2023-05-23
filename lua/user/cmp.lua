@@ -18,25 +18,13 @@ require("luasnip.loaders.from_vscode").lazy_load { paths = "~/.config/nvim/snipp
 
 local ConfirmBehavior = cmp_types.ConfirmBehavior
 
-local cmp_window = require "cmp.utils.window"
 local cmp_mapping = require "cmp.config.mapping"
-
-cmp_window.info_ = cmp_window.info
-cmp_window.info = function(self)
-  local info = self:info_()
-  info.scrollable = false
-  return info
-end
 
 cmp.setup {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
-  },
-  experimental = {
-    native_menu = false,
-    ghost_text = false,
   },
   mapping = cmp.mapping.preset.insert {
     ["<C-k>"] = cmp_mapping(cmp_mapping.select_prev_item(), { "i", "c" }),
@@ -61,22 +49,6 @@ cmp.setup {
     },
     ["<tab>"] = cmp.mapping.confirm { select = true },
   },
-  sources = cmp.config.sources {
-    { name = "nvim_lsp" },
-    { name = "path" },
-    { name = "luasnip" },
-    { name = "nvim_lua" },
-    { name = "buffer" },
-    { name = "calc" },
-    { name = "nvim_lsp_signature_help" },
-  },
-  window = {
-    completion = {
-      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-      col_offset = -3,
-      side_padding = 0,
-    },
-  },
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
@@ -87,6 +59,27 @@ cmp.setup {
 
       return kind
     end,
+  },
+  sources = cmp.config.sources {
+    { name = "codeium" },
+    { name = "nvim_lsp" },
+    { name = "path" },
+    { name = "luasnip" },
+    { name = "nvim_lua" },
+    { name = "buffer" },
+    { name = "calc" },
+    { name = "nvim_lsp_signature_help" },
+  },
+  confirm_opts = {
+    behavior = cmp.ConfirmBehavior.Replace,
+    select = false,
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  experimental = {
+    ghost_text = true,
   },
 }
 

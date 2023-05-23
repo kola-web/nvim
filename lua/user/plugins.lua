@@ -97,7 +97,8 @@ require("lazy").setup {
       "nvim-treesitter",
     },
   },
-  { "Exafunction/codeium.vim" },
+  -- { "Exafunction/codeium.vim" },
+  { "jcdickinson/codeium.nvim" },
 
   -- Telescope
   { "nvim-telescope/telescope.nvim", tag = "0.1.1" },
