@@ -18,6 +18,16 @@ M.servers = {
   "dockerls",
 }
 
+M.null_servers = {
+  "prettier",
+  "black",
+  "stylua",
+  "shellcheck",
+  "google_java_format",
+  "flake8",
+  "shfmt",
+}
+
 M.compare_to_clipboard = function()
   local ftype = vim.api.nvim_eval "&filetype"
   vim.cmd "vsplit"

@@ -7,6 +7,10 @@ local M = {
       "williamboman/mason-lspconfig.nvim",
       lazy = true,
     },
+    {
+      "jayp0521/mason-null-ls.nvim",
+      lazy = true
+    }
   },
 }
 
@@ -27,6 +31,10 @@ function M.config()
   require("mason").setup(settings)
   require("mason-lspconfig").setup {
     ensure_installed = require("utils.init").servers,
+    automatic_installation = true,
+  }
+  require("mason-null-ls").setup {
+    ensure_installed = require("utils.init").null_servers,
     automatic_installation = true,
   }
 end
