@@ -48,8 +48,8 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<tab>", "::BufferLineCycleNext<CR><CR>", opts)
-keymap("n", "<S-tab>", "::BufferLineCyclePrev<CR><CR>", opts)
+keymap("n", "<tab>", "<Cmd>BufferLineCycleNext<CR>", opts)
+keymap("n", "<S-tab>", "<Cmd>BufferLineCyclePrev<CR>", opts)
 
 -- smart n/N
 keymap("n", "n", vim.v.searchforward == 1 and "n" or "N", opts)
@@ -87,14 +87,3 @@ keymap("t", "<esc>", [[<C-\><C-n>]])
 -- 聪明地使用命令行历史
 -- keymap("c", "<C-n>", "<down>", opts)
 -- keymap("c", "<C-p>", "<up>", opts)
-
--- DAP
--- keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
--- keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
--- keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
--- keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
--- keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
--- keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
--- keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
--- keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
--- keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
