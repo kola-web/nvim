@@ -1,9 +1,0 @@
-{
-  "diagnostics.globals": ["vim", "project_root",
-        "bufnr"],
-  "workspace.library": [
-        "/Users/lijialin/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/4756a996"
-    ],
-  "diagnostics.disable": ["param-type-mismatch",
-        "deprecated"]
-}

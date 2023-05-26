@@ -1,11 +1,13 @@
-local status_ok, code_runner = pcall(require, "code_runner")
-if not status_ok then
-	return
-end
+local M = {
+  "CRAG666/code_runner.nvim",
+  event = "VeryLazy"
+}
 
-code_runner.setup({
-	filetype = {
-		typescript = "deno run",
-		javascript = "node",
-	},
-})
+M.opts = {
+  filetype = {
+    typescript = "deno run",
+    javascript = "node",
+  },
+}
+
+return M

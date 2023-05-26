@@ -1,18 +1,26 @@
-local status_ok, substitute = pcall(require, 'substitute')
-if not status_ok then
-  return
+local M = {
+  "gbprod/substitute.nvim",
+}
+
+M.config = function()
+  local status_ok, substitute = pcall(require, 'substitute')
+  if not status_ok then
+    return
+  end
+
+  substitute.setup {
+    on_substitute = nil,
+    yank_substituted_text = false,
+    range = {
+      prefix = 'S',
+      prompt_current_text = false,
+      confirm = false,
+      complete_word = false,
+      motion1 = false,
+      motion2 = false,
+      suffix = '',
+    },
+  }
 end
 
-substitute.setup {
-  on_substitute = nil,
-  yank_substituted_text = false,
-  range = {
-    prefix = 'S',
-    prompt_current_text = false,
-    confirm = false,
-    complete_word = false,
-    motion1 = false,
-    motion2 = false,
-    suffix = '',
-  },
-}
+return M
