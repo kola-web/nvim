@@ -9,8 +9,8 @@ local M = {
       "glepnir/lspsaga.nvim",
     },
     {
-      "b0o/schemastore.nvim"
-    }
+      "b0o/schemastore.nvim",
+    },
   },
 }
 
@@ -22,26 +22,21 @@ function M.config()
 
   local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }
-    local keymap = vim.api.nvim_buf_set_keymap
-    keymap(bufnr, "n", "gr", "<cmd>Lspsaga lsp_finder<CR>", opts)
-    keymap(bufnr, "n", "gD", "<cmd>Lspsaga peek_definition<CR>", opts)
-    keymap(bufnr, "n", "gd", "<cmd>Lspsaga goto_definition<CR>", opts)
-    keymap(bufnr, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
-    keymap(bufnr, "n", "gT", "<cmd>Lspsaga peek_type_definition<CR>", opts)
-    keymap(bufnr, "n", "gt", "<cmd>Lspsaga goto_type_definition<CR>", opts)
-    keymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<CR>")
+    local keymap = vim.keymap.set
+    keymap("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", opts)
+    keymap("n", "gD", "<cmd>Lspsaga peek_definition<CR>", opts)
+    keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>", opts)
+    keymap("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+    keymap("n", "gT", "<cmd>Lspsaga peek_type_definition<CR>", opts)
+    keymap("n", "gt", "<cmd>Lspsaga goto_type_definition<CR>", opts)
+    keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
   end
 
   local lspconfig = require "lspconfig"
   local on_attach = function(client, bufnr)
-    if client.name == "tsserver" then
-      client.server_capabilities.documentFormattingProvider = false
-    end
-
-    if client.name == "sumneko_lua" then
-      client.server_capabilities.documentFormattingProvider = false
-    end
-
+    -- if client.name == "tsserver" then
+    -- end
+    client.server_capabilities.documentFormattingProvider = false
     lsp_keymaps(bufnr)
     require("illuminate").on_attach(client)
   end
@@ -64,9 +59,9 @@ function M.config()
 
   local signs = {
     { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn",  text = "" },
-    { name = "DiagnosticSignHint",  text = "" },
-    { name = "DiagnosticSignInfo",  text = "" },
+    { name = "DiagnosticSignWarn", text = "" },
+    { name = "DiagnosticSignHint", text = "" },
+    { name = "DiagnosticSignInfo", text = "" },
   }
 
   for _, sign in ipairs(signs) do

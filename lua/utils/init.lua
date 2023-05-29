@@ -47,5 +47,4 @@ M.is_vue = function()
   return is_vue
 end
 
-
 return M

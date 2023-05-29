@@ -1,5 +1,7 @@
 local M = {
   "glepnir/lspsaga.nvim",
+  event = "LspAttach",
+  dependencies = { { "nvim-tree/nvim-web-devicons" } },
 }
 
 M.config = function()
@@ -11,6 +13,11 @@ M.config = function()
   lspsaga.setup {
     outline = {
       win_position = "left",
+    },
+    finder = {
+      keys = {
+        expand_or_jump = "<cr>",
+      },
     },
   }
 end
