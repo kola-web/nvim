@@ -48,3 +48,4 @@ M.is_vue = function()
 end
 
 return M
+
