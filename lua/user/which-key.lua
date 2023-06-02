@@ -121,17 +121,6 @@ function M.config()
         "<cmd>BufferLinePickClose<cr>",
         "Pick which buffer to close",
       },
-      d = {
-        b = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "toggle_breakpoint" },
-        c = { "<cmd>lua require'dap'.continue()<cr>", "continue" },
-        i = { "<cmd>lua require'dap'.step_into()<cr>", "step_into" },
-        o = { "<cmd>lua require'dap'.step_over()<cr>", "step_over" },
-        O = { "<cmd>lua require'dap'.step_out()<cr>", "step_out" },
-        r = { "<cmd>lua require'dap'.run_last()<cr>", "run_last" },
-        l = { "<cmd>lua require'dap'.repl.toggle()<cr>", "repl_toggle" },
-        u = { "<cmd>lua require'dapui'.toggle()<cr>", "dap-ui" },
-        t = { "<cmd>lua require'dap'.terminate()<cr>", "terminate" },
-      },
       h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
       l = {
         "<cmd>BufferLineCloseRight<cr>",

@@ -27,8 +27,14 @@ local M = {
     {
       "hrsh7th/cmp-nvim-lua",
     },
+    -- {
+    --   "jcdickinson/codeium.nvim",
+    -- },
     {
-      "jcdickinson/codeium.nvim",
+      "zbirenbaum/copilot-cmp",
+      config = function()
+        require("copilot_cmp").setup()
+      end,
     },
   },
   event = {
@@ -48,35 +54,13 @@ function M.config()
     return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
   end
 
-  local kind_icons = {
-    Text = "",
-    Method = "",
-    Function = "",
-    Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "",
-    Interface = "",
-    Module = "",
-    Property = "",
-    Unit = "",
-    Value = "",
-    Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
-    Codeium = "󰚩",
-    Copilot = "",
-  }
+  local has_words_before = function()
+    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+      return false
+    end
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match "^%s*$" == nil
+  end
 
   cmp.setup {
     snippet = {
@@ -96,7 +80,9 @@ function M.config()
       -- Set `select` to `false` to only confirm explicitly selected items.
       ["<tab>"] = cmp.mapping.confirm { select = true },
       ["<C-j>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
+        if cmp.visible() and has_words_before() then
+          cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
+        elseif cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expandable() then
           luasnip.expand()
@@ -124,40 +110,38 @@ function M.config()
         "s",
       }),
     },
-    formatting = {
-      fields = { "kind", "abbr", "menu" },
-      format = function(entry, vim_item)
-        vim_item.kind = kind_icons[vim_item.kind]
-        vim_item.menu = ({
-          nvim_lsp = "",
-          nvim_lua = "",
-          luasnip = "",
-          buffer = "",
-          path = "",
-          emoji = "",
-        })[entry.source.name]
-        return vim_item
-      end,
-    },
     sources = {
-      { name = "codeium" },
-      { name = "nvim_lsp" },
-      { name = "nvim_lua" },
+      -- { name = "codeium", },
+      { name = "copilot" },
       { name = "luasnip" },
       { name = "buffer" },
+      { name = "nvim_lsp" },
+      { name = "nvim_lua" },
       { name = "path" },
     },
-    confirm_opts = {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = false,
-    },
     window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
+      documentation = {
+        max_height = 15,
+        max_width = 60,
+      },
     },
-    experimental = {
-      ghost_text = true,
+    formatting = {
+      fields = { "abbr", "menu", "kind" },
+      format = function(entry, item)
+        local short_name = {
+          nvim_lsp = "LSP",
+          nvim_lua = "nvim",
+        }
+
+        local menu_name = short_name[entry.source.name] or entry.source.name
+
+        item.menu = string.format("[%s]", menu_name)
+        return item
+      end,
     },
+    -- experimental = {
+    --   ghost_text = true,
+    -- },
   }
 end
 

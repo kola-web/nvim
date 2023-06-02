@@ -1,6 +1,6 @@
 local M = {
   "kyazdani42/nvim-tree.lua",
-  event = "VimEnter"
+  event = "VimEnter",
 }
 
 function M.config()

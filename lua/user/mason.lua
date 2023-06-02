@@ -9,8 +9,8 @@ local M = {
     },
     {
       "jayp0521/mason-null-ls.nvim",
-      lazy = true
-    }
+      lazy = true,
+    },
   },
 }
 

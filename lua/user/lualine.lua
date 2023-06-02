@@ -22,12 +22,16 @@ function M.config()
     always_visible = true,
   }
 
-  local diff = {
-    "diff",
-    colored = false,
-    symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
-    cond = hide_in_width,
-  }
+  local diff_source = function()
+    local gitsigns = vim.b.gitsigns_status_dict
+    if gitsigns then
+      return {
+        added = gitsigns.added,
+        modified = gitsigns.changed,
+        removed = gitsigns.removed,
+      }
+    end
+  end
 
   local filetype = {
     "filetype",
@@ -54,9 +58,20 @@ function M.config()
     },
     sections = {
       lualine_a = { "mode" },
-      lualine_b = { "branch" },
-      lualine_c = { diagnostics },
-      lualine_x = { diff, spaces, "encoding", filetype },
+      lualine_b = { { "b:gitsigns_head", icon = "" } },
+      lualine_c = { diagnostics, "filesize" },
+      lualine_x = {
+        "searchcount",
+        {
+          "diff",
+          source = diff_source,
+          symbols = { added = " ", modified = " ", removed = " " },
+          cond = hide_in_width,
+        },
+        spaces,
+        "encoding",
+        filetype,
+      },
       lualine_y = { location },
       lualine_z = { "progress" },
     },

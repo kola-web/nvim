@@ -19,6 +19,7 @@ M.config = function()
         expand_or_jump = "<cr>",
       },
     },
+    request_timeout = 10000,
   }
 end
 

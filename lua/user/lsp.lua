@@ -11,6 +11,10 @@ local M = {
     {
       "b0o/schemastore.nvim",
     },
+    {
+      "williamboman/mason-lspconfig.nvim",
+      lazy = true,
+    },
   },
 }
 
@@ -41,21 +45,21 @@ function M.config()
     require("illuminate").on_attach(client)
   end
 
-  for _, server in pairs(require("utils.init").servers) do
-    Opts = {
-      on_attach = on_attach,
-      capabilities = capabilities,
-    }
+  require("mason-lspconfig").setup_handlers {
+    function(server_name)
+      Opts = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
 
-    server = vim.split(server, "@")[1]
+      local require_ok, conf_opts = pcall(require, "settings." .. server_name)
+      if require_ok then
+        Opts = vim.tbl_deep_extend("force", conf_opts, Opts)
+      end
 
-    local require_ok, conf_opts = pcall(require, "settings." .. server)
-    if require_ok then
-      Opts = vim.tbl_deep_extend("force", conf_opts, Opts)
-    end
-
-    lspconfig[server].setup(Opts)
-  end
+      lspconfig[server_name].setup(Opts)
+    end,
+  }
 
   local signs = {
     { name = "DiagnosticSignError", text = "" },
@@ -69,8 +73,7 @@ function M.config()
   end
 
   local config = {
-    -- disable virtual text
-    virtual_text = false,
+    virtual_text = true,
     -- show signs
     signs = {
       active = signs,
