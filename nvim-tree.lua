@@ -8,35 +8,24 @@ local M = {
   },
 }
 
-local function copy_file_to()
-  local api = require "nvim-tree.api"
-  local node = api.tree.get_node_under_cursor()
+local function copy_file_to(node)
   local file_src = node["absolute_path"]
-  print(file_src)
-  -- The args of input are {prompt}, {default}, {completion}
-  -- Read in the new file path using the existing file's path as the baseline.
-  -- local file_out = vim.fn.input("COPY TO: ", file_src, "file")
-  -- Create any parent dirs as required
-  -- local dir = vim.fn.fnamemodify(file_out, ":h")
-  -- vim.fn.system { "mkdir", "-p", dir }
-  -- Copy the file
-  -- vim.fn.system { "cp", "-R", "~/.config/nvim/template/wxmlComponent", file_out }
+  print("111" .. file_src)
 end
 
-M.on_attach = function(bufnr)
-  local api = require "nvim-tree.api"
+local on_attach = function(bufnr)
+  -- local api = require "nvim-tree.api"
+  --
+  -- local function opts(desc)
+  --   return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  -- end
 
-  local function opts(desc)
-    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-  end
-
-  -- vim.keymap.set("n", "]a", copy_file_to, opts "copy_file_to")
-  vim.keymap.set("n", "]a", copy_file_to, opts "Copy File To")
+  vim.keymap.set("n", "<C-y>", copy_file_to, { buffer = bufnr })
 end
 
 function M.config()
   require("nvim-tree").setup {
-    on_attach = M.on_attach(),
+    on_attach = on_attach,
     select_prompts = true,
     update_focused_file = {
       enable = true,
@@ -87,4 +76,3 @@ function M.config()
 end
 
 return M
-
