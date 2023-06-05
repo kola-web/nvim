@@ -12,6 +12,12 @@ function M.config()
         cterm_color = "65",
         name = "Zsh",
       },
+      wxml = {
+        icon = "",
+        color = "#E04422",
+        cterm_color = "65",
+        name = "Wxml",
+      },
     },
     color_icons = true,
     default = true,

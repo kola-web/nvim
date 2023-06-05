@@ -6,4 +6,3 @@ if not vim.g.vscode then
 else
   require "options"
 end
-

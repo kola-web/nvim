@@ -1,11 +1,33 @@
 local M = {
-  "kyazdani42/nvim-tree.lua",
+  "nvim-tree/nvim-tree.lua",
   event = "VimEnter",
+  dependencies = {
+    {
+      "nvim-tree/nvim-web-devicons",
+    },
+  },
 }
 
+local function copy_file_to(node)
+  local file_src = node["absolute_path"]
+  local file_out = vim.fn.input("COPY TO: ", file_src, "file")
+  print(file_out)
+end
+
+M.on_attach = function(bufnr)
+  local api = require "nvim-tree.api"
+
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  vim.keymap.set("n", "]a", copy_file_to, opts "copy_file_to")
+end
+
 function M.config()
-  local tree_cb = require("nvim-tree.config").nvim_tree_callback
   require("nvim-tree").setup {
+    on_attach = M.on_attach(),
+    select_prompts = true,
     update_focused_file = {
       enable = true,
       update_cwd = true,

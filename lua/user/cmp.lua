@@ -24,9 +24,6 @@ local M = {
         "rafamadriz/friendly-snippets",
       },
     },
-    {
-      "hrsh7th/cmp-nvim-lua",
-    },
     -- {
     --   "jcdickinson/codeium.nvim",
     -- },
@@ -112,12 +109,11 @@ function M.config()
     },
     sources = {
       -- { name = "codeium", },
-      { name = "copilot" },
-      { name = "luasnip" },
-      { name = "buffer" },
-      { name = "nvim_lsp" },
-      { name = "nvim_lua" },
-      { name = "path" },
+      { name = "copilot", priority = 1100 },
+      { name = "nvim_lsp", priority = 1000 },
+      { name = "luasnip", priority = 1050 },
+      { name = "buffer", priority = 500 },
+      { name = "path", priority = 250 },
     },
     window = {
       documentation = {
