@@ -15,12 +15,6 @@ local M = {
       "williamboman/mason-lspconfig.nvim",
       lazy = true,
     },
-    {
-      "folke/neodev.nvim",
-      config = function()
-        require("neodev").setup()
-      end,
-    },
   },
 }
 

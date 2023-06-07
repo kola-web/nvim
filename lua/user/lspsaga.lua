@@ -19,6 +19,9 @@ M.config = function()
         expand_or_jump = "<cr>",
       },
     },
+    symbol_in_winbar = {
+      enable = false,
+    },
     request_timeout = 10000,
   }
 end

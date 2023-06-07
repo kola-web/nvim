@@ -24,14 +24,8 @@ local M = {
         "rafamadriz/friendly-snippets",
       },
     },
-    -- {
-    --   "jcdickinson/codeium.nvim",
-    -- },
     {
-      "zbirenbaum/copilot-cmp",
-      config = function()
-        require("copilot_cmp").setup()
-      end,
+      "jcdickinson/codeium.nvim",
     },
   },
   event = {
@@ -108,8 +102,7 @@ function M.config()
       }),
     },
     sources = {
-      -- { name = "codeium", },
-      { name = "copilot", priority = 1100 },
+      { name = "codeium", priority = 1200 },
       { name = "nvim_lsp", priority = 1000 },
       { name = "luasnip", priority = 1050 },
       { name = "buffer", priority = 500 },
