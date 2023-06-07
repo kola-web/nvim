@@ -102,11 +102,11 @@ function M.config()
       }),
     },
     sources = {
-      { name = "codeium", priority = 1200 },
-      { name = "nvim_lsp", priority = 1000 },
-      { name = "luasnip", priority = 1050 },
-      { name = "buffer", priority = 500 },
-      { name = "path", priority = 250 },
+      { name = "codeium" },
+      { name = "nvim_lsp" },
+      { name = "luasnip" },
+      { name = "buffer" },
+      { name = "path" },
     },
     window = {
       documentation = {

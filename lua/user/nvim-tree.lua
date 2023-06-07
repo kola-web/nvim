@@ -8,14 +8,16 @@ local M = {
   },
 }
 
-local function copy_file_to()
-  local api = require "nvim-tree.api"
-  local node = api.tree.get_node_under_cursor()
-  local file_src = node["absolute_path"]
-  local dir = vim.fn.fnamemodify(file_src, ":h")
-  vim.fn.system { "mkdir", "-p", dir }
-  -- -- Copy the file
-  vim.fn.system { "cp", "-R", "~/.config/nvim/template/wxmlComponent", dir }
+local function copy_file_to(foldName)
+  return function()
+    local api = require "nvim-tree.api"
+    local node = api.tree.get_node_under_cursor()
+    local file_src = node["absolute_path"]
+    local dir = vim.fn.fnamemodify(file_src, ":h")
+    local file_out = dir .. "/" .. foldName
+    vim.fn.system { "mkdir", "-p", file_out }
+    vim.fn.system { "cp", "-R", "/Users/lijialin/.config/nvim/template/" .. foldName .. "/.", file_out }
+  end
 end
 
 local on_attach = function(bufnr)
@@ -26,7 +28,8 @@ local on_attach = function(bufnr)
     return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
   end
 
-  vim.keymap.set("n", "<C-y>", copy_file_to, opts "Copy File To")
+  vim.keymap.set("n", "<C-y>c", copy_file_to "wxmlComponent", opts "wxmlComponent")
+  vim.keymap.set("n", "<C-y>p", copy_file_to "wxmlPage", opts "wxmlPage")
 end
 
 M.config = function()

@@ -23,6 +23,7 @@ function M.config()
   }
 
   local diff_source = function()
+    ---@diagnostic disable-next-line: undefined-field
     local gitsigns = vim.b.gitsigns_status_dict
     if gitsigns then
       return {
@@ -46,6 +47,11 @@ function M.config()
   local spaces = function()
     return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
   end
+
+  local codeium = function()
+    return vim.fn["codeium#GetStatusString"]()
+  end
+
   lualine.setup {
     options = {
       globalstatus = true,
@@ -69,6 +75,7 @@ function M.config()
           cond = hide_in_width,
         },
         spaces,
+        codeium,
         "encoding",
         filetype,
       },
@@ -79,3 +86,4 @@ function M.config()
 end
 
 return M
+
