@@ -1,3 +1,4 @@
 {
-  "sumneko-lua.enableNvimLuaDev": true,
+  "sumneko-lua.locale": "zh-cn",
+  "snippets.textmateSnippetsRoots":["~/Library/Application Support/Code/User/snippets"]
 }

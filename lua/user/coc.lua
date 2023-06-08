@@ -6,7 +6,6 @@ local M = {
 
 vim.g["coc_global_extensions"] = {
   "coc-diagnostic",
-  "coc-wxml",
   "coc-html",
   "coc-css",
   "coc-tsserver",
@@ -17,6 +16,7 @@ vim.g["coc_global_extensions"] = {
   "coc-markdownlint",
   "coc-yaml",
   "coc-sumneko-lua",
+  "coc-snippets"
 }
 
 M.config = function()

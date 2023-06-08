@@ -1,5 +1,3 @@
 {
-  "workspace.library": [],
-  "workspace.checkThirdParty": true,
   "diagnostics.globals": ["vim"]
 }
