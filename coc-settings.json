@@ -1,4 +1,7 @@
 {
   "sumneko-lua.locale": "zh-cn",
-  "snippets.textmateSnippetsRoots":["~/Library/Application Support/Code/User/snippets"]
+  "snippets.textmateSnippetsRoots": [
+    "~/Library/Application Support/Code/User/snippets"
+  ],
+  "snippets.ultisnips.pythonPrompt": false
 }
