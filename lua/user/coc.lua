@@ -5,13 +5,18 @@ local M = {
 }
 
 vim.g["coc_global_extensions"] = {
-  "coc-tsserver",
-  "coc-css",
+  "coc-diagnostic",
+  "coc-wxml",
   "coc-html",
+  "coc-css",
+  "coc-tsserver",
+  "coc-eslint",
+  "coc-prettier",
   "@yaegassy/coc-volar",
   "@yaegassy/coc-volar-tools",
   "coc-markdownlint",
   "coc-yaml",
+  "coc-sumneko-lua",
 }
 
 M.config = function()
@@ -28,17 +33,9 @@ M.config = function()
   -- NOTE: Use command ':verbose imap <tab>' to make sure Tab is not mapped by
   -- other plugins before putting this into your config
   local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
-  keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
-  keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
-
-  -- Make <CR> to accept selected completion item or notify coc.nvim to format
-  -- <C-g>u breaks current undo, please make your own choice
-  keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-
-  -- Use <c-j> to trigger snippets
-  keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
-  -- Use <c-space> to trigger completion
-  keyset("i", "<c-space>", "coc#refresh()", { silent = true, expr = true })
+  keyset("i", "<C-j>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', opts)
+  keyset("i", "<C-k>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+  keyset("i", "<Tab>", [[coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<Tab>"]], opts)
 
   -- Use `[g` and `]g` to navigate diagnostics
   -- Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
@@ -62,6 +59,7 @@ M.config = function()
       vim.api.nvim_command("!" .. vim.o.keywordprg .. " " .. cw)
     end
   end
+
   keyset("n", "K", "<CMD>lua _G.show_docs()<CR>", { silent = true })
 
   -- Highlight the symbol and its references on a CursorHold event(cursor is idle)
