@@ -1,12 +1,7 @@
 local M = {
-  "jcdickinson/codeium.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "hrsh7th/nvim-cmp",
-  },
+  "Exafunction/codeium.vim",
   event = "InsertEnter",
   config = function()
-    require("codeium").setup {}
   end,
 }
 
