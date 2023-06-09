@@ -198,11 +198,11 @@ function M.config()
     l = {
       name = "LSP",
       a = { "<Plug>(coc-codeaction-cursor)", "Code Action" },
-      d = { "<cmd>TroubleToggle<cr>", "diagnostic_setloclist" },
+      d = { ":<C-u>CocList diagnostics<cr>", "diagnostic_setloclist" },
       s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "signature" },
-      n = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Netx Errors" },
-      N = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev Errors" },
-      r = { "<cmd>Lspsaga rename<cr>", "Rename" },
+      n = { "<Plug>(coc-diagnostic-next)", "Netx Errors" },
+      N = { "<Plug>(coc-diagnostic-prev)", "Prev Errors" },
+      r = { "<Plug>(coc-rename)", "Rename" },
       R = { "<cmd>Lspsaga rename ++project<cr>", "All Rename" },
       t = { "<cmd>Telescope filetypes<cr>", "filetypes" },
       i = { "<cmd>lua vim.lsp.buf.incoming_calls()<CR>", "incoming_calls" },
@@ -325,6 +325,7 @@ function M.config()
     q = {
       t = { "<esc><cmd>'<,'>!quicktype -l typescript --just-types <cr>", "quicktype" },
     },
+    m = { "<Plug>(coc-format-selected)", "format selected" }
   }
 
   which_key.setup(setup)
