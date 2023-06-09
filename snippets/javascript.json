@@ -2,9 +2,7 @@
   "Print to console": {
     "scope": "javascript,typescript",
     "prefix": "cl clg",
-    "body": [
-      "console.log($1)"
-    ],
+    "body": ["console.log($1)"],
     "description": "Log output to console"
   },
   "wx.ajax": {
@@ -25,10 +23,7 @@
   "e.currentTarget.dataset": {
     "scope": "javascript,typescript",
     "prefix": "wxt",
-    "body": [
-      "const {$1} = e.currentTarget.dataset;",
-      ""
-    ],
+    "body": ["const {$1} = e.currentTarget.dataset;", ""],
     "description": ""
   }
 }
