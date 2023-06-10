@@ -32,6 +32,7 @@ function M.config()
       "json",
       "json5",
       "jsdoc",
+      "kdl",
       "lua",
       "luadoc",
       "markdown",
