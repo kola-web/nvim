@@ -29,6 +29,9 @@ local M = {
       {
         "hrsh7th/cmp-nvim-lua",
       },
+      {
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+      },
     },
   },
   event = {
@@ -114,6 +117,7 @@ function M.config()
       { name = "nvim_lua" },
       { name = "buffer" },
       { name = "path" },
+      { name = "nvim_lsp_signature_help" },
     },
     window = {
       documentation = {

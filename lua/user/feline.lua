@@ -1,6 +1,9 @@
 local M = {
   "freddiehaddad/feline.nvim",
   event = { "VimEnter", "InsertEnter", "BufReadPre", "BufAdd", "BufNew", "BufReadPost" },
+  dependencies = {
+    "Exafunction/codeium.vim",
+  },
 }
 
 local one_monokai = {
@@ -122,6 +125,18 @@ local c = {
   diagnostic_info = {
     provider = "diagnostic_info",
   },
+  codeium = {
+    provider = function()
+      return vim.fn["codeium#GetStatusString"]()
+    end,
+    hl = {
+      fg = "dark_red",
+      bg = "darkblue",
+      style = "bold",
+    },
+    left_sep = "left_filled",
+    right_sep = "block",
+  },
   lsp_client_names = {
     provider = "lsp_client_names",
     hl = {
@@ -129,7 +144,6 @@ local c = {
       bg = "darkblue",
       style = "bold",
     },
-    left_sep = "left_filled",
     right_sep = "block",
   },
   file_type = {
@@ -205,6 +219,7 @@ local middle = {
 }
 
 local right = {
+  c.codeium,
   c.lsp_client_names,
   c.file_type,
   c.file_encoding,
@@ -232,8 +247,6 @@ M.config = function()
     theme = one_monokai,
     vi_mode_colors = vi_mode_colors,
   }
-  -- require("feline").winbar.setup()
-  -- require("feline").statuscolumn.setup()
 end
 
 return M
