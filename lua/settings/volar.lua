@@ -30,18 +30,4 @@ return {
       new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
     end
   end,
-  init_options = {
-    typescript = {
-      tsdk = "",
-    },
-  },
-  settings = {
-    typescript = {
-      locale = "zh-cn",
-      preferences = {
-        -- "relative" | "non-relative" | "auto" | "shortest"(not sure)
-        importModuleSpecifier = "non-relative",
-      },
-    },
-  },
 }
