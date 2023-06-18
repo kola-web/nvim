@@ -65,7 +65,7 @@ function M.config()
     sections = {
       lualine_a = { "mode" },
       lualine_b = { { "b:gitsigns_head", icon = "" } },
-      lualine_c = { diagnostics, "filesize" },
+      lualine_c = { diagnostics, "filesize", { "filename", file_status = false, path = 1 } },
       lualine_x = {
         "searchcount",
         {
