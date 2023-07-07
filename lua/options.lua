@@ -50,6 +50,7 @@ if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
   vim.g.neovide_cursor_vfx_mode = ""
   vim.g.neovide_cursor_animation_length = 0
+  vim.opt.linespace = 14
 
   vim.g.neovide_input_use_logo = 1 -- enable use of the logo (cmd) key
   vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
@@ -69,4 +70,3 @@ vim.g.loaded_netrwPlugin = 1
 
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
-

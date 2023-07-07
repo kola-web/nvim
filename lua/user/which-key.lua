@@ -155,8 +155,11 @@ function M.config()
 
     r = {
       name = "Replace",
-      d = { "<cmd>%s/div/view/g<cr>", "Node" },
+      d = { "<cmd>%s/<div/<view/g<cr><cmd>%s/<\\/div/<\\/view/g<cr>", "Node" },
+      v = { "<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr>", "Node" },
       p = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', "px-->rpx" },
+      w = { '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1))."px"#g<cr>', "rpx-->px" },
+      e = { '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 2)."px"#g<cr>', "rpx/2-->px" },
       o = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', "px-->rem" },
       c = { "<cmd>RunClose <cr>", "run close" },
       r = { "<cmd>RunFile <cr>", "run file" },

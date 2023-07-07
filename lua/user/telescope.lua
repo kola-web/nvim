@@ -5,9 +5,6 @@ local M = {
   dependencies = {
     { "nvim-lua/plenary.nvim" },
     {
-      "ahmedkhalf/project.nvim",
-    },
-    {
       "nvim-telescope/telescope-file-browser.nvim",
     },
     {
