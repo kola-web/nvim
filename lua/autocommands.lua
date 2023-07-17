@@ -51,3 +51,11 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd({ "WinClosed" }, {
+  callback = function()
+    if vim.bo.buftype == "prompt" then
+      vim.api.nvim_command "stopinsert"
+    end
+  end,
+})

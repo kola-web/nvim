@@ -20,7 +20,7 @@ M.config = function()
       },
     },
     symbol_in_winbar = {
-      enable = false,
+      enable = true,
     },
     request_timeout = 10000,
   }

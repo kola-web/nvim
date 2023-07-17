@@ -43,6 +43,12 @@ M.config = function()
           ["<Up>"] = actions.move_selection_previous,
           ["<C-j>"] = actions.move_selection_next,
           ["<C-k>"] = actions.move_selection_previous,
+          ["<C-n>"] = actions.cycle_history_next,
+          ["<C-p>"] = actions.cycle_history_prev,
+          ["<CR>"] = actions.select_default,
+        },
+        n = {
+          ["?"] = actions.which_key,
         },
       },
     },
