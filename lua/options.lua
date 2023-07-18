@@ -44,6 +44,9 @@ vim.opt.linebreak = true -- 自动将行换行
 vim.opt.foldmethod = "indent" -- 使用缩进来自动折叠代码块
 vim.opt.foldlevel = 99 -- 打开文件时默认折叠级别
 vim.o.background = "dark" -- 设置背景颜色为深色模式，或设置为 "light" 来使用浅色模式
+vim.o.spelllang = "en,cjk"
+vim.opt_local.wrap = true
+vim.opt_local.spell = true
 
 -- neovide
 if vim.g.neovide then
