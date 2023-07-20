@@ -22,3 +22,4 @@ vim.filetype.add {
     ["vscode-snippets"] = "jsonc", -- Included in the plugin
   },
 }
+

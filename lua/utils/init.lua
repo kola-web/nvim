@@ -10,7 +10,6 @@ M.servers = {
   "jsonls",
   "yamlls",
   "emmet_ls",
-  "eslint",
   "volar",
   "marksman",
   "intelephense",
@@ -27,6 +26,7 @@ M.null_servers = {
   "google_java_format",
   "flake8",
   "shfmt",
+  "eslint",
 }
 
 M.compare_to_clipboard = function()

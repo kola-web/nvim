@@ -38,9 +38,8 @@ function M.config()
 
   local lspconfig = require "lspconfig"
   local on_attach = function(client, bufnr)
-    -- if client.name == "tsserver" then
-    -- end
     client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
     lsp_keymaps(bufnr)
     require("illuminate").on_attach(client)
   end

@@ -1,5 +1,6 @@
 return {
-	settings = {
-		packageManager = "pnpm",
-	},
+  settings = {
+    packageManager = "pnpm",
+    format = false,
+  },
 }

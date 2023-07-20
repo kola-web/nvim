@@ -30,4 +30,17 @@ return {
       new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
     end
   end,
+  documentFeatures = {
+    documentFormatting = {
+      defaultPrintWidth = 60,
+    },
+  },
+  settings = {
+    typescript = {
+      preferences = {
+        -- "relative" | "non-relative" | "auto" | "shortest"(not sure)
+        importModuleSpecifier = "non-relative",
+      },
+    },
+  },
 }
