@@ -3,3 +3,5 @@ tmux
 fg/!
 fg
 bg
+keymaps
+autocommands

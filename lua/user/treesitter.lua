@@ -10,6 +10,60 @@ local M = {
       "nvim-tree/nvim-web-devicons",
       event = "VeryLazy",
     },
+    {
+      "windwp/nvim-ts-autotag",
+      event = "VeryLazy",
+      configs = function()
+        require("nvim-treesitter.configs").setup {
+          autotag = {
+            enable = true,
+            enable_rename = true,
+            enable_close = true,
+            enable_close_on_slash = true,
+            filetypes = {
+              "html",
+              "wxml",
+              "javascript",
+              "typescript",
+              "javascriptreact",
+              "typescriptreact",
+              "svelte",
+              "vue",
+              "tsx",
+              "jsx",
+              "rescript",
+              "xml",
+              "php",
+              "markdown",
+              "astro",
+              "glimmer",
+              "handlebars",
+              "hbs",
+            },
+            skip_tags = {
+              "area",
+              "base",
+              "br",
+              "col",
+              "command",
+              "embed",
+              "hr",
+              "img",
+              "slot",
+              "input",
+              "keygen",
+              "link",
+              "meta",
+              "param",
+              "source",
+              "track",
+              "wbr",
+              "menuitem",
+            },
+          },
+        }
+      end,
+    },
   },
 }
 function M.config()
@@ -57,6 +111,9 @@ function M.config()
       disable = { "css" }, -- list of language that will be disabled
     },
     autopairs = {
+      enable = true,
+    },
+    autotag = {
       enable = true,
     },
     indent = { enable = true, disable = { "python", "css" } },

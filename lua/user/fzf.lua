@@ -12,7 +12,8 @@ function M.config()
   fzf.setup {
     "telescope",
     files = {
-      rg_opts = "--color=always --smart-case -g '!{.git,node_modules,miniprogram_npm,.yarn,static,.svn}'",
+      find_opts = [[-type f -not -path '*/\.git/*' -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/miniprogram_npm/*' -not -path '*/.yarn/*' -not -path '*/static/*' -not -path '*/.svn/*']],
+      rg_opts = "--color=never --files --hidden --follow -g '!{.git,node_modules,miniprogram_npm,.yarn,static,.svn}'",
       fd_opts = "--color=never --type f --hidden --follow --exclude '{.git,node_modules,miniprogram_npm,.yarn,static,.svn}'",
     },
   }
