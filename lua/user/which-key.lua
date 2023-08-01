@@ -285,10 +285,6 @@ function M.config()
       x = { "<cmd>SnipTerminate<cr>", "Terminate" },
     },
 
-    u = {
-      name = "Update",
-      u = { "<cmd> :NvChadUpdate <CR>", "  update nvchad" },
-    },
     T = {
       name = "Treesitter",
       h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" },
