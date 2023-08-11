@@ -25,7 +25,7 @@ function M.config()
         extra_args = { "--trailing-comma all", "--html-whitespace-sensitivity ignore" },
       },
       formatting.black.with { extra_args = { "--fast" } },
-      formatting.stylua,
+      -- formatting.stylua,
       formatting.google_java_format,
       diagnostics.flake8,
     },
