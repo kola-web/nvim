@@ -15,10 +15,12 @@ local M = {
     },
     {
       "wellle/targets.vim",
+    },
+    {
+      "junegunn/vim-easy-align"
     }
   },
   event = "VeryLazy"
 }
 
 return M
-

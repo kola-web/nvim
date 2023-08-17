@@ -27,7 +27,7 @@ function M.config()
   local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }
     local keymap = vim.keymap.set
-    keymap("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", opts)
+    keymap("n", "gr", "<cmd>Lspsaga finder<CR>", opts)
     keymap("n", "gD", "<cmd>Lspsaga peek_definition<CR>", opts)
     keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>", opts)
     keymap("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
@@ -64,9 +64,9 @@ function M.config()
 
   local signs = {
     { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
+    { name = "DiagnosticSignWarn",  text = "" },
+    { name = "DiagnosticSignHint",  text = "" },
+    { name = "DiagnosticSignInfo",  text = "" },
   }
 
   for _, sign in ipairs(signs) do
