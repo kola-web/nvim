@@ -16,5 +16,7 @@ M.opts = {
     "NvimTree",
   },
 }
+-- create 1-100 arr
+
 
 return M
