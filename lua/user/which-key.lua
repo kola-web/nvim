@@ -94,16 +94,16 @@ function M.config()
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
     ["o"] = { "<cmd>Lspsaga outline<CR>", "Symbols" },
     ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', "Comment" },
-    -- ["f"] = {
-    --   "<cmd> Telescope find_files <CR>",
-    --   "Find files",
-    -- },
     ["f"] = {
-      "<cmd> FzfLua files <CR>",
+      "<cmd> Telescope find_files <CR>",
       "Find files",
     },
-    -- ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-    ["F"] = { "<cmd>FzfLua live_grep theme=ivy<cr>", "Find Text" },
+    -- ["f"] = {
+    --   "<cmd> FzfLua files <CR>",
+    --   "Find files",
+    -- },
+    ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+    -- ["F"] = { "<cmd>FzfLua live_grep theme=ivy<cr>", "Find Text" },
     ["m"] = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "Format" },
     [";"] = { "<cmd>Alpha<cr>", "Alpha" },
 
