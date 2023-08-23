@@ -5,9 +5,9 @@ local M = {
   --dark
   -- "folke/tokyonight.nvim",
   -- "projekt0n/github-nvim-theme",
-  "sainnhe/gruvbox-material",
+  -- "sainnhe/gruvbox-material",
   -- "Mofiqul/dracula.nvim",
-  -- "catppuccin/nvim",
+  "catppuccin/nvim",
   -- "rebelot/kanagawa.nvim",
   -- "EdenEast/nightfox.nvim",
   lazy = false,    -- make sure we load this during startup if it is your main colorscheme
@@ -20,9 +20,9 @@ local M = {
 
 -- dark
 vim.o.background = "dark"
--- M.name = "catppuccin-frappe"
+M.name = "catppuccin-macchiato"
 -- M.name = "github_dark_dimmed"
-M.name = "gruvbox-material"
+-- M.name = "gruvbox-material"
 -- M.name = "dracula"
 -- M.name = "highlite"
 -- M.name = "Nightfox"

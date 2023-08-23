@@ -3,9 +3,6 @@ local M = {
   event = { "BufReadPre", "BufAdd", "BufNew", "BufReadPost" },
   dependencies = {
     {
-      "famiu/bufdelete.nvim",
-    },
-    {
       'nvim-tree/nvim-web-devicons'
     },
   },
@@ -20,10 +17,15 @@ function M.config()
   bufferline.setup {
     options = {
       mode = "buffers",
-      close_command = "Bdelete! %d",                        -- can be a string | function, see "Mouse actions"
-      right_mouse_command = "Bdelete! %d",                  -- can be a string | function, see "Mouse actions"
+      close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
+      right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
       offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
-      separator_style = "thin",                             -- | "thick" | "thin" | { 'any', 'any' },
+      separator_style = "thin",            -- | "thick" | "thin" | { 'any', 'any' },
+      hover = {
+        enabled = false,                   -- requires nvim 0.8+
+        delay = 200,
+        reveal = { "close" },
+      },
       sort_by = "id",
     },
   }

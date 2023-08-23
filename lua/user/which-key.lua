@@ -90,7 +90,7 @@ function M.config()
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     ["w"] = { "<cmd>w!<CR>", "Save" },
     -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
-    ["c"] = { "<cmd>lua require('bufdelete').bufdelete(0, true)<CR>", "Close Buffer" },
+    ["c"] = { "<cmd>bd<CR>", "Close Buffer" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
     ["o"] = { "<cmd>Lspsaga outline<CR>", "Symbols" },
     ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', "Comment" },
