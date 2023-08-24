@@ -1,11 +1,6 @@
 local M = {
   "akinsho/bufferline.nvim",
-  event = { "BufReadPre", "BufAdd", "BufNew", "BufReadPost" },
-  dependencies = {
-    {
-      'nvim-tree/nvim-web-devicons'
-    },
-  },
+  event = "VeryLazy",
 }
 
 function M.config()
@@ -19,10 +14,17 @@ function M.config()
       mode = "buffers",
       close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
       right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
-      offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
-      separator_style = "thin",            -- | "thick" | "thin" | { 'any', 'any' },
+      offsets = {
+        {
+          filetype = "neo-tree",
+          text = "Neo-tree",
+          highlight = "Directory",
+          text_align = "left",
+        },
+      },
+      separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
       hover = {
-        enabled = false,                   -- requires nvim 0.8+
+        enabled = false,        -- requires nvim 0.8+
         delay = 200,
         reveal = { "close" },
       },

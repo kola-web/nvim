@@ -1,11 +1,6 @@
 local M = {
   "nvim-tree/nvim-tree.lua",
   event = "VimEnter",
-  dependencies = {
-    {
-      "nvim-tree/nvim-web-devicons",
-    },
-  },
 }
 
 local function copy_file_to(foldName)

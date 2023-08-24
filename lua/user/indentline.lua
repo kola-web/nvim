@@ -4,7 +4,7 @@ local M = {
 }
 
 M.opts = {
-  char = "▏",
+  char = "│",
   show_trailing_blankline_indent = false,
   show_first_indent_level = true,
   use_treesitter = true,
@@ -12,8 +12,15 @@ M.opts = {
   buftype_exclude = { "terminal", "nofile" },
   filetype_exclude = {
     "help",
-    "packer",
-    "NvimTree",
+    "alpha",
+    "dashboard",
+    "neo-tree",
+    "Trouble",
+    "lazy",
+    "mason",
+    "notify",
+    "toggleterm",
+    "lazyterm",
   },
 }
 -- create 1-100 arr

@@ -1,6 +1,6 @@
 local M = {
   "nvim-lualine/lualine.nvim",
-  event = { "VimEnter", "InsertEnter", "BufReadPre", "BufAdd", "BufNew", "BufReadPost" },
+  event = "VeryLazy",
 }
 
 function M.config()
@@ -82,6 +82,7 @@ function M.config()
       lualine_y = { location },
       lualine_z = { "progress" },
     },
+    extensions = { "neo-tree", "lazy" },
   }
 end
 

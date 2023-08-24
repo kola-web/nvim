@@ -7,10 +7,6 @@ local M = {
       event = "VeryLazy",
     },
     {
-      "nvim-tree/nvim-web-devicons",
-      event = "VeryLazy",
-    },
-    {
       "windwp/nvim-ts-autotag",
       event = "VeryLazy",
       configs = function()

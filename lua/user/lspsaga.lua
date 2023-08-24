@@ -1,7 +1,6 @@
 local M = {
   "glepnir/lspsaga.nvim",
   event = "LspAttach",
-  dependencies = { { "nvim-tree/nvim-web-devicons" } },
 }
 
 M.config = function()
