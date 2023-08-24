@@ -13,22 +13,22 @@ function M.config()
 
   local setup = {
     plugins = {
-      marks = true, -- shows a list of your marks on ' and `
-      registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+      marks = true,       -- shows a list of your marks on ' and `
+      registers = true,   -- shows your registers on " in NORMAL or <C-r> in INSERT mode
       spelling = {
-        enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+        enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
         suggestions = 20, -- how many suggestions should be shown in the list?
       },
       -- the presets plugin, adds help for a bunch of default keybindings in Neovim
       -- No actual key bindings are created
       presets = {
-        operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-        motions = false, -- adds help for motions
+        operators = false,    -- adds help for operators like d, y, ... and registers them for motion / text object completion
+        motions = false,      -- adds help for motions
         text_objects = false, -- help for text objects triggered after entering an operator
-        windows = true, -- default bindings on <c-w>
-        nav = true, -- misc bindings to work with windows
-        z = true, -- bindings for folds, spelling and others prefixed with z
-        g = true, -- bindings for prefixed with g
+        windows = true,       -- default bindings on <c-w>
+        nav = true,           -- misc bindings to work with windows
+        z = true,             -- bindings for folds, spelling and others prefixed with z
+        g = true,             -- bindings for prefixed with g
       },
     },
     -- add operators that will trigger motion and text object completion
@@ -48,24 +48,24 @@ function M.config()
     },
     popup_mappings = {
       scroll_down = "<c-d>", -- binding to scroll down inside the popup
-      scroll_up = "<c-u>", -- binding to scroll up inside the popup
+      scroll_up = "<c-u>",   -- binding to scroll up inside the popup
     },
     window = {
-      border = "rounded", -- none, single, double, shadow
-      position = "bottom", -- bottom, top
-      margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+      border = "rounded",       -- none, single, double, shadow
+      position = "bottom",      -- bottom, top
+      margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]
       padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
       winblend = 0,
     },
     layout = {
-      height = { min = 4, max = 25 }, -- min and max height of the columns
-      width = { min = 20, max = 50 }, -- min and max width of the columns
-      spacing = 3, -- spacing between columns
-      align = "center", -- align columns left, center or right
+      height = { min = 4, max = 25 },                                             -- min and max height of the columns
+      width = { min = 20, max = 50 },                                             -- min and max width of the columns
+      spacing = 3,                                                                -- spacing between columns
+      align = "center",                                                           -- align columns left, center or right
     },
-    ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
+    ignore_missing = true,                                                        -- enable this to hide mappings for which you didn't specify a label
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-    show_help = false, -- show help message on the command line when the popup is visible
+    show_help = false,                                                            -- show help message on the command line when the popup is visible
     -- triggers = "auto", -- automatically setup triggers
     -- triggers = {"<leader>"} -- or specify a list manually
     triggers_blacklist = {
@@ -78,19 +78,23 @@ function M.config()
   }
 
   local opts = {
-    mode = "n", -- NORMAL mode
+    mode = "n",     -- NORMAL mode
     prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
+    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true,  -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
+    nowait = true,  -- use `nowait` when creating keymaps
   }
 
   local mappings = {
-    ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+    -- ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+    ["e"] = { function()
+      require("neo-tree.command").execute({ toggle = true })
+    end, "Explorer" },
     ["w"] = { "<cmd>w!<CR>", "Save" },
     -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
-    ["c"] = { "<cmd>bd<CR>", "Close Buffer" },
+    -- ["c"] = { "<cmd>bd<CR>", "Close Buffer" },
+    ["c"] = { function() require("mini.bufremove").delete(0, false) end, "Close Buffer" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
     ["o"] = { "<cmd>Lspsaga outline<CR>", "Symbols" },
     ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', "Comment" },
@@ -201,11 +205,16 @@ function M.config()
 
     l = {
       name = "LSP",
-      a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+      a = { vim.lsp.buf.code_action, "Code Action" },
       d = { "<cmd>TroubleToggle<cr>", "diagnostic_setloclist" },
-      s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "signature" },
       n = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Netx Errors" },
       N = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev Errors" },
+      e = { function()
+        require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+      end, "Netx Errors" },
+      E = { function()
+        require("lspsaga.diagnostic"):goto_prev({ severity = vim.diagnostic.severity.ERROR })
+      end, "Prev Errors" },
       r = { "<cmd>Lspsaga rename<cr>", "Rename" },
       R = { "<cmd>Lspsaga rename ++project<cr>", "All Rename" },
       t = { "<cmd>Telescope filetypes<cr>", "filetypes" },
@@ -229,7 +238,7 @@ function M.config()
         end,
         "Colorscheme",
       },
-      t = { "<cmd>TodoTelescope<cr>", "todoList" },
+      t = { "<cmd>TodoTrouble<cr>", "todoList" },
       f = {
         function()
           require("telescope").extensions.file_browser.file_browser {
@@ -305,12 +314,12 @@ function M.config()
   }
 
   local vopts = {
-    mode = "v", -- VISUAL mode
+    mode = "v",     -- VISUAL mode
     prefix = "<leader>",
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
+    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true,  -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
+    nowait = true,  -- use `nowait` when creating keymaps
   }
 
   local vmappings = {

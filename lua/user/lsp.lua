@@ -18,22 +18,55 @@ local M = {
   },
 }
 
-local cmp_nvim_lsp = require "cmp_nvim_lsp"
-function M.config()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
+function M.config(_, opts)
+  local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  local capabilities = vim.tbl_deep_extend(
+    "force",
+    {},
+    vim.lsp.protocol.make_client_capabilities(),
+    has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+    opts.capabilities or {}
+  )
+
+  for name, icon in pairs(require("icons").diagnostics) do
+    name = "DiagnosticSign" .. name
+    vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+  end
+
+  local config = {
+    underline = true,
+    update_in_insert = false,
+    virtual_text = {
+      spacing = 4,
+      source = "if_many",
+      prefix = "●",
+      -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+      -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+      -- prefix = "icons",
+    },
+    severity_sort = true,
+  }
+
+  vim.diagnostic.config(config)
+
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "rounded",
+  })
+
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = "rounded",
+  })
 
   local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }
     local keymap = vim.keymap.set
     keymap("n", "gr", "<cmd>Lspsaga finder<CR>", opts)
-    keymap("n", "gD", "<cmd>Lspsaga peek_definition<CR>", opts)
-    keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>", opts)
-    keymap("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
-    keymap("n", "gT", "<cmd>Lspsaga peek_type_definition<CR>", opts)
-    keymap("n", "gt", "<cmd>Lspsaga goto_type_definition<CR>", opts)
-    keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+    keymap('n', 'gI', function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, opts)
+    keymap('n', 'gy', function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, opts)
+    keymap('n', 'gD', vim.lsp.buf.declaration, opts)
+    keymap("n", "gd", vim.lsp.buf.definition, opts)
+    keymap("n", "K", vim.lsp.buf.hover, opts)
+    keymap('n', 'gK', vim.lsp.buf.signature_help, opts)
   end
 
   local lspconfig = require "lspconfig"
@@ -50,7 +83,7 @@ function M.config()
     function(server_name)
       Opts = {
         on_attach = on_attach,
-        capabilities = capabilities,
+        capabilities = vim.deepcopy(capabilities),
       }
 
       local require_ok, conf_opts = pcall(require, "settings." .. server_name)
@@ -61,47 +94,6 @@ function M.config()
       lspconfig[server_name].setup(Opts)
     end,
   }
-
-  local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn",  text = "" },
-    { name = "DiagnosticSignHint",  text = "" },
-    { name = "DiagnosticSignInfo",  text = "" },
-  }
-
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  end
-
-  local config = {
-    virtual_text = true,
-    -- show signs
-    signs = {
-      active = signs,
-    },
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
-    float = {
-      focusable = false,
-      style = "minimal",
-      border = "rounded",
-      source = "always",
-      header = "",
-      prefix = "",
-      suffix = "",
-    },
-  }
-
-  vim.diagnostic.config(config)
-
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
-  })
-
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
-  })
 end
 
 return M
