@@ -28,7 +28,6 @@ local M = {
           mappings = {
             ["<C-t>c"] = function(state)
               local fs_actions = require("neo-tree.sources.filesystem.lib.fs_actions")
-              local manager = require("neo-tree.sources.manager")
               local node = state.tree:get_node()
               local currentPath = node._parent_id
               vim.fn.system { "cp", "-R", "/Users/lijialin/.config/nvim/template/" .. "wxmlComponent", currentPath }
@@ -38,11 +37,11 @@ local M = {
             end,
             ["<C-t>p"] = function(state)
               local fs_actions = require("neo-tree.sources.filesystem.lib.fs_actions")
-              local manager = require("neo-tree.sources.manager")
               local node = state.tree:get_node()
               local currentPath = node._parent_id
-              vim.fn.system { "cp", "-R", "/Users/lijialin/.config/nvim/template/" .. "wxmlComponent", currentPath }
+              vim.fn.system { "cp", "-R", "/Users/lijialin/.config/nvim/template/" .. "wxmlPage", currentPath }
               fs_actions.rename_node(currentPath .. "/wxmlPage", function(_, path)
+                print(path)
                 vim.cmd("edit " .. path .. "/index.wxml")
               end)
             end
