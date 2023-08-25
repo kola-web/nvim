@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 vim.opt.backup = false                                     -- 不创建备份文件
 vim.opt.clipboard = "unnamedplus"                          -- 允许 Neovim 访问系统剪贴板
 vim.opt.cmdheight = 1                                      -- 命令行高度，用于显示信息
@@ -65,10 +68,10 @@ if vim.g.neovide then
   vim.keymap.set("i", "<D-v>", '<ESC>"+pA') -- Paste insert mode
 end
 
--- nvim-tree
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+if vim.fn.has("nvim-0.9.0") == 1 then
+  vim.opt.splitkeep = "screen"
+  vim.opt.shortmess:append({ C = true })
+end
 
--- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0

@@ -3,7 +3,6 @@ local M = {
   event = "Bufenter",
   cmd = { "Telescope" },
   dependencies = {
-    { "nvim-lua/plenary.nvim" },
     {
       "nvim-telescope/telescope-file-browser.nvim",
     },

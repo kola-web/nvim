@@ -4,11 +4,20 @@ local M = {
   -- ui components
   { "MunifTanjim/nui.nvim",        lazy = true },
   {
+    "rcarriga/nvim-notify",
+    opts = {
+      timeout = 3000,
+      max_height = function()
+        return math.floor(vim.o.lines * 0.75)
+      end,
+      max_width = function()
+        return math.floor(vim.o.columns * 0.75)
+      end,
+    },
+  },
+  {
     "folke/noice.nvim",
     event = "VeryLazy",
-    dependencies = {
-      "rcarriga/nvim-notify",
-    },
     opts = {
       lsp = {
         progress = {
@@ -47,6 +56,32 @@ local M = {
       },
     },
   },
+  {
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        mode = "buffers",
+        close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
+        right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
+        offsets = {
+          {
+            filetype = "neo-tree",
+            text = "Neo-tree",
+            highlight = "Directory",
+            text_align = "left",
+          },
+        },
+        separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
+        hover = {
+          enabled = false,        -- requires nvim 0.8+
+          delay = 200,
+          reveal = { "close" },
+        },
+        sort_by = "id",
+      },
+    }
+  }
 }
 
 return M

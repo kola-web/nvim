@@ -3,9 +3,6 @@ local M = {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     cmd = "Neotree",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
     deactivate = function()
       vim.cmd([[Neotree close]])
     end,
