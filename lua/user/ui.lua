@@ -3,18 +3,40 @@ local M = {
   { "nvim-tree/nvim-web-devicons", lazy = true },
   -- ui components
   { "MunifTanjim/nui.nvim",        lazy = true },
-  { "rcarriga/nvim-notify",        lazy = true },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
+    dependencies = {
+      "rcarriga/nvim-notify",
+    },
     opts = {
       lsp = {
+        progress = {
+          enabled = true,
+        },
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
           ["cmp.entry.get_documentation"] = true,
         },
+      },
+      routes = {
+        {
+          filter = {
+            event = "msg_show",
+            any = {
+              { find = "%d+L, %d+B" },
+              { find = "; after #%d+" },
+              { find = "; before #%d+" },
+            },
+          },
+          view = "mini",
+        },
+      },
+      messages = {
+        -- enabled = false
+        view = 'mini'
       },
       presets = {
         bottom_search = true,         -- use a classic bottom cmdline for search
