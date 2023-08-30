@@ -108,7 +108,8 @@ function M.config()
     -- },
     ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
     -- ["F"] = { "<cmd>FzfLua live_grep theme=ivy<cr>", "Find Text" },
-    ["m"] = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "Format" },
+    -- ["m"] = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "Format" },
+    ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
     [";"] = { "<cmd>Alpha<cr>", "Alpha" },
 
     b = {
@@ -176,7 +177,6 @@ function M.config()
       g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
       j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
       k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-      l = { "<cmd>GitBlameToggle<cr>", "Blame" },
       p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
       r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
       R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },

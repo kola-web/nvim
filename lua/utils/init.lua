@@ -16,6 +16,7 @@ M.servers = {
   "docker_compose_language_service",
   "dockerls",
   "intelephense",
+  "eslint",
 }
 
 M.null_servers = {
@@ -26,7 +27,6 @@ M.null_servers = {
   "google_java_format",
   "flake8",
   "shfmt",
-  "eslint",
 }
 
 M.compare_to_clipboard = function()

@@ -46,11 +46,11 @@ M.config = function()
       selection_caret = " ",
       buffer_previewer_maker = new_maker,
       file_ignore_patterns = {
-        ".git",
-        ".svn",
+        ".git/",
+        ".svn/",
         "node_modules",
         "miniprogram_npm",
-        ".yarn",
+        ".yarn/",
       },
       mappings = {
         i = {

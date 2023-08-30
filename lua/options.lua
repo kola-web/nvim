@@ -70,9 +70,9 @@ if vim.g.neovide then
   vim.keymap.set("i", "<D-v>", '<ESC>"+pA') -- Paste insert mode
 end
 
-if vim.fn.has("nvim-0.9.0") == 1 then
+if vim.fn.has "nvim-0.9.0" == 1 then
   vim.opt.splitkeep = "screen"
-  vim.opt.shortmess:append({ C = true })
+  vim.opt.shortmess:append { C = true }
 end
 
 -- Fix markdown indentation settings
