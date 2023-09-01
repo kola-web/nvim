@@ -16,7 +16,7 @@ M.servers = {
   "docker_compose_language_service",
   "dockerls",
   "intelephense",
-  "eslint",
+  "efm",
 }
 
 M.null_servers = {
@@ -24,7 +24,6 @@ M.null_servers = {
   "black",
   "stylua",
   "shellcheck",
-  "google_java_format",
   "flake8",
   "shfmt",
 }

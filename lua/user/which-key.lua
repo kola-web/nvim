@@ -108,8 +108,8 @@ function M.config()
     -- },
     ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
     -- ["F"] = { "<cmd>FzfLua live_grep theme=ivy<cr>", "Find Text" },
-    -- ["m"] = { function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end, "Format" }, -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
-    ["m"] = { "<cmd>GuardFmt<cr>", "Format" }, -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
+    ["m"] = { function() vim.lsp.buf.format({ async = false, timeout_ms = 10000 }) end, "Format" }, -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
+    -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" }, -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
     [";"] = { "<cmd>Alpha<cr>", "Alpha" },
 
     b = {

@@ -16,9 +16,9 @@ local M = {
     { 'hrsh7th/cmp-buffer' },
     { 'saadparwaiz1/cmp_luasnip' },
     { 'hrsh7th/cmp-nvim-lua' },
-    -- null-ls
-    { 'jay-babu/mason-null-ls.nvim' },
-    { 'jose-elias-alvarez/null-ls.nvim' },
+    -- format
+    { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
+    { 'creativenull/efmls-configs-nvim' },
   },
 }
 
@@ -26,7 +26,11 @@ M.config = function()
   local lsp = require('lsp-zero').preset({})
 
   lsp.on_attach(function(client, bufnr)
-    lsp.default_keymaps({ buffer = bufnr, omit = { '<F2>', '<F3>', '<F4>' } })
+    lsp.default_keymaps({
+      buffer = bufnr,
+      omit = { '<F2>', '<F3>', '<F4>' },
+      preserve_mappings = false,
+    })
   end)
   lsp.ensure_installed(require('utils.init').servers)
   lsp.setup_servers(require('utils.init').servers)
@@ -34,8 +38,10 @@ M.config = function()
     function(server_name)
       local Opts = {
         on_init = function(client)
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.documentFormattingRangeProvider = false
+          if client.name ~= 'efm' then
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end
         end,
       }
       local require_ok, conf_opts = pcall(require, 'settings.' .. server_name)
@@ -99,23 +105,13 @@ M.config = function()
   })
 
   ----- null-ls ------------------------------------------------------------------------------------
-  local null_ls = require('null-ls')
-
-  null_ls.setup()
 
   -- See mason-null-ls.nvim's documentation for more details:
   -- https://github.com/jay-babu/mason-null-ls.nvim#setup
-  require('mason-null-ls').setup({
+  require('mason-tool-installer').setup({
     ensure_installed = require('utils.init').null_servers,
     automatic_installation = true,
-    handlers = {
-      prettier = function(source_name, methods)
-        null_ls.register(null_ls.builtins.formatting.prettier.with({
-          extra_filetypes = { 'toml' },
-          extra_args = { '--trailing-comma all', '--html-whitespace-sensitivity ignore' },
-        }))
-      end,
-    },
+    run_on_start = false,
   })
 end
 
