@@ -6,6 +6,12 @@ local M = {
     { 'neovim/nvim-lspconfig' }, -- Required
     { 'williamboman/mason.nvim' }, -- Optional
     { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+    {
+      'simrat39/symbols-outline.nvim',
+      config = function()
+        require('symbols-outline').setup({})
+      end,
+    },
 
     -- Autocompletion
     { 'hrsh7th/nvim-cmp' }, -- Required
@@ -32,6 +38,12 @@ M.config = function()
       preserve_mappings = false,
     })
   end)
+  lsp.set_sign_icons({
+    error = require('icons').diagnostics.Error,
+    warn = require('icons').diagnostics.Warn,
+    hint = require('icons').diagnostics.Hint,
+    info = require('icons').diagnostics.Info,
+  })
   lsp.ensure_installed(require('utils.init').servers)
   lsp.setup_servers(require('utils.init').servers)
   require('mason-lspconfig').setup_handlers({

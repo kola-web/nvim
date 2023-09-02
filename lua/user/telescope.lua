@@ -1,37 +1,39 @@
 local M = {
-  "nvim-telescope/telescope.nvim",
-  event = "Bufenter",
-  cmd = { "Telescope" },
+  'nvim-telescope/telescope.nvim',
+  event = 'Bufenter',
+  cmd = { 'Telescope' },
   dependencies = {
     {
-      "nvim-telescope/telescope-file-browser.nvim",
+      'nvim-telescope/telescope-file-browser.nvim',
     },
     {
-      "nvim-telescope/telescope-ui-select.nvim",
+      'nvim-telescope/telescope-ui-select.nvim',
     },
     {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'make',
     },
   },
 }
 
 M.config = function()
-  local status_ok, telescope = pcall(require, "telescope")
+  local status_ok, telescope = pcall(require, 'telescope')
   if not status_ok then
     return
   end
 
-  local actions = require "telescope.actions"
+  local actions = require('telescope.actions')
 
-  local previewers = require("telescope.previewers")
+  local previewers = require('telescope.previewers')
 
   local new_maker = function(filepath, bufnr, opts)
     opts = opts or {}
 
     filepath = vim.fn.expand(filepath)
     vim.loop.fs_stat(filepath, function(_, stat)
-      if not stat then return end
+      if not stat then
+        return
+      end
       if stat.size > 100000 then
         return
       else
@@ -42,74 +44,75 @@ M.config = function()
 
   local opts = {
     defaults = {
-      prompt_prefix = " ",
-      selection_caret = " ",
+      prompt_prefix = ' ',
+      selection_caret = ' ',
       buffer_previewer_maker = new_maker,
       file_ignore_patterns = {
-        ".git/",
-        ".svn/",
-        "node_modules",
-        "miniprogram_npm",
-        ".yarn/",
+        '.git/',
+        '.svn/',
+        'node_modules',
+        'miniprogram_npm',
+        '.yarn/',
       },
       mappings = {
         i = {
-          ["<Down>"] = actions.move_selection_next,
-          ["<Up>"] = actions.move_selection_previous,
-          ["<C-j>"] = actions.move_selection_next,
-          ["<C-k>"] = actions.move_selection_previous,
-          ["<C-n>"] = actions.cycle_history_next,
-          ["<C-p>"] = actions.cycle_history_prev,
-          ["<CR>"] = actions.select_default,
+          ['<Down>'] = actions.move_selection_next,
+          ['<Up>'] = actions.move_selection_previous,
+          ['<C-j>'] = actions.move_selection_next,
+          ['<C-k>'] = actions.move_selection_previous,
+          ['<C-n>'] = actions.cycle_history_next,
+          ['<C-p>'] = actions.cycle_history_prev,
+          ['<CR>'] = actions.select_default,
         },
         n = {
-          ["?"] = actions.which_key,
+          ['?'] = actions.which_key,
         },
       },
     },
     pickers = {
       find_files = {
-        find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
+        find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix' },
       },
     },
     extensions = {
       file_browser = {
-        theme = "dropdown",
+        theme = 'dropdown',
         -- disables netrw and use telescope-file-browser in its place
         hijack_netrw = true,
         mappings = {
-          ["i"] = {
+          ['i'] = {
             -- your custom insert mode mappings
-            ["<C-w>"] = function()
-              vim.cmd "normal vbd"
+            ['<C-w>'] = function()
+              vim.cmd('normal vbd')
             end,
           },
-          ["n"] = {
+          ['n'] = {
             -- your custom normal mode mappings
-            ["/"] = function()
-              vim.cmd "startinsert"
+            ['/'] = function()
+              vim.cmd('startinsert')
             end,
           },
         },
       },
-      ["ui-select"] = {
-        require("telescope.themes").get_dropdown {
-          initial_mode = "normal",
-        },
+      ['ui-select'] = {
+        require('telescope.themes').get_dropdown({
+          initial_mode = 'normal',
+        }),
       },
       fzf = {
-        fuzzy = true,                   -- false will only do exact matching
+        fuzzy = true, -- false will only do exact matching
         override_generic_sorter = true, -- override the generic sorter
-        override_file_sorter = true,    -- override the file sorter
-        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+        override_file_sorter = true, -- override the file sorter
+        case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
         -- the default case_mode is "smart_case"
       },
     },
   }
 
   telescope.setup(opts)
-  telescope.load_extension "file_browser"
-  telescope.load_extension "ui-select"
+  telescope.load_extension('file_browser')
+  telescope.load_extension('ui-select')
+  telescope.load_extension('noice')
 end
 
 return M

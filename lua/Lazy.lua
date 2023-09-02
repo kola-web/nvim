@@ -1,5 +1,5 @@
 local M = {}
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   -- bootstrap lazy.nvim
   -- stylua: ignore
@@ -10,7 +10,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 -- load lazy
 M.setup = function(name)
-  require("lazy").setup({
+  require('lazy').setup({
     spec = {
       { import = name },
     },
@@ -23,20 +23,23 @@ M.setup = function(name)
       version = false, -- always use the latest git commit
       -- version = "*", -- try installing the latest stable version for plugins that support semver
     },
-    install = { colorscheme = { "catppuccin-macchiato", "habamax" } },
+    install = { colorscheme = { 'catppuccin-macchiato', 'habamax' } },
     checker = { enabled = false }, -- automatically check for plugin updates
+    change_detection = {
+      notify = false,
+    },
     performance = {
       rtp = {
         -- disable some rtp plugins
         disabled_plugins = {
-          "gzip",
+          'gzip',
           -- "matchit",
           -- "matchparen",
           -- "netrwPlugin",
-          "tarPlugin",
-          "tohtml",
-          "tutor",
-          "zipPlugin",
+          'tarPlugin',
+          'tohtml',
+          'tutor',
+          'zipPlugin',
         },
       },
     },
