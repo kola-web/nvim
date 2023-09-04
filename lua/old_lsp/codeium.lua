@@ -20,20 +20,20 @@ local M = {
   -- }
 
   {
-    "github/copilot.vim",
-    event = "InsertEnter",
+    'github/copilot.vim',
+    event = 'InsertEnter',
     config = function()
       vim.g.copilot_enabled = true
       vim.g.copilot_no_tab_map = true
       vim.g.copilot_filetypes = {
-        html = false
+        html = false,
       }
       vim.cmd('imap <silent><script><expr> <C-e> copilot#Accept("")')
-      vim.keymap.set("i", "<C-;>", "<Plug>(copilot-next)")
-      vim.keymap.set("i", "<C-,>", "<Plug>(copilot-previous)")
-      vim.keymap.set("i", "<C-x>", "<Plug>(copilot-dismiss)")
-    end
-  }
+      vim.keymap.set('i', '<C-;>', '<Plug>(copilot-next)')
+      vim.keymap.set('i', '<C-,>', '<Plug>(copilot-previous)')
+      vim.keymap.set('i', '<C-x>', '<Plug>(copilot-dismiss)')
+    end,
+  },
 }
 
 return M

@@ -12,6 +12,8 @@ local M = {
         require('symbols-outline').setup({})
       end,
     },
+    { 'zbirenbaum/copilot.lua' },
+    { 'zbirenbaum/copilot-cmp' },
 
     -- Autocompletion
     { 'hrsh7th/nvim-cmp' }, -- Required
@@ -67,12 +69,18 @@ M.config = function()
 
   ----- cmp ------------------------------------------------------------------------------------
   local cmp = require('cmp')
+  require('copilot').setup({
+    suggestion = { enabled = false },
+    panel = { enabled = false },
+  })
+  require('copilot_cmp').setup()
 
   require('luasnip.loaders.from_vscode').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load({ paths = '~/.config/nvim/snippets' })
 
   cmp.setup({
     sources = {
+      { name = 'copilot' },
       { name = 'luasnip' },
       { name = 'nvim_lsp' },
       { name = 'nvim_lua' },
@@ -92,7 +100,7 @@ M.config = function()
       end),
       -- Accept currently selected item. If none selected, `select` first item.
       -- Set `select` to `false` to only confirm explicitly selected items.
-      ['<tab>'] = cmp.mapping.confirm({ select = true }),
+      ['<tab>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
       ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
       ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
     }),
