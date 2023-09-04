@@ -36,9 +36,18 @@ local M = {
     event = 'VeryLazy',
     opts = {
       options = {
-        mode = 'buffers',
-        close_command = 'bdelete! %d', -- can be a string | function, see "Mouse actions"
-        right_mouse_command = 'Bdelete! %d', -- can be a string | function, see "Mouse actions"
+        -- stylua: ignore
+        close_command = function(n) require("mini.bufremove").delete(n, false) end,
+        -- stylua: ignore
+        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+        diagnostics = 'nvim_lsp',
+        always_show_bufferline = true,
+        diagnostics_indicator = function(_, _, diag)
+          local icons = require('icons').diagnostics
+          local ret = (diag.error and icons.Error .. diag.error .. ' ' or '')
+            .. (diag.warning and icons.Warn .. diag.warning or '')
+          return vim.trim(ret)
+        end,
         offsets = {
           {
             filetype = 'neo-tree',
@@ -46,12 +55,6 @@ local M = {
             highlight = 'Directory',
             text_align = 'left',
           },
-        },
-        separator_style = 'thin', -- | "thick" | "thin" | { 'any', 'any' },
-        hover = {
-          enabled = false, -- requires nvim 0.8+
-          delay = 200,
-          reveal = { 'close' },
         },
         sort_by = 'id',
       },
