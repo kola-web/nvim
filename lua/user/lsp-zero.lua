@@ -24,6 +24,7 @@ local M = {
     { 'hrsh7th/cmp-buffer' },
     { 'saadparwaiz1/cmp_luasnip' },
     { 'hrsh7th/cmp-nvim-lua' },
+
     -- format
     { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
     { 'creativenull/efmls-configs-nvim' },
@@ -32,6 +33,7 @@ local M = {
 
 M.config = function()
   local lsp = require('lsp-zero').preset({})
+  local icons = require('icons')
 
   lsp.on_attach(function(client, bufnr)
     lsp.default_keymaps({
@@ -41,10 +43,10 @@ M.config = function()
     })
   end)
   lsp.set_sign_icons({
-    error = require('icons').diagnostics.Error,
-    warn = require('icons').diagnostics.Warn,
-    hint = require('icons').diagnostics.Hint,
-    info = require('icons').diagnostics.Info,
+    error = icons.diagnostics.Error,
+    warn = icons.diagnostics.Warn,
+    hint = icons.diagnostics.Hint,
+    info = icons.diagnostics.Info,
   })
   lsp.ensure_installed(require('utils.init').servers)
   lsp.setup_servers(require('utils.init').servers)
