@@ -159,6 +159,7 @@ function M.config()
       p = { '<cmd>Telescope oldfiles<cr>', 'history file' },
       m = { '<cmd>PeekOpen<cr>', 'PeekOpen' },
       c = { '<cmd>PeekClose<cr>', 'PeekClose' },
+      a = { vim.lsp.buf.add_workspace_folder, 'add_workspace_folder' },
     },
     P = {
       name = 'Plugins',
@@ -240,7 +241,6 @@ function M.config()
 
     s = {
       name = 'Search',
-      b = { '<cmd>Telescope git_branches<cr>', 'Checkout branch' },
       T = {
         function()
           require('base46').toggle_theme()
@@ -284,7 +284,7 @@ function M.config()
         end,
         'replace',
       },
-      p = {
+      b = {
         function()
           require('spectre').open_file_search()
         end,

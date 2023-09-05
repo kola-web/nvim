@@ -73,6 +73,9 @@ M.config = function()
       find_files = {
         find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix' },
       },
+      buffers = {
+        initial_mode = 'normal',
+      },
     },
     extensions = {
       file_browser = {
