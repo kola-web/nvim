@@ -14,6 +14,7 @@ local M = {
     },
     { 'zbirenbaum/copilot.lua' },
     { 'zbirenbaum/copilot-cmp' },
+    { 'b0o/schemastore.nvim' },
 
     -- Autocompletion
     { 'hrsh7th/nvim-cmp' }, -- Required
@@ -34,6 +35,10 @@ local M = {
 M.config = function()
   local lsp = require('lsp-zero').preset({})
   local icons = require('icons')
+  local formatLsp = {
+    efm = true,
+    taplo = true,
+  }
 
   lsp.on_attach(function(client, bufnr)
     lsp.default_keymaps({
@@ -54,7 +59,7 @@ M.config = function()
     function(server_name)
       local Opts = {
         on_init = function(client)
-          if client.name ~= 'efm' then
+          if formatLsp[client.name] == nil then
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
           end

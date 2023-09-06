@@ -21,6 +21,7 @@ M.servers = {
   'dockerls',
   'intelephense',
   'efm',
+  'taplo',
 }
 
 M.null_servers = {
