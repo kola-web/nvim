@@ -6,12 +6,6 @@ local M = {
     { 'neovim/nvim-lspconfig' }, -- Required
     { 'williamboman/mason.nvim' }, -- Optional
     { 'williamboman/mason-lspconfig.nvim' }, -- Optional
-    {
-      'simrat39/symbols-outline.nvim',
-      config = function()
-        require('symbols-outline').setup({})
-      end,
-    },
     { 'zbirenbaum/copilot.lua' },
     { 'zbirenbaum/copilot-cmp' },
     { 'b0o/schemastore.nvim' },
@@ -25,6 +19,7 @@ local M = {
     { 'hrsh7th/cmp-buffer' },
     { 'saadparwaiz1/cmp_luasnip' },
     { 'hrsh7th/cmp-nvim-lua' },
+    { 'uga-rosa/cmp-dictionary' },
 
     -- format
     { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
@@ -46,6 +41,15 @@ M.config = function()
       omit = { '<F2>', '<F3>', '<F4>' },
       preserve_mappings = false,
     })
+    local opts = { buffer = bufnr }
+    local bind = vim.keymap.set
+
+    bind('n', 'K', '<cmd>Lspsaga hover_doc<cr>', opts)
+    bind('n', 'gr', '<cmd>Lspsaga finder<cr>', opts)
+    bind('n', 'gd', '<cmd>Lspsaga goto_definition<cr>', opts)
+    bind('n', 'gD', '<cmd>Lspsaga peek_definition<cr>', opts)
+    bind('n', 'go', '<cmd>Lspsaga goto_type_definition<cr>', opts)
+    bind('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<cr>', opts)
   end)
   lsp.set_sign_icons({
     error = icons.diagnostics.Error,
@@ -93,6 +97,10 @@ M.config = function()
       { name = 'nvim_lua' },
       { name = 'buffer' },
       { name = 'path' },
+      {
+        name = 'dictionary',
+        keyword_length = 2,
+      },
     },
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),

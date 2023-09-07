@@ -87,11 +87,11 @@ local M = {
       require('mini.bufremove').setup()
     end,
   },
-  {
-    'folke/trouble.nvim',
-    cmd = { 'TroubleToggle', 'Trouble' },
-    opts = { use_diagnostic_signs = true },
-  },
+  -- {
+  --   'folke/trouble.nvim',
+  --   cmd = { 'TroubleToggle', 'Trouble' },
+  --   opts = { use_diagnostic_signs = true },
+  -- },
   {
     'folke/todo-comments.nvim',
     cmd = { 'TodoTrouble', 'TodoTelescope' },
@@ -113,6 +113,34 @@ local M = {
         desc = 'Previous todo comment',
       },
     },
+  },
+  {
+    'nvimdev/lspsaga.nvim',
+    event = 'LspAttach',
+    config = function()
+      require('lspsaga').setup({
+        diagnostic = {
+          max_height = 0.8,
+          keys = {
+            quit = { 'q', '<ESC>' },
+          },
+        },
+        code_actions = {
+          show_server_name = true,
+        },
+        finder = {
+          keys = {
+            toggle_or_open = '<cr>',
+          },
+        },
+        outline = {
+          layout = 'float',
+          keys = {
+            toggle_or_jump = '<cr>',
+          },
+        },
+      })
+    end,
   },
 }
 

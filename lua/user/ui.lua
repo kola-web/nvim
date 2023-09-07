@@ -115,6 +115,7 @@ local M = {
             { 'filename', path = 1, symbols = { modified = '  ', readonly = '', unnamed = '' } },
           },
           lualine_x = {
+            "filetype",
             -- stylua: ignore
             {
               function() return require("noice").api.status.command.get() end,

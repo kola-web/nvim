@@ -2,7 +2,7 @@ local M = {
   diagnostics = {
     Error = " ",
     Warn = " ",
-    Hint = " ",
+    Hint = "💡",
     Info = " ",
   },
   git = {
