@@ -19,7 +19,6 @@ local M = {
     { 'hrsh7th/cmp-buffer' },
     { 'saadparwaiz1/cmp_luasnip' },
     { 'hrsh7th/cmp-nvim-lua' },
-    { 'uga-rosa/cmp-dictionary' },
 
     -- format
     { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
@@ -97,10 +96,6 @@ M.config = function()
       { name = 'nvim_lua' },
       { name = 'buffer' },
       { name = 'path' },
-      {
-        name = 'dictionary',
-        keyword_length = 2,
-      },
     },
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
