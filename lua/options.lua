@@ -68,7 +68,7 @@ if vim.g.neovide then
   vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
   vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
   vim.keymap.set('t', '<D-v>', [['<C-\><C-N>"'.nr2char(getchar()).'pi']], { expr = true })
-  vim.keymap.set('i', '<D-v>', '<ESC>"+pA') -- Paste insert mode
+  vim.keymap.set('i', '<D-v>', '<C-R>*') -- Paste insert mode
 end
 
 if vim.fn.has('nvim-0.9.0') == 1 then

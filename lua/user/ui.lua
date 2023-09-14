@@ -39,13 +39,17 @@ local M = {
         {
           filter = {
             event = 'msg_show',
-            any = {
-              { find = '%d+L, %d+B' },
-              { find = '; after #%d+' },
-              { find = '; before #%d+' },
-            },
+            kind = '',
           },
-          view = 'mini',
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            event = 'msg_show',
+            kind = '',
+            find = 'written',
+          },
+          opts = { skip = true },
         },
       },
       presets = {
@@ -81,7 +85,7 @@ local M = {
             text_align = 'left',
           },
         },
-        sort_by = 'id',
+        sort = 'none',
       },
     },
   },
@@ -115,7 +119,7 @@ local M = {
             { 'filename', path = 1, symbols = { modified = '  ', readonly = '', unnamed = '' } },
           },
           lualine_x = {
-            "filetype",
+            'filetype',
             -- stylua: ignore
             {
               function() return require("noice").api.status.command.get() end,

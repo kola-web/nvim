@@ -1,7 +1,6 @@
 local M = {
   'VonHeikemen/lsp-zero.nvim',
-  branch = 'v3.x',
-
+  branch = 'v2.x',
   dependencies = {
     -- LSP Support
     { 'neovim/nvim-lspconfig' }, -- Required
@@ -28,17 +27,17 @@ local M = {
 }
 
 M.config = function()
-  local lsp_zero = require('lsp-zero')
+  local lsp = require('lsp-zero').preset({})
   local icons = require('icons')
   local formatLsp = {
     efm = true,
     taplo = true,
   }
 
-  lsp_zero.on_attach(function(client, bufnr)
-    lsp_zero.default_keymaps({
+  lsp.on_attach(function(client, bufnr)
+    lsp.default_keymaps({
       buffer = bufnr,
-      exclude = { '<F2>', '<F3>', '<F4>' },
+      omit = { '<F2>', '<F3>', '<F4>' },
       preserve_mappings = false,
     })
     local opts = { buffer = bufnr }
@@ -51,34 +50,32 @@ M.config = function()
     bind('n', 'go', '<cmd>Lspsaga goto_type_definition<cr>', opts)
     bind('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<cr>', opts)
   end)
-  lsp_zero.set_sign_icons({
+  lsp.set_sign_icons({
     error = icons.diagnostics.Error,
     warn = icons.diagnostics.Warn,
     hint = icons.diagnostics.Hint,
     info = icons.diagnostics.Info,
   })
-  require('mason').setup({})
-  require('mason-lspconfig').setup({
-    ensure_installed = require('utils.init').servers,
-    handlers = {
-      -- lsp_zero.default_setup,
-      function(server_name)
-        local Opts = {
-          on_init = function(client)
-            if formatLsp[client.name] == nil then
-              client.server_capabilities.documentFormattingProvider = false
-              client.server_capabilities.documentRangeFormattingProvider = false
-            end
-          end,
-        }
-        local require_ok, conf_opts = pcall(require, 'settings.' .. server_name)
-        if require_ok then
-          Opts = vim.tbl_deep_extend('force', conf_opts, Opts)
-        end
-        require('lspconfig')[server_name].setup(Opts)
-      end,
-    },
+  lsp.ensure_installed(require('utils.init').servers)
+  lsp.setup_servers(require('utils.init').servers)
+  require('mason-lspconfig').setup_handlers({
+    function(server_name)
+      local Opts = {
+        on_init = function(client)
+          if formatLsp[client.name] == nil then
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end
+        end,
+      }
+      local require_ok, conf_opts = pcall(require, 'settings.' .. server_name)
+      if require_ok then
+        Opts = vim.tbl_deep_extend('force', conf_opts, Opts)
+      end
+      require('lspconfig')[server_name].setup(Opts)
+    end,
   })
+  lsp.setup()
 
   ----- cmp ------------------------------------------------------------------------------------
   local cmp = require('cmp')
@@ -137,8 +134,10 @@ M.config = function()
     },
   })
 
-  ----- efm ------------------------------------------------------------------------------------
+  ----- null-ls ------------------------------------------------------------------------------------
 
+  -- See mason-null-ls.nvim's documentation for more details:
+  -- https://github.com/jay-babu/mason-null-ls.nvim#setup
   require('mason-tool-installer').setup({
     ensure_installed = require('utils.init').null_servers,
     automatic_installation = true,

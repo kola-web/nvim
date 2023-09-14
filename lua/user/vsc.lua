@@ -63,6 +63,12 @@ local M = {
   {
     'mhinz/vim-signify',
     event = 'BufReadPre',
+    config = function()
+      vim.g.signify_line_highlight = 0
+      vim.g.signify_sign_add = '┃'
+      vim.g.signify_sign_delete = '┃'
+      vim.g.signify_sign_change = '┃'
+    end,
   },
 }
 

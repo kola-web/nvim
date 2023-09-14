@@ -134,7 +134,7 @@ local M = {
           },
         },
         outline = {
-          layout = 'float',
+          -- layout = 'float',
           keys = {
             toggle_or_jump = '<cr>',
           },
