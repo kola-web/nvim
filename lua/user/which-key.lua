@@ -135,13 +135,13 @@ function M.config()
         '<cmd>BufferLineCloseLeft<cr><cmd>BufferLineCloseRight<cr>',
         'closeOtherBuffer',
       },
-      j = { '<cmd>BufferLinePick<cr>', 'Jump' },
+      s = { '<cmd>BufferLinePick<cr>', 'Jump' },
       c = {
         '<cmd>BufferLinePickClose<cr>',
         'Pick which buffer to close',
       },
-      h = { '<cmd>BufferLineCloseLeft<cr>', 'Close all to the left' },
-      l = {
+      e = { '<cmd>BufferLineCloseLeft<cr>', 'Close all to the left' },
+      q = {
         '<cmd>BufferLineCloseRight<cr>',
         'Close all to the right',
       },
@@ -153,6 +153,10 @@ function M.config()
         '<cmd>BufferLineSortByExtension<cr>',
         'Sort by language',
       },
+      h = { require('smart-splits').swap_buf_left, 'swap_buf_left' },
+      j = { require('smart-splits').swap_buf_down, 'swap_buf_down' },
+      k = { require('smart-splits').swap_buf_up, 'swap_buf_up' },
+      l = { require('smart-splits').swap_buf_right, 'swap_buf_right' },
     },
     p = {
       name = 'Projects',
