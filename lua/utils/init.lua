@@ -20,17 +20,17 @@ M.servers = {
   'docker_compose_language_service',
   'dockerls',
   'intelephense',
-  'efm',
-  'taplo',
+  -- 'efm',
 }
 
 M.null_servers = {
   'prettier',
   'black',
   'stylua',
-  'shellcheck',
   'flake8',
+  'shellcheck',
   'shfmt',
+  'taplo',
 }
 
 M.compare_to_clipboard = function()

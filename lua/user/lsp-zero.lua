@@ -22,8 +22,9 @@ local M = {
     { 'hrsh7th/cmp-nvim-lua' },
 
     -- format
+    -- { 'creativenull/efmls-configs-nvim' },
     { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
-    { 'creativenull/efmls-configs-nvim' },
+    { 'stevearc/conform.nvim' },
   },
 }
 
@@ -32,7 +33,6 @@ M.config = function()
   local icons = require('icons')
   local formatLsp = {
     efm = true,
-    taplo = true,
   }
 
   lsp_zero.on_attach(function(client, bufnr)
@@ -50,6 +50,9 @@ M.config = function()
     bind('n', 'gD', '<cmd>Lspsaga peek_definition<cr>', opts)
     bind('n', 'go', '<cmd>Lspsaga goto_type_definition<cr>', opts)
     bind('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<cr>', opts)
+    bind('n', '<leader>m', function()
+      require('conform').format({ bufnr = bufnr, lsp_fallback = true })
+    end, opts)
   end)
   lsp_zero.set_sign_icons({
     error = icons.diagnostics.Error,
@@ -64,12 +67,12 @@ M.config = function()
       -- lsp_zero.default_setup,
       function(server_name)
         local Opts = {
-          on_init = function(client)
-            if formatLsp[client.name] == nil then
-              client.server_capabilities.documentFormattingProvider = false
-              client.server_capabilities.documentRangeFormattingProvider = false
-            end
-          end,
+          -- on_init = function(client)
+          --   if formatLsp[client.name] == nil then
+          --     client.server_capabilities.documentFormattingProvider = false
+          --     client.server_capabilities.documentRangeFormattingProvider = false
+          --   end
+          -- end,
         }
         local require_ok, conf_opts = pcall(require, 'settings.' .. server_name)
         if require_ok then
@@ -137,12 +140,34 @@ M.config = function()
     },
   })
 
-  ----- efm ------------------------------------------------------------------------------------
+  ----- format ------------------------------------------------------------------------------------
 
   require('mason-tool-installer').setup({
     ensure_installed = require('utils.init').null_servers,
     automatic_installation = true,
     run_on_start = false,
+  })
+  require('conform').setup({
+    formatters_by_ft = {
+      lua = { 'stylua' },
+      -- Conform will run multiple formatters sequentially
+      -- python = { 'isort', 'black' },
+      -- Use a sub-list to run only the first available formatter
+      javascript = { { 'prettierd', 'prettier' } },
+      typescript = { { 'prettierd', 'prettier' } },
+      html = { { 'prettierd', 'prettier' } },
+      wxml = { { 'prettierd', 'prettier' } },
+      vue = { { 'prettierd', 'prettier' } },
+      css = { { 'prettierd', 'prettier' } },
+      scss = { { 'prettierd', 'prettier' } },
+      wxss = { { 'prettierd', 'prettier' } },
+      json = { { 'prettierd', 'prettier' } },
+      yaml = { { 'prettierd', 'prettier' } },
+
+      sh = { 'shfmt', 'shellcheck' },
+
+      toml = { 'taplo' },
+    },
   })
 end
 
