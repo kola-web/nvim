@@ -338,12 +338,40 @@ function M.config()
       t = { '<cmd>.!pbpaste | quicktype -l typescript --just-types  <cr>', 'typescript' },
     },
     [' '] = {
-      name = 'hop',
-      w = { '<cmd>HopWord<cr>', 'HopWord' },
-      s = { '<cmd>HopChar2<cr>', 'HopChar2' },
-      ['/'] = { '<cmd>HopPattern<cr>', 'HopPattern' },
-      l = { '<cmd>HopLine<cr>', 'HopLine' },
-      L = { '<cmd>HopLine<cr>', 'HopLineStart' },
+      name = 'flash',
+      s = {
+        function()
+          require('flash').jump()
+        end,
+        'jump',
+      },
+      h = {
+        function()
+          require('flash').jump({ continue = true })
+        end,
+        'jump',
+      },
+      w = {
+        function()
+          require('flash').jump({
+            pattern = vim.fn.expand('<cword>'),
+          })
+        end,
+        'jump Word',
+      },
+      -- s = { '<cmd>HopChar2<cr>', 'HopChar2' },
+      -- ['/'] = { '<cmd>HopPattern<cr>', 'HopPattern' },
+      l = {
+        function()
+          require('flash').jump({
+            search = { mode = 'search', max_length = 0 },
+            label = { after = { 0, 0 } },
+            pattern = '^',
+          })
+        end,
+        'jump line',
+      },
+      -- L = { '<cmd>HopLine<cr>', 'HopLineStart' },
     },
   }
 

@@ -28,6 +28,7 @@ local M = {
     'folke/noice.nvim',
     event = 'VeryLazy',
     opts = {
+      cmdline = {},
       lsp = {
         override = {
           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
@@ -71,6 +72,7 @@ local M = {
         right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
         diagnostics = 'nvim_lsp',
         always_show_bufferline = true,
+        move_wraps_at_ends = true,
         diagnostics_indicator = function(_, _, diag)
           local icons = require('icons').diagnostics
           local ret = (diag.error and icons.Error .. diag.error .. ' ' or '')

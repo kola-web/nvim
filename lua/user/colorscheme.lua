@@ -10,42 +10,40 @@ local M = {
   -- "rebelot/kanagawa.nvim",
   -- "EdenEast/nightfox.nvim",
 
-  -- 'catppuccin/nvim',
-  -- lazy = false,
-  -- priority = 1000,
-  -- opts = {
-  --   integrations = {
-  --     alpha = true,
-  --     cmp = true,
-  --     flash = true,
-  --     gitsigns = true,
-  --     illuminate = true,
-  --     indent_blankline = { enabled = true },
-  --     lsp_trouble = true,
-  --     mason = true,
-  --     mini = true,
-  --     native_lsp = {
-  --       enabled = true,
-  --       underlines = {
-  --         errors = { 'undercurl' },
-  --         hints = { 'undercurl' },
-  --         warnings = { 'undercurl' },
-  --         information = { 'undercurl' },
-  --       },
-  --     },
-  --     navic = { enabled = true, custom_bg = 'lualine' },
-  --     neotest = true,
-  --     noice = true,
-  --     notify = true,
-  --     neotree = true,
-  --     semantic_tokens = true,
-  --     telescope = true,
-  --     treesitter = true,
-  --     which_key = true,
-  --   },
-  -- },
+  'catppuccin/nvim',
+  lazy = false,
+  priority = 1000,
+  opts = {
+    integrations = {
+      alpha = true,
+      cmp = true,
+      flash = true,
+      gitsigns = true,
+      illuminate = true,
+      indent_blankline = { enabled = true },
+      lsp_trouble = true,
+      mason = true,
+      mini = true,
+      native_lsp = {
+        enabled = true,
+        underlines = {
+          errors = { 'undercurl' },
+          hints = { 'undercurl' },
+          warnings = { 'undercurl' },
+          information = { 'undercurl' },
+        },
+      },
+      noice = true,
+      notify = true,
+      neotree = true,
+      semantic_tokens = true,
+      telescope = true,
+      treesitter = true,
+      which_key = true,
+    },
+  },
 
-  'wittyjudge/gruvbox-material.nvim',
+  -- 'wittyjudge/gruvbox-material.nvim',
 }
 
 -- light
@@ -54,9 +52,9 @@ local M = {
 
 -- dark
 vim.o.background = 'dark'
--- M.name = 'catppuccin-macchiato'
+M.name = 'catppuccin-macchiato'
 -- M.name = "github_dark_dimmed"
-M.name = 'gruvbox-material'
+-- M.name = 'gruvbox-material'
 -- M.name = "dracula"
 -- M.name = "highlite"
 -- M.name = "Nightfox"

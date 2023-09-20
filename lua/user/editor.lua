@@ -142,6 +142,15 @@ local M = {
       })
     end,
   },
+  {
+    'folke/flash.nvim',
+    event = 'VeryLazy',
+    opts = {
+      highlight = {
+        backdrop = false,
+      },
+    },
+  },
 }
 
 return M

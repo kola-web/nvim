@@ -42,6 +42,25 @@ M.config = function()
     end)
   end
 
+  local function flash(prompt_bufnr)
+    require('flash').jump({
+      pattern = '^',
+      label = { after = { 0, 0 } },
+      search = {
+        mode = 'search',
+        exclude = {
+          function(win)
+            return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= 'TelescopeResults'
+          end,
+        },
+      },
+      action = function(match)
+        local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
+        picker:set_selection(match.pos[1] - 1)
+      end,
+    })
+  end
+
   local opts = {
     defaults = {
       prompt_prefix = ' ',
@@ -63,9 +82,11 @@ M.config = function()
           ['<C-n>'] = actions.cycle_history_next,
           ['<C-p>'] = actions.cycle_history_prev,
           ['<CR>'] = actions.select_default,
+          ['<c-s>'] = flash,
         },
         n = {
           ['?'] = actions.which_key,
+          ['<c-s>'] = flash,
         },
       },
     },
