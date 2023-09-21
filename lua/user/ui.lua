@@ -61,35 +61,101 @@ local M = {
       },
     },
   },
+  -- {
+  --   'akinsho/bufferline.nvim',
+  --   event = 'VeryLazy',
+  --   opts = {
+  --     options = {
+  --       -- stylua: ignore
+  --       close_command = function(n) require("mini.bufremove").delete(n, false) end,
+  --       -- stylua: ignore
+  --       right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+  --       diagnostics = 'nvim_lsp',
+  --       always_show_bufferline = true,
+  --       move_wraps_at_ends = true,
+  --       diagnostics_indicator = function(_, _, diag)
+  --         local icons = require('icons').diagnostics
+  --         local ret = (diag.error and icons.Error .. diag.error .. ' ' or '')
+  --           .. (diag.warning and icons.Warn .. diag.warning or '')
+  --         return vim.trim(ret)
+  --       end,
+  --       offsets = {
+  --         {
+  --           filetype = 'neo-tree',
+  --           text = 'Neo-tree',
+  --           highlight = 'Directory',
+  --           text_align = 'left',
+  --         },
+  --       },
+  --       sort = 'none',
+  --     },
+  --   },
+  -- },
   {
-    'akinsho/bufferline.nvim',
-    event = 'VeryLazy',
-    opts = {
-      options = {
-        -- stylua: ignore
-        close_command = function(n) require("mini.bufremove").delete(n, false) end,
-        -- stylua: ignore
-        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
-        diagnostics = 'nvim_lsp',
-        always_show_bufferline = true,
-        move_wraps_at_ends = true,
-        diagnostics_indicator = function(_, _, diag)
-          local icons = require('icons').diagnostics
-          local ret = (diag.error and icons.Error .. diag.error .. ' ' or '')
-            .. (diag.warning and icons.Warn .. diag.warning or '')
-          return vim.trim(ret)
-        end,
-        offsets = {
-          {
-            filetype = 'neo-tree',
-            text = 'Neo-tree',
-            highlight = 'Directory',
-            text_align = 'left',
+    'willothy/nvim-cokeline',
+    config = function()
+      local get_hex = require('cokeline.hlgroups').get_hl_attr
+      local yellow = vim.g.terminal_color_3
+
+      require('cokeline').setup({
+        default_hl = {
+          fg = function(buffer)
+            return buffer.is_focused and get_hex('Normal', 'fg') or get_hex('Comment', 'fg')
+          end,
+          bg = function()
+            return get_hex('ColorColumn', 'bg')
+          end,
+        },
+        sidebar = {
+          filetype = { 'neo-tree', 'NvimTree' },
+          components = {
+            {
+              text = function(buf)
+                return vim.bo[buf.number].filetype
+              end,
+            },
           },
         },
-        sort = 'none',
-      },
-    },
+        components = {
+          {
+            text = function(buffer)
+              return (buffer.index ~= 1) and '▏' or ''
+            end,
+          },
+          {
+            text = '  ',
+          },
+          {
+            text = function(buffer)
+              return buffer.devicon.icon
+            end,
+            fg = function(buffer)
+              return buffer.devicon.color
+            end,
+          },
+          {
+            text = ' ',
+          },
+          {
+            text = function(buffer)
+              return buffer.filename .. '  '
+            end,
+            bold = function(buffer)
+              return buffer.is_focused
+            end,
+          },
+          {
+            text = '',
+            on_click = function(buffer)
+              buffer:delete()
+            end,
+          },
+          {
+            text = '  ',
+          },
+        },
+      })
+    end,
   },
   {
     'nvim-lualine/lualine.nvim',
