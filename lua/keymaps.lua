@@ -52,8 +52,8 @@ keymap("n", "]C", "/</style<cr>", opts)
 -- Navigate buffers
 -- keymap("n", "<tab>", "<Cmd>BufferLineCycleNext<CR>", opts)
 -- keymap("n", "<S-tab>", "<Cmd>BufferLineCyclePrev<CR>", opts)
-keymap("n", "<tab>", "<Plug>(cokeline-focus-prev)", opts)
-keymap("n", "<S-tab>", "<Plug>(cokeline-focus-next)", opts)
+keymap("n", "<tab>", "<Plug>(cokeline-focus-next)", opts)
+keymap("n", "<S-tab>", "<Plug>(cokeline-focus-prev)", opts)
 
 -- smart n/N
 keymap("n", "n", vim.v.searchforward == 1 and "n" or "N", opts)

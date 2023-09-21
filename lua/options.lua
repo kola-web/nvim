@@ -45,12 +45,17 @@ vim.opt.whichwrap:append('<,>,[,],h,l') -- 允许在到达行首/行尾时使用
 vim.opt.iskeyword:append('-,#') -- 将包含 `-,#` 的单词视为单个单词
 vim.opt.formatoptions:remove({ 'c', 'r', 'o' }) -- 这是一个描述自动格式化方式的字母序列
 vim.opt.linebreak = true -- 自动将行换行
-vim.opt.foldmethod = 'indent' -- 使用缩进来自动折叠代码块
-vim.opt.foldlevel = 99 -- 打开文件时默认折叠级别
 vim.o.spelllang = 'en,cjk'
 vim.opt_local.wrap = true
 vim.opt_local.spell = true
 vim.opt.wildmode = 'longest:full,full' -- Command-line completion mode
+
+-- vim.o.foldcolumn = '5'
+vim.o.foldenable = true
+vim.opt.foldmethod = 'indent' -- 使用缩进来自动折叠代码块
+vim.o.foldlevelstart = 99
+vim.opt.foldlevel = 99 -- 打开文件时默认折叠级别
+-- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- neovide
 if vim.g.neovide then

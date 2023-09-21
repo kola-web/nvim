@@ -31,9 +31,6 @@ local M = {
 M.config = function()
   local lsp_zero = require('lsp-zero')
   local icons = require('icons')
-  local formatLsp = {
-    efm = true,
-  }
 
   lsp_zero.on_attach(function(client, bufnr)
     lsp_zero.default_keymaps({
@@ -60,6 +57,16 @@ M.config = function()
     hint = icons.diagnostics.Hint,
     info = icons.diagnostics.Info,
   })
+  lsp_zero.set_server_config({
+    capabilities = {
+      textDocument = {
+        foldingRange = {
+          dynamicRegistration = false,
+          lineFoldingOnly = true,
+        },
+      },
+    },
+  })
   require('mason').setup({})
   require('mason-lspconfig').setup({
     ensure_installed = require('utils.init').servers,
@@ -68,6 +75,9 @@ M.config = function()
       function(server_name)
         local Opts = {
           -- on_init = function(client)
+          --   local formatLsp = {
+          --     efm = true,
+          --   }
           --   if formatLsp[client.name] == nil then
           --     client.server_capabilities.documentFormattingProvider = false
           --     client.server_capabilities.documentRangeFormattingProvider = false
@@ -138,6 +148,26 @@ M.config = function()
         return item
       end,
     },
+    completion = {
+      completeopt = 'menu,menuone,noselect',
+      keyword_pattern = '\\k\\+',
+      keyword_length = 2,
+      get_trigger_characters = function(trigger_characters)
+        return trigger_characters
+      end,
+      -- 自定义路径匹配函数，将别名替换为实际路径
+      match = {
+        base = function(_, completion_item)
+          -- 这里添加你的路径别名映射，例如：
+          local alias_map = {
+            ['@'] = '/src',
+            -- 添加其他别名映射，如果需要的话
+          }
+          local path = alias_map[completion_item.word] or completion_item.word
+          return path
+        end,
+      },
+    },
   })
 
   ----- format ------------------------------------------------------------------------------------
@@ -156,7 +186,6 @@ M.config = function()
       javascript = { { 'prettierd', 'prettier' } },
       typescript = { { 'prettierd', 'prettier' } },
       html = { { 'prettierd', 'prettier' } },
-      wxml = { { 'prettierd', 'prettier' } },
       vue = { { 'prettierd', 'prettier' } },
       css = { { 'prettierd', 'prettier' } },
       scss = { { 'prettierd', 'prettier' } },
