@@ -1,13 +1,8 @@
 local M = {
-  "CRAG666/code_runner.nvim",
-  event = "VeryLazy"
-}
-
-M.opts = {
-  filetype = {
-    typescript = "deno run",
-    javascript = "node",
-  },
+  -- "CRAG666/code_runner.nvim",
+  'michaelb/sniprun',
+  event = 'VeryLazy',
+  build = 'bash ./install.sh',
 }
 
 return M

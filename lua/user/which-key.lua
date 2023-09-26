@@ -96,13 +96,7 @@ function M.config()
     },
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
-    -- ["c"] = { "<cmd>bd<CR>", "Close Buffer" },
-    ['c'] = {
-      function()
-        require('mini.bufremove').delete(0, false)
-      end,
-      'Close Buffer',
-    },
+    ['c'] = { '<cmd>BufferClose<CR>', 'Close Buffer' },
     ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
     ['o'] = { '<cmd>Lspsaga outline<CR>', 'Symbols' },
     ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
@@ -133,27 +127,15 @@ function M.config()
         'Buffers',
       },
       o = {
-        '<cmd>BufferLineCloseLeft<cr><cmd>BufferLineCloseRight<cr>',
-        'closeOtherBuffer',
+        '<cmd>BufferCloseAllButCurrent<cr>',
+        'BufferCloseAllButCurrent',
       },
-      s = { '<cmd>BufferLinePick<cr>', 'Jump' },
+      s = { '<cmd>BufferPick<cr>', 'BufferPick' },
       c = {
-        '<cmd>BufferLinePickClose<cr>',
-        'Pick which buffer to close',
+        '<cmd>BufferPickDelete<cr>',
+        'BufferPickDelete',
       },
-      e = { '<cmd>BufferLineCloseLeft<cr>', 'Close all to the left' },
-      q = {
-        '<cmd>BufferLineCloseRight<cr>',
-        'Close all to the right',
-      },
-      D = {
-        '<cmd>BufferLineSortByDirectory<cr>',
-        'Sort by directory',
-      },
-      L = {
-        '<cmd>BufferLineSortByExtension<cr>',
-        'Sort by language',
-      },
+      r = { '<cmd>BufferRestore<cr>', 'BufferRestore' },
       h = { require('smart-splits').swap_buf_left, 'swap_buf_left' },
       j = { require('smart-splits').swap_buf_down, 'swap_buf_down' },
       k = { require('smart-splits').swap_buf_up, 'swap_buf_up' },
@@ -186,8 +168,6 @@ function M.config()
       w = { '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1))."px"#g<cr>', 'rpx-->px' },
       e = { '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 2)."px"#g<cr>', 'rpx/2-->px' },
       o = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', 'px-->rem' },
-      c = { '<cmd>RunClose <cr>', 'run close' },
-      r = { '<cmd>RunFile <cr>', 'run file' },
       m = {
         "<cmd><c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>",
         'run file',
@@ -316,7 +296,6 @@ function M.config()
         'replace',
       },
     },
-
     S = {
       name = 'SnipRun',
       c = { '<cmd>SnipClose<cr>', 'Close' },

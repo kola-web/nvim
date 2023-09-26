@@ -136,7 +136,6 @@ M.config = function()
   telescope.setup(opts)
   telescope.load_extension('file_browser')
   telescope.load_extension('ui-select')
-  telescope.load_extension('noice')
 end
 
 return M

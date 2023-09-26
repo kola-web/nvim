@@ -41,7 +41,7 @@ M.config = function()
     local opts = { buffer = bufnr }
     local bind = vim.keymap.set
 
-    bind('n', 'K', '<cmd>Lspsaga hover_doc<cr>', opts)
+    -- bind('n', 'K', '<cmd>Lspsaga hover_doc<cr>', opts)
     bind('n', 'gr', '<cmd>Lspsaga finder<cr>', opts)
     bind('n', 'gd', '<cmd>Lspsaga goto_definition<cr>', opts)
     bind('n', 'gD', '<cmd>Lspsaga peek_definition<cr>', opts)

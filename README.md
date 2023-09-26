@@ -1,5 +1,3 @@
-# [基于nvim-basic-ide](https://github.com/LunarVim/nvim-basic-ide)
-
 # 插件使用备忘录
 
 ## abolish.vim

@@ -68,6 +68,22 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup('close_with_q'),
+  pattern = {
+    'DiffviewFiles',
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set(
+      'n',
+      'q',
+      '<cmd>DiffviewClose<cr>',
+      { buffer = event.buf, silent = true }
+    )
+  end,
+})
+
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup('wrap_spell'),
@@ -89,4 +105,3 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
   end,
 })
-

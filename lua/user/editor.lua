@@ -82,17 +82,6 @@ local M = {
     end,
   },
   {
-    'echasnovski/mini.bufremove',
-    config = function()
-      require('mini.bufremove').setup()
-    end,
-  },
-  -- {
-  --   'folke/trouble.nvim',
-  --   cmd = { 'TroubleToggle', 'Trouble' },
-  --   opts = { use_diagnostic_signs = true },
-  -- },
-  {
     'folke/todo-comments.nvim',
     cmd = { 'TodoTrouble', 'TodoTelescope' },
     event = { 'BufReadPost', 'BufNewFile' },
@@ -146,8 +135,13 @@ local M = {
     'folke/flash.nvim',
     event = 'VeryLazy',
     opts = {
-      highlight = {
-        backdrop = false,
+      -- highlight = {
+      --   backdrop = false,
+      -- },
+      modes = {
+        char = {
+          jump_labels = true,
+        },
       },
     },
   },

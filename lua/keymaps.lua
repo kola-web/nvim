@@ -19,7 +19,9 @@ vim.g.mapleader = " "
 keymap("", "<S-l>", "$", opts)
 keymap("", "<S-h>", "^", opts)
 
-keymap("n", "B", "<cmd>enew<cr>", opts)
+keymap("n", "BB", "<cmd>enew<cr>", opts)
+keymap("n", "BJ", "<cmd>enew<cr><cmd>set filetype=javascript<cr>", opts)
+keymap("n", "BT", "<cmd>enew<cr><cmd>set filetype=typescript<cr>", opts)
 
 -- Normal --
 -- Better window navigation
@@ -32,8 +34,8 @@ keymap("n", "<C-m>", "%", opts)
 -- keymap("n", "<C-z>", "<nop>", opts)
 -- keymap("n", "(", "<cmd>BufferLineMovePrev<cr>", opts)
 -- keymap("n", ")", "<cmd>BufferLineMoveNext<cr>", opts)
-keymap("n", "(", "<Plug>(cokeline-switch-prev)", opts)
-keymap("n", ")", "<Plug>(cokeline-switch-next)", opts)
+keymap("n", "(", "<cmd>BufferMovePrevious<cr>", opts)
+keymap("n", ")", "<cmd>BufferMoveNext<cr>", opts)
 
 -- vue jump
 keymap("n", "]h", "/<template<cr>", opts)
@@ -52,8 +54,8 @@ keymap("n", "]C", "/</style<cr>", opts)
 -- Navigate buffers
 -- keymap("n", "<tab>", "<Cmd>BufferLineCycleNext<CR>", opts)
 -- keymap("n", "<S-tab>", "<Cmd>BufferLineCyclePrev<CR>", opts)
-keymap("n", "<tab>", "<Plug>(cokeline-focus-next)", opts)
-keymap("n", "<S-tab>", "<Plug>(cokeline-focus-prev)", opts)
+keymap("n", "<tab>", "<Cmd>BufferNext<CR>", opts)
+keymap("n", "<S-tab>", "<Cmd>BufferPrevious<CR>", opts)
 
 -- smart n/N
 keymap("n", "n", vim.v.searchforward == 1 and "n" or "N", opts)
