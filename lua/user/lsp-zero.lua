@@ -68,29 +68,21 @@ M.config = function()
     },
   })
   require('mason').setup({})
+  local handlers_config = {
+    lsp_zero.default_setup,
+  }
+  local servers = require('utils.init').servers
+  for _, server_name in ipairs(servers) do
+    local require_ok, conf_opts = pcall(require, 'settings.' .. server_name)
+    if require_ok then
+      handlers_config[server_name] = function()
+        require('lspconfig')[server_name].setup(conf_opts)
+      end
+    end
+  end
   require('mason-lspconfig').setup({
-    ensure_installed = require('utils.init').servers,
-    handlers = {
-      -- lsp_zero.default_setup,
-      function(server_name)
-        local Opts = {
-          -- on_init = function(client)
-          --   local formatLsp = {
-          --     efm = true,
-          --   }
-          --   if formatLsp[client.name] == nil then
-          --     client.server_capabilities.documentFormattingProvider = false
-          --     client.server_capabilities.documentRangeFormattingProvider = false
-          --   end
-          -- end,
-        }
-        local require_ok, conf_opts = pcall(require, 'settings.' .. server_name)
-        if require_ok then
-          Opts = vim.tbl_deep_extend('force', conf_opts, Opts)
-        end
-        require('lspconfig')[server_name].setup(Opts)
-      end,
-    },
+    ensure_installed = servers,
+    handlers = handlers_config,
   })
 
   ----- cmp ------------------------------------------------------------------------------------
