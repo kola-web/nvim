@@ -98,12 +98,39 @@ M.config = function()
 
   cmp.setup({
     sources = {
-      { name = 'copilot' },
-      { name = 'luasnip' },
+      {
+        name = 'copilot',
+        trigger_characters = {
+          {
+            '.',
+            ':',
+            '(',
+            "'",
+            '"',
+            '[',
+            ',',
+            '#',
+            '*',
+            '@',
+            '|',
+            '=',
+            '-',
+            '{',
+            '/',
+            '\\',
+            '+',
+            '?',
+            ' ',
+            -- "\t",
+            -- "\n",
+          },
+        },
+      },
       { name = 'nvim_lsp' },
+      { name = 'path' },
+      { name = 'luasnip' },
       { name = 'nvim_lua' },
       { name = 'buffer' },
-      { name = 'path' },
     },
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
@@ -139,26 +166,6 @@ M.config = function()
         item.menu = string.format('[%s]', menu_name)
         return item
       end,
-    },
-    completion = {
-      completeopt = 'menu,menuone,noselect',
-      keyword_pattern = '\\k\\+',
-      keyword_length = 2,
-      get_trigger_characters = function(trigger_characters)
-        return trigger_characters
-      end,
-      -- 自定义路径匹配函数，将别名替换为实际路径
-      match = {
-        base = function(_, completion_item)
-          -- 这里添加你的路径别名映射，例如：
-          local alias_map = {
-            ['@'] = '/src',
-            -- 添加其他别名映射，如果需要的话
-          }
-          local path = alias_map[completion_item.word] or completion_item.word
-          return path
-        end,
-      },
     },
   })
 
