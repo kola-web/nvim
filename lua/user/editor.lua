@@ -140,7 +140,8 @@ local M = {
       -- },
       modes = {
         char = {
-          jump_labels = true,
+          enabled = false,
+          -- jump_labels = true,
         },
       },
     },

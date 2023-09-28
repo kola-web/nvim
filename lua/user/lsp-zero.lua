@@ -16,7 +16,7 @@ local M = {
     { 'hrsh7th/cmp-nvim-lsp' }, -- Required
     { 'L3MON4D3/LuaSnip' }, -- Required
     { 'rafamadriz/friendly-snippets' },
-    { 'hrsh7th/cmp-path' },
+    { 'kola-web/cmp-path' },
     { 'hrsh7th/cmp-buffer' },
     { 'saadparwaiz1/cmp_luasnip' },
     { 'hrsh7th/cmp-nvim-lua' },
@@ -126,9 +126,9 @@ M.config = function()
           },
         },
       },
+      { name = 'luasnip' },
       { name = 'nvim_lsp' },
       { name = 'path' },
-      { name = 'luasnip' },
       { name = 'nvim_lua' },
       { name = 'buffer' },
     },
