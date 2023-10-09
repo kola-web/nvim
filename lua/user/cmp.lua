@@ -8,10 +8,7 @@ local M = {
       "hrsh7th/cmp-buffer",
     },
     {
-      "hrsh7th/cmp-path",
-    },
-    {
-      "hrsh7th/cmp-cmdline",
+      "kola-web/cmp-path",
     },
     {
       "saadparwaiz1/cmp_luasnip",
@@ -25,6 +22,7 @@ local M = {
     {
       "L3MON4D3/LuaSnip",
       event = "InsertEnter",
+      version = "v2.*",
       build = "make install_jsregexp",
       dependencies = {
         {
@@ -32,15 +30,21 @@ local M = {
         },
       }
     },
+    { 'zbirenbaum/copilot.lua' },
+    { 'zbirenbaum/copilot-cmp' },
   },
   event = {
     "InsertEnter",
-    "CmdlineEnter",
   },
 }
 
 function M.config()
   local cmp = require "cmp"
+  require('copilot').setup({
+    suggestion = { enabled = false },
+    panel = { enabled = false },
+  })
+  require('copilot_cmp').setup()
   local luasnip = require "luasnip"
   require("luasnip.loaders.from_vscode").lazy_load()
   require("luasnip.loaders.from_vscode").lazy_load { paths = "~/.config/nvim/snippets" }
@@ -73,8 +77,9 @@ function M.config()
       ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
     },
     sources = {
-      { name = "luasnip" },
+      { name = 'copilot' },
       { name = "nvim_lsp" },
+      { name = "luasnip" },
       { name = "nvim_lua" },
       { name = "buffer" },
       { name = "path" },

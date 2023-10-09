@@ -49,7 +49,7 @@ function M.config(_, opts)
 
   vim.diagnostic.config(config)
 
-  local function lsp_keymaps()
+  local function lsp_keymaps(bufnr)
     local key_opts = { noremap = true, silent = true }
     local keymap = vim.keymap.set
     keymap('n', 'gr', '<cmd>Lspsaga finder<CR>', key_opts)
@@ -64,6 +64,9 @@ function M.config(_, opts)
     keymap('n', 'K', vim.lsp.buf.hover, key_opts)
     keymap('n', 'gs', vim.lsp.buf.signature_help, key_opts)
     keymap('n', 'gl', vim.diagnostic.open_float, key_opts)
+    keymap('n', '<leader>m', function()
+      require('conform').format({ bufnr = bufnr, lsp_fallback = true })
+    end, opts)
   end
 
   local lspconfig = require('lspconfig')
@@ -78,7 +81,7 @@ function M.config(_, opts)
         command = 'EslintFixAll',
       })
     end
-    lsp_keymaps()
+    lsp_keymaps(bufnr)
     require('illuminate').on_attach(client)
   end
 

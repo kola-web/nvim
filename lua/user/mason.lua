@@ -33,10 +33,6 @@ function M.config()
     ensure_installed = require('utils.init').servers,
     automatic_installation = true,
   })
-  -- require("mason-null-ls").setup {
-  --   ensure_installed = require("utils.init").null_servers,
-  --   automatic_installation = true,
-  -- }
   require('mason-tool-installer').setup({
     ensure_installed = require('utils.init').null_servers,
     automatic_installation = true,
