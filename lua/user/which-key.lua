@@ -98,7 +98,7 @@ function M.config()
     -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
     ['c'] = { '<cmd>BufferClose<CR>', 'Close Buffer' },
     ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
-    ['o'] = { '<cmd>Lspsaga outline<CR>', 'Symbols' },
+    ['o'] = { '<cmd>SymbolsOutline<CR>', 'Symbols' },
     ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
     ['f'] = {
       '<cmd> Telescope find_files <CR>',
@@ -207,34 +207,14 @@ function M.config()
 
     l = {
       name = 'LSP',
-      -- a = { vim.lsp.buf.code_action, 'Code Action' },
-      a = { '<cmd>Lspsaga code_action<cr>', 'Code Action' },
-      -- d = { '<cmd>TroubleToggle<cr>', 'diagnostic_setloclist' },
-      D = { '<cmd>Lspsaga show_workspace_diagnostics ++normal<cr>', 'diagnostic_setloclist' },
-      d = { '<cmd>Lspsaga show_buf_diagnostics ++normal<cr>', 'diagnostic_setloclist' },
-      -- n = { vim.diagnostic.goto_next, 'Netx Errors' },
-      -- N = { vim.diagnostic.goto_prev, 'Prev Errors' },
-      n = { '<cmd>Lspsaga diagnostic_jump_next<cr>', 'Netx Errors' },
-      N = { '<cmd>Lspsaga diagnostic_jump_prev<cr>', 'Prev Errors' },
-      e = {
-        function()
-          require('lspsaga.diagnostic'):goto_next({ severity = vim.diagnostic.severity.ERROR })
-        end,
-        'Netx Errors',
-      },
-      E = {
-        function()
-          require('lspsaga.diagnostic'):goto_prev({ severity = vim.diagnostic.severity.ERROR })
-        end,
-        'Prev Errors',
-      },
-      -- r = { vim.lsp.buf.rename, 'Rename' },
-      r = { '<cmd>Lspsaga rename<cr>', 'Rename' },
+      a = { vim.lsp.buf.code_action, 'Code Action' },
+      d = { '<cmd>TroubleToggle<cr>', 'diagnostic_setloclist' },
+      n = { vim.diagnostic.goto_next, 'Netx Errors' },
+      N = { vim.diagnostic.goto_prev, 'Prev Errors' },
+      r = { vim.lsp.buf.rename, 'Rename' },
       t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
-      -- i = { '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'incoming_calls' },
-      -- o = { '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'outgoing_calls' },
-      i = { '<cmd>Lspsaga incoming_calls<CR>', 'incoming_calls' },
-      o = { '<cmd>Lspsaga outgoing_calls<CR>', 'outgoing_calls' },
+      i = { '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'incoming_calls' },
+      o = { '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'outgoing_calls' },
       I = { '<cmd>LspInstallInfo<cr>', 'LspInstallInfo' },
       c = {
         function()

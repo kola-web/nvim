@@ -104,31 +104,10 @@ local M = {
     },
   },
   {
-    'nvimdev/lspsaga.nvim',
-    event = 'LspAttach',
+    'simrat39/symbols-outline.nvim',
+    event = 'VeryLazy',
     config = function()
-      require('lspsaga').setup({
-        diagnostic = {
-          max_height = 0.8,
-          keys = {
-            quit = { 'q', '<ESC>' },
-          },
-        },
-        code_actions = {
-          show_server_name = true,
-        },
-        finder = {
-          keys = {
-            toggle_or_open = '<cr>',
-          },
-        },
-        outline = {
-          -- layout = 'float',
-          keys = {
-            toggle_or_jump = '<cr>',
-          },
-        },
-      })
+      require('symbols-outline').setup()
     end,
   },
   {

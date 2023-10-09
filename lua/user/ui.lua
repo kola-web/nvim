@@ -11,6 +11,8 @@ local M = {
     opts = {
       animation = false,
       insert_at_end = true,
+      -- exclude_ft = { 'javascript' },
+      -- exclude_name = { 'package.json' },
       sidebar_filetypes = {
         ['neo-tree'] = { event = 'BufWipeout' },
       },

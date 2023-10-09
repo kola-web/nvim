@@ -41,12 +41,6 @@ M.config = function()
     local opts = { buffer = bufnr }
     local bind = vim.keymap.set
 
-    -- bind('n', 'K', '<cmd>Lspsaga hover_doc<cr>', opts)
-    bind('n', 'gr', '<cmd>Lspsaga finder<cr>', opts)
-    bind('n', 'gd', '<cmd>Lspsaga goto_definition<cr>', opts)
-    bind('n', 'gD', '<cmd>Lspsaga peek_definition<cr>', opts)
-    bind('n', 'go', '<cmd>Lspsaga goto_type_definition<cr>', opts)
-    bind('n', 'gl', '<cmd>Lspsaga show_line_diagnostics<cr>', opts)
     bind('n', '<leader>m', function()
       require('conform').format({ bufnr = bufnr, lsp_fallback = true })
     end, opts)
@@ -98,37 +92,10 @@ M.config = function()
 
   cmp.setup({
     sources = {
-      {
-        name = 'copilot',
-        trigger_characters = {
-          {
-            '.',
-            ':',
-            '(',
-            "'",
-            '"',
-            '[',
-            ',',
-            '#',
-            '*',
-            '@',
-            '|',
-            '=',
-            '-',
-            '{',
-            '/',
-            '\\',
-            '+',
-            '?',
-            ' ',
-            -- "\t",
-            -- "\n",
-          },
-        },
-      },
-      { name = 'luasnip' },
+      { name = 'copilot' },
       { name = 'nvim_lsp' },
       { name = 'path' },
+      { name = 'luasnip' },
       { name = 'nvim_lua' },
       { name = 'buffer' },
     },
@@ -174,7 +141,8 @@ M.config = function()
   require('mason-tool-installer').setup({
     ensure_installed = require('utils.init').null_servers,
     automatic_installation = true,
-    run_on_start = false,
+    run_on_start = true,
+    auto_update = true,
   })
   require('conform').setup({
     formatters_by_ft = {
