@@ -118,6 +118,13 @@ function M.config()
     -- },
     -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
     -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" }, -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
+    ['m'] = {
+      function()
+        require('conform').format({ lsp_fallback = true })
+      end,
+      'Format',
+    },
+    -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
     [';'] = { '<cmd>Alpha<cr>', 'Alpha' },
 
     b = {

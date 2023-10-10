@@ -6,5 +6,5 @@ else
   require('keymaps')
   require('Lazy').setup('user')
   require('autocommands')
-  require('lua.user.colorscheme').config()
+  require('user.colorscheme').config()
 end
