@@ -11,7 +11,7 @@ return {
     'svelte',
     'pug',
     'typescriptreact',
-    'vue',
+    -- 'vue',
   },
   init_options = {
     --- @type string[]
