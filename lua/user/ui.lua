@@ -4,17 +4,28 @@ local M = {
   -- ui components
   { 'MunifTanjim/nui.nvim', lazy = true },
   {
-    'romgrk/barbar.nvim',
-    init = function()
-      vim.g.barbar_auto_setup = false
-    end,
+    'akinsho/bufferline.nvim',
+    event = 'VeryLazy',
     opts = {
-      animation = false,
-      insert_at_end = true,
-      -- exclude_ft = { 'javascript' },
-      -- exclude_name = { 'package.json' },
-      sidebar_filetypes = {
-        ['neo-tree'] = { event = 'BufWipeout' },
+      options = {
+        close_command = 'bd', -- can be a string | function, see "Mouse actions"
+        right_mouse_command = 'bd', -- can be a string | function, see "Mouse actions"
+        diagnostics = 'nvim_lsp',
+        always_show_bufferline = false,
+        diagnostics_indicator = function(_, _, diag)
+          local icons = require('icons').diagnostics
+          local ret = (diag.error and icons.Error .. diag.error .. ' ' or '')
+            .. (diag.warning and icons.Warn .. diag.warning or '')
+          return vim.trim(ret)
+        end,
+        offsets = {
+          {
+            filetype = 'neo-tree',
+            text = 'Neo-tree',
+            highlight = 'Directory',
+            text_align = 'left',
+          },
+        },
       },
     },
   },

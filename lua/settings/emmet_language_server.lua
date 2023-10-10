@@ -29,11 +29,11 @@ return {
       },
     },
     --- @type boolean Defaults to `true`
-    showAbbreviationSuggestions = false,
+    showAbbreviationSuggestions = true,
     --- @type "always" | "never" Defaults to `"always"`
     showExpandedAbbreviation = 'always',
     --- @type boolean Defaults to `false`
-    showSuggestionsAsSnippets = true,
+    showSuggestionsAsSnippets = false,
     --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/syntax-profiles/)
     syntaxProfiles = {
       html = {

@@ -96,7 +96,7 @@ function M.config()
     },
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
-    ['c'] = { '<cmd>BufferClose<CR>', 'Close Buffer' },
+    ['c'] = { '<cmd>bd<CR>', 'Close Buffer' },
     ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
     ['o'] = { '<cmd>SymbolsOutline<CR>', 'Symbols' },
     ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
@@ -120,9 +120,9 @@ function M.config()
     -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" }, -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
     ['m'] = {
       function()
-        require('conform').format({ lsp_fallback = true })
+        require('conform').format({ async = true, lsp_fallback = true })
       end,
-      'Format',
+      'Format buffer',
     },
     -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
     [';'] = { '<cmd>Alpha<cr>', 'Alpha' },
@@ -134,7 +134,7 @@ function M.config()
         'Buffers',
       },
       o = {
-        '<cmd>BufferCloseAllButCurrent<cr>',
+        '<cmd>BufferLineCloseOthers<cr>',
         'BufferCloseAllButCurrent',
       },
       s = { '<cmd>BufferPick<cr>', 'BufferPick' },

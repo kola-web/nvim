@@ -1,10 +1,8 @@
 local M = {
   "stevearc/conform.nvim",
-  eneny = "VeryLazy"
-}
-
-M.config = function()
-  require('conform').setup({
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
+  opts = {
     formatters_by_ft = {
       lua = { 'stylua' },
       -- Conform will run multiple formatters sequentially
@@ -24,7 +22,12 @@ M.config = function()
 
       toml = { 'taplo' },
     },
-  })
-end
+  },
+  config = function(_, opts)
+    local util = require("conform.util")
+    util.add_formatter_args(require("conform.formatters.shfmt"), { "-i", "2" })
+    require("conform").setup(opts)
+  end,
+}
 
 return M
