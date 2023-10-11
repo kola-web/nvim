@@ -1,13 +1,13 @@
 local M = {
   {
-    "folke/tokyonight.nvim",
+    'folke/tokyonight.nvim',
     lazy = true,
-    opts = { style = "moon" },
+    opts = { style = 'moon' },
   },
   {
-    "catppuccin/nvim",
+    'catppuccin/nvim',
     lazy = true,
-    name = "catppuccin",
+    name = 'catppuccin',
     opts = {
       integrations = {
         alpha = true,
@@ -22,13 +22,13 @@ local M = {
         native_lsp = {
           enabled = true,
           underlines = {
-            errors = { "undercurl" },
-            hints = { "undercurl" },
-            warnings = { "undercurl" },
-            information = { "undercurl" },
+            errors = { 'undercurl' },
+            hints = { 'undercurl' },
+            warnings = { 'undercurl' },
+            information = { 'undercurl' },
           },
         },
-        navic = { enabled = true, custom_bg = "lualine" },
+        navic = { enabled = true, custom_bg = 'lualine' },
         neotest = true,
         noice = true,
         notify = true,
@@ -42,10 +42,10 @@ local M = {
   },
   {
     'sainnhe/gruvbox-material',
-  }
+  },
 }
 
-M.name = "gruvbox-material"
+M.name = 'gruvbox-material'
 
 function M.config()
   local status_ok, theme = pcall(vim.cmd.colorscheme, M.name)

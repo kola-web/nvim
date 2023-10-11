@@ -13,6 +13,9 @@ local M = {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',
     },
+    {
+      'ahmedkhalf/project.nvim',
+    },
   },
 }
 

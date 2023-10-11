@@ -96,7 +96,7 @@ function M.config()
     },
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
-    ['c'] = { '<cmd>bd<CR>', 'Close Buffer' },
+    ['c'] = { '<cmd>Bdelete!<CR>', 'Close Buffer' },
     ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
     ['o'] = { '<cmd>SymbolsOutline<CR>', 'Symbols' },
     ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
@@ -214,15 +214,8 @@ function M.config()
 
     l = {
       name = 'LSP',
-      a = { vim.lsp.buf.code_action, 'Code Action' },
       d = { '<cmd>TroubleToggle<cr>', 'diagnostic_setloclist' },
-      n = { vim.diagnostic.goto_next, 'Netx Errors' },
-      N = { vim.diagnostic.goto_prev, 'Prev Errors' },
-      r = { vim.lsp.buf.rename, 'Rename' },
       t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
-      i = { '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', 'incoming_calls' },
-      o = { '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', 'outgoing_calls' },
-      I = { '<cmd>LspInstallInfo<cr>', 'LspInstallInfo' },
       c = {
         function()
           fun.compare_to_clipboard()
@@ -233,12 +226,6 @@ function M.config()
 
     s = {
       name = 'Search',
-      T = {
-        function()
-          require('base46').toggle_theme()
-        end,
-        'Colorscheme',
-      },
       t = { '<cmd>TodoTrouble<cr>', 'todoList' },
       f = {
         function()
@@ -319,9 +306,7 @@ function M.config()
       },
       w = {
         function()
-          require('flash').jump({
-            pattern = vim.fn.expand('<cword>'),
-          })
+          require('utils').flashWord()
         end,
         'jump Word',
       },

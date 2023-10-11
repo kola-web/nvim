@@ -52,9 +52,9 @@ keymap('n', ']C', '/</style<cr>', opts)
 
 -- Navigate buffers
 -- keymap("n", "<tab>", "<Cmd>BufferLineCycleNext<CR>", opts)
--- keymap("n", "<S-tab>", "<Cmd>BufferLineCyclePrev<CR>", opts)
+keymap("n", "<S-tab>", "<Cmd>BufferLineCyclePrev<CR>", opts)
 keymap('n', '<tab>', '<Cmd>bnext<CR>', opts)
-keymap('n', '<S-tab>', '<Cmd>bprevious<CR>', opts)
+-- keymap('n', '<S-tab>', '<Cmd>bprevious<CR>', opts)
 
 -- smart n/N
 keymap('n', 'n', vim.v.searchforward == 1 and 'n' or 'N', opts)
