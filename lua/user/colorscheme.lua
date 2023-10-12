@@ -2,7 +2,7 @@ local M = {
   {
     'folke/tokyonight.nvim',
     lazy = true,
-    opts = { style = 'moon' },
+    opts = { style = 'storm' },
   },
   {
     'catppuccin/nvim',
@@ -45,7 +45,7 @@ local M = {
   },
 }
 
-M.name = 'gruvbox-material'
+M.name = 'tokyonight'
 
 function M.config()
   local status_ok, theme = pcall(vim.cmd.colorscheme, M.name)

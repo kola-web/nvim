@@ -243,7 +243,8 @@ function M.config()
         'file_browser',
       },
       c = { '<cmd>Telescope colorscheme<cr>', 'colorscheme' },
-      h = { '<cmd>Telescope help_tags<cr>', 'Help' },
+      h = { '<cmd>lua require"telescope.builtin".find_files({ hidden = true })<cr>', 'Help' },
+      H = { '<cmd>Telescope help_tags<cr>', 'Help' },
       i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", 'Media' },
       l = { '<cmd>Telescope resume<cr>', 'Last Search' },
       M = { '<cmd>Telescope man_pages<cr>', 'Man Pages' },
@@ -290,6 +291,12 @@ function M.config()
     q = {
       t = { '<cmd>.!pbpaste | quicktype -l typescript --just-types  <cr>', 'typescript' },
     },
+    n = {
+      name = 'noice',
+      l = { '<cmd>Noice last<cr>', 'todoList' },
+      h = { '<cmd>Noice history<cr>', 'todoList' },
+      t = { '<cmd>Noice telescope<cr>', 'todoList' },
+    },
     [' '] = {
       name = 'flash',
       s = {
@@ -298,15 +305,15 @@ function M.config()
         end,
         'jump',
       },
-      h = {
+      v = {
         function()
-          require('flash').jump({ continue = true })
+          require('flash').treesitter()
         end,
         'jump',
       },
       w = {
         function()
-          require('utils').flashWord()
+          require('utils.init').flashWord()
         end,
         'jump Word',
       },

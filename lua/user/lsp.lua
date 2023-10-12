@@ -6,11 +6,25 @@ local M = {
     {
       'hrsh7th/cmp-nvim-lsp',
     },
+    {
+      'folke/neoconf.nvim',
+    },
+    {
+      'williamboman/mason.nvim',
+    },
+    {
+      'williamboman/mason-lspconfig.nvim',
+    },
+    {
+      'folke/neodev.nvim',
+    },
   },
 }
 
 function M.config()
   local cmp_nvim_lsp = require('cmp_nvim_lsp')
+  require('neoconf').setup({})
+  require('neodev').setup({})
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -43,21 +57,22 @@ function M.config()
     require('illuminate').on_attach(client)
   end
 
-  for _, server in pairs(require('utils').servers) do
-    Opts = {
-      on_attach = on_attach,
-      capabilities = capabilities,
-    }
-
-    server = vim.split(server, '@')[1]
-
-    local require_ok, conf_opts = pcall(require, 'settings.' .. server)
-    if require_ok then
-      Opts = vim.tbl_deep_extend('force', conf_opts, Opts)
-    end
-
-    lspconfig[server].setup(Opts)
-  end
+  require('mason-lspconfig').setup_handlers({
+    function(server_name)
+      local server_config = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+      if require('neoconf').get(server_name .. '.disable') then
+        return
+      end
+      local require_ok, conf_opts = pcall(require, 'settings.' .. server_name)
+      if require_ok then
+        server_config = vim.tbl_deep_extend('force', conf_opts, server_config)
+      end
+      lspconfig[server_name].setup(server_config)
+    end,
+  })
 
   local signs = {
     { name = 'DiagnosticSignError', text = '' },
