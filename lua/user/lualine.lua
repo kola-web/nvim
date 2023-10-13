@@ -2,6 +2,7 @@ local M = {
   'nvim-lualine/lualine.nvim',
   event = { 'VimEnter', 'InsertEnter', 'BufReadPre', 'BufAdd', 'BufNew', 'BufReadPost' },
 }
+local icons = require('user.nvim-dev-icons')
 
 function M.config()
   local status_ok, lualine = pcall(require, 'lualine')
@@ -13,11 +14,12 @@ function M.config()
     return vim.fn.winwidth(0) > 80
   end
 
+
   local diagnostics = {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
     sections = { 'error', 'warn' },
-    symbols = { error = ' ', warn = ' ' },
+    symbols = { error = icons.icons.diagnostics.Error, warn = icons.icons.diagnostics.Warn },
     colored = false,
     always_visible = true,
   }
@@ -25,7 +27,11 @@ function M.config()
   local diff = {
     'diff',
     colored = false,
-    symbols = { added = ' ', modified = ' ', removed = ' ' }, -- changes diff symbols
+    symbols = {
+      added = icons.icons.git.added,
+      modified = icons.icons.git.modified,
+      removed = icons.icons.git.removed,
+    }, -- changes diff symbols
     cond = hide_in_width,
   }
 

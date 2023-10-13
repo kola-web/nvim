@@ -1,26 +1,26 @@
 local M = {
-  "kana/vim-textobj-user",
+  'kana/vim-textobj-user',
   dependencies = {
     {
-      "kola-web/vim-indent-object",
+      'kola-web/vim-indent-object',
     },
     {
-      "kana/vim-textobj-entire",
+      'kana/vim-textobj-entire',
     },
     {
-      "whatyouhide/vim-textobj-xmlattr",
+      'whatyouhide/vim-textobj-xmlattr',
     },
     {
-      "glts/vim-textobj-comment",
+      'glts/vim-textobj-comment',
     },
     {
-      "wellle/targets.vim",
+      'wellle/targets.vim',
     },
     {
-      "junegunn/vim-easy-align"
-    }
+      'junegunn/vim-easy-align',
+    },
   },
-  event = "VeryLazy"
+  event = 'VeryLazy',
 }
 
 return M

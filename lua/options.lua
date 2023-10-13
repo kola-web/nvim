@@ -1,5 +1,5 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 
 vim.opt.backup = false -- 不创建备份文件
 vim.opt.clipboard = 'unnamedplus' -- 允许 Neovim 访问系统剪贴板
@@ -49,6 +49,7 @@ vim.o.spelllang = 'en,cjk'
 vim.opt_local.wrap = true
 vim.opt_local.spell = true
 vim.opt.wildmode = 'longest:full,full' -- Command-line completion mode
+vim.g.editorconfig = false
 
 -- vim.o.foldcolumn = '5'
 vim.o.foldenable = true

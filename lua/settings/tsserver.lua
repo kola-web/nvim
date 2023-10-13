@@ -12,6 +12,13 @@ return {
     locale = 'zh-CN',
     preferences = {
       importModuleSpecifierPreference = 'non-relative',
+      includeInlayParameterNameHints = 'all',
+      includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+      includeInlayFunctionParameterTypeHints = true,
+      includeInlayVariableTypeHints = true,
+      includeInlayPropertyDeclarationTypeHints = true,
+      includeInlayFunctionLikeReturnTypeHints = true,
+      includeInlayEnumMemberValueHints = true,
     },
   },
 }
