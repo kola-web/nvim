@@ -43,9 +43,10 @@ local M = {
   {
     'sainnhe/gruvbox-material',
   },
+  {},
 }
 
-M.name = 'tokyonight'
+M.name = 'gruvbox-material'
 
 function M.config()
   local status_ok, theme = pcall(vim.cmd.colorscheme, M.name)

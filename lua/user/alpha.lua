@@ -24,7 +24,7 @@ function M.config()
     dashboard.button("q", " " .. " Quit", ":qa<CR>"),
   }
   local function footer()
-    return "chrisatmachine.com"
+    return "kola"
   end
 
   dashboard.section.footer.val = footer()

@@ -51,9 +51,9 @@ keymap('n', ']C', '/</style<cr>', opts)
 -- keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
--- keymap("n", "<tab>", "<Cmd>BufferLineCycleNext<CR>", opts)
-keymap("n", "<S-tab>", "<Cmd>BufferLineCyclePrev<CR>", opts)
-keymap('n', '<tab>', '<Cmd>bnext<CR>', opts)
+keymap("n", "<tab>", "<Cmd>BufferLineCycleNext<CR>", opts)
+keymap('n', '<S-tab>', '<Cmd>BufferLineCyclePrev<CR>', opts)
+-- keymap('n', '<tab>', '<Cmd>bnext<CR>', opts)
 -- keymap('n', '<S-tab>', '<Cmd>bprevious<CR>', opts)
 
 -- smart n/N
