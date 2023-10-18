@@ -299,37 +299,10 @@ function M.config()
     },
     [' '] = {
       name = 'flash',
-      s = {
-        function()
-          require('flash').jump()
-        end,
-        'jump',
-      },
-      v = {
-        function()
-          require('flash').treesitter()
-        end,
-        'jump',
-      },
-      w = {
-        function()
-          require('utils.init').flashWord()
-        end,
-        'jump Word',
-      },
-      -- s = { '<cmd>HopChar2<cr>', 'HopChar2' },
-      -- ['/'] = { '<cmd>HopPattern<cr>', 'HopPattern' },
-      l = {
-        function()
-          require('flash').jump({
-            search = { mode = 'search', max_length = 0 },
-            label = { after = { 0, 0 } },
-            pattern = '^',
-          })
-        end,
-        'jump line',
-      },
-      -- L = { '<cmd>HopLine<cr>', 'HopLineStart' },
+      w = { '<cmd>HopWord<cr>', 'HopChar2' },
+      ['/'] = { '<cmd>HopPattern<cr>', 'HopChar2' },
+      s = { '<cmd>HopChar2<cr>', 'HopChar2' },
+      l = { '<cmd>HopLine<cr>', 'HopLineStart' },
     },
   }
 

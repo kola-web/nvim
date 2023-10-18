@@ -21,17 +21,16 @@ local M = {
   },
 }
 
-function M.config()
-  local cmp_nvim_lsp = require('cmp_nvim_lsp')
-  require('neoconf').setup({})
-  require('neodev').setup({})
+local status, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if not status then
+  return
+end
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
-
-  local function lsp_keymaps(bufnr)
-    local keymap = vim.api.nvim_buf_set_keymap
+local function lsp_keymaps(bufnr)
+  local keymap = vim.api.nvim_buf_set_keymap
     -- stylua: ignore start
     keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true, desc = "GoTo declaration" })
     keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true, desc = "GoTo definition" })
@@ -48,22 +47,30 @@ function M.config()
     keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { noremap = true, silent = true, desc = "Rename" })
     keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true, silent = true, desc = "Signature help" })
     keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", { noremap = true, silent = true, desc = "Setloclist" })
-    -- stylua: ignore end
-  end
+  -- stylua: ignore end
+end
+
+M.on_attach = function(client, bufnr)
+  lsp_keymaps(bufnr)
+  require('illuminate').on_attach(client)
+end
+
+function M.config()
+  require('neoconf').setup({})
+  require('neodev').setup({})
 
   local lspconfig = require('lspconfig')
-  local on_attach = function(client, bufnr)
-    lsp_keymaps(bufnr)
-    require('illuminate').on_attach(client)
-  end
 
   require('mason-lspconfig').setup_handlers({
     function(server_name)
       local server_config = {
-        on_attach = on_attach,
-        capabilities = capabilities,
+        on_attach = M.on_attach,
+        capabilities = M.capabilities,
       }
       if require('neoconf').get(server_name .. '.disable') then
+        return
+      end
+      if server_name == 'tsserver' then
         return
       end
       local require_ok, conf_opts = pcall(require, 'settings.' .. server_name)
@@ -87,7 +94,7 @@ function M.config()
 
   local config = {
     -- disable virtual text
-    virtual_text = false,
+    virtual_text = true,
     -- show signs
     signs = {
       active = signs,

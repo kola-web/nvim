@@ -41,6 +41,11 @@ function M.config()
   local icons = require('user.nvim-dev-icons')
   require('luasnip/loaders/from_vscode').lazy_load()
   require('luasnip.loaders.from_vscode').lazy_load({ paths = '~/.config/nvim/snippets' })
+  require('copilot').setup({
+    suggestion = { enabled = false },
+    panel = { enabled = false },
+  })
+  require('copilot_cmp').setup()
 
   local check_backspace = function()
     local col = vim.fn.col('.') - 1

@@ -14,7 +14,6 @@ function M.config()
     return vim.fn.winwidth(0) > 80
   end
 
-
   local diagnostics = {
     'diagnostics',
     sources = { 'nvim_diagnostic' },
@@ -52,7 +51,8 @@ function M.config()
     options = {
       globalstatus = true,
       icons_enabled = true,
-      theme = 'auto',
+      -- theme = 'auto',
+      theme = 'solarized',
       component_separators = { left = '', right = '' },
       section_separators = { left = '', right = '' },
       disabled_filetypes = { 'alpha', 'dashboard' },
