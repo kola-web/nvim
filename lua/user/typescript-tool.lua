@@ -22,4 +22,10 @@ local M = {
   },
 }
 
+M.config = function(_, opts)
+  if not require('neoconf').get('tsserver' .. '.disable') then
+    require('typescript-tools').setup(opts)
+  end
+end
+
 return M

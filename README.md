@@ -6,7 +6,7 @@
 | ---- | -------------------- |
 | crm  | coerce to MixedCase  |
 | crc  | coerce to camelCase  |
-| crc  | coerce to UPPER_CASE |
+| cru  | coerce to UPPER_CASE |
 | cr.  | coerce to dot.case   |
 | cr-  | coerce to dash-case  |
 | cr   | coerce to space case |

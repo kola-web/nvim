@@ -12,7 +12,7 @@ local M = {
 function M.config()
   local project = require('project_nvim')
   project.setup({
-
+    manual_mode = true,
     -- detection_methods = { "lsp", "pattern" }, -- NOTE: lsp detection will get annoying with multiple langs in one project
     detection_methods = { 'pattern' },
 

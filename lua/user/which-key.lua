@@ -150,7 +150,8 @@ function M.config()
     },
     p = {
       name = 'Projects',
-      p = { '<cmd>Telescope oldfiles<cr>', 'history file' },
+      p = { '<cmd>Telescope projects<cr>', 'projects' },
+      h = { '<cmd>Telescope oldfiles<cr>', 'history file' },
       m = { '<cmd>PeekOpen<cr>', 'PeekOpen' },
       c = { '<cmd>PeekClose<cr>', 'PeekClose' },
       a = { vim.lsp.buf.add_workspace_folder, 'add_workspace_folder' },
@@ -214,7 +215,7 @@ function M.config()
 
     l = {
       name = 'LSP',
-      d = { '<cmd>TroubleToggle<cr>', 'diagnostic_setloclist' },
+      -- d = { '<cmd>TroubleToggle<cr>', 'diagnostic_setloclist' },
       t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
       c = {
         function()
@@ -226,7 +227,7 @@ function M.config()
 
     s = {
       name = 'Search',
-      t = { '<cmd>TodoTrouble<cr>', 'todoList' },
+      t = { '<cmd>TodoTelescope<cr>', 'TodoTelescope' },
       f = {
         function()
           require('telescope').extensions.file_browser.file_browser({
@@ -293,16 +294,48 @@ function M.config()
     },
     n = {
       name = 'noice',
-      l = { '<cmd>Noice last<cr>', 'todoList' },
-      h = { '<cmd>Noice history<cr>', 'todoList' },
-      t = { '<cmd>Noice telescope<cr>', 'todoList' },
+      l = { '<cmd>Noice last<cr>', 'noice last' },
+      h = { '<cmd>Noice history<cr>', 'noice history' },
+      t = { '<cmd>Noice telescope<cr>', 'noice telescope' },
     },
     [' '] = {
       name = 'flash',
-      w = { '<cmd>HopWord<cr>', 'HopChar2' },
-      ['/'] = { '<cmd>HopPattern<cr>', 'HopChar2' },
-      s = { '<cmd>HopChar2<cr>', 'HopChar2' },
-      l = { '<cmd>HopLine<cr>', 'HopLineStart' },
+      s = {
+        function()
+          require('flash').jump()
+        end,
+        'jump',
+      },
+      v = {
+        function()
+          require('flash').treesitter()
+        end,
+        'jump',
+      },
+      w = {
+        function()
+          require('utils.init').flashWord()
+        end,
+        'jump Word',
+      },
+      -- s = { '<cmd>HopChar2<cr>', 'HopChar2' },
+      ['/'] = {
+        function()
+          require('flash').toggle()
+        end,
+        'HopPattern',
+      },
+      l = {
+        function()
+          require('flash').jump({
+            search = { mode = 'search', max_length = 0 },
+            label = { after = { 0, 0 } },
+            pattern = '^',
+          })
+        end,
+        'jump line',
+      },
+      -- L = { '<cmd>HopLine<cr>', 'HopLineStart' },
     },
   }
 

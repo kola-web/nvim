@@ -44,27 +44,23 @@ local M = {
     'sainnhe/gruvbox-material',
   },
   {
-    'sainnhe/everforest',
+    'ellisonleao/gruvbox.nvim',
+    priority = 1000,
+    config = true,
+    opts = {},
   },
   {
-    'svrana/neosolarized.nvim',
-    dependencies = {
-      'tjdevries/colorbuddy.nvim',
-    },
+    'sainnhe/everforest',
   },
 }
 
-M.name = 'neosolarized'
+M.name = 'gruvbox-material'
 
 function M.config()
   local status_ok, theme = pcall(vim.cmd.colorscheme, M.name)
   if not status_ok then
     return
   end
-  require('neosolarized').setup({
-    comment_italics = true,
-    background_set = true,
-  })
 end
 
 return M

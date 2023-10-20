@@ -1,5 +1,6 @@
 return {
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+  -- filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+  filetypes = { 'typescript', 'javascript', 'vue' },
   settings = {
     typescript = {
       locale = 'zh-CN',
