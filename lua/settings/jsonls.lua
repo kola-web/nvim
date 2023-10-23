@@ -60,6 +60,7 @@ local schemas = {
       '!/.eslintrc.*',
       '!project.private.config.json',
       '!keybindings.json',
+      '!.neoconf.json',
     },
     url = 'https://dldir1.qq.com/WechatWebDev/plugins/editor/wechat-miniprogram_wx-json/1.0.0/page_component.schema.json',
   },

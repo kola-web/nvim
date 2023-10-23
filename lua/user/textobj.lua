@@ -1,9 +1,9 @@
 local M = {
   'kana/vim-textobj-user',
   dependencies = {
-    {
-      'kola-web/vim-indent-object',
-    },
+    -- {
+    --   'kola-web/vim-indent-object',
+    -- },
     {
       'kana/vim-textobj-entire',
     },

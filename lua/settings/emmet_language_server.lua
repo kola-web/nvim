@@ -18,15 +18,11 @@ return {
     excludeLanguages = {},
     --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/preferences/)
     preferences = {
-      bem = {
-        elementSeparator = '__',
-        modifierSeparator = '_',
-        shortElementPrefix = '-',
-      },
-      css = {
-        intUnit = 'rpx',
-        floatUnitr = 'rpx',
-      },
+      ['bem.elementSeparator'] = '__',
+      ['bem.modifierSeparator'] = '_',
+      ['bem.shortElementPrefix'] = '-',
+      ['css.intUnit'] = 'px',
+      ['css.floatUnitr'] = 'px',
     },
     --- @type boolean Defaults to `true`
     showAbbreviationSuggestions = true,

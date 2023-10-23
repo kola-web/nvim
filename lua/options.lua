@@ -49,7 +49,7 @@ vim.o.spelllang = 'en,cjk'
 vim.opt_local.wrap = true
 vim.opt_local.spell = true
 vim.opt.wildmode = 'longest:full,full' -- Command-line completion mode
-vim.g.editorconfig = false
+vim.g.editorconfig = true
 
 -- vim.o.foldcolumn = '5'
 vim.o.foldenable = true

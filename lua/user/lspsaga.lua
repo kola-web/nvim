@@ -31,7 +31,7 @@ M.config = function()
     },
     diagnostic = {
       extend_relatedInformation = true,
-      diagnostic_only_current = true,
+      -- diagnostic_only_current = true,
     },
   })
 end
