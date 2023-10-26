@@ -121,7 +121,7 @@ function M.config()
     -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" }, -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
     ['m'] = {
       function()
-        require('conform').format({ async = true, lsp_fallback = true })
+        require('conform').format()
       end,
       'Format buffer',
     },
@@ -143,7 +143,10 @@ function M.config()
         '<cmd>BufferPickDelete<cr>',
         'BufferPickDelete',
       },
-      r = { '<cmd>BufferRestore<cr>', 'BufferRestore' },
+      r = {
+        '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>',
+        'Redraw / clear hlsearch / diff update',
+      },
       h = { require('smart-splits').swap_buf_left, 'swap_buf_left' },
       j = { require('smart-splits').swap_buf_down, 'swap_buf_down' },
       k = { require('smart-splits').swap_buf_up, 'swap_buf_up' },
@@ -218,6 +221,12 @@ function M.config()
       name = 'LSP',
       -- d = { '<cmd>TroubleToggle<cr>', 'diagnostic_setloclist' },
       t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
+      p = {
+        function()
+          require('dropbar.api').pick()
+        end,
+        'filetypes',
+      },
       c = {
         function()
           fun.compare_to_clipboard()
@@ -245,6 +254,7 @@ function M.config()
         'file_browser',
       },
       c = { '<cmd>Telescope colorscheme<cr>', 'colorscheme' },
+      d = { '<cmd>Telescope diagnostics<cr>', 'colorscheme' },
       h = { '<cmd>lua require"telescope.builtin".find_files({ hidden = true })<cr>', 'Help' },
       H = { '<cmd>Telescope help_tags<cr>', 'Help' },
       i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", 'Media' },
@@ -366,9 +376,28 @@ function M.config()
     },
   }
 
+  local color_opts = {
+    mode = 'n', -- NORMAL mode
+    prefix = '<C-->',
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = true, -- use `nowait` when creating keymaps
+  }
+
+  local color_mappings = {
+    ['h'] = { '<cmd>ConvertColorTo hex<cr>.', 'hex' },
+    ['r'] = { '<cmd>ConvertColorTo rgb<cr>.', 'rgb' },
+    ['g'] = { '<cmd>ConvertColorTo rgba<cr>.', 'rgba' },
+    ['f'] = { '<cmd>ConvertColorTo rgb_float<cr>.', 'rgb_float' },
+    ['i'] = { '<cmd>ConvertColorTo rgb_int<cr>.', 'rgb_int' },
+    ['s'] = { '<cmd>ConvertColorTo hsl<cr>.', 'hsl' },
+  }
+
   which_key.setup(setup)
   which_key.register(mappings, opts)
   which_key.register(vmappings, vopts)
+  -- which_key.register(color_mappings, color_opts)
 end
 
 return M

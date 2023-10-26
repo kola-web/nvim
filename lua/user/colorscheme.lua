@@ -2,7 +2,7 @@ local M = {
   {
     'folke/tokyonight.nvim',
     lazy = true,
-    opts = { style = 'storm' },
+    opts = { style = 'moon' },
   },
   {
     'catppuccin/nvim',

@@ -20,6 +20,18 @@ local M = {
       bind_to_cwd = false,
       follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
+      commands = {
+        copy_file_name = function(state)
+          local node = state.tree:get_node()
+          vim.fn.setreg('*', node.name, 'c')
+        end,
+        copy_file_path = function(state)
+          local node = state.tree:get_node()
+          local full_path = node.path
+          local relative_path = full_path:sub(#state.path + 2)
+          vim.fn.setreg('*', relative_path, 'c')
+        end,
+      },
       window = {
         mappings = {
           ['<C-t>c'] = function(state)
@@ -51,6 +63,8 @@ local M = {
               vim.cmd('edit ' .. path .. '/index.wxml')
             end)
           end,
+          ['Y'] = 'copy_file_name',
+          ['<C-y>'] = 'copy_file_path',
         },
       },
     },
@@ -80,8 +94,26 @@ local M = {
     })
   end,
   dependencies = {
+    'nvim-lua/plenary.nvim',
+    'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+    'MunifTanjim/nui.nvim',
     {
-      'MunifTanjim/nui.nvim',
+      's1n7ax/nvim-window-picker',
+      config = function()
+        require('window-picker').setup({
+          filter_rules = {
+            include_current_win = false,
+            autoselect_one = true,
+            -- filter using buffer options
+            bo = {
+              -- if the file type is one of following, the window will be ignored
+              filetype = { 'neo-tree', 'neo-tree-popup', 'notify' },
+              -- if the buffer type is one of following, the window will be ignored
+              buftype = { 'terminal', 'quickfix' },
+            },
+          },
+        })
+      end,
     },
   },
 }

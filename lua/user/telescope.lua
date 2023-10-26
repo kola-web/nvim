@@ -103,6 +103,9 @@ M.config = function()
       buffers = {
         initial_mode = 'normal',
       },
+      diagnostics = {
+        initial_mode = 'normal',
+      },
     },
     extensions = {
       file_browser = {

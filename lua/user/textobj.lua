@@ -11,13 +11,7 @@ local M = {
       'whatyouhide/vim-textobj-xmlattr',
     },
     {
-      'glts/vim-textobj-comment',
-    },
-    {
       'wellle/targets.vim',
-    },
-    {
-      'junegunn/vim-easy-align',
     },
   },
   event = 'VeryLazy',

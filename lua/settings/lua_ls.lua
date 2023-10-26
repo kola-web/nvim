@@ -1,4 +1,8 @@
 return {
+  cmd = {
+    'lua-language-server',
+    '--locale=zh-cn',
+  },
   settings = {
     Lua = {
       completion = {
@@ -11,6 +15,7 @@ return {
         library = {
           [vim.fn.expand('$VIMRUNTIME/lua')] = true,
           [vim.fn.stdpath('config') .. '/lua'] = true,
+          '${3rd}/luv/library',
         },
       },
       telemetry = {

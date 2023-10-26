@@ -20,6 +20,11 @@ local M = {
       'folke/neodev.nvim',
     },
   },
+  opts = {
+    inlay_hints = {
+      enabled = true,
+    },
+  },
 }
 
 local status, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
@@ -33,26 +38,32 @@ M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 local function lsp_keymaps(bufnr)
   local keymap = vim.api.nvim_buf_set_keymap
   -- stylua: ignore start
-  -- keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true, desc = "GoTo declaration" })
-  --   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true, desc = "GoTo definition" })
-  --   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true, desc = "Hover" })
-  --   keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", { noremap = true, silent = true, desc = "GoTo implementation" })
-  --   keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { noremap = true, silent = true, desc = "GoTo references" })
-  --   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true, desc = "Float diagnostic" })
-  --   keymap(bufnr, "n", "<leader>lI", "<cmd>LspInfo<cr>", { noremap = true, silent = true, desc = "Mason" })
-  --   keymap(bufnr, "n", "<leader>li", "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", { noremap = true, silent = true, desc = "Lsp incoming_calls" })
-  --   keymap(bufnr, "n", "<leader>lo", "<cmd>lua vim.lsp.buf.outgoing_calls()<cr>", { noremap = true, silent = true, desc = "Lsp code_action" })
-  --   keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { noremap = true, silent = true, desc = "Code action" })
-  --   keymap(bufnr, "n", "<leader>ln", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", { noremap = true, silent = true, desc = "Next diagnostic" })
-  --   keymap(bufnr, "n", "<leader>lp", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", { noremap = true, silent = true, desc = "Previous diagnostic" })
-  --   keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { noremap = true, silent = true, desc = "Rename" })
-  -- keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true, silent = true, desc = "Signature help" })
-  -- keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", { noremap = true, silent = true, desc = "Setloclist" })
+  keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true, desc = "GoTo declaration" })
+  keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true, desc = "GoTo definition" })
+  keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true, desc = "Hover" })
+  keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", { noremap = true, silent = true, desc = "GoTo implementation" })
+  keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { noremap = true, silent = true, desc = "GoTo references" })
+  keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true, desc = "Float diagnostic" })
+  keymap(bufnr, "n", "<leader>lI", "<cmd>LspInfo<cr>", { noremap = true, silent = true, desc = "Mason" })
+  keymap(bufnr, "n", "<leader>li", "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", { noremap = true, silent = true, desc = "Lsp incoming_calls" })
+  keymap(bufnr, "n", "<leader>lo", "<cmd>lua vim.lsp.buf.outgoing_calls()<cr>", { noremap = true, silent = true, desc = "Lsp code_action" })
+  keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { noremap = true, silent = true, desc = "Code action" })
+  keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", { noremap = true, silent = true, desc = "Next diagnostic" })
+  keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", { noremap = true, silent = true, desc = "Previous diagnostic" })
+  keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { noremap = true, silent = true, desc = "Rename" })
+  keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true, silent = true, desc = "Signature help" })
+  keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", { noremap = true, silent = true, desc = "Setloclist" })
+  keymap(bufnr, "n", "<leader>ld", "<cmd>TroubleToggle<CR>", { noremap = true, silent = true, desc = "Setloclist" })
+
   -- stylua: ignore end
 end
 
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
+
+  if client.supports_method('textDocument/inlayHint') then
+    vim.lsp.inlay_hint(bufnr, true)
+  end
   require('illuminate').on_attach(client)
 end
 
@@ -101,8 +112,15 @@ function M.config()
   end
 
   local config = {
-    -- disable virtual text
-    virtual_text = false,
+    --  virtual text
+    virtual_text = {
+      spacing = 4,
+      source = 'if_many',
+      prefix = '●',
+      -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+      -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+      -- prefix = "icons",
+    },
     -- show signs
     signs = {
       active = signs,
@@ -110,15 +128,15 @@ function M.config()
     update_in_insert = true,
     underline = true,
     severity_sort = true,
-    float = {
-      focusable = false,
-      style = 'minimal',
-      border = 'rounded',
-      source = 'always',
-      header = '',
-      prefix = '',
-      suffix = '',
-    },
+    -- float = {
+    --   focusable = false,
+    --   style = 'minimal',
+    --   border = 'rounded',
+    --   source = 'always',
+    --   header = '',
+    --   prefix = '',
+    --   suffix = '',
+    -- },
   }
 
   vim.diagnostic.config(config)
