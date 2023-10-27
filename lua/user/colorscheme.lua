@@ -52,9 +52,14 @@ local M = {
   {
     'sainnhe/everforest',
   },
+  {
+    'rebelot/kanagawa.nvim',
+  },
 }
 
 M.name = 'gruvbox-material'
+-- M.name = 'tokyonight'
+-- M.name = 'kanagawa-dragon'
 
 function M.config()
   local status_ok, theme = pcall(vim.cmd.colorscheme, M.name)

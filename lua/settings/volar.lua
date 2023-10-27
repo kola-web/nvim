@@ -19,7 +19,7 @@ return {
       inlayHints = true,
       diagnostics = true,
       codeLens = {
-        showReferencesNotification = true,
+        enabled = true,
       },
     },
   },
@@ -70,31 +70,5 @@ return {
         },
       },
     },
-    css = { validate = false },
-    scss = {
-      validate = false,
-      inlayHints = {
-        parameterNames = {
-          enabled = 'all',
-          suppressWhenArgumentMatchesName = true,
-        },
-        parameterTypes = {
-          enabled = true,
-        },
-        functionLikeReturnTypes = {
-          enabled = true,
-        },
-        variableTypes = {
-          enabled = true,
-        },
-        enumMemberValues = {
-          enabled = true,
-        },
-        propertyDeclarationTypes = {
-          enabled = true,
-        },
-      },
-    },
-    less = { validate = false },
   },
 }

@@ -106,3 +106,25 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
   end,
 })
+
+-- vim.api.nvim_create_autocmd('User', {
+--   pattern = 'LspAttached',
+--   once = true,
+--   callback = vim.lsp.codelens.refresh,
+-- })
+
+-- 在悬停窗口中自动显示线路诊断
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--   buffer = bufnr,
+--   callback = function()
+--     local opts = {
+--       focusable = false,
+--       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+--       border = 'rounded',
+--       source = 'always',
+--       prefix = ' ',
+--       scope = 'cursor',
+--     }
+--     vim.diagnostic.open_float(nil, opts)
+--   end
+-- })

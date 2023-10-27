@@ -27,13 +27,18 @@ local M = {
   },
 }
 
-local status, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if not status then
+local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if not has_cmp then
   return
 end
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
+
+M.capabilities = vim.tbl_deep_extend(
+  'force',
+  {},
+  vim.lsp.protocol.make_client_capabilities(),
+  has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+  {}
+)
 
 local function lsp_keymaps(bufnr)
   local keymap = vim.api.nvim_buf_set_keymap
@@ -64,7 +69,26 @@ M.on_attach = function(client, bufnr)
   if client.supports_method('textDocument/inlayHint') then
     vim.lsp.inlay_hint(bufnr, true)
   end
-  require('illuminate').on_attach(client)
+
+  -- if client.supports_method('textDocument/codeLens') then
+  --   local augroup = vim.api.nvim_create_augroup('TypescriptToolsCodeLensGroup', { clear = true })
+  --   vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'CursorHold' }, {
+  --     buffer = bufnr,
+  --     callback = vim.lsp.codelens.refresh,
+  --     group = augroup,
+  --   })
+  -- end
+
+  -- if client.supports_method('textDocument/codeLens') then
+  --   -- refresh codelens on TextChanged and InsertLeave as well
+  --   vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
+  --     buffer = bufnr,
+  --     callback = vim.lsp.codelens.refresh,
+  --   })
+  --   -- trigger codelens refresh
+  --   vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
+  --   require('illuminate').on_attach(client)
+  -- end
 end
 
 function M.config()
@@ -77,7 +101,7 @@ function M.config()
     function(server_name)
       local server_config = {
         on_attach = M.on_attach,
-        capabilities = M.capabilities,
+        capabilities = vim.deepcopy(M.capabilities),
       }
       local neoConfig = {}
       -- 使用 typescript-tool代替typescript-language-server
@@ -93,7 +117,7 @@ function M.config()
 
       local require_ok, conf_opts = pcall(require, 'settings.' .. server_name)
       if require_ok then
-        server_config = vim.tbl_deep_extend('force', conf_opts, neoConfig, server_config)
+        server_config = vim.tbl_deep_extend('force', conf_opts, neoConfig, server_config) or {}
       end
 
       lspconfig[server_name].setup(server_config)
@@ -115,7 +139,7 @@ function M.config()
     --  virtual text
     virtual_text = {
       spacing = 4,
-      source = 'if_many',
+      source = 'always',
       prefix = '●',
       -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
       -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
@@ -128,15 +152,9 @@ function M.config()
     update_in_insert = true,
     underline = true,
     severity_sort = true,
-    -- float = {
-    --   focusable = false,
-    --   style = 'minimal',
-    --   border = 'rounded',
-    --   source = 'always',
-    --   header = '',
-    --   prefix = '',
-    --   suffix = '',
-    -- },
+    float = {
+      source = 'always',
+    },
   }
 
   vim.diagnostic.config(config)
