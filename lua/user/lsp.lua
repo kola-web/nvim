@@ -47,7 +47,8 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true, desc = "GoTo definition" })
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true, desc = "Hover" })
   keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", { noremap = true, silent = true, desc = "GoTo implementation" })
-  keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { noremap = true, silent = true, desc = "GoTo references" })
+  -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { noremap = true, silent = true, desc = "GoTo references" })
+  keymap(bufnr, "n", "gr", "<cmd>lua require('trouble').toggle('lsp_references')<CR>", { noremap = true, silent = true, desc = "GoTo references" })
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true, desc = "Float diagnostic" })
   keymap(bufnr, "n", "<leader>lI", "<cmd>LspInfo<cr>", { noremap = true, silent = true, desc = "Mason" })
   keymap(bufnr, "n", "<leader>li", "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", { noremap = true, silent = true, desc = "Lsp incoming_calls" })
@@ -127,8 +128,8 @@ function M.config()
   local signs = {
     { name = 'DiagnosticSignError', text = '' },
     { name = 'DiagnosticSignWarn', text = '' },
-    { name = 'DiagnosticSignHint', text = '' },
-    { name = 'DiagnosticSignInfo', text = '' },
+    { name = 'DiagnosticSignHint', text = '' },
+    { name = 'DiagnosticSignInfo', text = ' ' },
   }
 
   for _, sign in ipairs(signs) do

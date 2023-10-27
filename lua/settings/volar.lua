@@ -2,6 +2,7 @@ return {
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
   -- filetypes = { 'typescript', 'javascript', 'vue' },
   init_options = {
+    locale = 'zh-CN',
     languageFeatures = {
       references = true,
       implementation = true,

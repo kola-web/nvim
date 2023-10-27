@@ -20,6 +20,7 @@ M.servers = {
   'docker_compose_language_service',
   'dockerls',
   'intelephense',
+  'eslint',
   -- 'efm',
 }
 
