@@ -50,6 +50,9 @@ return {
           enabled = true,
         },
       },
+      preferences = {
+        importModuleSpecifier = 'non-relative',
+      },
     },
     javascript = {
       inlayHints = {
@@ -72,6 +75,9 @@ return {
         propertyDeclarationTypes = {
           enabled = true,
         },
+      },
+      preferences = {
+        importModuleSpecifier = 'non-relative',
       },
     },
   },

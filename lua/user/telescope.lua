@@ -69,7 +69,8 @@ M.config = function()
 
   local opts = {
     defaults = {
-      prompt_prefix = ' ',
+      -- prompt_prefix = ' ',
+      prompt_prefix = '',
       selection_caret = ' ',
       buffer_previewer_maker = new_maker,
       file_ignore_patterns = {
