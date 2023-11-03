@@ -57,8 +57,8 @@ local M = {
   },
 }
 
--- M.name = 'gruvbox-material'
-M.name = 'tokyonight'
+M.name = 'gruvbox-material'
+-- M.name = 'tokyonight'
 -- M.name = 'kanagawa-dragon'
 
 function M.config()
