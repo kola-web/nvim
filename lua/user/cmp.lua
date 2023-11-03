@@ -48,6 +48,7 @@ function M.config()
     panel = { enabled = false },
   })
   require('copilot_cmp').setup()
+  local defaults = require('cmp.config.default')()
 
   local check_backspace = function()
     local col = vim.fn.col('.') - 1
@@ -55,6 +56,9 @@ function M.config()
   end
 
   cmp.setup({
+    completion = {
+      completeopt = 'menu,menuone,noinsert',
+    },
     snippet = {
       expand = function(args)
         luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -129,13 +133,10 @@ function M.config()
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     },
-    -- window = {
-    --   completion = cmp.config.window.bordered(),
-    --   documentation = cmp.config.window.bordered(),
-    -- },
     experimental = {
       ghost_text = true,
     },
+    sorting = defaults.sorting,
   })
 end
 
