@@ -220,6 +220,7 @@ function M.config()
     l = {
       name = 'LSP',
       -- d = { '<cmd>TroubleToggle<cr>', 'diagnostic_setloclist' },
+      l = { '<cmd>lua require("neogen").generate()<CR>', 'filetypes' },
       t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
       p = {
         function()

@@ -58,6 +58,7 @@ local M = {
 }
 
 M.name = 'gruvbox-material'
+-- M.name = 'gruvbox'
 -- M.name = 'tokyonight'
 -- M.name = 'kanagawa-dragon'
 
