@@ -1,4 +1,4 @@
----@diagnostic disable: missing-fields, different-requires
+---@diagnostic disable: missing-fields
 local M = {
   'hrsh7th/nvim-cmp',
   version = false, -- last release is way too old
@@ -41,8 +41,9 @@ function M.config()
   local cmp = require('cmp')
   local luasnip = require('luasnip')
   local icons = require('user.nvim-dev-icons')
-  require('luasnip/loaders/from_vscode').lazy_load()
-  require('luasnip.loaders.from_vscode').lazy_load({ paths = '~/.config/nvim/snippets' })
+  local formVscode = require('luasnip/loaders/from_vscode')
+  formVscode.lazy_load()
+  formVscode.lazy_load({ paths = '~/.config/nvim/snippets' })
   require('copilot').setup({
     suggestion = { enabled = false },
     panel = { enabled = false },
