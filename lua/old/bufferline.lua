@@ -12,6 +12,8 @@ local M = {
   keys = {
     { '<S-tab>', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev buffer' },
     { '<tab>', '<cmd>BufferLineCycleNext<cr>', desc = 'Next buffer' },
+    { '(', '<cmd>BufferLineMovePrev<cr>', desc = 'move prev' },
+    { ')', '<cmd>BufferLineMoveNext<cr>', desc = 'move move' },
   },
   opts = {
     options = {

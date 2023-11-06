@@ -34,8 +34,6 @@ keymap('n', '<C-l>', '<C-w>l', opts)
 
 -- keymap('n', '<C-m>', '%', opts)
 -- keymap("n", "<C-z>", "<nop>", opts)
-keymap('n', '(', '<cmd>BufferLineMovePrev<cr>', opts)
-keymap('n', ')', '<cmd>BufferLineMoveNext<cr>', opts)
 
 -- vue jump
 keymap('n', ']h', '/<template<cr>', opts)

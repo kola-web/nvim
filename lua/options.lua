@@ -15,6 +15,7 @@ vim.g.root_spec = { 'lsp', { '.git', 'lua' }, 'cwd' }
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
+opt.backup = false -- 不创建备份文件
 opt.clipboard = 'unnamedplus' -- Sync with system clipboard
 opt.completeopt = 'menu,menuone,noselect'
 -- opt.conceallevel = 3 -- Hide * markup for bold and italic
@@ -33,6 +34,7 @@ opt.number = true -- Print line number
 opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
+opt.swapfile = false -- 不创建交换文件
 opt.scrolloff = 4 -- Lines of context
 opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp' }
 opt.shiftround = true -- Round indent

@@ -22,19 +22,16 @@ local M = {
       wxss = { { 'prettierd', 'prettier' } },
       json = { { 'prettierd', 'prettier' } },
       yaml = { { 'prettierd', 'prettier' } },
-
       sh = { 'shfmt', 'shellcheck' },
-
       toml = { 'taplo' },
     },
     formatters = {
       injected = { options = { ignore_errors = true } },
     },
   },
-  config = function(_, opts)
-    local util = require('conform.util')
-    util.add_formatter_args(require('conform.formatters.shfmt'), { '-i', '2' })
-    require('conform').setup(opts)
+  init = function()
+    -- If you want the formatexpr, here is the place to set it
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
 }
 

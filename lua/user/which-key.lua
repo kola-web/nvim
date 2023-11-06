@@ -121,7 +121,9 @@ function M.config()
     -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" }, -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
     ['m'] = {
       function()
-        require('conform').format()
+        require('conform').format({
+          lsp_fallback = true,
+        })
       end,
       'Format buffer',
     },
@@ -135,7 +137,7 @@ function M.config()
         'Buffers',
       },
       o = {
-        '<cmd>BufferLineCloseOthers<cr>',
+        '<cmd>BufferCloseAllButCurrent<cr>',
         'BufferCloseAllButCurrent',
       },
       s = { '<cmd>BufferPick<cr>', 'BufferPick' },
