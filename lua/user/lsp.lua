@@ -67,12 +67,12 @@ end
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
 
-  if client.name == 'eslint' then
-    vim.api.nvim_create_autocmd('BufWritePost', {
-      buffer = bufnr,
-      command = 'EslintFixAll',
-    })
-  end
+  -- if client.name == 'eslint' then
+  --   vim.api.nvim_create_autocmd('BufWritePost', {
+  --     buffer = bufnr,
+  --     command = 'EslintFixAll',
+  --   })
+  -- end
 
   if client.supports_method('textDocument/inlayHint') then
     vim.lsp.inlay_hint(bufnr, true)

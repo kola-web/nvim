@@ -128,7 +128,18 @@ function M.config()
       { name = 'nvim_lua' },
       { name = 'luasnip' },
       { name = 'buffer' },
-      { name = 'path' },
+      {
+        name = 'path',
+        option = {
+          pathMappings = {
+            ['@'] = {
+              '${folder}/src',
+              '${folder}/miniprogram',
+            },
+            ['~@'] = '${folder}/src',
+          },
+        },
+      },
     },
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
