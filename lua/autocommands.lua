@@ -62,7 +62,8 @@ vim.api.nvim_create_autocmd('FileType', {
     'neotest-output-panel',
     'sagadiagnostc',
     'dropbar_menu',
-    'lazy'
+    'lazy',
+    'noice'
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false

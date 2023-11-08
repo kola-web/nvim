@@ -74,9 +74,9 @@ M.on_attach = function(client, bufnr)
   --   })
   -- end
 
-  if client.supports_method('textDocument/inlayHint') then
-    vim.lsp.inlay_hint(bufnr, true)
-  end
+  -- if client.supports_method('textDocument/inlayHint') then
+  --   vim.lsp.inlay_hint(bufnr, true)
+  -- end
 
   -- if client.supports_method('textDocument/codeLens') then
   --   local augroup = vim.api.nvim_create_augroup('TypescriptToolsCodeLensGroup', { clear = true })

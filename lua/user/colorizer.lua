@@ -9,6 +9,6 @@ M.config = function()
     return
   end
 
-  colorizer.setup()
+  colorizer.setup({})
 end
 return M

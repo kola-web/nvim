@@ -56,6 +56,40 @@ function M.config()
     return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
   end
 
+  -- 创建一个新的source，用于支持alias
+  local alias_source = {
+    name = 'alias',
+    priority = 9,
+    keyword_pattern = [[\(\w\+\)]], -- 此处设置用于匹配alias的正则表达式
+    get_keyword = function(entry)
+      return entry.word
+    end,
+    complete = function(_, _, callback)
+      -- 获取当前打开文件所在目录
+      local current_directory = vim.fn.expand('%:p:h')
+
+      -- 在这里编写用于获取当前目录下的alias的逻辑
+      local aliases = {
+        ['alias1'] = current_directory .. '/path_to_alias1',
+        ['alias2'] = current_directory .. '/path_to_alias2',
+        -- 添加更多的alias和对应的路径
+      }
+
+      local items = {}
+      for alias, path in pairs(aliases) do
+        table.insert(items, {
+          label = alias,
+          kind = 'Alias',
+          word = path,
+        })
+      end
+
+      callback(items)
+    end,
+  }
+
+  cmp.register_source('alias', alias_source)
+
   cmp.setup({
     completion = {
       completeopt = 'menu,menuone,noinsert',
@@ -137,6 +171,7 @@ function M.config()
               '${folder}/miniprogram',
             },
             ['~@'] = '${folder}/src',
+            ['@renderer'] = "${folder}/src/renderer/src"
           },
         },
       },

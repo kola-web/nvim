@@ -24,6 +24,7 @@ keymap('n', 'BJ', '<cmd>enew<cr><cmd>set filetype=javascript<cr>', opts)
 keymap('n', 'BT', '<cmd>enew<cr><cmd>set filetype=typescript<cr>', opts)
 keymap('n', 'BV', '<cmd>enew<cr><cmd>set filetype=vue<cr>', opts)
 keymap('n', 'BH', '<cmd>enew<cr><cmd>set filetype=html<cr>', opts)
+keymap('n', 'BL', '<cmd>enew<cr><cmd>set filetype=lua<cr>', opts)
 
 -- Normal --
 -- Better window navigation

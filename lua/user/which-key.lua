@@ -97,7 +97,7 @@ function M.config()
     },
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
-    ['c'] = { '<cmd>BufferClose!<CR>', 'Close Buffer' },
+    ['c'] = { '<cmd>Bdelete!<CR>', 'Close Buffer' },
     ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
     ['o'] = { '<cmd>SymbolsOutline<CR>', 'Symbols' },
     ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
@@ -137,12 +137,12 @@ function M.config()
         'Buffers',
       },
       o = {
-        '<cmd>BufferCloseAllButCurrent<cr>',
+        '<cmd>BufferLineCloseOthers<cr>',
         'BufferCloseAllButCurrent',
       },
-      s = { '<cmd>BufferPick<cr>', 'BufferPick' },
+      s = { '<cmd>BufferLinePick<cr>', 'BufferPick' },
       c = {
-        '<cmd>BufferPickDelete<cr>',
+        '<cmd>BufferLinePick<cr>',
         'BufferPickDelete',
       },
       r = {
