@@ -15,6 +15,10 @@ vim.g.mapleader = ' '
 --   term_mode = "t",
 --   command_mode = "c",
 
+-- Map j and k with v:count conditional for vertical movement
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
 -- All
 keymap('', '<S-l>', '$', opts)
 keymap('', '<S-h>', '^', opts)
@@ -38,11 +42,8 @@ keymap('n', '<C-l>', '<C-w>l', opts)
 
 -- vue jump
 keymap('n', ']h', '/<template<cr>', opts)
-keymap('n', ']H', '/</template<cr>', opts)
 keymap('n', ']s', '/<script<cr>', opts)
-keymap('n', ']S', '/</script<cr>', opts)
 keymap('n', ']c', '/<style<cr>', opts)
-keymap('n', ']C', '/</style<cr>', opts)
 
 -- Resize with arrows
 -- keymap("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -62,7 +63,6 @@ keymap('n', 'N', vim.v.searchforward == 1 and 'N' or 'n', opts)
 
 -- Better paste
 keymap('v', 'p', '"_dP', opts)
-
 
 -- Visual --
 -- Stay in indent mode
@@ -92,10 +92,6 @@ keymap('t', '<esc>', [[<C-\><C-n>]])
 keymap({ 'i', 'n', 'v' }, '<C-->', function()
   -- require('color-converter').cycle()
   require('user.converter').toggleColorFormat()
-end, opts)
-
-keymap({ 'i', 'n' }, '<C-;>', function()
-  require('dropbar.api').pick()
 end, opts)
 
 -- 聪明地使用命令行历史

@@ -1,17 +1,19 @@
 return {
   filetypes = {
+    'astro',
     'css',
     'eruby',
     'html',
-    'javascript',
+    'htmldjango',
     'javascriptreact',
     'less',
+    'pug',
     'sass',
     'scss',
     'svelte',
-    'pug',
     'typescriptreact',
-    -- 'vue',
+    'php',
+    'vue',
   },
   init_options = {
     --- @type string[]

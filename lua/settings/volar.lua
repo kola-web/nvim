@@ -1,7 +1,10 @@
 -- Language server `volar` does not support command `editor.action.showReferences`. This command may require a client extension.
+local is_vue = require('utils.init').is_vue
 return {
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
-  -- filetypes = { 'typescript', 'javascript', 'vue' },
+  -- filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+  filetypes = is_vue()
+      and { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
+    or { 'vue' },
   init_options = {
     locale = 'zh-CN',
     languageFeatures = {

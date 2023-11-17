@@ -10,7 +10,7 @@ return {
       },
     },
     codeActionOnSave = {
-      enable = true,
+      enable = false,
       mode = 'all',
     },
     experimental = {

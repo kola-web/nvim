@@ -7,9 +7,6 @@ local M = {
       'nvim-telescope/telescope-file-browser.nvim',
     },
     {
-      'nvim-telescope/telescope-ui-select.nvim',
-    },
-    {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',
     },
@@ -80,6 +77,17 @@ M.config = function()
         'miniprogram_npm',
         '.yarn/',
       },
+      get_selection_window = function()
+        local wins = vim.api.nvim_list_wins()
+        table.insert(wins, 1, vim.api.nvim_get_current_win())
+        for _, win in ipairs(wins) do
+          local buf = vim.api.nvim_win_get_buf(win)
+          if vim.bo[buf].buftype == '' then
+            return win
+          end
+        end
+        return 0
+      end,
       mappings = {
         i = {
           ['<Down>'] = actions.move_selection_next,
@@ -107,6 +115,9 @@ M.config = function()
       diagnostics = {
         initial_mode = 'normal',
       },
+      lsp_code_actions = {
+        initial_mode = 'normal',
+      },
     },
     extensions = {
       file_browser = {
@@ -128,11 +139,6 @@ M.config = function()
           },
         },
       },
-      ['ui-select'] = {
-        require('telescope.themes').get_dropdown({
-          initial_mode = 'normal',
-        }),
-      },
       fzf = {
         fuzzy = true, -- false will only do exact matching
         override_generic_sorter = true, -- override the generic sorter
@@ -145,7 +151,6 @@ M.config = function()
 
   telescope.setup(opts)
   telescope.load_extension('file_browser')
-  telescope.load_extension('ui-select')
   telescope.load_extension('noice')
 end
 

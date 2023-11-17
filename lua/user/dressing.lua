@@ -13,6 +13,17 @@ local M = {
       return vim.ui.input(...)
     end
   end,
+  opts = {
+    select = {
+      get_config = function(opts)
+        if opts.kind == 'codeaction' then
+          return {
+            backend = 'builtin',
+          }
+        end
+      end,
+    },
+  },
 }
 
 return M

@@ -13,10 +13,10 @@ local M = {
       -- Conform will run multiple formatters sequentially
       -- python = { 'isort', 'black' },
       -- Use a sub-list to run only the first available formatter
-      javascript = { { 'prettierd', 'prettier' } },
-      typescript = { { 'prettierd', 'prettier' } },
+      javascript = { { 'prettierd', 'prettier' }, { 'eslint_d' } },
+      typescript = { { 'prettierd', 'prettier' }, { 'eslint_d' } },
       html = { { 'prettierd', 'prettier' } },
-      vue = { { 'prettierd', 'prettier' } },
+      vue = { { 'prettierd', 'prettier' }, { 'eslint_d' } },
       css = { { 'prettierd', 'prettier' } },
       scss = { { 'prettierd', 'prettier' } },
       wxss = { { 'prettierd', 'prettier' } },
@@ -24,6 +24,7 @@ local M = {
       yaml = { { 'prettierd', 'prettier' } },
       sh = { 'shfmt', 'shellcheck' },
       toml = { 'taplo' },
+      pint = { 'php' },
     },
     formatters = {
       injected = { options = { ignore_errors = true } },

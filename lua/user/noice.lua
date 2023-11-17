@@ -11,14 +11,6 @@ local M = {
       },
     },
     routes = {
-      -- {
-      --   filter = {
-      --     event = 'msg_show',
-      --     kind = '',
-      --     find = '',
-      --   },
-      --   opts = { skip = true },
-      -- },
       {
         filter = {
           event = 'msg_show',
@@ -35,6 +27,8 @@ local M = {
       bottom_search = true,
       command_palette = true,
       long_message_to_split = true,
+      inc_rename = false, -- enables an input dialog for inc-rename.nvim
+      lsp_doc_border = false, -- add a border to hover docs and signature help
     },
   },
   dependencies = {
@@ -67,6 +61,14 @@ local M = {
       silent = true,
       expr = true,
       mode = { 'n', 'i', 's' },
+    },
+    {
+      '<S-Enter>',
+      function()
+        require('noice').redirect(vim.fn.getcmdline())
+      end,
+      desc = 'Redirect Cmdline',
+      mode = { 'c' },
     },
   },
 }

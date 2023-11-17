@@ -102,13 +102,22 @@ local M = {
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
   },
+  {
+    'Tsuzat/NeoSolarized.nvim',
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    opts = {
+      transparent = false,
+    },
+  },
 }
 
--- M.name = 'gruvbox-material'
+M.name = 'gruvbox-material'
+-- M.name = 'NeoSolarized'
 -- M.name = 'gruvbox'
 -- M.name = 'tokyonight'
 -- M.name = 'kanagawa-dragon'
-M.name = 'solarized-osaka'
+-- M.name = 'solarized-osaka'
 -- M.name = 'night-owl'
 
 function M.config()

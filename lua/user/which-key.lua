@@ -128,7 +128,7 @@ function M.config()
       'Format buffer',
     },
     -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
-    [';'] = { '<cmd>Alpha<cr>', 'Alpha' },
+    [';'] = { '<cmd>Dashboard<cr>', 'Alpha' },
 
     b = {
       name = 'Buffers',
@@ -182,6 +182,7 @@ function M.config()
       w = { '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1))."px"#g<cr>', 'rpx-->px' },
       e = { '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 2)."px"#g<cr>', 'rpx/2-->px' },
       o = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', 'px-->rem' },
+      l = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', '1080px-->750px' },
       m = {
         "<cmd><c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>",
         'run file',

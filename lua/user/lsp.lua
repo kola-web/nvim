@@ -52,7 +52,7 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true, desc = "Float diagnostic" })
   keymap(bufnr, "n", "<leader>lI", "<cmd>LspInfo<cr>", { noremap = true, silent = true, desc = "Mason" })
   keymap(bufnr, "n", "<leader>li", "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", { noremap = true, silent = true, desc = "Lsp incoming_calls" })
-  keymap(bufnr, "n", "<leader>lo", "<cmd>lua vim.lsp.buf.outgoing_calls()<cr>", { noremap = true, silent = true, desc = "Lsp code_action" })
+  keymap(bufnr, "n", "<leader>lo", "<cmd>lua vim.lsp.buf.outgoing_calls()<cr>", { noremap = true, silent = true, desc = "Lsp outgoing_calls" })
   keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { noremap = true, silent = true, desc = "Code action" })
   keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", { noremap = true, silent = true, desc = "Next diagnostic" })
   keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", { noremap = true, silent = true, desc = "Previous diagnostic" })
@@ -100,7 +100,13 @@ M.on_attach = function(client, bufnr)
 end
 
 function M.config()
-  require('neoconf').setup({})
+  require('neoconf').setup({
+    import = {
+      vscode = false, -- local .vscode/settings.json
+      coc = false, -- global/local coc-settings.json
+      nlsp = false, -- global/local nlsp-settings.nvim json settings
+    },
+  })
   require('neodev').setup({})
 
   local lspconfig = require('lspconfig')
@@ -114,9 +120,6 @@ function M.config()
       local neoConfig = {}
       -- 使用 typescript-tool代替typescript-language-server
       if server_name == 'tsserver' then
-        return
-      end
-      if require('neoconf').get(server_name .. '.disable') then
         return
       end
       if server_name == 'emmet_language_server' then

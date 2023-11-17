@@ -7,14 +7,17 @@ local M = {
       nohlsearch = true,
     },
     modes = {
+      search = {
+        enabled = false,
+      },
       char = {
-        autohide = true,
-        jump_labels = true,
-        highlight = {
-          backdrop = false,
-        },
+        enabled = false,
       },
     },
+  },
+  -- stylua: ignore
+  keys = {
+    { 'r', mode = 'o', function() require('flash').remote() end, desc = 'Remote Flash' },
   },
 }
 

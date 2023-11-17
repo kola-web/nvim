@@ -1,4 +1,5 @@
 local lsp = require('user.lsp')
+local is_vue = require('utils.init').is_vue
 local M = {
   'pmizio/typescript-tools.nvim',
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
@@ -54,7 +55,10 @@ local M = {
 }
 
 M.config = function(_, opts)
-  if not require('neoconf').get('tsserver' .. '.disable') then
+  -- if not require('neoconf').get('tsserver' .. '.disable') then
+  --   require('typescript-tools').setup(opts)
+  -- end
+  if not is_vue() then
     require('typescript-tools').setup(opts)
   end
 end
