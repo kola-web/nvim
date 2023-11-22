@@ -30,7 +30,6 @@ M.null_servers = {
   'shellcheck',
   'shfmt',
   'taplo',
-  'eslint_d',
   'pint',
 }
 

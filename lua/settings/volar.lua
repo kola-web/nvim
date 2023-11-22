@@ -1,12 +1,31 @@
--- Language server `volar` does not support command `editor.action.showReferences`. This command may require a client extension.
 local is_vue = require('utils.init').is_vue
+local util = require('lspconfig.util')
+local function get_typescript_server_path(root_dir)
+  local global_ts = '/Users/lijialin/Library/pnpm/global/5/node_modules/typescript/lib'
+  -- Alternative location if installed as root:
+  -- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
+  local found_ts = ''
+  local function check_dir(path)
+    found_ts = util.path.join(path, 'node_modules', 'typescript', 'lib')
+    if util.path.exists(found_ts) then
+      return path
+    end
+  end
+  if util.search_ancestors(root_dir, check_dir) then
+    return found_ts
+  else
+    return global_ts
+  end
+end
+
 return {
-  -- filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
   filetypes = is_vue()
       and { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
     or { 'vue' },
+  on_new_config = function(new_config, new_root_dir)
+    new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+  end,
   init_options = {
-    locale = 'zh-CN',
     languageFeatures = {
       callHierarchy = true,
       codeAction = true,
@@ -32,6 +51,7 @@ return {
   },
   settings = {
     typescript = {
+      locale = 'zh-CN',
       inlayHints = {
         parameterNames = {
           enabled = 'all',
@@ -52,9 +72,6 @@ return {
         propertyDeclarationTypes = {
           enabled = true,
         },
-      },
-      preferences = {
-        importModuleSpecifier = 'non-relative',
       },
     },
     javascript = {
@@ -78,9 +95,6 @@ return {
         propertyDeclarationTypes = {
           enabled = true,
         },
-      },
-      preferences = {
-        importModuleSpecifier = 'non-relative',
       },
     },
   },

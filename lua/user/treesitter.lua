@@ -14,10 +14,6 @@ local M = {
   end,
   dependencies = {
     {
-      'JoosepAlviste/nvim-ts-context-commentstring',
-      event = 'VeryLazy',
-    },
-    {
       'nvim-tree/nvim-web-devicons',
       event = 'VeryLazy',
     },
@@ -75,12 +71,7 @@ function M.config()
     autotag = {
       enable = true,
     },
-    indent = { enable = true, disable = { 'python', 'css' } },
-
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-    },
+    indent = { enable = true },
     incremental_selection = {
       enable = true,
       keymaps = {

@@ -17,17 +17,7 @@ local M = {
       delete_check_events = 'TextChanged',
     },
     -- stylua: ignore
-    keys = {
-      {
-        "<tab>",
-        function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-        end,
-        expr = true, silent = true, mode = "i",
-      },
-      { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
-      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-    },
+    keys = {},
   },
   {
     'hrsh7th/nvim-cmp',
@@ -52,6 +42,14 @@ local M = {
     },
     opts = function()
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0
+          and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s')
+            == nil
+      end
+      local luasnip = require('luasnip')
       local cmp = require('cmp')
       local icons = require('user.nvim-dev-icons')
       local defaults = require('cmp.config.default')()
@@ -74,9 +72,33 @@ local M = {
           }),
           -- Accept currently selected item. If none selected, `select` first item.
           -- Set `select` to `false` to only confirm explicitly selected items.
-          ['<tab>'] = cmp.mapping.confirm({ select = true }),
-          ['<C-k>'] = cmp.mapping.select_prev_item(),
-          ['<C-j>'] = cmp.mapping.select_next_item(),
+          ['<tab>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+          }),
+          ['<C-j>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
+              cmp.select_next_item()
+            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+            -- this way you will only jump inside the snippet region
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+          ['<C-k>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
           { name = 'copilot' },
@@ -99,17 +121,10 @@ local M = {
           },
         }),
         formatting = {
-          fields = { 'kind', 'abbr', 'menu' },
-          format = function(entry, vim_item)
-            vim_item.kind = icons.icons.kinds[vim_item.kind]
-            vim_item.menu = ({
-              nvim_lsp = '',
-              nvim_lua = '',
-              luasnip = '',
-              buffer = '',
-              path = '',
-              emoji = '',
-            })[entry.source.name]
+          fields = { 'abbr', 'kind', 'menu' },
+          format = function(_, vim_item)
+            local format_icon = (' ' .. icons.icons.kinds[vim_item.kind] .. ' ')
+            vim_item.kind = string.format('%s %s', format_icon, vim_item.kind)
             return vim_item
           end,
         },

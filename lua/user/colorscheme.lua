@@ -50,12 +50,6 @@ local M = {
     opts = {},
   },
   {
-    'sainnhe/everforest',
-  },
-  {
-    'rebelot/kanagawa.nvim',
-  },
-  {
     'craftzdog/solarized-osaka.nvim',
     lazy = false,
     priority = 1000,
@@ -63,65 +57,30 @@ local M = {
       transparent = false, -- Enable this to disable setting the background color
       sidebars = { 'qf', 'vista_kind', 'terminal', 'packer', 'lazy' },
       on_colors = function(colors)
-        -- colors.bg = '#00262F'
+        colors.bg = '#00262F'
       end,
-      on_highlights = function(hl, c)
-        local prompt = '#2d3149'
-        hl.TelescopeNormal = {
-          bg = c.bg_dark,
-          fg = c.fg_dark,
-        }
-        hl.TelescopeBorder = {
-          bg = c.bg_dark,
-          fg = c.bg_dark,
-        }
-        hl.TelescopePromptNormal = {
-          bg = prompt,
-        }
-        hl.TelescopePromptBorder = {
-          bg = prompt,
-          fg = prompt,
-        }
-        hl.TelescopePromptTitle = {
-          bg = prompt,
-          fg = prompt,
-        }
-        hl.TelescopePreviewTitle = {
-          bg = c.bg_dark,
-          fg = c.bg_dark,
-        }
-        hl.TelescopeResultsTitle = {
-          bg = c.bg_dark,
-          fg = c.bg_dark,
-        }
-      end,
+      on_highlights = function(hl, c) end,
     },
   },
   {
-    'oxfist/night-owl.nvim',
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-  },
-  {
-    'Tsuzat/NeoSolarized.nvim',
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-    opts = {
-      transparent = false,
-    },
+    'cpea2506/one_monokai.nvim',
+    priority = 1000,
+    config = true,
   },
 }
 
-M.name = 'gruvbox-material'
+-- M.name = 'gruvbox-material'
 -- M.name = 'NeoSolarized'
 -- M.name = 'gruvbox'
 -- M.name = 'tokyonight'
 -- M.name = 'kanagawa-dragon'
 -- M.name = 'solarized-osaka'
 -- M.name = 'night-owl'
+M.name = 'one_monokai'
+
 
 function M.config()
-  local status_ok, theme = pcall(vim.cmd.colorscheme, M.name)
+  local status_ok, _ = pcall(vim.cmd.colorscheme, M.name)
   if not status_ok then
     return
   end

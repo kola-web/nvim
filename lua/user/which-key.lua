@@ -182,7 +182,10 @@ function M.config()
       w = { '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1))."px"#g<cr>', 'rpx-->px' },
       e = { '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 2)."px"#g<cr>', 'rpx/2-->px' },
       o = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', 'px-->rem' },
-      l = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', '1080px-->750px' },
+      l = {
+        '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>',
+        '1080px-->750px',
+      },
       m = {
         "<cmd><c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>",
         'run file',
@@ -307,11 +310,38 @@ function M.config()
     q = {
       t = { '<cmd>.!pbpaste | quicktype -l typescript --just-types  <cr>', 'typescript' },
     },
-    n = {
+    ['n'] = {
       name = 'noice',
-      l = { '<cmd>Noice last<cr>', 'noice last' },
-      h = { '<cmd>Noice history<cr>', 'noice history' },
-      t = { '<cmd>Noice telescope<cr>', 'noice telescope' },
+      u = {
+        function()
+          require('notify').dismiss({ silent = true, pending = true })
+        end,
+        'Dismiss all Notifications',
+      },
+      l = {
+        function()
+          require('noice').cmd('last')
+        end,
+        'Noice Last Message',
+      },
+      h = {
+        function()
+          require('noice').cmd('history')
+        end,
+        'Noice History',
+      },
+      a = {
+        function()
+          require('noice').cmd('all')
+        end,
+        'Noice All',
+      },
+      d = {
+        function()
+          require('noice').cmd('dismiss')
+        end,
+        'Dismiss All',
+      },
     },
     [' '] = {
       name = 'flash',
@@ -380,28 +410,9 @@ function M.config()
     },
   }
 
-  local color_opts = {
-    mode = 'n', -- NORMAL mode
-    prefix = '<C-->',
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = true, -- use `nowait` when creating keymaps
-  }
-
-  local color_mappings = {
-    ['h'] = { '<cmd>ConvertColorTo hex<cr>.', 'hex' },
-    ['r'] = { '<cmd>ConvertColorTo rgb<cr>.', 'rgb' },
-    ['g'] = { '<cmd>ConvertColorTo rgba<cr>.', 'rgba' },
-    ['f'] = { '<cmd>ConvertColorTo rgb_float<cr>.', 'rgb_float' },
-    ['i'] = { '<cmd>ConvertColorTo rgb_int<cr>.', 'rgb_int' },
-    ['s'] = { '<cmd>ConvertColorTo hsl<cr>.', 'hsl' },
-  }
-
   which_key.setup(setup)
   which_key.register(mappings, opts)
   which_key.register(vmappings, vopts)
-  -- which_key.register(color_mappings, color_opts)
 end
 
 return M

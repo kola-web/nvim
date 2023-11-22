@@ -16,8 +16,10 @@ vim.g.mapleader = ' '
 --   command_mode = "c",
 
 -- Map j and k with v:count conditional for vertical movement
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap({ 'n', 'x' }, 'j',  'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
+keymap({ 'n', 'x' }, '<Down>', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
+keymap({ 'n', 'x' }, 'k',  'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
+keymap({ 'n', 'x' }, '<Up>', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
 
 -- All
 keymap('', '<S-l>', '$', opts)
@@ -110,3 +112,7 @@ keymap('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search res
 keymap('i', ',', ',<c-g>u')
 keymap('i', '.', '.<c-g>u')
 keymap('i', ';', ';<c-g>u')
+
+-- save file
+keymap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+

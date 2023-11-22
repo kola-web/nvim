@@ -1,7 +1,6 @@
 local M = {
   'neovim/nvim-lspconfig',
-  lazy = false,
-  event = { 'BufReadPre' },
+  lazy = true,
   dependencies = {
     { 'b0o/schemastore.nvim' },
     {
@@ -60,19 +59,11 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true, silent = true, desc = "Signature help" })
   keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", { noremap = true, silent = true, desc = "Setloclist" })
   keymap(bufnr, "n", "<leader>ld", "<cmd>TroubleToggle<CR>", { noremap = true, silent = true, desc = "Setloclist" })
-
   -- stylua: ignore end
 end
 
 M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
-
-  -- if client.name == 'eslint' then
-  --   vim.api.nvim_create_autocmd('BufWritePost', {
-  --     buffer = bufnr,
-  --     command = 'EslintFixAll',
-  --   })
-  -- end
 
   -- if client.supports_method('textDocument/inlayHint') then
   --   vim.lsp.inlay_hint(bufnr, true)
@@ -113,15 +104,14 @@ function M.config()
 
   require('mason-lspconfig').setup_handlers({
     function(server_name)
+      -- if server_name == 'volar' then
+      --   return
+      -- end
       local server_config = {
         on_attach = M.on_attach,
-        capabilities = vim.deepcopy(M.capabilities),
+        capabilities = M.capabilities,
       }
       local neoConfig = {}
-      -- 使用 typescript-tool代替typescript-language-server
-      if server_name == 'tsserver' then
-        return
-      end
       if server_name == 'emmet_language_server' then
         neoConfig = require('neoconf').get(server_name) or {}
       end
@@ -169,14 +159,6 @@ function M.config()
   }
 
   vim.diagnostic.config(config)
-
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = 'rounded',
-  })
-
-  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = 'rounded',
-  })
 end
 
 return M
