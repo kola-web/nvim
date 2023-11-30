@@ -97,7 +97,12 @@ function M.config()
     },
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
-    ['c'] = { '<cmd>Bdelete!<CR>', 'Close Buffer' },
+    ['c'] = {
+      function(n)
+        require('mini.bufremove').delete(n, false)
+      end,
+      'Close Buffer',
+    },
     ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
     ['o'] = { '<cmd>SymbolsOutline<CR>', 'Symbols' },
     ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
@@ -117,12 +122,11 @@ function M.config()
     --   end,
     --   'Format',
     -- },
-    -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
-    -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" }, -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
     ['m'] = {
       function()
         require('conform').format({
           lsp_fallback = true,
+          async = true,
         })
       end,
       'Format buffer',
@@ -137,13 +141,8 @@ function M.config()
         'Buffers',
       },
       o = {
-        '<cmd>BufferLineCloseOthers<cr>',
+        '<cmd>%bdelete|edit#|bdelete#<cr>',
         'BufferCloseAllButCurrent',
-      },
-      s = { '<cmd>BufferLinePick<cr>', 'BufferPick' },
-      c = {
-        '<cmd>BufferLinePick<cr>',
-        'BufferPickDelete',
       },
       r = {
         '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>',
@@ -359,7 +358,7 @@ function M.config()
       },
       w = {
         function()
-          require('utils.init').flashWord()
+          fun.flashWord()
         end,
         'jump Word',
       },

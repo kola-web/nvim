@@ -1,4 +1,5 @@
 return {
+  workingDirectories = { mode = 'auto' },
   settings = {
     codeAction = {
       disableRuleComment = {

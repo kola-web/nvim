@@ -17,10 +17,8 @@ return {
     'pug',
     'sass',
     'scss',
-    'svelte',
     'typescriptreact',
     'php',
-    'vue',
   },
   init_options = {
     --- @type string[]

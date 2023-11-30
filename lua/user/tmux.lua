@@ -24,6 +24,7 @@ local M = {
 
   {
     'mrjones2014/smart-splits.nvim',
+    build = './kitty/install-kittens.bash',
     config = function()
       -- moving between splits
       vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)

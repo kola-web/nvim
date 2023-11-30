@@ -23,6 +23,7 @@ M.servers = {
 
 M.null_servers = {
   'prettier',
+  'eslint_d',
   'prettierd',
   'black',
   'stylua',
@@ -98,6 +99,16 @@ M.flashWord = function()
       end
     end,
   })
+end
+
+M.closeOtherAllBuffer = function()
+  local bufs = vim.api.nvim_list_bufs()
+  local current_buf = vim.api.nvim_get_current_buf()
+  for _, i in ipairs(bufs) do
+    if i ~= current_buf then
+      vim.api.nvim_buf_delete(i, {})
+    end
+  end
 end
 
 return M

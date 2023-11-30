@@ -17,8 +17,10 @@ local M = {
     { '<leader>li', '<cmd>Lspsaga incoming_calls<cr>', mode = { 'n' } },
     { '<leader>lo', '<cmd>Lspsaga outgoing_calls<cr>', mode = { 'n' } },
     { '<leader>lr', '<cmd>Lspsaga rename<cr>', mode = { 'n' } },
-    { '<leader>ld', '<cmd>Lspsaga show_workspace_diagnostics ++normal<cr>', mode = { 'n' } },
-    { '<leader>lq', '<cmd>Lspsaga show_buffer_diagnostics ++normal<cr>', mode = { 'n' } },
+    { '<leader>lq', '<cmd>Lspsaga show_workspace_diagnostics ++normal<cr>', mode = { 'n' } },
+    { '<leader>ld', '<cmd>Lspsaga show_buf_diagnostics ++normal<cr>', mode = { 'n' } },
+    { '<leader>lj', '<cmd>Lspsaga diagnostic_jump_next<cr>', mode = { 'n' } },
+    { '<leader>lk', '<cmd>Lspsaga diagnostic_jump_prev<cr>', mode = { 'n' } },
   },
 }
 
@@ -31,7 +33,6 @@ M.config = function()
     },
     diagnostic = {
       extend_relatedInformation = true,
-      -- diagnostic_only_current = true,
     },
   })
 end

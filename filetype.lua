@@ -6,7 +6,6 @@ vim.filetype.add({
     wxss = 'css',
     wxs = 'javascript',
     ['code-snippets'] = 'jsonc', -- Included in the plugin
-    conf = 'dosini',
     template = 'nginx',
   },
   -- 文件名
@@ -20,5 +19,6 @@ vim.filetype.add({
     ['nginx/*.conf'] = 'nginx', -- Included in the plugin
     ['nginx/templates/*'] = 'nginx', -- Included in the plugin
     ['vscode-snippets'] = 'jsonc', -- Included in the plugin
+    ['~/.config/kitty/*.conf'] = 'kitty',
   },
 })

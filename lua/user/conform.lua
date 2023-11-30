@@ -1,9 +1,12 @@
 local M = {
   'stevearc/conform.nvim',
+  dependencies = { 'mason.nvim' },
   event = { 'BufWritePre' },
-  cmd = { 'ConformInfo' },
+  cmd = 'ConformInfo',
   opts = function()
     local util = require('conform.util')
+    local prettier = { 'prettier' }
+
     return {
       format = {
         timeout_ms = 3000,
@@ -12,24 +15,41 @@ local M = {
       },
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- Conform will run multiple formatters sequentially
-        -- python = { 'isort', 'black' },
-        -- Use a sub-list to run only the first available formatter
-        javascript = { 'prettier' },
-        typescript = { 'prettier' },
-        html = { 'prettier' },
-        vue = { 'prettier' },
-        css = { 'prettier' },
-        scss = { 'prettier' },
-        wxss = { 'prettier' },
-        json = { 'prettier' },
-        yaml = { 'prettier' },
-        sh = { 'shfmt', 'shellcheck' },
+        fish = { 'fish_indent' },
+        sh = { 'shfmt' },
+
+        javascript = { prettier },
+        typescript = { prettier },
+        vue = { prettier },
+        html = { prettier },
+        css = { prettier },
+        scss = { prettier },
+        wxss = { prettier },
+        json = { prettier },
+        yaml = { prettier },
+        markdown = { prettier, 'injected' },
+        norg = { 'injected' },
+
         toml = { 'taplo' },
+
         php = { 'pint' },
       },
       formatters = {
-        injected = { options = { ignore_errors = true } },
+        eslint = {
+          command = function()
+            vim.cmd('EslintFixAll')
+            return ''
+          end,
+          cwd = require('conform.util').root_file({
+            '.eslintrc',
+            '.eslintrc.js',
+            '.eslintrc.cjs',
+            '.eslintrc.yaml',
+            '.eslintrc.yml',
+            '.eslintrc.json',
+            'eslint.config.js',
+          }),
+        },
       },
     }
   end,

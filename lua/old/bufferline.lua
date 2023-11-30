@@ -3,7 +3,7 @@ local M = {
   event = { 'BufReadPre', 'BufAdd', 'BufNew', 'BufReadPost' },
   dependencies = {
     {
-      'famiu/bufdelete.nvim',
+      'echasnovski/mini.bufremove',
     },
     {
       'nvim-tree/nvim-web-devicons',
@@ -17,9 +17,16 @@ local M = {
   },
   opts = {
     options = {
-      close_command = 'Bdelete! %d', -- can be a string | function, see "Mouse actions"
-      right_mouse_command = 'Bdelete! %d', -- can be a string | function, see "Mouse actions"
+      -- mode = 'tabs', -- set to "tabs" to only show tabpages instead
+      themable = true,
+      -- stylua: ignore
+      close_command = function(n) require("mini.bufremove").delete(n, false) end,
+      -- stylua: ignore
+      right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
       diagnostics = 'nvim_lsp',
+      show_tab_indicators = true,
+      persist_buffer_sort = false,
+      enforce_regular_tabs = true,
       offsets = {
         {
           filetype = 'neo-tree',
@@ -28,6 +35,12 @@ local M = {
           text_align = 'left',
         },
       },
+      indicator = {
+        style = 'underline',
+      },
+      numbers = function(opts)
+        return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
+      end,
     },
   },
 }

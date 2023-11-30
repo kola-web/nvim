@@ -74,10 +74,9 @@ local M = {
 -- M.name = 'gruvbox'
 -- M.name = 'tokyonight'
 -- M.name = 'kanagawa-dragon'
--- M.name = 'solarized-osaka'
+M.name = 'solarized-osaka'
 -- M.name = 'night-owl'
-M.name = 'one_monokai'
-
+-- M.name = 'one_monokai'
 
 function M.config()
   local status_ok, _ = pcall(vim.cmd.colorscheme, M.name)
