@@ -55,6 +55,14 @@ M.is_vue = function()
   return is_vue
 end
 
+M.is_eslint = function()
+  local util = require('lspconfig.util')
+  local cwd = vim.fn.getcwd()
+  local project_root = util.find_node_modules_ancestor(cwd)
+  local is_eslint = vim.fn.findfile('eslint.config.js', project_root) ~= ''
+  return is_eslint
+end
+
 M.flashWord = function()
   local Flash = require('flash')
 

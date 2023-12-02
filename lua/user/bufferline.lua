@@ -1,6 +1,6 @@
 local M = {
   'akinsho/bufferline.nvim',
-  event = { 'BufReadPre', 'BufAdd', 'BufNew', 'BufReadPost' },
+  event = "VeryLazy",
   dependencies = {
     {
       'echasnovski/mini.bufremove',
@@ -27,6 +27,7 @@ local M = {
       show_tab_indicators = true,
       persist_buffer_sort = false,
       enforce_regular_tabs = true,
+      sort_by = 'insert_at_end',
       offsets = {
         {
           filetype = 'neo-tree',
@@ -36,11 +37,9 @@ local M = {
         },
       },
       indicator = {
+        icon = '▎', -- this should be omitted if indicator style is not 'icon'
         style = 'underline',
       },
-      numbers = function(opts)
-        return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
-      end,
     },
   },
 }

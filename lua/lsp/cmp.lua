@@ -116,6 +116,7 @@ local M = {
                 },
                 ['~@'] = '${folder}/src',
                 ['@renderer'] = '${folder}/src/renderer/src',
+                ['/images'] = '${folder}/src/images',
               },
             },
           },

@@ -1,6 +1,5 @@
 local M = {
   'nvim-pack/nvim-spectre',
-  event = 'VeryLazy',
 }
 
 M.opts = {
@@ -9,7 +8,7 @@ M.opts = {
   live_update = false, -- auto execute search again when you write to any file in vim
   line_sep_start = '┌-----------------------------------------',
   result_padding = '¦  ',
-  line_sep       = '└-----------------------------------------',
+  line_sep = '└-----------------------------------------',
   highlight = {
     ui = 'String',
     search = 'DiffChange',

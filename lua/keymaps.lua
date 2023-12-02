@@ -15,10 +15,16 @@ vim.g.mapleader = ' '
 --   term_mode = "t",
 --   command_mode = "c",
 
+-- Allow clipboard copy paste in neovim
+keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
+keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+
 -- Map j and k with v:count conditional for vertical movement
-keymap({ 'n', 'x' }, 'j',  'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
+keymap({ 'n', 'x' }, 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
 keymap({ 'n', 'x' }, '<Down>', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
-keymap({ 'n', 'x' }, 'k',  'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
+keymap({ 'n', 'x' }, 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
 keymap({ 'n', 'x' }, '<Up>', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
 
 -- All
@@ -114,5 +120,4 @@ keymap('i', '.', '.<c-g>u')
 keymap('i', ';', ';<c-g>u')
 
 -- save file
-keymap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
-
+keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })

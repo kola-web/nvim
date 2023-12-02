@@ -87,7 +87,6 @@ local M = {
               currentPath,
             })
             fs_actions.rename_node(currentPath .. '/wxmlPage', function(_, path)
-              print(path)
               vim.cmd('edit ' .. path .. '/index.wxml')
             end)
           end,

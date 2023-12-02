@@ -1,6 +1,5 @@
 if vim.g.vscode then
   require('options')
-  require('Lazy').setup('vscode')
 else
   require('options')
   require('keymaps')
@@ -27,4 +26,3 @@ end
 if is_wsl == 1 then
   require('system.wsl')
 end
-

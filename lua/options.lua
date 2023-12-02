@@ -27,7 +27,7 @@ opt.formatoptions:append({ 'r' })
 opt.fillchars.eob = ' ' -- 将缓冲区末尾的空行显示为 ` `，默认为 `~`
 opt.grepformat = '%f:%l:%c:%m' -- grep 命令输出格式
 opt.grepprg = 'rg --vimgrep' -- grep 命令
-opt.guifont = 'FiraCode Nerd Font:h15' -- 在图形化的 neovim 应用程序中使用的字体
+opt.guifont = 'JetBrainsMono Nerd Font:h14' -- 在图形化的 neovim 应用程序中使用的字体
 opt.ignorecase = true -- 忽略大小写
 opt.inccommand = 'nosplit' -- 预览增量替换
 opt.laststatus = 3 -- 全局状态行
@@ -79,3 +79,15 @@ vim.g.loaded_perl_provider = 0
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
+if vim.g.neovide then
+  -- Put anything you want to happen only in Neovide here
+  vim.g.neovide_cursor_animation_length = 0
+  vim.opt.linespace = 4
+
+  vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+  vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+  vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
+  vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+  vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+  vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+end

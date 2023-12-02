@@ -145,7 +145,7 @@ function M.config()
   }
 
   for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
+    vim.fn.sign_define(sign.name, { text = sign.text, texthl = sign.name, numhl = sign.name })
   end
 
   local config = {

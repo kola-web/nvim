@@ -17,6 +17,9 @@ local M = {
       'nvim-tree/nvim-web-devicons',
       event = 'VeryLazy',
     },
+    {
+      'windwp/nvim-ts-autotag',
+    },
   },
 }
 function M.config()
@@ -70,6 +73,9 @@ function M.config()
     },
     autotag = {
       enable = true,
+      enable_rename = true,
+      enable_close = true,
+      enable_close_on_slash = true,
     },
     indent = { enable = true },
     incremental_selection = {

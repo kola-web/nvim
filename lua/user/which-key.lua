@@ -104,7 +104,7 @@ function M.config()
       'Close Buffer',
     },
     ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
-    ['o'] = { '<cmd>SymbolsOutline<CR>', 'Symbols' },
+    ['o'] = { '<cmd>Lspsaga outline<CR>', 'Symbols' },
     ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
     ['f'] = {
       '<cmd> Telescope find_files <CR>',
@@ -140,8 +140,12 @@ function M.config()
         "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
         'Buffers',
       },
+      -- o = {
+      --   '<cmd>%bdelece|edit#|bdelete#<cr>',
+      --   'BufferCloseAllButCurrent',
+      -- },
       o = {
-        '<cmd>%bdelete|edit#|bdelete#<cr>',
+        '<cmd>BufferLineCloseOthers<cr>',
         'BufferCloseAllButCurrent',
       },
       r = {
