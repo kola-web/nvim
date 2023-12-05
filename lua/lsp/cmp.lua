@@ -1,21 +1,36 @@
 local M = {
   {
     'L3MON4D3/LuaSnip',
-    build = (not jit.os:find('Windows'))
-        and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
-      or nil,
+    version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = 'make install_jsregexp',
     dependencies = {
-      'rafamadriz/friendly-snippets',
-      config = function()
-        local formVscode = require('luasnip/loaders/from_vscode')
-        formVscode.lazy_load()
-        formVscode.lazy_load({ paths = '~/.config/nvim/snippets' })
-      end,
+      {
+        'rafamadriz/friendly-snippets',
+        config = function()
+          require('luasnip/loaders/from_vscode').lazy_load({ paths = '~/.config/nvim/snippets' })
+        end,
+      },
+      {
+        'honza/vim-snippets',
+        config = function()
+          require('luasnip.loaders.from_snipmate').lazy_load()
+
+          -- One peculiarity of honza/vim-snippets is that the file with the global snippets is _.snippets, so global snippets
+          -- are stored in `ls.snippets._`.
+          -- We need to tell luasnip that "_" contains global snippets:
+          require('luasnip').filetype_extend('all', { '_' })
+        end,
+      },
     },
     opts = {
       history = true,
       delete_check_events = 'TextChanged',
     },
+    config = function(_, opts)
+      require('luasnip/loaders/from_vscode').lazy_load()
+      require('luasnip').setup(opts)
+    end,
     -- stylua: ignore
     keys = {},
   },
@@ -26,7 +41,8 @@ local M = {
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
-      'kola-web/cmp-path',
+      -- 'kola-web/cmp-path',
+      'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lua',
@@ -45,9 +61,7 @@ local M = {
       local has_words_before = function()
         unpack = unpack or table.unpack
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0
-          and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s')
-            == nil
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
       end
       local luasnip = require('luasnip')
       local cmp = require('cmp')

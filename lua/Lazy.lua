@@ -25,9 +25,10 @@ M.setup = function(name)
     },
     install = { colorscheme = { 'tokyonight', 'habamax' } },
     checker = { enabled = true }, -- automatically check for plugin updates
-    change_detection = {
-      notify = false,
-    },
+    -- change_detection = {
+    --   enabled = true,
+    --   notify = false,
+    -- },
     performance = {
       rtp = {
         -- disable some rtp plugins

@@ -122,15 +122,7 @@ function M.config()
     --   end,
     --   'Format',
     -- },
-    ['m'] = {
-      function()
-        require('conform').format({
-          lsp_fallback = true,
-          async = true,
-        })
-      end,
-      'Format buffer',
-    },
+    ['m'] = { fun.conformFormat, 'Format buffer' },
     -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
     [';'] = { '<cmd>Dashboard<cr>', 'Alpha' },
 

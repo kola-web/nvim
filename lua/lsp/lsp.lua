@@ -28,13 +28,7 @@ if not has_cmp then
   return
 end
 
-M.capabilities = vim.tbl_deep_extend(
-  'force',
-  {},
-  vim.lsp.protocol.make_client_capabilities(),
-  has_cmp and cmp_nvim_lsp.default_capabilities() or {},
-  {}
-)
+M.capabilities = vim.tbl_deep_extend('force', {}, vim.lsp.protocol.make_client_capabilities(), has_cmp and cmp_nvim_lsp.default_capabilities() or {}, {})
 
 local function lsp_keymaps(bufnr)
   local keymap = vim.api.nvim_buf_set_keymap
@@ -66,10 +60,6 @@ M.on_attach = function(client, bufnr)
 
   if client.name == 'eslint' then
     client.server_capabilities.documentFormattingProvider = true
-    -- vim.api.nvim_create_autocmd('BufWritePre', {
-    --   buffer = bufnr,
-    --   command = 'EslintFixAll',
-    -- })
   end
 
   -- vim.api.nvim_create_autocmd('BufWritePre', {

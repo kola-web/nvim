@@ -28,6 +28,7 @@ local M = {
       persist_buffer_sort = false,
       enforce_regular_tabs = true,
       sort_by = 'insert_at_end',
+
       offsets = {
         {
           filetype = 'neo-tree',

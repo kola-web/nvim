@@ -119,4 +119,16 @@ M.closeOtherAllBuffer = function()
   end
 end
 
+M.conformFormat = function()
+  local extra_lang_args = {
+    javasciprt = { lsp_fallback = 'always', name = 'eslint' },
+    typescript = { lsp_fallback = 'always', name = 'eslint' },
+    javascriptreact = { lsp_fallback = 'always', name = 'eslint' },
+  }
+
+  local buf = vim.api.nvim_get_current_buf()
+  local extra_args = extra_lang_args[vim.bo[buf].filetype] or {}
+  require('conform').format(vim.tbl_deep_extend('keep', { bufnr = buf, lsp_fallback = true }, extra_args))
+end
+
 return M

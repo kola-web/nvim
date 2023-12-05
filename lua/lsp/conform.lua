@@ -6,7 +6,7 @@ local M = {
   opts = function()
     local util = require('conform.util')
     local prettier = { 'prettier' }
-    local eslint_prettier = function()
+    local eslintOrPrettier = function()
       if require('utils.init').is_eslint() then
         return {}
       else
@@ -25,9 +25,9 @@ local M = {
         fish = { 'fish_indent' },
         sh = { 'shfmt' },
 
-        javascript = eslint_prettier,
-        typescript = eslint_prettier,
-        vue = eslint_prettier,
+        javascript = eslintOrPrettier,
+        typescript = eslintOrPrettier,
+        vue = eslintOrPrettier,
         html = { prettier },
         css = { prettier },
         scss = { prettier },
@@ -42,11 +42,12 @@ local M = {
         php = { 'pint' },
       },
       formatters = {
-        -- eslint_d = {
-        --   evn = {
-        --     ESLINT_USE_FLAT_CONFIG = true,
-        --   },
-        -- },
+        eslint_d = {
+          args = { '--fix-to-stdout', '--stdin', '--stdin-filename', '$FILENAME', 'restart' },
+          env = {
+            ESLINT_USE_FLAT_CONFIG = 'true',
+          },
+        },
         eslint = {
           command = function()
             vim.cmd('EslintFixAll')

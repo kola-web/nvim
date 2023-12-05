@@ -121,3 +121,23 @@ keymap('i', ';', ';<c-g>u')
 
 -- save file
 keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
+
+-- function EnterOrIndentTag()
+--   local file_type = vim.bo.filetype
+--   local line = vim.fn.getline('.')
+--   local col = vim.fn.getpos('.')[3]
+--   local before = line:sub(col - 1, col - 1)
+--   local after = line:sub(col, col)
+--
+--   if file_type == 'html' and before == '>' and after == '<' then
+--     return vim.api.nvim_replace_termcodes('<CR><C-o>O', true, true, true)
+--   elseif (file_type == 'css' or file_type == 'scss' or file_type == 'less') and before == '{' and after == '}' then
+--     return vim.api.nvim_replace_termcodes('<CR><C-o>O', true, true, true)
+--   elseif file_type == 'vue' and (before == '<' and after == '>') or (before == '{' and after == '}') then
+--     return vim.api.nvim_replace_termcodes('<CR><C-o>O', true, true, true)
+--   else
+--     vim.api.nvim_replace_termcodes('<CR>', true, true, true)
+--   end
+-- end
+--
+-- keymap('i', '<CR>', EnterOrIndentTag, { noremap = true, expr = true, buffer = true })
