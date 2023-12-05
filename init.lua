@@ -5,7 +5,7 @@ else
   require('keymaps')
   require('Lazy').setup('user')
   require('autocommands')
-  require('user.colorscheme').config()
+  require('user.colorscheme')
 end
 
 local has = vim.fn.has

@@ -1,12 +1,11 @@
-local M = {
+local M
+M = {
   {
     'folke/tokyonight.nvim',
-    lazy = true,
     opts = { style = 'moon' },
   },
   {
     'catppuccin/nvim',
-    lazy = true,
     name = 'catppuccin',
     opts = {
       integrations = {
@@ -61,11 +60,14 @@ local M = {
       end,
       on_highlights = function(hl, c) end,
     },
+    config = function(self, opts)
+      require('solarized-osaka').setup(opts)
+      M.SetColorscheme('solarized-osaka')
+    end,
   },
   {
     'cpea2506/one_monokai.nvim',
     priority = 1000,
-    config = true,
   },
 }
 
@@ -74,12 +76,12 @@ local M = {
 -- M.name = 'gruvbox'
 -- M.name = 'tokyonight'
 -- M.name = 'kanagawa-dragon'
-M.name = 'solarized-osaka'
+-- M.name = 'solarized-osaka'
 -- M.name = 'night-owl'
 -- M.name = 'one_monokai'
 
-function M.config()
-  local status_ok, _ = pcall(vim.cmd.colorscheme, M.name)
+function M.SetColorscheme(name)
+  local status_ok, _ = pcall(vim.cmd.colorscheme, name)
   if not status_ok then
     return
   end

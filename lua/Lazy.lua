@@ -23,7 +23,12 @@ M.setup = function(name)
       version = false, -- always use the latest git commit
       -- version = "*", -- try installing the latest stable version for plugins that support semver
     },
-    install = { colorscheme = { 'tokyonight', 'habamax' } },
+    dev = {
+      path = '~/.config/nvim-plugins',
+      patterns = { 'kola-web' },
+      fallback = false,
+    },
+    -- install = { colorscheme = { 'tokyonight', 'habamax' } },
     checker = { enabled = true }, -- automatically check for plugin updates
     -- change_detection = {
     --   enabled = true,

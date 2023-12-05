@@ -11,6 +11,7 @@ local M = {
     options = { try_as_border = false, indent_at_cursor = false },
   },
   init = function()
+    -- require('mini.indentscope').gen_animation.none()
     vim.api.nvim_create_autocmd('FileType', {
       pattern = {
         'help',

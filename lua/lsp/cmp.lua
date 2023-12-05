@@ -41,7 +41,8 @@ local M = {
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
-      -- 'kola-web/cmp-path',
+      'kola-web/cmp-path',
+      -- 'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
@@ -124,13 +125,11 @@ local M = {
             name = 'path',
             option = {
               pathMappings = {
-                ['@'] = {
-                  '${folder}/src',
-                  '${folder}/miniprogram',
-                },
+                -- ['@renderer'] = '${folder}/src/renderer/src',
+                ['@'] = '${folder}/src',
                 ['~@'] = '${folder}/src',
-                ['@renderer'] = '${folder}/src/renderer/src',
                 ['/images'] = '${folder}/src/images',
+                ['/components'] = '${folder}/src/components',
               },
             },
           },
