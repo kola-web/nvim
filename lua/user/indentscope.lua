@@ -5,9 +5,6 @@ local M = {
   opts = {
     -- symbol = "▏",
     symbol = '│',
-    draw = {
-      animation = nil,
-    },
     options = { try_as_border = false, indent_at_cursor = false },
   },
   init = function()

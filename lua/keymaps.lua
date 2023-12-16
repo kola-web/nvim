@@ -1,4 +1,4 @@
--- Shorten function name
+-- Shorten function name 
 local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true, noremap = true }
@@ -14,6 +14,9 @@ vim.g.mapleader = ' '
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
+
+keymap('i', '<C-e>', '<End>', opts)
+keymap('i', '<C-a>', '<Home>', opts)
 
 -- Allow clipboard copy paste in neovim
 keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })

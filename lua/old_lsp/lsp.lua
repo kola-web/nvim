@@ -20,13 +20,7 @@ local M = {
 
 function M.config(_, opts)
   local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-  local capabilities = vim.tbl_deep_extend(
-    'force',
-    {},
-    vim.lsp.protocol.make_client_capabilities(),
-    has_cmp and cmp_nvim_lsp.default_capabilities() or {},
-    opts.capabilities or {}
-  )
+  local capabilities = vim.tbl_deep_extend('force', {}, vim.lsp.protocol.make_client_capabilities(), has_cmp and cmp_nvim_lsp.default_capabilities() or {}, opts.capabilities or {})
 
   for name, icon in pairs(require('icons').diagnostics) do
     name = 'DiagnosticSign' .. name

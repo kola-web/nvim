@@ -7,7 +7,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
--- load lazy
 M.setup = function(name)
   require('lazy').setup({
     spec = {

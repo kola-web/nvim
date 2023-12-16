@@ -8,18 +8,7 @@ local M = {
       {
         'rafamadriz/friendly-snippets',
         config = function()
-          require('luasnip/loaders/from_vscode').lazy_load({ paths = '~/.config/nvim/snippets' })
-        end,
-      },
-      {
-        'honza/vim-snippets',
-        config = function()
-          require('luasnip.loaders.from_snipmate').lazy_load()
-
-          -- One peculiarity of honza/vim-snippets is that the file with the global snippets is _.snippets, so global snippets
-          -- are stored in `ls.snippets._`.
-          -- We need to tell luasnip that "_" contains global snippets:
-          require('luasnip').filetype_extend('all', { '_' })
+          require('luasnip/loaders/from_vscode').lazy_load()
         end,
       },
     },
@@ -28,7 +17,7 @@ local M = {
       delete_check_events = 'TextChanged',
     },
     config = function(_, opts)
-      require('luasnip/loaders/from_vscode').lazy_load()
+      require('luasnip/loaders/from_vscode').lazy_load({ paths = '~/.config/nvim/snippets' })
       require('luasnip').setup(opts)
     end,
     -- stylua: ignore

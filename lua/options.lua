@@ -39,7 +39,7 @@ opt.pumheight = 10 -- 弹出菜单中的最大条目数
 opt.relativenumber = true -- 相对行号
 opt.swapfile = false -- 不创建交换文件
 opt.scrolloff = 4 -- 上下文行数
-opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp' } -- 会话选项
+opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds' } -- 会话选项
 opt.shiftround = true -- 缩进四舍五入
 opt.shiftwidth = 2 -- 缩进大小
 opt.shortmess:append({ W = true, I = true, c = true, C = true }) -- 简短消息选项
@@ -58,8 +58,6 @@ opt.termguicolors = true -- 真彩色支持
 opt.timeoutlen = 300 -- 默认超时长度为1000毫秒
 opt.undofile = true -- 保存撤销历史
 opt.undolevels = 10000 -- 可以撤销的最大更改次数
-opt.updatetime = 200 -- 保存交换文件并触发CursorHold
-opt.virtualedit = 'block' -- 允许光标在文本不存在的位置移动
 opt.whichwrap:append('<,>,[,],h,l') -- 允许在到达行首/行尾时使用的键
 opt.iskeyword:append('-,#') -- 将包含 `-,#` 的单词视为单个单词
 opt.winminwidth = 5 -- 窗口的最小宽度
@@ -70,11 +68,14 @@ if vim.fn.has('nvim-0.10') == 1 then
 end
 
 -- vim.o.foldcolumn = '5'
-vim.o.foldenable = true
+-- vim.o.foldenable = true
 vim.opt.foldmethod = 'indent' -- 使用缩进来自动折叠代码块
 vim.o.foldlevelstart = 99
+
 vim.opt.foldlevel = 99 -- 打开文件时默认折叠级别
-vim.g.loaded_perl_provider = 0
+-- vim.opt.foldmethod = 'expr'
+-- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+-- vim.g.loaded_perl_provider = 0
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

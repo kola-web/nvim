@@ -34,8 +34,7 @@ local M = {
         wxss = { prettier },
         json = { prettier },
         yaml = { prettier },
-        markdown = { prettier, 'injected' },
-        norg = { 'injected' },
+        markdown = { prettier },
 
         toml = { 'taplo' },
 

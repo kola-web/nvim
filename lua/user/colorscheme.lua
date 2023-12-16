@@ -2,7 +2,7 @@ local M
 M = {
   {
     'folke/tokyonight.nvim',
-    opts = { style = 'moon' },
+    opts = { style = 'moon', transparent = true },
   },
   {
     'catppuccin/nvim',
@@ -60,10 +60,6 @@ M = {
       end,
       on_highlights = function(hl, c) end,
     },
-    config = function(self, opts)
-      require('solarized-osaka').setup(opts)
-      M.SetColorscheme('solarized-osaka')
-    end,
   },
   {
     'cpea2506/one_monokai.nvim',
@@ -71,8 +67,7 @@ M = {
   },
 }
 
--- M.name = 'gruvbox-material'
--- M.name = 'NeoSolarized'
+M.name = 'gruvbox-material'
 -- M.name = 'gruvbox'
 -- M.name = 'tokyonight'
 -- M.name = 'kanagawa-dragon'
@@ -80,8 +75,8 @@ M = {
 -- M.name = 'night-owl'
 -- M.name = 'one_monokai'
 
-function M.SetColorscheme(name)
-  local status_ok, _ = pcall(vim.cmd.colorscheme, name)
+function M.SetColorscheme()
+  local status_ok, _ = pcall(vim.cmd.colorscheme, M.name)
   if not status_ok then
     return
   end

@@ -256,16 +256,13 @@ function M.config()
         'file_browser',
       },
       c = { '<cmd>Telescope colorscheme<cr>', 'colorscheme' },
-      d = { '<cmd>Telescope diagnostics<cr>', 'colorscheme' },
-      h = { '<cmd>lua require"telescope.builtin".find_files({ hidden = true })<cr>', 'Help' },
+      d = { '<cmd>Telescope diagnostics<cr>', 'diagnostics' },
+      h = { '<cmd>lua require"telescope.builtin".find_files({ hidden = true })<cr>', 'hidden file' },
       H = { '<cmd>Telescope help_tags<cr>', 'Help' },
-      i = { "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>", 'Media' },
-      l = { '<cmd>Telescope resume<cr>', 'Last Search' },
       M = { '<cmd>Telescope man_pages<cr>', 'Man Pages' },
       r = { '<cmd>Telescope oldfiles<cr>', 'Recent File' },
       R = { '<cmd>Telescope registers<cr>', 'Registers' },
       k = { '<cmd>Telescope keymaps<cr>', 'Keymaps' },
-      C = { '<cmd>Telescope commands<cr>', 'Commands' },
       s = {
         function()
           require('spectre').open()

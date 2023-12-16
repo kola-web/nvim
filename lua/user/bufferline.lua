@@ -1,6 +1,6 @@
 local M = {
   'akinsho/bufferline.nvim',
-  event = "VeryLazy",
+  event = 'VeryLazy',
   dependencies = {
     {
       'echasnovski/mini.bufremove',
@@ -25,10 +25,9 @@ local M = {
       right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
       diagnostics = 'nvim_lsp',
       show_tab_indicators = true,
-      persist_buffer_sort = false,
-      enforce_regular_tabs = true,
-      sort_by = 'insert_at_end',
-
+      indicator = {
+        style = 'underline',
+      },
       offsets = {
         {
           filetype = 'neo-tree',
@@ -37,16 +36,11 @@ local M = {
           text_align = 'left',
         },
       },
-      indicator = {
-        icon = '▎', -- this should be omitted if indicator style is not 'icon'
-        style = 'underline',
-      },
     },
   },
 }
 function M.config(_, opts)
   require('bufferline').setup(opts)
-  -- Fix bufferline when restoring a session
   vim.api.nvim_create_autocmd('BufAdd', {
     callback = function()
       vim.schedule(function()

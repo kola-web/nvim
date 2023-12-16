@@ -53,6 +53,7 @@ function M.config()
       'phpdoc',
       'tsx',
       'vim',
+      'vimdoc',
       'vue',
       'toml',
       'typescript',

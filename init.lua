@@ -5,7 +5,7 @@ else
   require('keymaps')
   require('Lazy').setup('user')
   require('autocommands')
-  require('user.colorscheme')
+  require('user.colorscheme').SetColorscheme()
 end
 
 local has = vim.fn.has
@@ -26,3 +26,4 @@ end
 if is_wsl == 1 then
   require('system.wsl')
 end
+

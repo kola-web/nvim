@@ -8,10 +8,11 @@ local M = {
     },
     modes = {
       search = {
-        enabled = false,
+        -- enabled = false,
       },
       char = {
-        enabled = false,
+        -- enabled = false,
+        highlight = { backdrop = false },
       },
     },
   },
