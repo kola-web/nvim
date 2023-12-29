@@ -1,8 +1,7 @@
 local M = {
   {
     'L3MON4D3/LuaSnip',
-    version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-    -- install jsregexp (optional!).
+    version = 'v2.*',
     build = 'make install_jsregexp',
     dependencies = {
       {
@@ -11,6 +10,7 @@ local M = {
           require('luasnip/loaders/from_vscode').lazy_load()
         end,
       },
+      { 'folke/neodev.nvim', config = true },
     },
     opts = {
       history = true,
@@ -20,22 +20,18 @@ local M = {
       require('luasnip/loaders/from_vscode').lazy_load({ paths = '~/.config/nvim/snippets' })
       require('luasnip').setup(opts)
     end,
-    -- stylua: ignore
     keys = {},
   },
   {
     'hrsh7th/nvim-cmp',
-    version = false, -- last release is way too old
+    version = false,
     event = 'InsertEnter',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
-      'kola-web/cmp-path',
-      -- 'hrsh7th/cmp-path',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lua',
+      'kola-web/cmp-path',
       {
         'zbirenbaum/copilot.lua',
         opts = {
@@ -45,6 +41,9 @@ local M = {
         config = true,
       },
       { 'zbirenbaum/copilot-cmp', fix_pairs = true, config = true },
+
+      { 'mattn/emmet-vim' },
+      { 'dcampos/cmp-emmet-vim' },
     },
     opts = function()
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
@@ -55,9 +54,9 @@ local M = {
       end
       local luasnip = require('luasnip')
       local cmp = require('cmp')
-      local icons = require('user.nvim-dev-icons')
       local defaults = require('cmp.config.default')()
       return {
+        preselect = 'item',
         completion = {
           completeopt = 'menu,menuone,noinsert',
         },
@@ -74,18 +73,44 @@ local M = {
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
           }),
-          -- Accept currently selected item. If none selected, `select` first item.
-          -- Set `select` to `false` to only confirm explicitly selected items.
-          ['<tab>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = true,
-          }),
+          ['<tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.mapping.confirm({ select = true })()
+            elseif has_words_before() then
+              cmp.mapping.complete({
+                config = {
+                  sources = {
+                    { name = 'emmet_vim' },
+                  },
+                },
+              })()
+
+              if cmp.visible() then
+                cmp.mapping.confirm({ select = true })()
+              else
+                fallback()
+              end
+
+            -- cmp.mapping.complete({
+            --   config = {
+            --     sources = {
+            --       {
+            --         name = 'nvim_lsp',
+            --         entry_filter = function(entry)
+            --           return entry.source:get_debug_name() == 'nvim_lsp:emmet_language_server'
+            --         end,
+            --       },
+            --     },
+            --   },
+            -- })()
+            -- cmp.mapping.confirm({ select = true })()
+            else
+              fallback()
+            end
+          end),
           ['<C-j>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
               cmp.select_next_item()
-            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-            -- this way you will only jump inside the snippet region
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
             elseif has_words_before() then
@@ -105,6 +130,12 @@ local M = {
           end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
+          {
+            name = 'emmet_vim',
+            option = {
+              -- filetypes = {  },
+            },
+          },
           { name = 'copilot' },
           { name = 'nvim_lsp' },
           { name = 'nvim_lua' },
@@ -113,22 +144,27 @@ local M = {
           {
             name = 'path',
             option = {
-              pathMappings = {
-                -- ['@renderer'] = '${folder}/src/renderer/src',
-                ['@'] = '${folder}/src',
-                ['~@'] = '${folder}/src',
-                ['/images'] = '${folder}/src/images',
-                ['/components'] = '${folder}/src/components',
-              },
+              -- pathMappings = {
+              --   ['@'] = '${folder}/src',
+              --   ['~@'] = '${folder}/src',
+              --   ['/images'] = '${folder}/src/images',
+              --   ['/components'] = '${folder}/src/components',
+              -- },
             },
           },
         }),
         formatting = {
-          fields = { 'abbr', 'kind', 'menu' },
-          format = function(_, vim_item)
-            local format_icon = (' ' .. icons.icons.kinds[vim_item.kind] .. ' ')
-            vim_item.kind = string.format('%s %s', format_icon, vim_item.kind)
-            return vim_item
+          fields = { 'abbr', 'menu', 'kind' },
+          format = function(entry, item)
+            local short_name = {
+              nvim_lsp = 'LSP',
+              nvim_lua = 'nvim',
+            }
+
+            local menu_name = short_name[entry.source.name] or entry.source.name
+
+            item.menu = string.format('[%s]', menu_name)
+            return item
           end,
         },
         experimental = {
@@ -137,7 +173,6 @@ local M = {
         sorting = defaults.sorting,
       }
     end,
-    ---@param opts cmp.ConfigSchema
     config = function(_, opts)
       for _, source in ipairs(opts.sources) do
         source.group_index = source.group_index or 1

@@ -1,7 +1,9 @@
----@diagnostic disable: undefined-field
 local M = {
   'nvim-lualine/lualine.nvim',
   event = { 'VimEnter', 'InsertEnter', 'BufReadPre', 'BufAdd', 'BufNew', 'BufReadPost' },
+  dependencies = { {
+    'AndreM222/copilot-lualine',
+  } },
 }
 local icons = require('user.nvim-dev-icons')
 
@@ -48,46 +50,38 @@ function M.config()
       globalstatus = true,
       icons_enabled = true,
       theme = 'auto',
-      -- component_separators = { left = '', right = '' },
-      -- section_separators = { left = '', right = '' },
-      component_separators = { left = '', right = '' },
-      section_separators = { left = '', right = '' },
+      component_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
       disabled_filetypes = { 'alpha', 'dashboard' },
       always_divide_middle = true,
     },
     sections = {
       lualine_a = { 'mode' },
-      lualine_b = { 'branch' },
-      lualine_c = { diagnostics, { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } }, { 'filename', file_status = true, path = 1 } },
+      lualine_b = { 'branch', diff, diagnostics },
+      lualine_c = { { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } }, { 'filename', file_status = true, path = 1 } },
       lualine_x = {
-        {
-          require('noice').api.status.command.get,
-          cond = require('noice').api.status.command.has,
-          color = { fg = '#A57CFF' },
-        },
-        {
-          require('noice').api.status.mode.get,
-          cond = require('noice').api.status.mode.has,
-          color = { fg = '#F07652' },
-        },
+        'encoding',
+        'fileformat',
+        { 'copilot', show_colors = true },
+        'filetype',
         {
           require('lazy.status').updates,
           cond = require('lazy.status').has_updates,
           color = { fg = '#54A5FF' },
         },
-        diff,
       },
-      lualine_y = {
-        { 'progress', separator = ' ', padding = { left = 1, right = 0 } },
-        { 'location', padding = { left = 0, right = 1 } },
-      },
-      lualine_z = {
-        function()
-          return ' ' .. os.date('%R')
-        end,
-      },
+      lualine_y = { 'progress' },
+      lualine_z = { 'location' },
     },
-    extensions = { 'neo-tree', 'lazy' },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = { 'filename' },
+      lualine_x = { 'location' },
+      lualine_y = {},
+      lualine_z = {},
+    },
+    extensions = { 'neo-tree', 'lazy', 'fzf', 'trouble', 'mason' },
   })
 end
 

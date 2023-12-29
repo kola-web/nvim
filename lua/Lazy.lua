@@ -6,12 +6,14 @@ if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
-
 M.setup = function(name)
   require('lazy').setup({
     spec = {
       { import = name },
+      { import = 'vscode' },
       { import = 'lsp' },
+      -- { import = 'lsp-zero' },
+      -- { import = 'coc' },
     },
     defaults = {
       -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -25,14 +27,14 @@ M.setup = function(name)
     dev = {
       path = '~/.config/nvim-plugins',
       patterns = { 'kola-web' },
-      fallback = false,
+      fallback = true,
     },
-    -- install = { colorscheme = { 'tokyonight', 'habamax' } },
-    checker = { enabled = true }, -- automatically check for plugin updates
-    -- change_detection = {
-    --   enabled = true,
-    --   notify = false,
-    -- },
+    install = { missing = true, colorscheme = { 'nightfox' } },
+    checker = { enabled = true, notify = false }, -- automatically check for plugin updates
+    change_detection = {
+      enabled = true,
+      notify = false,
+    },
     performance = {
       rtp = {
         -- disable some rtp plugins

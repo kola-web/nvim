@@ -1,5 +1,5 @@
 local M = {
-  "tpope/vim-abolish",
+  'tpope/vim-abolish',
   lazy = false,
 }
 

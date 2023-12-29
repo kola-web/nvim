@@ -43,10 +43,10 @@ keymap('n', 'BL', '<cmd>enew<cr><cmd>set filetype=lua<cr>', opts)
 
 -- Normal --
 -- Better window navigation
-keymap('n', '<C-h>', '<C-w>h', opts)
-keymap('n', '<C-j>', '<C-w>j', opts)
-keymap('n', '<C-k>', '<C-w>k', opts)
-keymap('n', '<C-l>', '<C-w>l', opts)
+-- keymap('n', '<C-h>', '<C-w>h', opts)
+-- keymap('n', '<C-j>', '<C-w>j', opts)
+-- keymap('n', '<C-k>', '<C-w>k', opts)
+-- keymap('n', '<C-l>', '<C-w>l', opts)
 
 -- keymap('n', '<C-m>', '%', opts)
 -- keymap("n", "<C-z>", "<nop>", opts)
@@ -144,3 +144,5 @@ keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' 
 -- end
 --
 -- keymap('i', '<CR>', EnterOrIndentTag, { noremap = true, expr = true, buffer = true })
+
+-- vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#<cr>", {desc="Close all buffers but the current one"}) -- https://stackoverflow.com/a/42071865/516188

@@ -12,6 +12,7 @@ local M = {
     { 'gD', '<cmd>Lspsaga peek_definition<cr>', mode = { 'n' } },
     { 'gr', '<cmd>Lspsaga finder tyd+ref+imp+def<cr>', mode = { 'n' } },
     { 'gl', '<cmd>Lspsaga show_line_diagnostics<cr>', mode = { 'n' } },
+    { '<leader>o', '<cmd>Lspsaga code_action<cr>', mode = { 'n' } },
     { '<leader>la', '<cmd>Lspsaga code_action<cr>', mode = { 'n' } },
     { '<leader>ld', '<cmd>Lspsaga show_buffer_diagnostics<cr>', mode = { 'n' } },
     { '<leader>lD', '<cmd>Lspsaga show_workspace_diagnostics<cr>', mode = { 'n' } },

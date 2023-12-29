@@ -11,3 +11,102 @@
 | cr-  | coerce to dash-case  |
 | cr   | coerce to space case |
 | crt  | coerce to Title Case |
+
+
+--------------------------------------------------------------------------------
+-- tabline.nvim configuration
+--------------------------------------------------------------------------------
+-- Save this file where it will be loaded, for example in
+-- ~/.local/share/nvim/site/plugin/lua/tabline_settings.lua
+
+-- Load package
+
+vim.cmd('packadd tabline.nvim') -- remove this line if in pack/*/start,
+                                -- or if using a plugin manager
+
+local ok, tabline = pcall(require, 'tabline.setup')
+if not ok then return end
+
+
+-------------------------------------------------------------------------------
+-- Settings
+-------------------------------------------------------------------------------
+-- These are the default values, if you delete a key, default will still be used
+-- To know what the settings do, read :help tnv-settings
+
+local settings = {
+  main_cmd_name             = 'Tabline',
+  filtering                 = false,
+  cwd_badge                 = true,
+  tabs_badge                = {
+    fraction = true,
+    left = true,
+    visibility = {'buffers'}
+  },
+  label_style               = 'sep',
+  show_full_path            = false,
+  show_unnamed              = true,
+  max_recent                = 10,
+  modes                     = { 'auto', 'buffers', 'args' },
+  mode_badge                = nil,
+  mapleader                 = '<leader><leader>',
+  default_mappings          = false,
+  cd_mappings               = false,
+  theme                     = 'default',
+  show_icons                = true,
+  show_button               = false,
+  overflow_arrows           = false,
+  colored_icons             = true,
+  icon_spacing              = '  ',
+  ascii_only                = false,
+  scratch_label             = '[Scratch]',
+  unnamed_label             = '[Unnamed]',
+  fzf_layout                = { down = '30%' },
+}
+
+
+--------------------------------------------------------------------------------
+-- Mappings
+--------------------------------------------------------------------------------
+
+-- example mapping to select buffer
+vim.cmd('nmap gb <Plug>(TabSelect)')
+
+local L = settings.mapleader
+
+local mappings = {
+  ['mode next']      = '<F5>',    -- change tabline mode
+  ['next']           = ']b',      -- select next buffer/tab
+  ['prev']           = '[b',      -- select previous buffer/tab
+  ['away']           = L .. 'a',  -- move current buffer away from sight (put last)
+  ['left']           = nil,       -- move current buffer [count] positions to the left
+  ['right']          = nil,       -- move current buffer [count] positions to the right
+  ['filtering!']     = L .. 'f',  -- toggle buffer filtering based on cwd
+  ['fullpath!']      = L .. '/',  -- toggle showing the paths/basenames
+  ['close']          = L .. 'q',  -- delete the buffer without closing the window
+  ['pin!']           = L .. 'p',  -- toggle pin buffer
+  ['unpin!']         = nil,       -- unpin all pinned buffers
+  ['bufname']        = nil,       -- give name to current buffer
+  ['tabname']        = nil,       -- give name to current tab
+  ['buficon']        = nil,       -- give icon to current buffer
+  ['tabicon']        = nil,       -- give icon to current tab
+  ['bufreset']       = nil,       -- remove custom name/icon from current buffer
+  ['tabreset']       = nil,       -- remove custom name/icon from current tab
+  ['resetall']       = nil,       -- remove all custom names/icons
+  ['reopen']         = L .. 'u',  -- reopen closed tab
+  ['closedtabs']     = L .. 'U',  -- fzf choose tab to reopen
+  ['purge']          = L .. 'x',  -- close anything in the tabpage that isn't a regular buffer
+  ['cleanup']        = L .. 'X',  -- delete all buffers that are unrelated to current directories
+  ['minimize']       = nil,       -- delete all buffers except the ones in their own window
+  ['buffers']        = L .. 'b',  -- fzf choose valid buffer
+  ['session load']   = L .. 'sl',
+  ['session new']    = L .. 'sn',
+  ['session save']   = L .. 'ss',
+  ['session delete'] = L .. 'sd',
+}
+
+-------------------------------------------------------------------------------
+-- Load the setup (don't skip this step...)
+-------------------------------------------------------------------------------
+tabline.setup(settings)
+tabline.mappings(mappings)

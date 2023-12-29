@@ -1,3 +1,4 @@
+[
   // emmet
   {
     "key": "cmd+e",
@@ -404,3 +405,4 @@
     "when": "editorLangId == 'html' || editorLangId == 'javascriptreact' || editorLangId == 'svelte' || editorLangId == 'typescript' || editorLangId == 'typescriptreact' || editorLangId == 'vue' || editorTextFocus && editorLangId == 'javascript'"
   },
 ]
+

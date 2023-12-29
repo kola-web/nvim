@@ -104,16 +104,18 @@ function M.config()
       'Close Buffer',
     },
     ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
-    ['o'] = { '<cmd>Lspsaga outline<CR>', 'Symbols' },
+    ['o'] = { '<cmd>AerialToggle<CR>', 'Symbols' },
     ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
+    -- ['f'] = {
+    --   '<cmd> Telescope find_files <CR>',
+    --   'Find files',
+    -- },
     ['f'] = {
-      '<cmd> Telescope find_files <CR>',
+      function()
+        require('fzf-lua').files()
+      end,
       'Find files',
     },
-    -- ["f"] = {
-    --   "<cmd> FzfLua files <CR>",
-    --   "Find files",
-    -- },
     ['F'] = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
     -- ["F"] = { "<cmd>FzfLua live_grep theme=ivy<cr>", "Find Text" },
     -- ['m'] = {
@@ -133,7 +135,7 @@ function M.config()
         'Buffers',
       },
       -- o = {
-      --   '<cmd>%bdelece|edit#|bdelete#<cr>',
+      --   '<cmd>%bdelete|edit#|bdelete#<cr>',
       --   'BufferCloseAllButCurrent',
       -- },
       o = {
@@ -151,7 +153,6 @@ function M.config()
     },
     p = {
       name = 'Projects',
-      p = { '<cmd>Telescope projects<cr>', 'projects' },
       h = { '<cmd>Telescope oldfiles<cr>', 'history file' },
       m = { '<cmd>PeekOpen<cr>', 'PeekOpen' },
       c = { '<cmd>PeekClose<cr>', 'PeekClose' },
@@ -269,17 +270,15 @@ function M.config()
         end,
         'replace',
       },
-      w = {
-        function()
-          require('spectre').open_visual({ select_word = true })
-        end,
-        'replace',
-      },
       b = {
         function()
           require('spectre').open_file_search()
         end,
         'replace',
+      },
+      p = {
+        '<cmd>Telescope package_info<cr>',
+        'package_info',
       },
     },
     S = {
@@ -304,33 +303,9 @@ function M.config()
     },
     ['n'] = {
       name = 'noice',
-      u = {
+      n = {
         function()
-          require('notify').dismiss({ silent = true, pending = true })
-        end,
-        'Dismiss all Notifications',
-      },
-      l = {
-        function()
-          require('noice').cmd('last')
-        end,
-        'Noice Last Message',
-      },
-      h = {
-        function()
-          require('noice').cmd('history')
-        end,
-        'Noice History',
-      },
-      a = {
-        function()
-          require('noice').cmd('all')
-        end,
-        'Noice All',
-      },
-      d = {
-        function()
-          require('noice').cmd('dismiss')
+          require('bmessages').toggle({ split_type = 'split' })
         end,
         'Dismiss All',
       },

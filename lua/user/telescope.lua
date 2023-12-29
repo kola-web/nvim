@@ -11,9 +11,6 @@ local M = {
       build = 'make',
     },
     {
-      'ahmedkhalf/project.nvim',
-    },
-    {
       'folke/noice.nvim',
     },
   },
@@ -110,6 +107,7 @@ M.config = function()
     },
     extensions = {
       file_browser = {
+        initial_mode = 'normal',
         theme = 'dropdown',
         -- disables netrw and use telescope-file-browser in its place
         hijack_netrw = true,
@@ -135,12 +133,16 @@ M.config = function()
         case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
         -- the default case_mode is "smart_case"
       },
+      package_info = {
+        initial_mode = 'normal',
+      },
     },
   }
 
   telescope.setup(opts)
   telescope.load_extension('file_browser')
   telescope.load_extension('noice')
+  telescope.load_extension('package_info')
 end
 
 return M

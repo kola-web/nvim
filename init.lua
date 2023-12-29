@@ -1,11 +1,9 @@
-if vim.g.vscode then
-  require('options')
-else
-  require('options')
+require('options')
+require('Lazy').setup('user')
+if not vim.g.vscode then
   require('keymaps')
-  require('Lazy').setup('user')
   require('autocommands')
-  require('user.colorscheme').SetColorscheme()
+  require('user.colorscheme')
 end
 
 local has = vim.fn.has
@@ -24,6 +22,5 @@ if is_win == 1 then
   require('system.windows')
 end
 if is_wsl == 1 then
-  require('system.wsl')
+  require('system.wslcoq')
 end
-

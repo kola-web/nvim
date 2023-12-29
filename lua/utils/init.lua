@@ -11,7 +11,7 @@ M.servers = {
   'bashls',
   'jsonls',
   'yamlls',
-  'emmet_language_server',
+  -- 'emmet_language_server',
   'volar',
   'marksman',
   'phpactor',
