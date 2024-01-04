@@ -11,7 +11,7 @@ M.servers = {
   'bashls',
   'jsonls',
   'yamlls',
-  -- 'emmet_language_server',
+  'emmet_language_server',
   'volar',
   'marksman',
   'phpactor',
@@ -129,6 +129,16 @@ M.conformFormat = function()
   local buf = vim.api.nvim_get_current_buf()
   local extra_args = extra_lang_args[vim.bo[buf].filetype] or {}
   require('conform').format(vim.tbl_deep_extend('keep', { bufnr = buf, lsp_fallback = true }, extra_args))
+end
+
+M.has_value = function(tab, val)
+  for index, value in ipairs(tab) do
+    if value == val then
+      return true
+    end
+  end
+
+  return false
 end
 
 return M

@@ -42,19 +42,34 @@ local M = {
       },
       { 'zbirenbaum/copilot-cmp', fix_pairs = true, config = true },
 
-      { 'mattn/emmet-vim' },
-      { 'dcampos/cmp-emmet-vim' },
+      {
+        'mattn/emmet-vim',
+        init = function()
+          -- vim.g.user_emmet_leader_key = '<c-y>'
+          vim.g.user_emmet_mode = 'i'
+          vim.g.user_emmet_settings = {
+            variables = {
+              lang = 'zh',
+            },
+          }
+        end,
+      },
     },
     opts = function()
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
-      local has_words_before = function()
-        unpack = unpack or table.unpack
+
+      unpack = unpack or table.unpack
+      local function has_words_before()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
       end
+
       local luasnip = require('luasnip')
       local cmp = require('cmp')
       local defaults = require('cmp.config.default')()
+
+      local has_value = require('utils.init').has_value
+
       return {
         preselect = 'item',
         completion = {
@@ -73,41 +88,46 @@ local M = {
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
           }),
+          -- ['<tab>'] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.mapping.confirm({ select = true })()
+          --   elseif has_words_before() then
+          --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>(emmet-expand-abbr)', true, true, true), 'i',
+          --       true)
+          --     -- fallback()
+
+          --     -- cmp.mapping.complete({
+          --     --   config = {
+          --     --     sources = {
+          --     --       {
+          --     --         name = 'nvim_lsp',
+          --     --         entry_filter = function(entry)
+          --     --           return entry.source:get_debug_name() == 'nvim_lsp:emmet_language_server'
+          --     --         end,
+          --     --       },
+          --     --     },
+          --     --   },
+          --     -- })()
+          --     -- cmp.mapping.confirm({ select = true })()
+          --   else
+          --     fallback()
+          --   end
+          -- end),
           ['<tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.mapping.confirm({ select = true })()
             elseif has_words_before() then
-              cmp.mapping.complete({
-                config = {
-                  sources = {
-                    { name = 'emmet_vim' },
-                  },
-                },
-              })()
-
-              if cmp.visible() then
-                cmp.mapping.confirm({ select = true })()
+              local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+              local valid_filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'pug', 'typescriptreact', 'vue', 'wxml' } -- 添加你需要的文件类型
+              if has_value(valid_filetypes, filetype) then
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>(emmet-expand-abbr)', true, true, true), 'i', true)
               else
                 fallback()
               end
-
-            -- cmp.mapping.complete({
-            --   config = {
-            --     sources = {
-            --       {
-            --         name = 'nvim_lsp',
-            --         entry_filter = function(entry)
-            --           return entry.source:get_debug_name() == 'nvim_lsp:emmet_language_server'
-            --         end,
-            --       },
-            --     },
-            --   },
-            -- })()
-            -- cmp.mapping.confirm({ select = true })()
             else
               fallback()
             end
-          end),
+          end, { 'i', 'c' }),
           ['<C-j>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -130,12 +150,6 @@ local M = {
           end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
-          {
-            name = 'emmet_vim',
-            option = {
-              -- filetypes = {  },
-            },
-          },
           { name = 'copilot' },
           { name = 'nvim_lsp' },
           { name = 'nvim_lua' },
