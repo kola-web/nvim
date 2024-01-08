@@ -15,12 +15,15 @@ local M = {
     'sainnhe/gruvbox-material',
     config = function()
       vim.cmd([[colorscheme gruvbox-material]])
+      vim.api.nvim_set_hl(0, 'NormalFloat', { fg = 'LightGrey' })
     end,
   },
   {
     'xiyaowong/transparent.nvim',
     opts = {
-      extra_groups = {},
+      extra_groups = {
+        'FzfLuaNormal',
+      },
       exclude_groups = {
         'CursorLine',
       }, -- table: groups you don't want to clear

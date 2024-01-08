@@ -88,31 +88,6 @@ local M = {
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
           }),
-          -- ['<tab>'] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.mapping.confirm({ select = true })()
-          --   elseif has_words_before() then
-          --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>(emmet-expand-abbr)', true, true, true), 'i',
-          --       true)
-          --     -- fallback()
-
-          --     -- cmp.mapping.complete({
-          --     --   config = {
-          --     --     sources = {
-          --     --       {
-          --     --         name = 'nvim_lsp',
-          --     --         entry_filter = function(entry)
-          --     --           return entry.source:get_debug_name() == 'nvim_lsp:emmet_language_server'
-          --     --         end,
-          --     --       },
-          --     --     },
-          --     --   },
-          --     -- })()
-          --     -- cmp.mapping.confirm({ select = true })()
-          --   else
-          --     fallback()
-          --   end
-          -- end),
           ['<tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.mapping.confirm({ select = true })()
@@ -127,7 +102,7 @@ local M = {
             else
               fallback()
             end
-          end, { 'i', 'c' }),
+          end, { 'i' }),
           ['<C-j>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()

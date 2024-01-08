@@ -143,7 +143,7 @@ function M.config()
         'BufferCloseAllButCurrent',
       },
       r = {
-        '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>',
+        '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR>',
         'Redraw / clear hlsearch / diff update',
       },
       h = { require('smart-splits').swap_buf_left, 'swap_buf_left' },
@@ -151,6 +151,7 @@ function M.config()
       k = { require('smart-splits').swap_buf_up, 'swap_buf_up' },
       l = { require('smart-splits').swap_buf_right, 'swap_buf_right' },
     },
+    ["'"] = { [[:<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>]], 'Modify the register' },
     p = {
       name = 'Projects',
       h = { '<cmd>Telescope oldfiles<cr>', 'history file' },

@@ -130,3 +130,16 @@ vim.api.nvim_create_autocmd('BufEnter', {
   desc = 'Disable New Line Comment',
 })
 
+-- 更加智能的当前行高亮
+vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
+  callback = function()
+    vim.opt.cursorline = true
+  end,
+  desc = 'set cursorline',
+})
+vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinEnter' }, {
+  callback = function()
+    vim.opt.cursorline = false
+  end,
+  desc = 'set nocursorline',
+})

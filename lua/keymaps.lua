@@ -1,4 +1,4 @@
--- Shorten function name 
+-- Shorten function name
 local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true, noremap = true }
@@ -71,6 +71,10 @@ keymap('n', '<S-tab>', '<Cmd>bprevious<CR>', opts)
 -- smart n/N
 keymap('n', 'n', vim.v.searchforward == 1 and 'n' or 'N', opts)
 keymap('n', 'N', vim.v.searchforward == 1 and 'N' or 'n', opts)
+
+-- add space line
+keymap('n', ']<space>', "<Cmd>put =repeat(nr2char(10), v:count1) <Bar> '[-1<CR>", opts)
+keymap('n', '[<space>', "<Cmd>put! =repeat(nr2char(10), v:count1) <Bar> ']+1<CR>", opts)
 
 -- Better paste
 keymap('v', 'p', '"_dP', opts)
