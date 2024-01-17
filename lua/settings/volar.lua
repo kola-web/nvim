@@ -2,8 +2,6 @@ local is_vue = require('utils.init').is_vue
 local util = require('lspconfig.util')
 local function get_typescript_server_path(root_dir)
   local global_ts = '/Users/lijialin/Library/pnpm/global/5/node_modules/typescript/lib'
-  -- Alternative location if installed as root:
-  -- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
   local found_ts = ''
   local function check_dir(path)
     found_ts = util.path.join(path, 'node_modules', 'typescript', 'lib')

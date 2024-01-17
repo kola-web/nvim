@@ -88,7 +88,6 @@ function M.config()
   }
 
   local mappings = {
-    -- ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
     ['e'] = {
       function()
         require('neo-tree.command').execute({ toggle = true })
@@ -96,7 +95,7 @@ function M.config()
       'Explorer',
     },
     ['w'] = { '<cmd>w!<CR>', 'Save' },
-    -- ['q'] = { '<cmd>q!<CR>', 'Quit' },
+    ['q'] = { '<cmd>q!<CR>', 'Quit' },
     ['c'] = {
       function(n)
         require('mini.bufremove').delete(n, false)
@@ -223,13 +222,13 @@ function M.config()
     l = {
       name = 'LSP',
       -- d = { '<cmd>TroubleToggle<cr>', 'diagnostic_setloclist' },
-      l = { '<cmd>lua require("neogen").generate()<CR>', 'filetypes' },
+      l = { '<cmd>lua require("neogen").generate()<CR>', 'generate' },
       t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
       p = {
         function()
           require('dropbar.api').pick()
         end,
-        'filetypes',
+        'dropbar',
       },
       c = {
         function()
@@ -299,9 +298,9 @@ function M.config()
       l = { '<cmd>TSNodeUnderCursor<cr>', 'UnderCursor' },
       p = { '<cmd>TSPlaygroundToggle<cr>', 'Playground' },
     },
-    q = {
-      t = { '<cmd>.!pbpaste | quicktype -l typescript --just-types  <cr>', 'typescript' },
-    },
+    -- q = {
+    --   t = { '<cmd>.!pbpaste | quicktype -l typescript --just-types  <cr>', 'typescript' },
+    -- },
     ['n'] = {
       name = 'noice',
       n = {

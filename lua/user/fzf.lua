@@ -10,17 +10,42 @@ function M.config()
   end
 
   fzf.setup({
-    'telescope',
-    -- 'fzf-tmux',
+    fzf_opts = {
+      ['--layout'] = 'default',
+      ['--marker'] = '+',
+      ['--border'] = 'none',
+      ['--padding'] = '0%',
+      ['--margin'] = '0%',
+      ['--no-separator'] = '',
+      ['--preview-window'] = 'up,50%',
+      ['--info'] = 'default',
+    },
+    winopts = {},
+    fzf_colors = {
+      ['bg'] = '-1',
+      -- ['bg+'] = '-1',
+    },
+    -- fzf_colors = {
+    --   ['fg'] = { 'fg', 'CursorLine' },
+    --   ['bg'] = { 'bg', 'Normal' },
+    --   ['hl'] = { 'fg', 'Comment' },
+    --   ['fg+'] = { 'fg', 'Normal' },
+    --   ['bg+'] = { 'bg', 'PmenuSel' },
+    --   ['hl+'] = { 'fg', 'Statement', 'italic' },
+    --   ['info'] = { 'fg', 'Comment', 'italic' },
+    --   ['prompt'] = { 'fg', 'Underlined' },
+    --   ['pointer'] = { 'fg', 'Exception' },
+    --   ['marker'] = { 'fg', '@character' },
+    --   ['spinner'] = { 'fg', 'DiagnosticOk' },
+    --   ['header'] = { 'fg', 'Comment' },
+    --   ['gutter'] = { 'bg', 'Normal' },
+    --   ['separator'] = { 'fg', 'Comment' },
+    -- },
     files = {
       find_opts = [[-type f -not -path '*/\.git/*' -not -path '*/.git/*' -not -path '*/node_modules/*' -not -path '*/miniprogram_npm/*' -not -path '*/.yarn/*' -not -path '*/static/*' -not -path '*/.svn/*' --not -path '*/statics/*']],
       rg_opts = "--color=never --files --hidden --follow -g '!{.git,node_modules,miniprogram_npm,.yarn,static,.svn,statics}'",
       fd_opts = "--color=never --type f --hidden --follow --exclude '{.git,node_modules,miniprogram_npm,.yarn,static,.svn,statics}'",
     },
-    -- winopts = {
-    -- Use **only one** of the below options
-    -- split = 'belowright new', -- open in split below current window
-    -- },
   })
 end
 

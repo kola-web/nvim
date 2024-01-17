@@ -38,6 +38,9 @@ local M = {
           suggestion = { enabled = false },
           panel = { enabled = false },
         },
+        keys = {
+          { '<C-Enter>', '<cmd>Copilot panel<cr>', mode = { 'n' } },
+        },
         config = true,
       },
       { 'zbirenbaum/copilot-cmp', fix_pairs = true, config = true },
