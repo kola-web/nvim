@@ -256,8 +256,20 @@ function M.config()
         end,
         'file_browser',
       },
+      a = {
+        function()
+          require('scissors').addNewSnippet()
+        end,
+        'addSnippet',
+      },
       c = { '<cmd>Telescope colorscheme<cr>', 'colorscheme' },
       d = { '<cmd>Telescope diagnostics<cr>', 'diagnostics' },
+      e = {
+        function()
+          require('scissors').editSnippet()
+        end,
+        'editSnippet',
+      },
       h = { '<cmd>lua require"telescope.builtin".find_files({ hidden = true })<cr>', 'hidden file' },
       H = { '<cmd>Telescope help_tags<cr>', 'Help' },
       M = { '<cmd>Telescope man_pages<cr>', 'Man Pages' },

@@ -9,6 +9,7 @@ M.opts = {
     char = '│',
     tab_char = '│',
   },
+  scope = { enabled = true },
   exclude = {
     buftypes = { 'terminal', 'nofile' },
     filetypes = {

@@ -63,30 +63,6 @@ M.on_attach = function(client, bufnr)
   --   buffer = bufnr,
   --   command = 'EslintFixAll',
   -- })
-
-  -- if client.supports_method('textDocument/inlayHint') then
-  --   vim.lsp.inlay_hint(bufnr, true)
-  -- end
-
-  -- if client.supports_method('textDocument/codeLens') then
-  --   local augroup = vim.api.nvim_create_augroup('TypescriptToolsCodeLensGroup', { clear = true })
-  --   vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'CursorHold' }, {
-  --     buffer = bufnr,
-  --     callback = vim.lsp.codelens.refresh,
-  --     group = augroup,
-  --   })
-  -- end
-
-  -- if client.supports_method('textDocument/codeLens') then
-  --   -- refresh codelens on TextChanged and InsertLeave as well
-  --   vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
-  --     buffer = bufnr,
-  --     callback = vim.lsp.codelens.refresh,
-  --   })
-  --   -- trigger codelens refresh
-  --   vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
-  --   require('illuminate').on_attach(client)
-  -- end
 end
 
 function M.config()
@@ -144,6 +120,10 @@ function M.config()
       -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
       -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
       -- prefix = "icons",
+      severity = {
+        -- Specify a range of severities
+        min = vim.diagnostic.severity.ERROR,
+      },
     },
     -- show signs
     signs = {

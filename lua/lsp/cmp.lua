@@ -31,7 +31,8 @@ local M = {
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lua',
-      'kola-web/cmp-path',
+      -- 'kola-web/cmp-path',
+      'hrsh7th/cmp-path',
       {
         'zbirenbaum/copilot.lua',
         opts = {

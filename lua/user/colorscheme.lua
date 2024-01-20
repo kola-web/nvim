@@ -1,14 +1,25 @@
 local M = {
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   priority = 1000,
+  --   lazy = false,
+  --   opts = { style = 'moon', transparent = true },
+  --   config = function(_, opts)
+  --     require('tokyonight').setup(opts)
+  --     vim.cmd([[colorscheme tokyonight]])
+  --   end,
+  -- },
   {
-    'folke/tokyonight.nvim',
-    priority = 1000,
+    'craftzdog/solarized-osaka.nvim',
     lazy = false,
-    opts = { style = 'moon', transparent = true },
+    priority = 1000,
+    opts = { transparent = true },
     config = function(_, opts)
-      require('tokyonight').setup(opts)
-      vim.cmd([[colorscheme tokyonight]])
+      require('solarized-osaka').setup(opts)
+      vim.cmd([[colorscheme solarized-osaka]])
     end,
   },
+
   -- {
   --   priority = 1000,
   --   lazy = false,
@@ -18,18 +29,18 @@ local M = {
   --     vim.api.nvim_set_hl(0, 'NormalFloat', { fg = 'LightGrey' })
   --   end,
   -- },
-  {
-    'xiyaowong/transparent.nvim',
-    cond = not vim.g.neovide,
-    opts = {
-      extra_groups = {},
-      exclude_groups = {
-        'CursorLine',
-        'CursorLineNr',
-      },
-    },
-    config = true,
-  },
+  -- {
+  --   'xiyaowong/transparent.nvim',
+  --   cond = not vim.g.neovide,
+  --   opts = {
+  --     extra_groups = {},
+  --     exclude_groups = {
+  --       'CursorLine',
+  --       'CursorLineNr',
+  --     },
+  --   },
+  --   config = true,
+  -- },
 }
 
 return M

@@ -24,11 +24,11 @@ local M = {
 
   {
     'mrjones2014/smart-splits.nvim',
-    build = './kitty/install-kittens.bash',
+    build = 'bash ./kitty/install-kittens.bash',
     config = function()
-      -- require('smart-splits').setup({
-      --   multiplexer_integration = vim.env.KITTY_LISTEN_ON ~= nil and 'kitty' or nil,
-      -- })
+      require('smart-splits').setup({
+        multiplexer_integration = vim.env.KITTY_LISTEN_ON ~= nil and 'kitty' or nil,
+      })
       -- moving between splits
       vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
       vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
