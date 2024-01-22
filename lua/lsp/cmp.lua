@@ -97,7 +97,7 @@ local M = {
               cmp.mapping.confirm({ select = true })()
             elseif has_words_before() then
               local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
-              local valid_filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'pug', 'typescriptreact', 'vue', 'wxml' } -- 添加你需要的文件类型
+              local valid_filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'pug', 'typescriptreact', 'vue', 'wxml', 'php', 'blade' } -- 添加你需要的文件类型
               if has_value(valid_filetypes, filetype) then
                 vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>(emmet-expand-abbr)', true, true, true), 'i', true)
               else

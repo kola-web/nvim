@@ -31,7 +31,7 @@ M.null_servers = {
   'shellcheck',
   'shfmt',
   'taplo',
-  'pint',
+  'blade-formatter',
 }
 
 M.compare_to_clipboard = function()
@@ -139,6 +139,25 @@ M.has_value = function(tab, val)
   end
 
   return false
+end
+
+---@param name string
+---@param fn fun(name:string)
+M.on_load = function(name, fn)
+  local Config = require('lazy.core.config')
+  if Config.plugins[name] and Config.plugins[name]._.loaded then
+    fn(name)
+  else
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'LazyLoad',
+      callback = function(event)
+        if event.data == name then
+          fn(name)
+          return true
+        end
+      end,
+    })
+  end
 end
 
 return M

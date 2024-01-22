@@ -146,7 +146,7 @@ keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' 
 --     vim.api.nvim_replace_termcodes('<CR>', true, true, true)
 --   end
 -- end
---
--- keymap('i', '<CR>', EnterOrIndentTag, { noremap = true, expr = true, buffer = true })
+
+-- keymap('i', '<CR>', EnterOrIndentTag, { noremap = true, expr = true })
 
 -- vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#<cr>", {desc="Close all buffers but the current one"}) -- https://stackoverflow.com/a/42071865/516188

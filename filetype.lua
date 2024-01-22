@@ -7,7 +7,7 @@ vim.filetype.add({
     wxs = 'javascript',
     ['code-snippets'] = 'jsonc', -- Included in the plugin
     template = 'nginx',
-    ['code-profile'] = "json"
+    ['code-profile'] = 'json',
   },
   -- 文件名
   filename = {
@@ -21,5 +21,6 @@ vim.filetype.add({
     ['nginx/templates/*'] = 'nginx', -- Included in the plugin
     ['vscode-snippets'] = 'jsonc', -- Included in the plugin
     ['~/.config/kitty/*.conf'] = 'kitty',
+    ['.*%.blade%.php'] = 'blade',
   },
 })

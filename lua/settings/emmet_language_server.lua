@@ -19,6 +19,7 @@ return {
     'scss',
     'typescriptreact',
     'php',
+    'blade',
   },
   init_options = {
     --- @type string[]

@@ -38,7 +38,7 @@ local M = {
 
         toml = { 'taplo' },
 
-        php = { 'pint' },
+        blade = { 'blade-formatter' },
       },
       formatters = {
         eslint_d = {
