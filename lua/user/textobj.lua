@@ -3,9 +3,9 @@ local M = {
     'kana/vim-textobj-user',
     event = 'VeryLazy',
     dependencies = {
-      {
-        'kola-web/vim-indent-object',
-      },
+      -- {
+      --   'kola-web/vim-indent-object',
+      -- },
       {
         -- ae ie
         'kana/vim-textobj-entire',
