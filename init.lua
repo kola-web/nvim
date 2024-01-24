@@ -22,6 +22,5 @@ if is_win == 1 then
   require('system.windows')
 end
 if is_wsl == 1 then
-  require('system.wslcoq')
+  require('system.wsl')
 end
-

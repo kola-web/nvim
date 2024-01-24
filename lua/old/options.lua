@@ -5,7 +5,6 @@ vim.opt.backup = false -- 不创建备份文件
 vim.opt.clipboard = 'unnamedplus' -- 允许 Neovim 访问系统剪贴板
 vim.opt.cmdheight = 1 -- 命令行高度，用于显示信息
 vim.opt.completeopt = { 'menuone', 'noselect', 'preview' } -- 自动补全菜单选项
-vim.opt.conceallevel = 0 -- 在 markdown 文件中显示 `` 符号
 -- vim.opt.confirm = true                                     -- Confirm to save changes before exiting modified buffer
 vim.opt.fileencoding = 'utf-8' -- 文件编码为 UTF-8
 vim.opt.hlsearch = true -- 高亮搜索结果

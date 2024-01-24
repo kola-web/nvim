@@ -11,4 +11,3 @@
 | cr-  | coerce to dash-case  |
 | cr   | coerce to space case |
 | crt  | coerce to Title Case |
-
