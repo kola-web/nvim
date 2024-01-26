@@ -104,10 +104,9 @@ keymap('n', 'gx', '<Plug>(EasyAlign)')
 -- fzf-lua
 keymap('t', '<esc>', [[<C-\><C-n>]])
 
-keymap({ 'i', 'n', 'v' }, '<C-->', function()
-  -- require('color-converter').cycle()
-  require('user.converter').toggleColorFormat()
-end, opts)
+-- keymap({ 'i', 'n', 'v' }, '<C-->', function()
+--   require('user.converter').toggleColorFormat()
+-- end, opts)
 
 -- 聪明地使用命令行历史
 -- keymap("c", "<C-n>", "<down>", opts)

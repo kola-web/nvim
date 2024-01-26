@@ -59,7 +59,6 @@ function M.config()
       'markdown',
       'markdown_inline',
       'php',
-      'phpdoc',
       'tsx',
       'vim',
       'vimdoc',

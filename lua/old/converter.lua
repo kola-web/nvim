@@ -1,6 +1,18 @@
-local M = {
+local M = {}
+
+M = {
   'amadeus/vim-convert-color-to',
   event = 'VeryLazy',
+  keys = {
+    {
+      { 'i', 'n', 'v' },
+      '<C-->',
+      function()
+        M:toggleColorFormat()
+      end,
+      desc = 'Prev buffer',
+    },
+  },
 }
 
 M.index = 1

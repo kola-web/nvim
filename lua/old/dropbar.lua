@@ -5,7 +5,6 @@ local M = {
     'nvim-telescope/telescope-fzf-native.nvim',
   },
   keys = {
-
     {
       { 'i', 'n' },
       '<C-;>',

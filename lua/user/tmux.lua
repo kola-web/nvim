@@ -27,7 +27,7 @@ local M = {
     build = 'bash ./kitty/install-kittens.bash',
     config = function()
       require('smart-splits').setup({
-        multiplexer_integration = vim.env.KITTY_LISTEN_ON ~= nil and 'kitty' or nil,
+        -- multiplexer_integration = vim.env.KITTY_LISTEN_ON ~= nil and 'kitty' or nil,
       })
       -- moving between splits
       vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
