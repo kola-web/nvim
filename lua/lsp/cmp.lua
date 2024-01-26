@@ -10,7 +10,6 @@ local M = {
           require('luasnip/loaders/from_vscode').lazy_load()
         end,
       },
-      { 'folke/neodev.nvim', config = true },
     },
     opts = {
       history = true,
@@ -30,7 +29,7 @@ local M = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-nvim-lua',
+      -- 'hrsh7th/cmp-nvim-lua',
       -- 'kola-web/cmp-path',
       'hrsh7th/cmp-path',
       {
@@ -129,11 +128,10 @@ local M = {
           end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
-          { name = 'copilot' },
+          { name = 'copilot', group_index = 1, priority = 100 },
           { name = 'nvim_lsp' },
-          { name = 'nvim_lua' },
+          -- { name = 'nvim_lua' },
           { name = 'luasnip' },
-          { name = 'buffer' },
           {
             name = 'path',
             option = {
@@ -145,6 +143,7 @@ local M = {
               -- },
             },
           },
+          { name = 'buffer' },
         }),
         formatting = {
           fields = { 'abbr', 'menu', 'kind' },

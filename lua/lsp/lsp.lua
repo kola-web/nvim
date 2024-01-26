@@ -12,6 +12,7 @@ local M = {
     {
       'williamboman/mason-lspconfig.nvim',
     },
+    { 'folke/neodev.nvim', config = true },
   },
   opts = {
     inlay_hints = {
