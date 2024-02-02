@@ -1,6 +1,7 @@
 local M = {
   'nvimdev/dashboard-nvim',
   event = 'VimEnter',
+  cond = true,
   opts = {
     theme = 'hyper',
     config = {
