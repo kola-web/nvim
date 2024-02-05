@@ -1,7 +1,7 @@
 local M = {
   'nvimdev/dashboard-nvim',
   event = 'VimEnter',
-  cond = true,
+  cond = not vim.env.KITTY_SCROLLBACK_NVIM,
   opts = {
     theme = 'hyper',
     config = {

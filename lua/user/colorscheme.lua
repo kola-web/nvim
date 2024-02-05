@@ -32,7 +32,7 @@ local M = {
     'sainnhe/gruvbox-material',
     config = function()
       vim.cmd([[colorscheme gruvbox-material]])
-      vim.api.nvim_set_hl(0, 'NormalFloat', { fg = 'LightGrey' })
+      -- vim.api.nvim_set_hl(0, 'NormalFloat', { fg = 'LightGrey' })
     end,
   },
 }

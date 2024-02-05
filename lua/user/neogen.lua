@@ -1,10 +1,9 @@
 local M = {
   'danymat/neogen',
   dependencies = 'nvim-treesitter/nvim-treesitter',
+  opts = {
+    snippet_engine = 'luasnip',
+  },
 }
-
-M.config = function()
-  require('neogen').setup({ snippet_engine = 'luasnip' })
-end
 
 return M

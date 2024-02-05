@@ -1,25 +1,16 @@
 return {
-  root_dir = require('lspconfig.util').root_pattern(
-    'package.json',
-    'tsconfig.json',
-    'jsconfig.json',
-    '.git',
-    '.svn'
-  ),
+  root_dir = require('lspconfig.util').root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git', '.svn'),
   filetypes = {
-    'astro',
     'css',
     'eruby',
     'html',
-    'htmldjango',
+    'javascript',
     'javascriptreact',
     'less',
-    'pug',
     'sass',
     'scss',
+    'pug',
     'typescriptreact',
-    'php',
-    'blade',
   },
   init_options = {
     --- @type string[]
@@ -31,6 +22,10 @@ return {
       ['bem.shortElementPrefix'] = '-',
       ['css.intUnit'] = 'px',
       ['css.floatUnitr'] = 'px',
+    },
+    includeLanguages = {
+      javascriptreact = 'html',
+      typescriptreact = 'html',
     },
     --- @type boolean Defaults to `true`
     showAbbreviationSuggestions = true,
