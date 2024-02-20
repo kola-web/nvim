@@ -47,20 +47,8 @@ local M = {
             ESLINT_USE_FLAT_CONFIG = 'true',
           },
         },
-        eslint = {
-          command = function()
-            vim.cmd('EslintFixAll')
-            return ''
-          end,
-          cwd = require('conform.util').root_file({
-            '.eslintrc',
-            '.eslintrc.js',
-            '.eslintrc.cjs',
-            '.eslintrc.yaml',
-            '.eslintrc.yml',
-            '.eslintrc.json',
-            'eslint.config.js',
-          }),
+        ['blade-formatter'] = {
+          prepend_args = { '-i', '2' },
         },
       },
     }

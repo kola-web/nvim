@@ -11,6 +11,7 @@ return {
     'scss',
     'pug',
     'typescriptreact',
+    'blade',
   },
   init_options = {
     --- @type string[]
@@ -26,6 +27,7 @@ return {
     includeLanguages = {
       javascriptreact = 'html',
       typescriptreact = 'html',
+      blade = 'html',
     },
     --- @type boolean Defaults to `true`
     showAbbreviationSuggestions = true,

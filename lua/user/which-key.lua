@@ -315,12 +315,7 @@ function M.config()
     -- },
     ['n'] = {
       name = 'noice',
-      n = {
-        function()
-          require('bmessages').toggle({ split_type = 'split' })
-        end,
-        'Dismiss All',
-      },
+      h = { '<cmd>NoiceHistory<cr>', 'NoiceHistory' },
     },
     [' '] = {
       name = 'flash',
