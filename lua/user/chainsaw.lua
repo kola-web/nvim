@@ -2,7 +2,7 @@ local M = {
   'chrisgrieser/nvim-chainsaw',
   keys = {
     {
-      '<C-;>',
+      '<C-S-L>',
       function()
         require('chainsaw').variableLog()
       end,
@@ -10,7 +10,7 @@ local M = {
       desc = 'Prev buffer',
     },
     {
-      '<C-;>',
+      '<C-S-L>',
       function()
         local keycodes = vim.api.nvim_replace_termcodes('viw', true, true, true):gsub('\n', '')
         vim.api.nvim_feedkeys(keycodes, 'n', true)

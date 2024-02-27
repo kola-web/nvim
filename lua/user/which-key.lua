@@ -88,12 +88,6 @@ function M.config()
   }
 
   local mappings = {
-    ['e'] = {
-      function()
-        require('neo-tree.command').execute({ toggle = true })
-      end,
-      'Explorer',
-    },
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     ['q'] = { '<cmd>q!<CR>', 'Quit' },
     ['c'] = {
@@ -104,7 +98,6 @@ function M.config()
     },
     ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
     ['o'] = { '<cmd>AerialToggle<CR>', 'Symbols' },
-    ['/'] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<cr>', 'Comment' },
     -- ['f'] = {
     --   '<cmd> Telescope find_files <CR>',
     --   'Find files',

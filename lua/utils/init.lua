@@ -14,7 +14,7 @@ M.servers = {
   'emmet_language_server',
   'volar',
   'marksman',
-  'phpactor',
+  'intelephense',
   'docker_compose_language_service',
   'dockerls',
   'eslint',
@@ -158,6 +158,17 @@ M.on_load = function(name, fn)
       end,
     })
   end
+end
+
+---@param on_attach fun(client, buffer)
+function M.on_attach(on_attach)
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+      local buffer = args.buf ---@type number
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      on_attach(client, buffer)
+    end,
+  })
 end
 
 return M

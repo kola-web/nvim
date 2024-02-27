@@ -6,7 +6,7 @@ local M = {
     vim.cmd([[Neotree close]])
   end,
   init = function()
-    if vim.fn.argc() == 1 then
+    if vim.fn.argc(-1) == 1 then
       local stat = vim.loop.fs_stat(vim.fn.argv(0))
       if stat and stat.type == 'directory' then
         require('neo-tree')
@@ -15,7 +15,7 @@ local M = {
   end,
   opts = {
     sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
-    open_files_do_not_replace_types = { 'terminal', 'Trouble', 'qf', 'Outline' },
+    open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
     filesystem = {
       bind_to_cwd = false,
       follow_current_file = { enabled = true },
@@ -112,14 +112,6 @@ local M = {
   },
   config = function(_, opts)
     require('neo-tree').setup(opts)
-    vim.api.nvim_create_autocmd('TermClose', {
-      pattern = '*lazygit',
-      callback = function()
-        if package.loaded['neo-tree.sources.git_status'] then
-          require('neo-tree.sources.git_status').refresh()
-        end
-      end,
-    })
   end,
   dependencies = {
     'nvim-lua/plenary.nvim',

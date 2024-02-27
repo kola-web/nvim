@@ -22,5 +22,6 @@ vim.filetype.add({
     ['vscode-snippets'] = 'jsonc', -- Included in the plugin
     ['~/.config/kitty/*.conf'] = 'kitty',
     ['.*%.blade%.php'] = 'blade',
+    ['.*%.wpy'] = 'vue',
   },
 })

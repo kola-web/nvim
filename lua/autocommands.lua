@@ -137,6 +137,7 @@ vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
   end,
   desc = 'set cursorline',
 })
+
 vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinEnter' }, {
   callback = function()
     vim.opt.cursorline = false

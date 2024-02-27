@@ -28,6 +28,7 @@ opt.fillchars.eob = ' ' -- 将缓冲区末尾的空行显示为 ` `，默认为 
 opt.grepformat = '%f:%l:%c:%m' -- grep 命令输出格式
 opt.grepprg = 'rg --vimgrep' -- grep 命令
 opt.guifont = 'JetBrainsMono Nerd Font:h14' -- 在图形化的 neovim 应用程序中使用的字体
+opt.hidden = false -- 允许在有未保存的修改时切换缓冲区
 opt.ignorecase = true -- 忽略大小写
 opt.inccommand = 'nosplit' -- 预览增量替换
 opt.laststatus = 3 -- 全局状态行

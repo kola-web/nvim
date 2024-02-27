@@ -1,5 +1,6 @@
 local M = {
-  "gbprod/substitute.nvim",
+  'gbprod/substitute.nvim',
+  vscode = true,
 }
 
 M.config = function()
@@ -8,7 +9,7 @@ M.config = function()
     return
   end
 
-  substitute.setup {
+  substitute.setup({
     on_substitute = nil,
     yank_substituted_text = false,
     range = {
@@ -20,7 +21,7 @@ M.config = function()
       motion2 = false,
       suffix = '',
     },
-  }
+  })
 end
 
 return M

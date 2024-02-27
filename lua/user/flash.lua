@@ -1,7 +1,7 @@
 local M = {
   'folke/flash.nvim',
   event = 'VeryLazy',
-  cond = true,
+  vscode = true,
   opts = {
     labels = 'asdfghjklqwertyuiopzxcvbnm',
     jump = {

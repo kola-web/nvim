@@ -31,7 +31,13 @@ local M = {
       offsets = {
         {
           filetype = 'neo-tree',
-          text = 'Neo-tree',
+          text = 'EXPLORER',
+          highlight = 'Directory',
+          text_align = 'left',
+        },
+        {
+          filetype = 'NvimTree',
+          text = 'EXPLORER',
           highlight = 'Directory',
           text_align = 'left',
         },

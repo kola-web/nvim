@@ -29,8 +29,9 @@ local M = {
   {
     'echasnovski/mini.indentscope',
     version = false,
+    vscode = true,
     opts = {
-      symbol = '│',
+      symbol = vim.g.vsocde and '│' or '',
       options = {
         indent_at_cursor = false,
         try_as_border = false,

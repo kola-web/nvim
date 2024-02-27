@@ -1,13 +1,7 @@
+local is_vue = require('utils.init').is_vue
 return {
-  filetypes = {
-    'javascript',
-    'javascriptreact',
-    'javascript.jsx',
-    'typescript',
-    'typescriptreact',
-    'typescript.tsx',
-  },
-  -- single_file_support = false,
+  filetypes = is_vue() and {} or { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+  autostart = not is_vue(),
   init_options = {
     locale = 'zh-CN',
     preferences = {

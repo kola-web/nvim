@@ -1,6 +1,10 @@
 local M = {
-  'tpope/vim-abolish',
-  lazy = false,
+  { 'tpope/vim-repeat' },
+  {
+    'tpope/vim-abolish',
+    lazy = false,
+    vscode = true,
+  },
 }
 
 return M
