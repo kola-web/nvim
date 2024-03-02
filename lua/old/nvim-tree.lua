@@ -3,7 +3,7 @@ local M = {
   version = '*',
   lazy = false,
   keys = {
-    { '<leader>e', '<cmd>NvimTreeToggle<cr>', 'Explorer', mode = { 'n' } },
+    { '<leader>e', '<cmd>NvimTreeFindFileToggle<cr>', 'Explorer', mode = { 'n' } },
   },
   opts = function()
     local icons = require('user.nvim-dev-icons').icons

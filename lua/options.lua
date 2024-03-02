@@ -2,9 +2,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
--- Enable LazyVim auto format
-vim.g.autoformat = true
-
 -- LazyVim root dir detection
 -- Each entry can be:
 -- * the name of a detector function like `lsp` or `cwd`
@@ -23,19 +20,17 @@ opt.confirm = true -- 在退出修改的缓冲区之前确认保存更改
 opt.cursorline = true -- 启用当前行高亮
 opt.expandtab = true -- 使用空格而不是制表符
 opt.fileencoding = 'utf-8' -- 文件编码为 UTF-8
-opt.formatoptions:append({ 'r' })
-opt.fillchars.eob = ' ' -- 将缓冲区末尾的空行显示为 ` `，默认为 `~`
+opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = '%f:%l:%c:%m' -- grep 命令输出格式
 opt.grepprg = 'rg --vimgrep' -- grep 命令
 opt.guifont = 'JetBrainsMono Nerd Font:h14' -- 在图形化的 neovim 应用程序中使用的字体
-opt.hidden = false -- 允许在有未保存的修改时切换缓冲区
 opt.ignorecase = true -- 忽略大小写
 opt.inccommand = 'nosplit' -- 预览增量替换
 opt.laststatus = 3 -- 全局状态行
 opt.list = true -- 显示一些不可见字符（制表符等）
 opt.mouse = 'a' -- 启用鼠标模式
 opt.number = true -- 显示行号
-opt.pumblend = 0 -- 弹出菜单透明度
+opt.pumblend = 10 -- 弹出菜单透明度
 opt.pumheight = 10 -- 弹出菜单中的最大条目数
 opt.relativenumber = true -- 相对行号
 opt.swapfile = false -- 不创建交换文件
@@ -61,6 +56,8 @@ opt.undofile = true -- 保存撤销历史
 opt.undolevels = 10000 -- 可以撤销的最大更改次数
 opt.whichwrap:append('<,>,[,],h,l') -- 允许在到达行首/行尾时使用的键
 opt.iskeyword:append('-,#') -- 将包含 `-,#` 的单词视为单个单词
+opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
+opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- 窗口的最小宽度
 opt.wrap = false -- 禁用换行
 
@@ -83,8 +80,12 @@ vim.g.markdown_recommended_style = 0
 
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
-  vim.g.neovide_cursor_animation_length = 0
   vim.opt.linespace = 4
+  vim.g.neovide_refresh_rate = 60
+  vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_scroll_animation_length = 0
+  vim.g.neovide_scroll_animation_far_lines = 0
+  vim.g.neovide_no_idle = false
 
   vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
   vim.keymap.set('v', '<D-c>', '"+y') -- Copy

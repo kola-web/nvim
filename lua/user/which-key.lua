@@ -88,6 +88,12 @@ function M.config()
   }
 
   local mappings = {
+    ['e'] = {
+      function()
+        require('neo-tree.command').execute({ toggle = true })
+      end,
+      'Explorer',
+    },
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     ['q'] = { '<cmd>q!<CR>', 'Quit' },
     ['c'] = {

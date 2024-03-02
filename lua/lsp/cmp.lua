@@ -30,8 +30,8 @@ local M = {
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
       -- 'hrsh7th/cmp-nvim-lua',
-      -- 'kola-web/cmp-path',
-      'hrsh7th/cmp-path',
+      'kola-web/cmp-path',
+      -- 'hrsh7th/cmp-path',
       {
         'zbirenbaum/copilot.lua',
         opts = {
@@ -135,12 +135,12 @@ local M = {
           {
             name = 'path',
             option = {
-              -- pathMappings = {
-              --   ['@'] = '${folder}/src',
-              --   ['~@'] = '${folder}/src',
-              --   ['/images'] = '${folder}/src/images',
-              --   ['/components'] = '${folder}/src/components',
-              -- },
+              pathMappings = {
+                ['@'] = '${folder}/src',
+                -- ['~@'] = '${folder}/src',
+                --   ['/images'] = '${folder}/src/images',
+                --   ['/components'] = '${folder}/src/components',
+              },
             },
           },
           { name = 'buffer' },

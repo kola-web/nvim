@@ -60,7 +60,6 @@ function M.config()
       'vue',
       'toml',
       'typescript',
-      'tsx',
       'yaml',
       'regex',
       'blade',

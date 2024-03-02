@@ -21,55 +21,36 @@ local M = {
   },
 }
 
-local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if not has_cmp then
-  return
-end
+local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-M.capabilities = vim.tbl_deep_extend('force', {}, vim.lsp.protocol.make_client_capabilities(), has_cmp and cmp_nvim_lsp.default_capabilities() or {}, {
-  workspace = {
-    didChangeWatchedFiles = {
-      dynamicRegistration = true,
-    },
-  },
-})
+M.on_attach = function()
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+      local keymap = vim.keymap.set
 
-local function lsp_keymaps(bufnr)
-  local keymap = vim.api.nvim_buf_set_keymap
-  -- stylua: ignore start
-  keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true, desc = "GoTo declaration" })
-  keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true, desc = "GoTo definition" })
-  keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true, desc = "Hover" })
-  keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", { noremap = true, silent = true, desc = "GoTo implementation" })
-  -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { noremap = true, silent = true, desc = "GoTo references" })
-  keymap(bufnr, "n", "gr", "<cmd>lua require('trouble').toggle('lsp_references')<CR>", { noremap = true, silent = true, desc = "GoTo references" })
-  keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true, desc = "Float diagnostic" })
-  keymap(bufnr, "n", "<leader>lI", "<cmd>LspInfo<cr>", { noremap = true, silent = true, desc = "Mason" })
-  keymap(bufnr, "n", "<leader>li", "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", { noremap = true, silent = true, desc = "Lsp incoming_calls" })
-  keymap(bufnr, "n", "<leader>lo", "<cmd>lua vim.lsp.buf.outgoing_calls()<cr>", { noremap = true, silent = true, desc = "Lsp outgoing_calls" })
-  keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { noremap = true, silent = true, desc = "Code action" })
-  keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", { noremap = true, silent = true, desc = "Next diagnostic" })
-  keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", { noremap = true, silent = true, desc = "Previous diagnostic" })
-  keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { noremap = true, silent = true, desc = "Rename" })
-  keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true, silent = true, desc = "Signature help" })
-  keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", { noremap = true, silent = true, desc = "Setloclist" })
-  keymap(bufnr, "n", "<leader>ld", "<cmd>TroubleToggle<CR>", { noremap = true, silent = true, desc = "Setloclist" })
-  -- stylua: ignore end
-end
-
-M.on_attach = function(client, bufnr)
-  lsp_keymaps(bufnr)
-
-  -- client.server_capabilities.documentFormattingProvider = false
-
-  if client.name == 'eslint' then
-    client.server_capabilities.documentFormattingProvider = true
-  end
-
-  -- vim.api.nvim_create_autocmd('BufWritePre', {
-  --   buffer = bufnr,
-  --   command = 'EslintFixAll',
-  -- })
+      local buffer = ev.buf
+      -- stylua: ignore start
+      keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "GoTo declaration" })
+      keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "GoTo definition" })
+      keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "Hover" })
+      keymap("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "GoTo implementation" })
+      -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "GoTo references" })
+      keymap("n", "gr", "<cmd>lua require('trouble').toggle('lsp_references')<CR>", { buffer=buffer, noremap = true, silent = true, desc = "GoTo references" })
+      keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "Float diagnostic" })
+      keymap("n", "<leader>lI", "<cmd>LspInfo<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Mason" })
+      keymap("n", "<leader>li", "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Lsp incoming_calls" })
+      keymap("n", "<leader>lo", "<cmd>lua vim.lsp.buf.outgoing_calls()<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Lsp outgoing_calls" })
+      keymap("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Code action" })
+      keymap("n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Next diagnostic" })
+      keymap("n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Previous diagnostic" })
+      keymap("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Rename" })
+      keymap("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "Signature help" })
+      keymap("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "Setloclist" })
+      keymap("n", "<leader>ld", "<cmd>TroubleToggle<CR>", { buffer=buffer, noremap = true, silent = true, desc = "Setloclist" })
+      -- stylua: ignore end
+    end,
+  })
 end
 
 function M.config()
@@ -81,6 +62,8 @@ function M.config()
     },
   })
 
+  M.on_attach()
+
   local lspconfig = require('lspconfig')
 
   require('mason-lspconfig').setup_handlers({
@@ -89,8 +72,7 @@ function M.config()
       --   return
       -- end
       local server_config = {
-        on_attach = M.on_attach,
-        capabilities = M.capabilities,
+        capabilities = lsp_capabilities,
       }
       local neoConfig = {}
       if server_name == 'emmet_language_server' then
@@ -107,8 +89,8 @@ function M.config()
   })
 
   local signs = {
-    { name = 'DiagnosticSignError', text = '' },
-    { name = 'DiagnosticSignWarn', text = '' },
+    { name = 'DiagnosticSignError', text = ' ' },
+    { name = 'DiagnosticSignWarn', text = ' ' },
     { name = 'DiagnosticSignHint', text = '' },
     { name = 'DiagnosticSignInfo', text = ' ' },
   }
