@@ -88,12 +88,12 @@ function M.config()
   }
 
   local mappings = {
-    ['e'] = {
-      function()
-        require('neo-tree.command').execute({ toggle = true })
-      end,
-      'Explorer',
-    },
+    -- ['e'] = {
+    --   function()
+    --     require('neo-tree.command').execute({ toggle = true })
+    --   end,
+    --   'Explorer',
+    -- },
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     ['q'] = { '<cmd>q!<CR>', 'Quit' },
     ['c'] = {
@@ -102,29 +102,20 @@ function M.config()
       end,
       'Close Buffer',
     },
+    o = { '<cmd>Lspsaga outline<cr>', 'outline' },
     ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
-    ['o'] = { '<cmd>AerialToggle<CR>', 'Symbols' },
     -- ['f'] = {
     --   '<cmd> Telescope find_files <CR>',
     --   'Find files',
     -- },
     ['f'] = {
-      function()
-        require('fzf-lua').files()
-      end,
+      '<cmd> FzfLua files <CR>',
       'Find files',
     },
     ['F'] = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
-    -- ["F"] = { "<cmd>FzfLua live_grep theme=ivy<cr>", "Find Text" },
-    -- ['m'] = {
-    --   function()
-    --     vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
-    --   end,
-    --   'Format',
-    -- },
     ['m'] = { fun.conformFormat, 'Format buffer' },
-    -- ["m"] = { "<cmd>GuardFmt<cr>", "Format" },
     [';'] = { '<cmd>Dashboard<cr>', 'Alpha' },
+    ["'"] = { [[:<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>]], 'Modify the register' },
 
     b = {
       name = 'Buffers',
@@ -149,7 +140,6 @@ function M.config()
       k = { require('smart-splits').swap_buf_up, 'swap_buf_up' },
       l = { require('smart-splits').swap_buf_right, 'swap_buf_right' },
     },
-    ["'"] = { [[:<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>]], 'Modify the register' },
     p = {
       name = 'Projects',
       h = { '<cmd>Telescope oldfiles<cr>', 'history file' },
@@ -186,7 +176,6 @@ function M.config()
         'run file',
       },
     },
-
     g = {
       name = 'Git',
       g = { '<cmd>lua _LAZYGIT_TOGGLE()<CR>', 'Lazygit' },
@@ -217,24 +206,25 @@ function M.config()
         p = { '<cmd>Gist -b -p<cr>', 'Create Private' },
       },
     },
-
     l = {
       name = 'LSP',
-      -- d = { '<cmd>TroubleToggle<cr>', 'diagnostic_setloclist' },
       l = { '<cmd>lua require("neogen").generate()<CR>', 'generate' },
       t = { '<cmd>Telescope filetypes<cr>', 'filetypes' },
-      p = {
-        function()
-          require('dropbar.api').pick()
-        end,
-        'dropbar',
-      },
       c = {
         function()
           fun.compare_to_clipboard()
         end,
         'clip',
       },
+      a = { '<cmd>Lspsaga code_action<cr>', 'code action' },
+      d = { '<cmd>Lspsaga show_buf_diagnostics ++normal<cr>', 'show buffer diagnostics' },
+      D = { '<cmd>Lspsaga show_workspace_diagnostics<cr>', 'show workspace diagnostics' },
+      i = { '<cmd>Lspsaga incoming_calls<cr>', 'incoming calls' },
+      o = { '<cmd>Lspsaga outgoing_calls<cr>', 'outgoing calls' },
+      r = { '<cmd>Lspsaga rename<cr>', 'rename' },
+      q = { '<cmd>Lspsaga show_workspace_diagnostics ++normal<cr>', 'show workspace diagnostics' },
+      j = { '<cmd>Lspsaga diagnostic_jump_next<cr>', 'diagnostic jump next' },
+      k = { '<cmd>Lspsaga diagnostic_jump_prev<cr>', 'diagnostic jump prev' },
     },
 
     s = {
@@ -353,7 +343,6 @@ function M.config()
         end,
         'jump line',
       },
-      -- L = { '<cmd>HopLine<cr>', 'HopLineStart' },
     },
   }
 

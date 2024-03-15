@@ -25,6 +25,7 @@ local M = {
       right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
       diagnostics = 'nvim_lsp',
       show_tab_indicators = true,
+      sort_by = 'insert_at_end',
       indicator = {
         style = 'underline',
       },

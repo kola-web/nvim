@@ -24,6 +24,7 @@ local M = {
 
   {
     'mrjones2014/smart-splits.nvim',
+    version = '>=1.0.0',
     build = 'bash ./kitty/install-kittens.bash',
     config = function()
       require('smart-splits').setup({

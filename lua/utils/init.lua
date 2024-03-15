@@ -59,7 +59,7 @@ M.is_eslint = function()
   local util = require('lspconfig.util')
   local cwd = vim.fn.getcwd()
   local project_root = util.find_node_modules_ancestor(cwd)
-  local is_eslint = vim.fn.findfile('eslint.config.js', project_root) ~= ''
+  local is_eslint = vim.fn.findfile('eslint.config.js', project_root) ~= '' or vim.fn.findfile('eslint.config.ts', project_root) ~= ''
   return is_eslint
 end
 
@@ -121,9 +121,10 @@ end
 
 M.conformFormat = function()
   local extra_lang_args = {
-    javasciprt = { lsp_fallback = 'always', name = 'eslint' },
-    typescript = { lsp_fallback = 'always', name = 'eslint' },
-    javascriptreact = { lsp_fallback = 'always', name = 'eslint' },
+    javasciprt = { name = 'eslint' },
+    typescript = { name = 'eslint' },
+    javascriptreact = { name = 'eslint' },
+    vue = { name = 'eslint' },
   }
 
   local buf = vim.api.nvim_get_current_buf()
@@ -158,17 +159,6 @@ M.on_load = function(name, fn)
       end,
     })
   end
-end
-
----@param on_attach fun(client, buffer)
-function M.on_attach(on_attach)
-  vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(args)
-      local buffer = args.buf ---@type number
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      on_attach(client, buffer)
-    end,
-  })
 end
 
 return M

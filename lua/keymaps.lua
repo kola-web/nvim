@@ -126,7 +126,7 @@ keymap('i', '.', '.<c-g>u')
 keymap('i', ';', ';<c-g>u')
 
 -- save file
-keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
+-- keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 
 -- function EnterOrIndentTag()
 --   local file_type = vim.bo.filetype

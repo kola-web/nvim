@@ -6,13 +6,16 @@ local M = {
   opts = function()
     local util = require('conform.util')
     local prettier = { 'prettier' }
-    local eslintOrPrettier = function()
-      if require('utils.init').is_eslint() then
-        return {}
-      else
-        return { prettier }
-      end
-    end
+    local eslint = { 'prettier', 'eslint_d' }
+
+    -- os.execute('ESLINT_USE_FLAT_CONFIG=true ' .. vim.fn.stdpath('data') .. '/mason/bin/eslint_d restart')
+    -- local eslintOrPrettier = function()
+    --   if require('utils.init').is_eslint() then
+    --     return eslint
+    --   else
+    --     return prettier
+    --   end
+    -- end
 
     return {
       format = {
@@ -25,9 +28,9 @@ local M = {
         fish = { 'fish_indent' },
         sh = { 'shfmt' },
 
-        javascript = eslintOrPrettier,
-        typescript = eslintOrPrettier,
-        vue = eslintOrPrettier,
+        javascript = { prettier },
+        typescript = prettier,
+        vue = prettier,
         html = { prettier },
         css = { prettier },
         scss = { prettier },
@@ -41,12 +44,6 @@ local M = {
         blade = { 'blade-formatter' },
       },
       formatters = {
-        eslint_d = {
-          args = { '--fix-to-stdout', '--stdin', '--stdin-filename', '$FILENAME', 'restart' },
-          env = {
-            ESLINT_USE_FLAT_CONFIG = 'true',
-          },
-        },
         ['blade-formatter'] = {
           prepend_args = { '-i', '2' },
         },

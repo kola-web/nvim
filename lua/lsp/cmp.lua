@@ -32,18 +32,6 @@ local M = {
       -- 'hrsh7th/cmp-nvim-lua',
       'kola-web/cmp-path',
       -- 'hrsh7th/cmp-path',
-      {
-        'zbirenbaum/copilot.lua',
-        opts = {
-          suggestion = { enabled = false },
-          panel = { enabled = false },
-        },
-        keys = {
-          { '<C-Enter>', '<cmd>Copilot panel<cr>', mode = { 'n' } },
-        },
-        config = true,
-      },
-      { 'zbirenbaum/copilot-cmp', fix_pairs = true, config = true },
 
       {
         'mattn/emmet-vim',
@@ -128,22 +116,22 @@ local M = {
           end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
-          { name = 'copilot', group_index = 1, priority = 100 },
+          { name = 'copilot' },
           { name = 'nvim_lsp' },
-          -- { name = 'nvim_lua' },
           { name = 'luasnip' },
+          { name = 'nvim_lua' },
+          { name = 'buffer' },
           {
             name = 'path',
             option = {
               pathMappings = {
                 ['@'] = '${folder}/src',
                 -- ['~@'] = '${folder}/src',
-                --   ['/images'] = '${folder}/src/images',
-                --   ['/components'] = '${folder}/src/components',
+                -- ['/images'] = '${folder}/src/images',
+                -- ['/components'] = '${folder}/src/components',
               },
             },
           },
-          { name = 'buffer' },
         }),
         formatting = {
           fields = { 'abbr', 'menu', 'kind' },

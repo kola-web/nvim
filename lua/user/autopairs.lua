@@ -1,7 +1,9 @@
 local M = {
   'windwp/nvim-autopairs',
   event = 'InsertEnter',
-  opts = {}, -- this is equalent to setup({}) function
+  opts = {
+    check_ts = true,
+  }, -- this ischeck_ts equalent to setup({}) function
 }
 
 return M

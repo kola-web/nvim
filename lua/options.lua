@@ -20,10 +20,9 @@ opt.confirm = true -- 在退出修改的缓冲区之前确认保存更改
 opt.cursorline = true -- 启用当前行高亮
 opt.expandtab = true -- 使用空格而不是制表符
 opt.fileencoding = 'utf-8' -- 文件编码为 UTF-8
-opt.formatoptions = "jcroqlnt" -- tcqj
+opt.formatoptions = 'jcroqlnt' -- tcqj
 opt.grepformat = '%f:%l:%c:%m' -- grep 命令输出格式
 opt.grepprg = 'rg --vimgrep' -- grep 命令
-opt.guifont = 'JetBrainsMono Nerd Font:h14' -- 在图形化的 neovim 应用程序中使用的字体
 opt.ignorecase = true -- 忽略大小写
 opt.inccommand = 'nosplit' -- 预览增量替换
 opt.laststatus = 3 -- 全局状态行
@@ -56,10 +55,14 @@ opt.undofile = true -- 保存撤销历史
 opt.undolevels = 10000 -- 可以撤销的最大更改次数
 opt.whichwrap:append('<,>,[,],h,l') -- 允许在到达行首/行尾时使用的键
 opt.iskeyword:append('-,#') -- 将包含 `-,#` 的单词视为单个单词
-opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-opt.wildmode = "longest:full,full" -- Command-line completion mode
+opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
+opt.wildmode = 'longest:full,full' -- Command-line completion mode
 opt.winminwidth = 5 -- 窗口的最小宽度
 opt.wrap = false -- 禁用换行
+
+-- gui
+opt.guifont = 'JetBrainsMono Nerd Font:h12' -- 在图形化的 neovim 应用程序中使用的字体
+opt.linespace = 0
 
 if vim.fn.has('nvim-0.10') == 1 then
   opt.smoothscroll = true
@@ -80,7 +83,7 @@ vim.g.markdown_recommended_style = 0
 
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
-  vim.opt.linespace = 4
+  vim.g.neovide_scale_factor = 1.4
   vim.g.neovide_refresh_rate = 60
   vim.g.neovide_cursor_animation_length = 0
   vim.g.neovide_scroll_animation_length = 0

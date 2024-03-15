@@ -3,8 +3,8 @@ local M = {
   event = 'BufRead',
   opts = {
     highlighter = {
-      auto_enable = true,
-      lsp = true,
+      auto_enable = false,
+      lsp = false,
     },
   },
   keys = {
