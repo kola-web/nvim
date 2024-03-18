@@ -102,8 +102,11 @@ function M.config()
       end,
       'Close Buffer',
     },
-    o = { '<cmd>Lspsaga outline<cr>', 'outline' },
-    ['h'] = { '<cmd>nohlsearch<CR>', 'No Highlight' },
+    o = { '<cmd>Outline<CR>', 'outline' },
+    h = {
+      '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR>',
+      'Redraw / clear hlsearch / diff update',
+    },
     -- ['f'] = {
     --   '<cmd> Telescope find_files <CR>',
     --   'Find files',
@@ -123,17 +126,9 @@ function M.config()
         "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
         'Buffers',
       },
-      -- o = {
-      --   '<cmd>%bdelete|edit#|bdelete#<cr>',
-      --   'BufferCloseAllButCurrent',
-      -- },
       o = {
         '<cmd>BufferLineCloseOthers<cr>',
         'BufferCloseAllButCurrent',
-      },
-      r = {
-        '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR>',
-        'Redraw / clear hlsearch / diff update',
       },
       h = { require('smart-splits').swap_buf_left, 'swap_buf_left' },
       j = { require('smart-splits').swap_buf_down, 'swap_buf_down' },
@@ -147,18 +142,6 @@ function M.config()
       c = { '<cmd>PeekClose<cr>', 'PeekClose' },
       a = { vim.lsp.buf.add_workspace_folder, 'add_workspace_folder' },
     },
-    P = {
-      name = 'Plugins',
-      i = { '<cmd>Lazy install<cr>', 'Install' },
-      s = { '<cmd>Lazy sync<cr>', 'Sync' },
-      S = { '<cmd>Lazy clear<cr>', 'Status' },
-      c = { '<cmd>Lazy clean<cr>', 'Clean' },
-      u = { '<cmd>Lazy update<cr>', 'Update' },
-      p = { '<cmd>Lazy profile<cr>', 'Profile' },
-      l = { '<cmd>Lazy log<cr>', 'Log' },
-      d = { '<cmd>Lazy debug<cr>', 'Debug' },
-    },
-
     r = {
       name = 'Replace',
       d = { '<cmd>%s/<div/<view/g<cr><cmd>%s/<\\/div/<\\/view/g<cr>', 'div->view' },
@@ -175,6 +158,7 @@ function M.config()
         "<cmd><c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>",
         'run file',
       },
+      a = { '<cmd>%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gcI<Left><Left><Left><Left><cr>', 'div->view' },
     },
     g = {
       name = 'Git',
@@ -196,15 +180,6 @@ function M.config()
         '<cmd>Gitsigns diffthis HEAD<cr>',
         'Diff',
       },
-      G = {
-        name = 'Gist',
-        a = { '<cmd>Gist -b -a<cr>', 'Create Anon' },
-        d = { '<cmd>Gist -d<cr>', 'Delete' },
-        f = { '<cmd>Gist -f<cr>', 'Fork' },
-        g = { '<cmd>Gist -b<cr>', 'Create' },
-        l = { '<cmd>Gist -l<cr>', 'List' },
-        p = { '<cmd>Gist -b -p<cr>', 'Create Private' },
-      },
     },
     l = {
       name = 'LSP',
@@ -216,15 +191,6 @@ function M.config()
         end,
         'clip',
       },
-      a = { '<cmd>Lspsaga code_action<cr>', 'code action' },
-      d = { '<cmd>Lspsaga show_buf_diagnostics ++normal<cr>', 'show buffer diagnostics' },
-      D = { '<cmd>Lspsaga show_workspace_diagnostics<cr>', 'show workspace diagnostics' },
-      i = { '<cmd>Lspsaga incoming_calls<cr>', 'incoming calls' },
-      o = { '<cmd>Lspsaga outgoing_calls<cr>', 'outgoing calls' },
-      r = { '<cmd>Lspsaga rename<cr>', 'rename' },
-      q = { '<cmd>Lspsaga show_workspace_diagnostics ++normal<cr>', 'show workspace diagnostics' },
-      j = { '<cmd>Lspsaga diagnostic_jump_next<cr>', 'diagnostic jump next' },
-      k = { '<cmd>Lspsaga diagnostic_jump_prev<cr>', 'diagnostic jump prev' },
     },
 
     s = {
@@ -282,26 +248,15 @@ function M.config()
         'package_info',
       },
     },
-    S = {
+    i = {
       name = 'SnipRun',
       c = { '<cmd>SnipClose<cr>', 'Close' },
-      n = { '<cmd>%SnipRun<cr>', 'Run File' },
-      i = { '<cmd>SnipInfo<cr>', 'Info' },
+      i = { '<cmd>SnipRun<cr>', 'Run File' },
+      d = { '<cmd>SnipInfo<cr>', 'Info' },
       m = { '<cmd>SnipReplMemoryClean<cr>', 'Mem Clean' },
       r = { '<cmd>SnipReset<cr>', 'Reset' },
-      t = { '<cmd>SnipRunToggle<cr>', 'Toggle' },
-      x = { '<cmd>SnipTerminate<cr>', 'Terminate' },
+      l = { '<cmd>SnipLive<cr>', 'snip live' },
     },
-
-    T = {
-      name = 'Treesitter',
-      h = { '<cmd>TSHighlightCapturesUnderCursor<cr>', 'Highlight' },
-      l = { '<cmd>TSNodeUnderCursor<cr>', 'UnderCursor' },
-      p = { '<cmd>TSPlaygroundToggle<cr>', 'Playground' },
-    },
-    -- q = {
-    --   t = { '<cmd>.!pbpaste | quicktype -l typescript --just-types  <cr>', 'typescript' },
-    -- },
     ['n'] = {
       name = 'noice',
       h = { '<cmd>NoiceHistory<cr>', 'NoiceHistory' },
@@ -369,6 +324,10 @@ function M.config()
     },
     q = {
       t = { "<esc><cmd>'<,'>!quicktype -l typescript --just-types <cr>", 'quicktype' },
+    },
+    i = {
+      name = 'SnipRun',
+      i = { '<cmd>%SnipRun<cr>', 'Run File' },
     },
   }
 

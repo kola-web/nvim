@@ -2,16 +2,7 @@ local M = {
   'nvim-treesitter/nvim-treesitter',
   version = false, -- last release is way too old and doesn't work on Windows
   build = ':TSUpdate',
-  event = { 'VeryLazy' },
-  init = function(plugin)
-    require('lazy.core.loader').add_to_rtp(plugin)
-    require('nvim-treesitter.query_predicates')
-  end,
   dependencies = {
-    {
-      'nvim-tree/nvim-web-devicons',
-      event = 'VeryLazy',
-    },
     {
       'windwp/nvim-ts-autotag',
     },
@@ -66,7 +57,7 @@ function M.config()
     }, -- put the language you want in this array
     -- ensure_installed = "all", -- one of "all" or a list of languages
     ignore_install = { '' }, -- List of parsers to ignore installing
-    sync_install = true,
+    sync_install = false,
     auto_install = true,
 
     highlight = {

@@ -62,7 +62,6 @@ opt.wrap = false -- 禁用换行
 
 -- gui
 opt.guifont = 'JetBrainsMono Nerd Font:h12' -- 在图形化的 neovim 应用程序中使用的字体
-opt.linespace = 0
 
 if vim.fn.has('nvim-0.10') == 1 then
   opt.smoothscroll = true

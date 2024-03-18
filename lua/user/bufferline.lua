@@ -1,12 +1,16 @@
 local M = {
   'akinsho/bufferline.nvim',
   event = 'VeryLazy',
+  after = 'catppuccin',
   dependencies = {
     {
       'echasnovski/mini.bufremove',
     },
     {
       'nvim-tree/nvim-web-devicons',
+    },
+    {
+      'catppuccin/nvim',
     },
   },
   keys = {
@@ -16,6 +20,7 @@ local M = {
     { ')', '<cmd>BufferLineMoveNext<cr>', desc = 'move move' },
   },
   opts = {
+
     options = {
       -- mode = 'tabs', -- set to "tabs" to only show tabpages instead
       themable = true,

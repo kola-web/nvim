@@ -74,10 +74,10 @@ M.config = function()
         i = {
           ['<Down>'] = actions.move_selection_next,
           ['<Up>'] = actions.move_selection_previous,
-          ['<C-j>'] = actions.move_selection_next,
-          ['<C-k>'] = actions.move_selection_previous,
-          ['<C-n>'] = actions.cycle_history_next,
-          ['<C-p>'] = actions.cycle_history_prev,
+          ['<C-n>'] = actions.move_selection_next,
+          ['<C-p>'] = actions.move_selection_previous,
+          ['<C-j>'] = actions.cycle_history_next,
+          ['<C-k>'] = actions.cycle_history_prev,
           ['<CR>'] = actions.select_default,
           ['<c-s>'] = flash,
         },
@@ -106,7 +106,7 @@ M.config = function()
         initial_mode = 'normal',
         theme = 'dropdown',
         -- disables netrw and use telescope-file-browser in its place
-        hijack_netrw = true,
+        hijack_netrw = false,
         mappings = {
           ['i'] = {
             -- your custom insert mode mappings

@@ -1,14 +1,14 @@
 local M = {
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   priority = 1000,
-  --   lazy = false,
-  --   opts = { style = 'moon', transparent = false },
-  --   config = function(_, opts)
-  --     require('tokyonight').setup(opts)
-  --     vim.cmd([[colorscheme tokyonight]])
-  --   end,
-  -- },
+  {
+    'folke/tokyonight.nvim',
+    priority = 1000,
+    lazy = false,
+    opts = { style = 'moon', transparent = false },
+    config = function(_, opts)
+      require('tokyonight').setup(opts)
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
 
   -- {
   --   'craftzdog/solarized-osaka.nvim',
@@ -36,13 +36,14 @@ local M = {
   --   end,
   -- },
 
-  {
-    'olimorris/onedarkpro.nvim',
-    priority = 1000, -- Ensure it loads first
-    config = function()
-      vim.cmd('colorscheme onedark')
-    end,
-  },
+  -- {
+  --   priority = 1000,
+  --   lazy = false,
+  --   'rebelot/kanagawa.nvim',
+  --   config = function()
+  --     vim.cmd([[colorscheme kanagawa]])
+  --   end,
+  -- },
 }
 
 return M

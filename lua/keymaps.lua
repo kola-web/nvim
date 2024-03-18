@@ -25,10 +25,10 @@ keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 
 -- Map j and k with v:count conditional for vertical movement
-keymap({ 'n', 'x' }, 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
-keymap({ 'n', 'x' }, '<Down>', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
-keymap({ 'n', 'x' }, 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
-keymap({ 'n', 'x' }, '<Up>', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
+-- keymap({ 'n', 'x' }, 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
+-- keymap({ 'n', 'x' }, '<Down>', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
+-- keymap({ 'n', 'x' }, 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
+-- keymap({ 'n', 'x' }, '<Up>', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
 
 -- All
 keymap('', '<S-l>', '$', opts)
