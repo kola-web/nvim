@@ -98,8 +98,8 @@ vim.keymap.set('n', 'sxc', "<cmd>lua require('substitute.exchange').cancel()<cr>
 keymap('n', 'ga', '<Plug>(abolish-coerce-word)')
 keymap('v', 'ga', '<Plug>(abolish-coerce)')
 
-keymap('x', 'gx', '<Plug>(EasyAlign)')
-keymap('n', 'gx', '<Plug>(EasyAlign)')
+keymap('x', 'g=', '<Plug>(EasyAlign)')
+keymap('n', 'g=', '<Plug>(EasyAlign)')
 
 -- fzf-lua
 keymap('t', '<esc>', [[<C-\><C-n>]])

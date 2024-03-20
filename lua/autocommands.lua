@@ -9,6 +9,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local buffer = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local filetype = vim.bo[buffer].filetype
+
+    if client.server_capabilities['documentSymbolProvider'] then
+      if filetype ~= 'vue' or client.name == 'volar' then
+        require('nvim-navic').attach(client, buffer)
+      end
+    end
 
     local keymap = vim.keymap.set
     -- stylua: ignore start
@@ -52,15 +59,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- resize splits if window got resized
-vim.api.nvim_create_autocmd({ "VimResized" }, {
-  group = augroup("resize_splits"),
+vim.api.nvim_create_autocmd({ 'VimResized' }, {
+  group = augroup('resize_splits'),
   callback = function()
     local current_tab = vim.fn.tabpagenr()
-    vim.cmd("tabdo wincmd =")
-    vim.cmd("tabnext " .. current_tab)
+    vim.cmd('tabdo wincmd =')
+    vim.cmd('tabnext ' .. current_tab)
   end,
 })
-
 
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd('FileType', {
@@ -92,9 +98,9 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- make it easier to close man-files when opened inline
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("man_unlisted"),
-  pattern = { "man" },
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup('man_unlisted'),
+  pattern = { 'man' },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
   end,
@@ -110,11 +116,10 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-
 -- Fix conceallevel for json files
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = augroup("json_conceal"),
-  pattern = { "json", "jsonc", "json5" },
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  group = augroup('json_conceal'),
+  pattern = { 'json', 'jsonc', 'json5' },
   callback = function()
     vim.opt_local.conceallevel = 0
   end,

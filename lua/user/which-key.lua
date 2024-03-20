@@ -13,17 +13,15 @@ function M.config()
 
   local setup = {
     plugins = {
-      marks = true, -- shows a list of your marks on ' and `
-      registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+      marks = true,
+      registers = true,
       spelling = {
-        enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-        suggestions = 20, -- how many suggestions should be shown in the list?
+        enabled = true,
+        suggestions = 20,
       },
-      -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-      -- No actual key bindings are created
       presets = {
-        operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-        motions = false, -- adds help for motions
+        operators = false,
+        motions = false,
         text_objects = false, -- help for text objects triggered after entering an operator
         windows = true, -- default bindings on <c-w>
         nav = true, -- misc bindings to work with windows
@@ -67,12 +65,7 @@ function M.config()
     hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ ' }, -- hide mapping boilerplate
     show_help = false, -- show help message on the command line when the popup is visible
     show_keys = false,
-    -- triggers = "auto", -- automatically setup triggers
-    -- triggers = {"<leader>"} -- or specify a list manually
     triggers_blacklist = {
-      -- list of mode / prefixes that should never be hooked by WhichKey
-      -- this is mostly relevant for key maps that start with a native binding
-      -- most people should not need to change this
       i = { 'j', 'k' },
       v = { 'j', 'k' },
     },
@@ -88,12 +81,6 @@ function M.config()
   }
 
   local mappings = {
-    -- ['e'] = {
-    --   function()
-    --     require('neo-tree.command').execute({ toggle = true })
-    --   end,
-    --   'Explorer',
-    -- },
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     ['q'] = { '<cmd>q!<CR>', 'Quit' },
     ['c'] = {
@@ -107,10 +94,6 @@ function M.config()
       '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR>',
       'Redraw / clear hlsearch / diff update',
     },
-    -- ['f'] = {
-    --   '<cmd> Telescope find_files <CR>',
-    --   'Find files',
-    -- },
     ['f'] = {
       '<cmd> FzfLua files <CR>',
       'Find files',
@@ -120,6 +103,42 @@ function M.config()
     [';'] = { '<cmd>Dashboard<cr>', 'Alpha' },
     ["'"] = { [[:<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>]], 'Modify the register' },
 
+    a = {
+      name = 'copilot',
+      a = {
+        function()
+          local input = vim.fn.input('Quick Chat: ')
+          if input ~= '' then
+            require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
+          end
+        end,
+        'CopilotChat - Quick chat',
+      },
+      h = {
+        function()
+          local actions = require('CopilotChat.actions')
+          require('CopilotChat.integrations.telescope').pick(actions.help_actions())
+          vim.api.nvim_input('<Esc>')
+        end,
+        'CopilotChat - Help actions',
+      },
+      p = {
+        function()
+          local actions = require('CopilotChat.actions')
+          require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
+          vim.api.nvim_input('<Esc>')
+        end,
+        'CopilotChat - Prompt actions',
+      },
+      o = {
+        '<cmd>Copilot panel<cr>',
+        'Copilot panel',
+      },
+      t = {
+        '<cmd>CopilotChatToggle<cr>',
+        'CopilotChat Toggle',
+      },
+    },
     b = {
       name = 'Buffers',
       b = {
@@ -327,7 +346,7 @@ function M.config()
     },
     i = {
       name = 'SnipRun',
-      i = { '<cmd>%SnipRun<cr>', 'Run File' },
+      i = { "<cmd>'<,'>SnipRun<cr>", 'Run File' },
     },
   }
 

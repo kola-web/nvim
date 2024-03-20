@@ -69,6 +69,7 @@ M.config = function()
         'node_modules',
         'miniprogram_npm',
         '.yarn/',
+        'dist',
       },
       mappings = {
         i = {
@@ -123,6 +124,9 @@ M.config = function()
         },
       },
       package_info = {
+        initial_mode = 'normal',
+      },
+      ['Copilot Chat Prompt Actions'] = {
         initial_mode = 'normal',
       },
     },
