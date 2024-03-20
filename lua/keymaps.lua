@@ -24,11 +24,19 @@ keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 
--- Map j and k with v:count conditional for vertical movement
--- keymap({ 'n', 'x' }, 'j', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
--- keymap({ 'n', 'x' }, '<Down>', 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true, silent = true })
--- keymap({ 'n', 'x' }, 'k', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
--- keymap({ 'n', 'x' }, '<Up>', 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true, silent = true })
+-- better up/down
+keymap({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
+-- Move Lines
+keymap("n", "<D-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
+keymap("n", "<D-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
+keymap("i", "<D-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+keymap("i", "<D-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+keymap("v", "<D-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+keymap("v", "<D-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- All
 keymap('', '<S-l>', '$', opts)
@@ -124,6 +132,13 @@ keymap('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search res
 keymap('i', ',', ',<c-g>u')
 keymap('i', '.', '.<c-g>u')
 keymap('i', ';', ';<c-g>u')
+
+keymap('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
+keymap('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
+keymap('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
+keymap('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
+keymap('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
+keymap('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
 -- save file
 -- keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })

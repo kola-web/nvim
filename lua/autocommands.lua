@@ -17,25 +17,44 @@ vim.api.nvim_create_autocmd('LspAttach', {
       end
     end
 
+    -- diagnostic
+    local diagnostic_goto = function(next, severity)
+      local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+      severity = severity and vim.diagnostic.severity[severity] or nil
+      return function()
+        go({ severity = severity })
+      end
+    end
+
     local keymap = vim.keymap.set
     -- stylua: ignore start
-    keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "GoTo declaration" })
-    keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "GoTo definition" })
-    keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "Hover" })
-    keymap("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "GoTo implementation" })
-    keymap("n", "gr", "<cmd>lua require('trouble').toggle('lsp_references')<CR>", { buffer=buffer, noremap = true, silent = true, desc = "GoTo references" })
-    keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "Float diagnostic" })
-    keymap("n", "<leader>lI", "<cmd>LspInfo<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Mason" })
-    keymap("n", "<leader>li", "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Lsp incoming_calls" })
-    keymap("n", "<leader>lo", "<cmd>lua vim.lsp.buf.outgoing_calls()<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Lsp outgoing_calls" })
-    keymap("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Code action" })
-    keymap("n", "<leader>ln", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Next diagnostic" })
-    keymap("n", "<leader>lp", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Previous diagnostic" })
-    keymap("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { buffer=buffer, noremap = true, silent = true, desc = "Rename" })
-    keymap("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "Signature help" })
-    keymap("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", { buffer=buffer, noremap = true, silent = true, desc = "Setloclist" })
-    keymap("n", "<leader>ld", "<cmd>TroubleToggle<CR>", { buffer=buffer, noremap = true, silent = true, desc = "Setloclist" })
-    keymap("n", "<leader>lm", "<cmd>EslintFixAll<CR>", { buffer=buffer, noremap = true, silent = true, desc = "Setloclist" })
+    local function createKeymap(mode, key, cmd, desc)
+        keymap(mode, key, cmd, { buffer=buffer, noremap = true, silent = true, desc = desc })
+    end
+
+    createKeymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", "GoTo declaration")
+    createKeymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", "GoTo definition")
+    createKeymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover")
+    createKeymap("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", "GoTo implementation")
+    createKeymap("n", "gr", function() require("trouble").toggle("lsp_references") end, "GoTo references")
+    createKeymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", "Float diagnostic")
+    createKeymap("n", "]d", diagnostic_goto(true), "Next Diagnostic")
+    createKeymap("n", "[d", diagnostic_goto(false), "Prev Diagnostic")
+    createKeymap("n", "]e", diagnostic_goto(true, "ERROR"), "Next Error")
+    createKeymap("n", "[e", diagnostic_goto(false, "ERROR"), "Prev Error")
+    createKeymap("n", "]w", diagnostic_goto(true, "WARN"), "Next Warning")
+    createKeymap("n", "[w", diagnostic_goto(false, "WARN"), "Prev Warning")
+    createKeymap("n", "<leader>lI", "<cmd>LspInfo<cr>", "Mason")
+    createKeymap("n", "<leader>li", "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", "Lsp incoming_calls")
+    createKeymap("n", "<leader>lo", "<cmd>lua vim.lsp.buf.outgoing_calls()<cr>", "Lsp outgoing_calls")
+    createKeymap("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action")
+    createKeymap("n", "<leader>ln", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", "Next diagnostic")
+    createKeymap("n", "<leader>lp", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", "Previous diagnostic")
+    createKeymap("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename")
+    createKeymap("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help")
+    createKeymap("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", "Setloclist")
+    createKeymap("n", "<leader>ld", function() require("trouble").toggle() end, "Setloclist")
+    createKeymap("n", "<leader>lm", "<cmd>EslintFixAll<CR>", "EslintFixAll")
     -- stylua: ignore end
   end,
 })
@@ -158,22 +177,4 @@ vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinEnter' }, {
     vim.opt.cursorline = false
   end,
   desc = 'set nocursorline',
-})
-
--- go to last loc when opening a buffer
-vim.api.nvim_create_autocmd('BufReadPost', {
-  group = augroup('last_loc'),
-  callback = function(event)
-    local exclude = { 'gitcommit' }
-    local buf = event.buf
-    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
-      return
-    end
-    vim.b[buf].lazyvim_last_loc = true
-    local mark = vim.api.nvim_buf_get_mark(buf, '"')
-    local lcount = vim.api.nvim_buf_line_count(buf)
-    if mark[1] > 0 and mark[1] <= lcount then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-    end
-  end,
 })

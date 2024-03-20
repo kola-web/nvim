@@ -31,13 +31,16 @@ function M.config()
     },
     -- add operators that will trigger motion and text object completion
     -- to enable all native operators, set the preset / operators plugin above
-    -- operators = { gc = "Comments" },
+    operators = { gc = 'Comments' },
     key_labels = {
       -- override the label used to display some keys. It doesn't effect WK in any other way.
       -- For example:
       -- ["<space>"] = "SPC",
       -- ["<cr>"] = "RET",
       -- ["<tab>"] = "TAB",
+    },
+    motions = {
+      count = true,
     },
     icons = {
       breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
@@ -61,10 +64,10 @@ function M.config()
       spacing = 3, -- spacing between columns
       align = 'center', -- align columns left, center or right
     },
-    ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
+    ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
     hidden = { '<silent>', '<cmd>', '<Cmd>', '<CR>', 'call', 'lua', '^:', '^ ' }, -- hide mapping boilerplate
-    show_help = false, -- show help message on the command line when the popup is visible
-    show_keys = false,
+    show_help = true, -- show help message on the command line when the popup is visible
+    show_keys = true, -- show the currently pressed key and its label as a message in the command line
     triggers_blacklist = {
       i = { 'j', 'k' },
       v = { 'j', 'k' },
@@ -212,9 +215,20 @@ function M.config()
       },
     },
 
+    x = {
+      name = '+diagnostics/quickfix',
+      x = { '<cmd>TroubleToggle document_diagnostics<cr>', 'Document Diagnostics (Trouble)' },
+      X = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Workspace Diagnostics (Trouble)' },
+      l = { '<cmd>TroubleToggle loclist<cr>', 'loclist' },
+      q = { '<cmd>TroubleToggle quickfix<cr>', 'quickfix' },
+      t = { '<cmd>TodoTrouble<cr>', 'Todo' },
+      T = { '<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>', 'Todo/FIX/FIXME' },
+    },
+
     s = {
       name = 'Search',
-      t = { '<cmd>TodoTelescope<cr>', 'TodoTelescope' },
+      t = { '<cmd>TodoTelescope<cr>', 'Todo' },
+      T = { '<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>', 'Todo/Fix/Fixme' },
       f = {
         function()
           require('telescope').extensions.file_browser.file_browser({
@@ -230,20 +244,8 @@ function M.config()
         end,
         'file_browser',
       },
-      a = {
-        function()
-          require('scissors').addNewSnippet()
-        end,
-        'addSnippet',
-      },
       c = { '<cmd>Telescope colorscheme<cr>', 'colorscheme' },
       d = { '<cmd>Telescope diagnostics<cr>', 'diagnostics' },
-      e = {
-        function()
-          require('scissors').editSnippet()
-        end,
-        'editSnippet',
-      },
       h = { '<cmd>lua require"telescope.builtin".find_files({ hidden = true })<cr>', 'hidden file' },
       H = { '<cmd>Telescope help_tags<cr>', 'Help' },
       M = { '<cmd>Telescope man_pages<cr>', 'Man Pages' },
@@ -276,9 +278,20 @@ function M.config()
       r = { '<cmd>SnipReset<cr>', 'Reset' },
       l = { '<cmd>SnipLive<cr>', 'snip live' },
     },
-    ['n'] = {
-      name = 'noice',
-      h = { '<cmd>NoiceHistory<cr>', 'NoiceHistory' },
+    n = {
+      name = 'snippet',
+      a = {
+        function()
+          require('scissors').addNewSnippet()
+        end,
+        'addSnippet',
+      },
+      e = {
+        function()
+          require('scissors').editSnippet()
+        end,
+        'editSnippet',
+      },
     },
     [' '] = {
       name = 'flash',
@@ -350,9 +363,9 @@ function M.config()
     },
   }
 
+  which_key.setup(setup)
   which_key.register(mappings, opts)
   which_key.register(vmappings, vopts)
-  which_key.setup(setup)
 end
 
 return M
