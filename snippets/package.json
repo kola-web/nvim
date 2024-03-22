@@ -1,1 +1,41 @@
-{"author":"kola","name":"kola-snippets","engines":{"vscode":"^1.11.0"},"contributes":{"snippets":[{"path":".\/vue.json","language":["vue"]},{"path":".\/json.json","language":["json"]},{"path":".\/javascript.json","language":["javascript","javascriptreact","typescript","typescriptreact","svelte"]},{"path":".\/lua.json","language":["lua"]}]}}
+{
+  "author": "kola",
+  "name": "kola-snippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "path": "./vue.json",
+        "language": [
+          "vue"
+        ]
+      },
+      {
+        "path": "./json.json",
+        "language": [
+          "json"
+        ]
+      },
+      {
+        "path": "./javascript.json",
+        "language": [
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "svelte",
+          "vue"
+        ]
+      },
+      {
+        "path": "./lua.json",
+        "language": [
+          "lua"
+        ]
+      }
+    ]
+  }
+}
+

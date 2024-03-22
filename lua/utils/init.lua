@@ -18,6 +18,7 @@ M.servers = {
   'docker_compose_language_service',
   'dockerls',
   'eslint',
+  'rust_analyzer',
   -- 'efm',
 }
 
@@ -32,6 +33,7 @@ M.null_servers = {
   'shfmt',
   'taplo',
   'blade-formatter',
+  'rustfmt',
 }
 
 M.compare_to_clipboard = function()

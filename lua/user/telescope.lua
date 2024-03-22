@@ -129,9 +129,6 @@ M.config = function()
       package_info = {
         initial_mode = 'normal',
       },
-      ['Copilot Chat Prompt Actions'] = {
-        initial_mode = 'normal',
-      },
     },
   }
 

@@ -42,6 +42,8 @@ local M = {
         toml = { 'taplo' },
 
         blade = { 'blade-formatter' },
+
+        rust = { 'rustfmt' },
       },
       formatters = {
         ['blade-formatter'] = {

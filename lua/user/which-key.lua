@@ -271,12 +271,48 @@ function M.config()
     },
     i = {
       name = 'SnipRun',
-      c = { '<cmd>SnipClose<cr>', 'Close' },
-      i = { '<cmd>SnipRun<cr>', 'Run File' },
-      d = { '<cmd>SnipInfo<cr>', 'Info' },
-      m = { '<cmd>SnipReplMemoryClean<cr>', 'Mem Clean' },
-      r = { '<cmd>SnipReset<cr>', 'Reset' },
-      l = { '<cmd>SnipLive<cr>', 'snip live' },
+      a = {
+        function()
+          require('sniprun.api').run_range(1, vim.fn.line('$'))
+        end,
+        'All',
+      },
+      c = {
+        function()
+          require('sniprun.display').close_all()
+        end,
+        'Close',
+      },
+      i = {
+        function()
+          require('sniprun').run()
+        end,
+        'Current',
+      },
+      d = {
+        function()
+          require('sniprun').info()
+        end,
+        'Info',
+      },
+      l = {
+        function()
+          require('sniprun.live_mode').toggle()
+        end,
+        'Live Mode',
+      },
+      m = {
+        function()
+          require('sniprun').clear_repl()
+        end,
+        'Clear REPL',
+      },
+      r = {
+        function()
+          require('sniprun').reset()
+        end,
+        'Reset',
+      },
     },
     n = {
       name = 'snippet',
@@ -359,7 +395,12 @@ function M.config()
     },
     i = {
       name = 'SnipRun',
-      i = { "<cmd>'<,'>SnipRun<cr>", 'Run File' },
+      i = {
+        function()
+          require('sniprun').run('v')
+        end,
+        'Run File',
+      },
     },
   }
 

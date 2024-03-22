@@ -27,14 +27,14 @@ local M = {
   --   end,
   -- },
 
-  -- {
-  --   priority = 1000,
-  --   lazy = false,
-  --   'sainnhe/gruvbox-material',
-  --   config = function()
-  --     vim.cmd([[colorscheme gruvbox-material]])
-  --   end,
-  -- },
+  {
+    priority = 1000,
+    lazy = false,
+    'sainnhe/gruvbox-material',
+    config = function()
+      vim.cmd([[colorscheme gruvbox-material]])
+    end,
+  },
 
   -- {
   --   priority = 1000,
@@ -45,15 +45,15 @@ local M = {
   --   end,
   -- },
 
-  {
-    'ellisonleao/gruvbox.nvim',
-    priority = 1000,
-    opts = {},
-    config = function(_, opts)
-      require('gruvbox').setup(opts)
-      vim.cmd([[colorscheme gruvbox]])
-    end,
-  },
+  -- {
+  --   'ellisonleao/gruvbox.nvim',
+  --   priority = 1000,
+  --   opts = {},
+  --   config = function(_, opts)
+  --     require('gruvbox').setup(opts)
+  --     vim.cmd([[colorscheme gruvbox]])
+  --   end,
+  -- },
 }
 
 return M

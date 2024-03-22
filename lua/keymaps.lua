@@ -25,18 +25,30 @@ keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 
 -- better up/down
-keymap({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-keymap({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-keymap({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-keymap({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap({ 'n', 'x' }, '<Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Move Lines
-keymap("n", "<D-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-keymap("n", "<D-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
-keymap("i", "<D-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-keymap("i", "<D-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-keymap("v", "<D-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-keymap("v", "<D-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+keymap('n', '<D-j>', '<cmd>m .+1<cr>==', { desc = 'Move down' })
+keymap('n', '<D-k>', '<cmd>m .-2<cr>==', { desc = 'Move up' })
+keymap('i', '<D-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move down' })
+keymap('i', '<D-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
+keymap('v', '<D-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
+keymap('v', '<D-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
+
+-- fold
+keymap('n', 'z1', '<cmd>set foldlevel=1<cr>', { desc = 'Fold level 1' })
+keymap('n', 'z2', '<cmd>set foldlevel=2<cr>', { desc = 'Fold level 2' })
+keymap('n', 'z3', '<cmd>set foldlevel=3<cr>', { desc = 'Fold level 3' })
+keymap('n', 'z4', '<cmd>set foldlevel=4<cr>', { desc = 'Fold level 4' })
+keymap('n', 'z5', '<cmd>set foldlevel=5<cr>', { desc = 'Fold level 5' })
+keymap('n', 'z6', '<cmd>set foldlevel=6<cr>', { desc = 'Fold level 6' })
+keymap('n', 'z7', '<cmd>set foldlevel=7<cr>', { desc = 'Fold level 7' })
+keymap('n', 'z8', '<cmd>set foldlevel=8<cr>', { desc = 'Fold level 8' })
+keymap('n', 'z9', '<cmd>set foldlevel=9<cr>', { desc = 'Fold level 9' })
+keymap('n', 'z0', '<cmd>set foldlevel=99<cr>', { desc = 'Fold level 99' })
 
 -- All
 keymap('', '<S-l>', '$', opts)

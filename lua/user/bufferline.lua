@@ -1,7 +1,6 @@
 local M = {
   'akinsho/bufferline.nvim',
   event = 'VeryLazy',
-  after = 'catppuccin',
   dependencies = {
     {
       'echasnovski/mini.bufremove',

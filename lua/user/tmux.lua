@@ -1,27 +1,4 @@
 local M = {
-  -- {
-  --   'aserowy/tmux.nvim',
-  --   event = 'VeryLazy',
-  --   config = function()
-  --     local status_ok, tmux = pcall(require, 'tmux')
-  --     if not status_ok then
-  --       return
-  --     end
-  --
-  --     tmux.setup({
-  --       copy_sync = {
-  --         enable = false,
-  --       },
-  --       navigation = {
-  --         enable_default_keybindings = true,
-  --       },
-  --       resize = {
-  --         enable_default_keybindings = false,
-  --       },
-  --     })
-  --   end,
-  -- },
-
   {
     'mrjones2014/smart-splits.nvim',
     version = '>=1.0.0',
