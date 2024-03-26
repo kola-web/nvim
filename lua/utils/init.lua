@@ -56,6 +56,7 @@ M.is_vue = function()
   local is_vue = vim.fn.isdirectory(vue_path) == 1
   return is_vue
 end
+M.is_vue()
 
 M.is_eslint = function()
   local util = require('lspconfig.util')

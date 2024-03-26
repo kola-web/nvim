@@ -8,8 +8,6 @@ return {
     plugins = {
       {
         name = '@vue/typescript-plugin',
-        -- Maybe a function to get the location of the plugin is better?
-        -- e.g. pnpm fallback to nvm fallback to default node path
         location = os.getenv('PNPM_HOME') .. '/global/5/node_modules/@vue/typescript-plugin',
         languages = { 'typescript', 'vue', 'javascript' },
       },
