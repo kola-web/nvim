@@ -4,6 +4,7 @@ local M = {
   dependencies = {
     {
       'echasnovski/mini.bufremove',
+      version = '*',
     },
     {
       'nvim-tree/nvim-web-devicons',

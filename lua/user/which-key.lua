@@ -92,7 +92,6 @@ function M.config()
       end,
       'Close Buffer',
     },
-    o = { '<cmd>Outline<CR>', 'outline' },
     h = {
       '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR>',
       'Redraw / clear hlsearch / diff update',
@@ -158,11 +157,9 @@ function M.config()
       l = { require('smart-splits').swap_buf_right, 'swap_buf_right' },
     },
     p = {
-      name = 'Projects',
-      h = { '<cmd>Telescope oldfiles<cr>', 'history file' },
+      name = 'Preview',
       m = { '<cmd>PeekOpen<cr>', 'PeekOpen' },
       c = { '<cmd>PeekClose<cr>', 'PeekClose' },
-      a = { vim.lsp.buf.add_workspace_folder, 'add_workspace_folder' },
     },
     r = {
       name = 'Replace',
@@ -214,7 +211,6 @@ function M.config()
         'clip',
       },
     },
-
     x = {
       name = '+diagnostics/quickfix',
       x = { '<cmd>TroubleToggle document_diagnostics<cr>', 'Document Diagnostics (Trouble)' },
@@ -224,7 +220,6 @@ function M.config()
       t = { '<cmd>TodoTrouble<cr>', 'Todo' },
       T = { '<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>', 'Todo/FIX/FIXME' },
     },
-
     s = {
       name = 'Search',
       t = { '<cmd>TodoTelescope<cr>', 'Todo' },

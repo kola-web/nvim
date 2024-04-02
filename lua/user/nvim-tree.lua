@@ -19,6 +19,10 @@ local M = {
       end
     end
 
+    local function open_in_finder()
+      vim.system({ 'open', vim.fn.expand('%:p:h') })
+    end
+
     local on_attach = function(bufnr)
       local api = require('nvim-tree.api')
       api.config.mappings.default_on_attach(bufnr)
@@ -26,6 +30,11 @@ local M = {
       local function opts(desc)
         return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
       end
+
+      vim.keymap.set('n', 'f', open_in_finder, opts('Live Filter: Start '))
+
+      vim.keymap.set('n', '/', api.live_filter.start, opts('Live Filter: Start '))
+      vim.keymap.set('n', '?', api.live_filter.clear, opts('Live Filter: Clear '))
 
       vim.keymap.set('n', '<C-y>c', copy_file_to('wxmlComponent'), opts('Copy File To'))
       vim.keymap.set('n', '<C-y>p', copy_file_to('wxmlPage'), opts('Copy File To'))

@@ -136,6 +136,9 @@ local M = {
       end,
     },
   },
+  keys = {
+    { '<leader>e', '<cmd>Neotree<cr>', 'Explorer', mode = { 'n' } },
+  },
 }
 
 return M

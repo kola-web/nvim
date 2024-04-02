@@ -27,15 +27,6 @@ local M = {
   --   end,
   -- },
 
-  {
-    priority = 1000,
-    lazy = false,
-    'sainnhe/gruvbox-material',
-    config = function()
-      vim.cmd([[colorscheme gruvbox-material]])
-    end,
-  },
-
   -- {
   --   priority = 1000,
   --   lazy = false,
@@ -44,6 +35,15 @@ local M = {
   --     vim.cmd([[colorscheme kanagawa]])
   --   end,
   -- },
+
+  {
+    priority = 1000,
+    lazy = false,
+    'sainnhe/gruvbox-material',
+    config = function()
+      vim.cmd([[colorscheme gruvbox-material]])
+    end,
+  },
 
   -- {
   --   'ellisonleao/gruvbox.nvim',

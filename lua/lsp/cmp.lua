@@ -126,6 +126,7 @@ local M = {
             option = {
               pathMappings = {
                 ['@'] = '${folder}/src',
+                ['/'] = '${folder}/src/public/',
                 -- ['~@'] = '${folder}/src',
                 -- ['/images'] = '${folder}/src/images',
                 -- ['/components'] = '${folder}/src/components',

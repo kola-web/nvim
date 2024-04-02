@@ -4,8 +4,6 @@ local M = {
   event = 'VeryLazy',
   opts = {
     -- your options here
-    aggressive_mode = false,
-    excluded_lsp_clients = { 'copilot' },
   },
 }
 

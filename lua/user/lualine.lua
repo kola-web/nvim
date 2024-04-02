@@ -1,9 +1,18 @@
 local M = {
   'nvim-lualine/lualine.nvim',
   event = { 'VimEnter', 'InsertEnter', 'BufReadPre', 'BufAdd', 'BufNew', 'BufReadPost' },
-  dependencies = { {
-    'AndreM222/copilot-lualine',
-  } },
+  dependencies = {
+    { 'AndreM222/copilot-lualine' },
+    {
+      'abeldekat/harpoonline',
+      version = '*',
+      opts = {
+        on_update = function()
+          require('lualine').refresh()
+        end,
+      },
+    },
+  },
 }
 local icons = require('user.nvim-dev-icons')
 
@@ -45,6 +54,22 @@ function M.config()
     end,
   }
 
+  -- LSP clients attached to buffer
+  local clients_lsp = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+
+    local clients = vim.lsp.buf_get_clients(bufnr)
+    if next(clients) == nil then
+      return ''
+    end
+
+    local c = {}
+    for _, client in pairs(clients) do
+      table.insert(c, client.name)
+    end
+    return '\u{f085} ' .. table.concat(c, '|')
+  end
+
   lualine.setup({
     options = {
       globalstatus = true,
@@ -59,10 +84,22 @@ function M.config()
       lualine_a = { 'mode' },
       lualine_b = { 'branch', diff, diagnostics },
       lualine_c = {
+        require('harpoonline').format,
         -- { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
         -- { 'filename', file_status = true, path = 1 },
       },
       lualine_x = {
+        {
+          require('noice').api.status.command.get,
+          cond = require('noice').api.status.command.has,
+          color = { fg = '#ff9e64' },
+        },
+        {
+          require('noice').api.status.mode.get,
+          cond = require('noice').api.status.mode.has,
+          color = { fg = '#ff9e64' },
+        },
+        clients_lsp,
         'encoding',
         'fileformat',
         { 'copilot', show_colors = true },

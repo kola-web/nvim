@@ -19,6 +19,7 @@ M.servers = {
   'dockerls',
   'eslint',
   'rust_analyzer',
+  'tailwindcss',
   -- 'efm',
 }
 

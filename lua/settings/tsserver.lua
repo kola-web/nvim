@@ -9,11 +9,10 @@ return {
       {
         name = '@vue/typescript-plugin',
         location = os.getenv('PNPM_HOME') .. '/global/5/node_modules/@vue/typescript-plugin',
-        languages = { 'typescript', 'vue', 'javascript' },
+        languages = { 'vue' },
       },
     },
   },
-  single_file_support = false,
   settings = {
     typescript = {
       inlayHints = {

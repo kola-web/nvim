@@ -1,6 +1,2 @@
-{
-    "diagnostics.disable": [
-        "missing-fields",
-        "unused-local"
-    ]
-}
+{}
+

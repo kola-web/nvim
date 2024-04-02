@@ -1,21 +1,13 @@
--- This file is automatically loaded by lazyvim.config.init.
-
 local function augroup(name)
-  return vim.api.nvim_create_augroup('lazyvim_' .. name, { clear = true })
+  return vim.api.nvim_create_augroup('kola_' .. name, { clear = true })
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(args)
     local buffer = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    local filetype = vim.bo[buffer].filetype
-
-    if client.server_capabilities['documentSymbolProvider'] then
-      if filetype ~= 'vue' or client.name == 'volar' then
-        require('nvim-navic').attach(client, buffer)
-      end
-    end
+    -- local client = vim.lsp.get_client_by_id(args.data.client_id)
+    -- local filetype = vim.bo[buffer].filetype
 
     -- diagnostic
     local diagnostic_goto = function(next, severity)
@@ -48,8 +40,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     createKeymap("n", "<leader>li", "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", "Lsp incoming_calls")
     createKeymap("n", "<leader>lo", "<cmd>lua vim.lsp.buf.outgoing_calls()<cr>", "Lsp outgoing_calls")
     createKeymap("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action")
-    createKeymap("n", "<leader>ln", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", "Next diagnostic")
-    createKeymap("n", "<leader>lp", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", "Previous diagnostic")
     createKeymap("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename")
     createKeymap("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help")
     createKeymap("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", "Setloclist")
@@ -84,6 +74,24 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
     local current_tab = vim.fn.tabpagenr()
     vim.cmd('tabdo wincmd =')
     vim.cmd('tabnext ' .. current_tab)
+  end,
+})
+
+-- go to last loc when opening a buffer
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = augroup('last_loc'),
+  callback = function(event)
+    local exclude = { 'gitcommit' }
+    local buf = event.buf
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+      return
+    end
+    vim.b[buf].lazyvim_last_loc = true
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local lcount = vim.api.nvim_buf_line_count(buf)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
   end,
 })
 
@@ -148,10 +156,10 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   group = augroup('auto_create_dir'),
   callback = function(event)
-    if event.match:match('^%w%w+://') then
+    if event.match:match('^%w%w+:[\\/][\\/]') then
       return
     end
-    local file = vim.loop.fs_realpath(event.match) or event.match
+    local file = vim.uv.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
   end,
 })
@@ -177,4 +185,28 @@ vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinEnter' }, {
     vim.opt.cursorline = false
   end,
   desc = 'set nocursorline',
+})
+
+-- nvim-tree
+vim.api.nvim_create_autocmd('QuitPre', {
+  callback = function()
+    local tree_wins = {}
+    local floating_wins = {}
+    local wins = vim.api.nvim_list_wins()
+    for _, w in ipairs(wins) do
+      local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w))
+      if bufname:match('NvimTree_') ~= nil then
+        table.insert(tree_wins, w)
+      end
+      if vim.api.nvim_win_get_config(w).relative ~= '' then
+        table.insert(floating_wins, w)
+      end
+    end
+    if 1 == #wins - #floating_wins - #tree_wins then
+      -- Should quit, so we close all invalid windows.
+      for _, w in ipairs(tree_wins) do
+        vim.api.nvim_win_close(w, true)
+      end
+    end
+  end,
 })

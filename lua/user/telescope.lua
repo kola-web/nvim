@@ -13,7 +13,6 @@ local M = {
 }
 
 M.config = function()
-  local trouble = require('trouble.providers.telescope')
   local status_ok, telescope = pcall(require, 'telescope')
   if not status_ok then
     return
@@ -82,12 +81,10 @@ M.config = function()
           ['<C-k>'] = actions.cycle_history_prev,
           ['<CR>'] = actions.select_default,
           ['<c-s>'] = flash,
-          ['<c-t>'] = trouble.open_with_trouble,
         },
         n = {
           ['?'] = actions.which_key,
           ['<c-s>'] = flash,
-          ['<c-t>'] = trouble.open_with_trouble,
         },
       },
     },

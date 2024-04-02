@@ -38,6 +38,7 @@ opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'glob
 opt.shiftround = true -- 缩进四舍五入
 opt.shiftwidth = 2 -- 缩进大小
 opt.shortmess:append({ W = true, I = true, c = true, C = true }) -- 简短消息选项
+opt.guicursor:append('n-v-c:blinkon500-blinkoff500')
 opt.showmode = false -- 不显示模式，因为有状态行
 opt.sidescrolloff = 8 -- 上下文列数
 opt.signcolumn = 'yes' -- 始终显示标志列，否则每次会移动文本
@@ -61,7 +62,7 @@ opt.winminwidth = 5 -- 窗口的最小宽度
 opt.wrap = false -- 禁用换行
 
 -- gui
-opt.guifont = 'JetBrainsMono Nerd Font:h12' -- 在图形化的 neovim 应用程序中使用的字体
+opt.guifont = 'JetBrainsMono Nerd Font:h14' -- 在图形化的 neovim 应用程序中使用的字体
 
 if vim.fn.has('nvim-0.10') == 1 then
   opt.smoothscroll = true
