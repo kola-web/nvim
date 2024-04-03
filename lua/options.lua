@@ -11,9 +11,14 @@ vim.g.root_spec = { 'lsp', { '.git', 'lua', '.svn' }, 'cwd' }
 
 local opt = vim.opt
 
+if not vim.env.SSH_TTY then
+  -- only set clipboard if not in ssh, to make sure the OSC 52
+  -- integration works automatically. Requires Neovim >= 0.10.0
+  opt.clipboard = 'unnamedplus' -- Sync with system clipboard
+end
+
 opt.autowrite = true -- 启用自动写入
 opt.backup = false -- 不创建备份文件
-opt.clipboard = 'unnamedplus' -- 与系统剪贴板同步
 opt.completeopt = 'menu,menuone,noselect' -- 补全选项
 opt.conceallevel = 0 -- 在 markdown 文件中显示 `` 符号
 opt.confirm = true -- 在退出修改的缓冲区之前确认保存更改
@@ -38,7 +43,6 @@ opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'glob
 opt.shiftround = true -- 缩进四舍五入
 opt.shiftwidth = 2 -- 缩进大小
 opt.shortmess:append({ W = true, I = true, c = true, C = true }) -- 简短消息选项
-opt.guicursor:append('n-v-c:blinkon500-blinkoff500')
 opt.showmode = false -- 不显示模式，因为有状态行
 opt.sidescrolloff = 8 -- 上下文列数
 opt.signcolumn = 'yes' -- 始终显示标志列，否则每次会移动文本

@@ -2,6 +2,10 @@ local M = {
   'folke/trouble.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   keys = {
+    { '<leader>xx', '<cmd>TroubleToggle document_diagnostics<cr>', desc = 'Document Diagnostics (Trouble)' },
+    { '<leader>xX', '<cmd>TroubleToggle workspace_diagnostics<cr>', desc = 'Workspace Diagnostics (Trouble)' },
+    { '<leader>xl', '<cmd>TroubleToggle loclist<cr>', desc = 'loclist' },
+    { '<leader>xq', '<cmd>TroubleToggle quickfix<cr>', desc = 'quickfix' },
     {
       '[q',
       function()

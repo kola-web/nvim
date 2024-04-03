@@ -37,6 +37,10 @@ M.null_servers = {
   'rustfmt',
 }
 
+M.dap_servers = {
+  'js',
+}
+
 M.compare_to_clipboard = function()
   local ftype = vim.api.nvim_eval('&filetype')
   vim.cmd('vsplit')

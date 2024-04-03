@@ -3,15 +3,6 @@ local M = {
   event = { 'VimEnter', 'InsertEnter', 'BufReadPre', 'BufAdd', 'BufNew', 'BufReadPost' },
   dependencies = {
     { 'AndreM222/copilot-lualine' },
-    {
-      'abeldekat/harpoonline',
-      version = '*',
-      opts = {
-        on_update = function()
-          require('lualine').refresh()
-        end,
-      },
-    },
   },
 }
 local icons = require('user.nvim-dev-icons')
@@ -20,10 +11,6 @@ function M.config()
   local status_ok, lualine = pcall(require, 'lualine')
   if not status_ok then
     return
-  end
-
-  local hide_in_width = function()
-    return vim.fn.winwidth(0) > 80
   end
 
   local diagnostics = {
@@ -84,7 +71,6 @@ function M.config()
       lualine_a = { 'mode' },
       lualine_b = { 'branch', diff, diagnostics },
       lualine_c = {
-        require('harpoonline').format,
         -- { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
         -- { 'filename', file_status = true, path = 1 },
       },

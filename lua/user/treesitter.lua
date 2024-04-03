@@ -86,11 +86,6 @@ local M = {
       configs.setup(opts)
     end,
   },
-  {
-    'nvim-treesitter/nvim-treesitter-context',
-    event = { 'BufReadPost', 'BufNewFile' },
-    opts = { mode = 'cursor', max_lines = 1, trim_scope = 'inner' },
-  },
 }
 
 return M

@@ -1,14 +1,23 @@
 local M = {
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   priority = 1000,
-  --   lazy = false,
-  --   opts = { style = 'moon', transparent = false },
-  --   config = function(_, opts)
-  --     require('tokyonight').setup(opts)
-  --     vim.cmd([[colorscheme tokyonight]])
-  --   end,
-  -- },
+  {
+    'folke/tokyonight.nvim',
+    priority = 1000,
+    lazy = false,
+    opts = { style = 'storm', transparent = false },
+    config = function(_, opts)
+      require('tokyonight').setup(opts)
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
+
+  {
+    priority = 1000,
+    lazy = false,
+    'sainnhe/gruvbox-material',
+    config = function()
+      -- vim.cmd([[colorscheme gruvbox-material]])
+    end,
+  },
 
   -- {
   --   'craftzdog/solarized-osaka.nvim',
@@ -33,25 +42,6 @@ local M = {
   --   'rebelot/kanagawa.nvim',
   --   config = function()
   --     vim.cmd([[colorscheme kanagawa]])
-  --   end,
-  -- },
-
-  {
-    priority = 1000,
-    lazy = false,
-    'sainnhe/gruvbox-material',
-    config = function()
-      vim.cmd([[colorscheme gruvbox-material]])
-    end,
-  },
-
-  -- {
-  --   'ellisonleao/gruvbox.nvim',
-  --   priority = 1000,
-  --   opts = {},
-  --   config = function(_, opts)
-  --     require('gruvbox').setup(opts)
-  --     vim.cmd([[colorscheme gruvbox]])
   --   end,
   -- },
 }

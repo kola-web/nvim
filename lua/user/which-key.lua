@@ -156,6 +156,9 @@ function M.config()
       k = { require('smart-splits').swap_buf_up, 'swap_buf_up' },
       l = { require('smart-splits').swap_buf_right, 'swap_buf_right' },
     },
+    d = {
+      name = 'debug',
+    },
     p = {
       name = 'Preview',
       m = { '<cmd>PeekOpen<cr>', 'PeekOpen' },
@@ -213,10 +216,6 @@ function M.config()
     },
     x = {
       name = '+diagnostics/quickfix',
-      x = { '<cmd>TroubleToggle document_diagnostics<cr>', 'Document Diagnostics (Trouble)' },
-      X = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Workspace Diagnostics (Trouble)' },
-      l = { '<cmd>TroubleToggle loclist<cr>', 'loclist' },
-      q = { '<cmd>TroubleToggle quickfix<cr>', 'quickfix' },
       t = { '<cmd>TodoTrouble<cr>', 'Todo' },
       T = { '<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>', 'Todo/FIX/FIXME' },
     },
