@@ -2,24 +2,15 @@ local M = {
   'neovim/nvim-lspconfig',
   lazy = true,
   dependencies = {
-    { 'b0o/schemastore.nvim' },
-    {
-      'folke/neoconf.nvim',
-      opts = {
-        import = {
-          vscode = false, -- local .vscode/settings.json
-          coc = false, -- global/local coc-settings.json
-          nlsp = false, -- global/local nlsp-settings.nvim json settings
-        },
-      },
-    },
-    {
-      'williamboman/mason.nvim',
-    },
-    {
-      'williamboman/mason-lspconfig.nvim',
-    },
+    { 'williamboman/mason.nvim' },
+    { 'williamboman/mason-lspconfig.nvim' },
+
+    { 'folke/neoconf.nvim', opts = { import = { vscode = false, coc = false, nlsp = false } } },
     { 'folke/neodev.nvim', config = true },
+
+    { 'b0o/schemastore.nvim' },
+
+    { 'SmiteshP/nvim-navic', opts = { highlight = true, icons = require('user.nvim-dev-icons').icons.kinds } },
   },
   opts = {
     inlay_hints = {
@@ -39,6 +30,7 @@ function M.config()
       local server_config = {
         capabilities = lsp_capabilities,
       }
+
       local neoConfig = {}
       if server_name == 'emmet_language_server' then
         neoConfig = require('neoconf').get(server_name) or {}

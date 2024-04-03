@@ -29,7 +29,6 @@ local M = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
-      -- 'hrsh7th/cmp-nvim-lua',
       'kola-web/cmp-path',
       -- 'hrsh7th/cmp-path',
 
@@ -116,7 +115,6 @@ local M = {
           end, { 'i', 's' }),
         }),
         sources = cmp.config.sources({
-          { name = 'copilot' },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'nvim_lua' },

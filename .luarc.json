@@ -1,2 +1,6 @@
-{}
+{
+    "diagnostics.disable": [
+        "unused-local"
+    ]
+}
 

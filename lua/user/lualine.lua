@@ -5,10 +5,10 @@ local M = {
     { 'AndreM222/copilot-lualine' },
   },
 }
-local icons = require('user.nvim-dev-icons')
 
 function M.config()
   local status_ok, lualine = pcall(require, 'lualine')
+  local icons = require('user.nvim-dev-icons')
   if not status_ok then
     return
   end

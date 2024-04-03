@@ -107,39 +107,6 @@ function M.config()
 
     a = {
       name = 'copilot',
-      a = {
-        function()
-          local input = vim.fn.input('Quick Chat: ')
-          if input ~= '' then
-            require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
-          end
-        end,
-        'CopilotChat - Quick chat',
-      },
-      h = {
-        function()
-          local actions = require('CopilotChat.actions')
-          require('CopilotChat.integrations.telescope').pick(actions.help_actions())
-          vim.api.nvim_input('<Esc>')
-        end,
-        'CopilotChat - Help actions',
-      },
-      p = {
-        function()
-          local actions = require('CopilotChat.actions')
-          require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
-          vim.api.nvim_input('<Esc>')
-        end,
-        'CopilotChat - Prompt actions',
-      },
-      o = {
-        '<cmd>Copilot panel<cr>',
-        'Copilot panel',
-      },
-      t = {
-        '<cmd>CopilotChatToggle<cr>',
-        'CopilotChat Toggle',
-      },
     },
     b = {
       name = 'Buffers',

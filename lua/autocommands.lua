@@ -5,9 +5,18 @@ end
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(args)
-    local buffer = args.buf
-    -- local client = vim.lsp.get_client_by_id(args.data.client_id)
-    -- local filetype = vim.bo[buffer].filetype
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    -- local filetype = vim.bo[bufnr].filetype
+    local filetype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+
+    if client and client.server_capabilities.documentSymbolProvider then
+      if filetype == 'vue' and client.name == 'tsserver' then
+        return
+      end
+      require('nvim-navic').attach(client, bufnr)
+      vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+    end
 
     -- diagnostic
     local diagnostic_goto = function(next, severity)
@@ -19,32 +28,30 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     local keymap = vim.keymap.set
-    -- stylua: ignore start
     local function createKeymap(mode, key, cmd, desc)
-        keymap(mode, key, cmd, { buffer=buffer, noremap = true, silent = true, desc = desc })
+      keymap(mode, key, cmd, { buffer = bufnr, noremap = true, silent = true, desc = desc })
     end
-
-    createKeymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", "GoTo declaration")
-    createKeymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", "GoTo definition")
-    createKeymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover")
-    createKeymap("n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", "GoTo implementation")
-    createKeymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", "GoTo references")
-    createKeymap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", "Float diagnostic")
-    createKeymap("n", "]d", diagnostic_goto(true), "Next Diagnostic")
-    createKeymap("n", "[d", diagnostic_goto(false), "Prev Diagnostic")
-    createKeymap("n", "]e", diagnostic_goto(true, "ERROR"), "Next Error")
-    createKeymap("n", "[e", diagnostic_goto(false, "ERROR"), "Prev Error")
-    createKeymap("n", "]w", diagnostic_goto(true, "WARN"), "Next Warning")
-    createKeymap("n", "[w", diagnostic_goto(false, "WARN"), "Prev Warning")
-    createKeymap("n", "<leader>lI", "<cmd>LspInfo<cr>", "lspInfo")
-    createKeymap("n", "<leader>li", "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", "Lsp incoming_calls")
-    createKeymap("n", "<leader>lo", "<cmd>lua vim.lsp.buf.outgoing_calls()<cr>", "Lsp outgoing_calls")
-    createKeymap("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action")
-    createKeymap("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename")
-    createKeymap("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help")
-    createKeymap("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", "Setloclist")
-    createKeymap("n", "<leader>lm", "<cmd>EslintFixAll<CR>", "EslintFixAll")
-    -- stylua: ignore end
+    createKeymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', 'GoTo definition')
+    createKeymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', 'GoTo declaration')
+    createKeymap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'GoTo type_definition')
+    createKeymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', 'Hover')
+    createKeymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', 'GoTo implementation')
+    createKeymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', 'GoTo references')
+    createKeymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Float diagnostic')
+    createKeymap('n', ']d', diagnostic_goto(true), 'Next Diagnostic')
+    createKeymap('n', '[d', diagnostic_goto(false), 'Prev Diagnostic')
+    createKeymap('n', ']e', diagnostic_goto(true, 'ERROR'), 'Next Error')
+    createKeymap('n', '[e', diagnostic_goto(false, 'ERROR'), 'Prev Error')
+    createKeymap('n', ']w', diagnostic_goto(true, 'WARN'), 'Next Warning')
+    createKeymap('n', '[w', diagnostic_goto(false, 'WARN'), 'Prev Warning')
+    createKeymap('n', '<leader>lI', '<cmd>LspInfo<cr>', 'lspInfo')
+    createKeymap('n', '<leader>li', '<cmd>lua vim.lsp.buf.incoming_calls()<cr>', 'Lsp incoming_calls')
+    createKeymap('n', '<leader>lo', '<cmd>lua vim.lsp.buf.outgoing_calls()<cr>', 'Lsp outgoing_calls')
+    createKeymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code action')
+    createKeymap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename')
+    createKeymap('n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help')
+    createKeymap('n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<CR>', 'Setloclist')
+    createKeymap('n', '<leader>lm', '<cmd>EslintFixAll<CR>', 'EslintFixAll')
   end,
 })
 
