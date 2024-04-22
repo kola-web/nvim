@@ -61,7 +61,6 @@ M.is_vue = function()
   local is_vue = vim.fn.isdirectory(vue_path) == 1
   return is_vue
 end
-M.is_vue()
 
 M.is_eslint = function()
   local util = require('lspconfig.util')
@@ -150,22 +149,14 @@ M.has_value = function(tab, val)
   return false
 end
 
----@param name string
----@param fn fun(name:string)
-M.on_load = function(name, fn)
-  local Config = require('lazy.core.config')
-  if Config.plugins[name] and Config.plugins[name]._.loaded then
-    fn(name)
+M.get_typescript_server_path = function(root_dir)
+  local found_ts = vim.fn.getcwd() .. '/node_modules/typescript/lib'
+  local mason_registry = require('mason-registry')
+  local global_ts = mason_registry.get_package('typescript-language-server'):get_install_path() .. 'node_modules/typescript/lib'
+  if found_ts then
+    return found_ts
   else
-    vim.api.nvim_create_autocmd('User', {
-      pattern = 'LazyLoad',
-      callback = function(event)
-        if event.data == name then
-          fn(name)
-          return true
-        end
-      end,
-    })
+    return global_ts
   end
 end
 

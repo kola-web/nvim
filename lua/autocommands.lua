@@ -10,13 +10,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- local filetype = vim.bo[bufnr].filetype
     local filetype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
 
-    if client and client.server_capabilities.documentSymbolProvider then
-      if filetype == 'vue' and client.name == 'tsserver' then
-        return
-      end
-      require('nvim-navic').attach(client, bufnr)
-      vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
-    end
+    -- if client and client.server_capabilities.documentSymbolProvider then
+    --   if filetype == 'vue' and client.name == 'tsserver' then
+    --     return
+    --   end
+    --   require('nvim-navic').attach(client, bufnr)
+    --   vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+    -- end
 
     -- diagnostic
     local diagnostic_goto = function(next, severity)
@@ -31,12 +31,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local function createKeymap(mode, key, cmd, desc)
       keymap(mode, key, cmd, { buffer = bufnr, noremap = true, silent = true, desc = desc })
     end
+
+    createKeymap('n', 'gr', '<cmd>Trouble lsp_references focus=true<CR>', 'GoTo references')
+
     createKeymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', 'GoTo definition')
     createKeymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', 'GoTo declaration')
     createKeymap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'GoTo type_definition')
     createKeymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', 'Hover')
     createKeymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', 'GoTo implementation')
-    createKeymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', 'GoTo references')
+    -- createKeymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', 'GoTo references')
     createKeymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Float diagnostic')
     createKeymap('n', ']d', diagnostic_goto(true), 'Next Diagnostic')
     createKeymap('n', '[d', diagnostic_goto(false), 'Prev Diagnostic')
@@ -50,7 +53,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     createKeymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code action')
     createKeymap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename')
     createKeymap('n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help')
-    createKeymap('n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<CR>', 'Setloclist')
+    createKeymap('n', '<leader>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', 'Setloclist')
     createKeymap('n', '<leader>lm', '<cmd>EslintFixAll<CR>', 'EslintFixAll')
   end,
 })
@@ -159,16 +162,16 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
-vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-  group = augroup('auto_create_dir'),
-  callback = function(event)
-    if event.match:match('^%w%w+:[\\/][\\/]') then
-      return
-    end
-    local file = vim.uv.fs_realpath(event.match) or event.match
-    vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
-  end,
-})
+-- vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+--   group = augroup('auto_create_dir'),
+--   callback = function(event)
+--     if event.match:match('^%w%w+:[\\/][\\/]') then
+--       return
+--     end
+--     local file = vim.uv.fs_realpath(event.match) or event.match
+--     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
+--   end,
+-- })
 
 -- 禁止新行注释
 vim.api.nvim_create_autocmd('BufEnter', {

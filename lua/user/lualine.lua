@@ -1,9 +1,6 @@
 local M = {
   'nvim-lualine/lualine.nvim',
   event = { 'VimEnter', 'InsertEnter', 'BufReadPre', 'BufAdd', 'BufNew', 'BufReadPost' },
-  dependencies = {
-    { 'AndreM222/copilot-lualine' },
-  },
 }
 
 function M.config()
@@ -88,7 +85,6 @@ function M.config()
         clients_lsp,
         'encoding',
         'fileformat',
-        { 'copilot', show_colors = true },
         'filetype',
         {
           require('lazy.status').updates,

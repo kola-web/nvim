@@ -1,40 +1,28 @@
 local M = {
   'folke/trouble.nvim',
+  branch = 'dev',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   keys = {
-    { '<leader>xx', '<cmd>TroubleToggle document_diagnostics<cr>', desc = 'Document Diagnostics (Trouble)' },
-    { '<leader>xX', '<cmd>TroubleToggle workspace_diagnostics<cr>', desc = 'Workspace Diagnostics (Trouble)' },
-    { '<leader>xl', '<cmd>TroubleToggle loclist<cr>', desc = 'loclist' },
-    { '<leader>xq', '<cmd>TroubleToggle quickfix<cr>', desc = 'quickfix' },
-    {
-      '[q',
-      function()
-        if require('trouble').is_open() then
-          require('trouble').previous({ skip_groups = true, jump = true })
-        else
-          local ok, err = pcall(vim.cmd.cprev)
-          if not ok then
-            vim.notify(err, vim.log.levels.ERROR)
-          end
-        end
-      end,
-      desc = 'Previous trouble/quickfix item',
-    },
-    {
-      ']q',
-      function()
-        if require('trouble').is_open() then
-          require('trouble').next({ skip_groups = true, jump = true })
-        else
-          local ok, err = pcall(vim.cmd.cnext)
-          if not ok then
-            vim.notify(err, vim.log.levels.ERROR)
-          end
-        end
-      end,
-      desc = 'Next trouble/quickfix item',
-    },
+    { '<leader>o', '<cmd>Trouble symbols toggle pinned=true results.win = { relative=win, position=right } focus=true<cr>', desc = 'outline (Trouble)' },
+    { '<leader>xx', '<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>', desc = 'Document Diagnostics (Trouble)' },
+    { '<leader>xX', '<cmd>Trouble diagnostics toggle<cr> focus=true', desc = 'Workspace Diagnostics (Trouble)' },
+    { '<leader>xl', '<cmd>Trouble loclist toggle<cr> focus=true', desc = 'loclist' },
+    { '<leader>xq', '<cmd>Trouble qflist toggle<cr> focus=true', desc = 'quickfix' },
   },
+  opts = {},
+  config = function(_, opts)
+    require('trouble').setup(opts)
+    -- local trouble = require('trouble')
+    -- local symbols = trouble.statusline({
+    --   mode = 'lsp_document_symbols',
+    --   groups = {},
+    --   title = false,
+    --   filter = { range = true },
+    --   format = '{kind_icon}{symbol.name:Normal}',
+    -- })
+    -- _G.my_symbols = symbols
+    -- vim.o.winbar = '%{%v:lua.my_symbols.get()%}'
+  end,
 }
 
 return M

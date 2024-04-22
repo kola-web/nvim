@@ -9,7 +9,7 @@ local M = {
       function()
         require('live-server').toggle()
       end,
-      desc = 'Noice Last Message',
+      desc = 'live-server',
     },
   },
 }

@@ -55,6 +55,7 @@ keymap('', '<S-l>', '$', opts)
 keymap('', '<S-h>', '^', opts)
 
 keymap('n', 'BB', '<cmd>enew<cr>', opts)
+keymap('n', 'BS', '<cmd>enew<cr><cmd>set filetype=json<cr>', opts)
 keymap('n', 'BJ', '<cmd>enew<cr><cmd>set filetype=javascript<cr>', opts)
 keymap('n', 'BT', '<cmd>enew<cr><cmd>set filetype=typescript<cr>', opts)
 keymap('n', 'BV', '<cmd>enew<cr><cmd>set filetype=vue<cr>', opts)

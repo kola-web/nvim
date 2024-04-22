@@ -21,7 +21,7 @@ M.opts = {
       desc = 'toggle current item',
     },
     ['enter_file'] = {
-      map = '<cr>',
+      map = 'o',
       cmd = "<cmd>lua require('spectre.actions').select_entry()<CR>",
       desc = 'goto current file',
     },
@@ -41,7 +41,7 @@ M.opts = {
       desc = 'show option',
     },
     ['run_current_replace'] = {
-      map = '<leader>rc',
+      map = '<cr>',
       cmd = "<cmd>lua require('spectre.actions').run_current_replace()<CR>",
       desc = 'replace current line',
     },
@@ -76,7 +76,7 @@ M.opts = {
       desc = 'toggle ignore case',
     },
     ['toggle_ignore_hidden'] = {
-      map = 'th',
+      map = 'i',
       cmd = "<cmd>lua require('spectre').change_options('hidden')<CR>",
       desc = 'toggle search hidden',
     },

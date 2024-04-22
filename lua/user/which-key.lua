@@ -148,6 +148,7 @@ function M.config()
         'run file',
       },
       a = { '<cmd>%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gcI<Left><Left><Left><Left><cr>', 'div->view' },
+      j = { '<cmd>!pbpaste | quicktype -l typescript --just-types --top-level Person | pbcopy<cr>', 'quicktype' },
     },
     g = {
       name = 'Git',

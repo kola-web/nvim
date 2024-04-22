@@ -10,7 +10,7 @@ local M = {
 
     { 'b0o/schemastore.nvim' },
 
-    { 'SmiteshP/nvim-navic', opts = { highlight = true, icons = require('user.nvim-dev-icons').icons.kinds } },
+    -- { 'SmiteshP/nvim-navic', opts = { highlight = true, icons = require('user.nvim-dev-icons').icons.kinds } },
   },
   opts = {
     inlay_hints = {

@@ -57,6 +57,8 @@ M.config = function()
     })
   end
 
+  local open_with_trouble = require('trouble.sources.telescope').open
+
   local opts = {
     defaults = {
       -- prompt_prefix = ' ',
@@ -81,10 +83,12 @@ M.config = function()
           ['<C-k>'] = actions.cycle_history_prev,
           ['<CR>'] = actions.select_default,
           ['<c-s>'] = flash,
+          ['<c-t>'] = open_with_trouble,
         },
         n = {
           ['?'] = actions.which_key,
           ['<c-s>'] = flash,
+          ['<c-t>'] = open_with_trouble,
         },
       },
     },

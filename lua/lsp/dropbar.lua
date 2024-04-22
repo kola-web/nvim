@@ -1,10 +1,6 @@
 local M = {
   'Bekaboo/dropbar.nvim',
   event = { 'BufReadPost', 'BufNewFile' },
-  -- optional, but required for fuzzy finder support
-  dependencies = {
-    'nvim-telescope/telescope-fzf-native.nvim',
-  },
   keys = {
     {
       '<C-;>',
@@ -14,6 +10,9 @@ local M = {
       desc = 'color convert',
     },
   },
+  config = function()
+    vim.cmd([[highlight Winbar gui=none]])
+  end,
 }
 
 return M
