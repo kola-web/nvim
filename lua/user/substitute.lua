@@ -1,6 +1,5 @@
 local M = {
   'gbprod/substitute.nvim',
-  vscode = true,
 }
 
 M.config = function()

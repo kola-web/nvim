@@ -29,7 +29,6 @@ local M = {
   {
     'echasnovski/mini.indentscope',
     version = false,
-    vscode = true,
     opts = {
       symbol = vim.g.vsocde and '' or '│',
       options = {

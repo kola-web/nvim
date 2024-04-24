@@ -1,10 +1,10 @@
-require('options')
-require('Lazy').setup('user')
 if not vim.g.vscode then
+  require('options')
   require('keymaps')
   require('autocommands')
   require('user.colorscheme')
 end
+require('Lazy').setup('user')
 
 local has = vim.fn.has
 local is_mac = has('macunix')

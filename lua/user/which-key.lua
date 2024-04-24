@@ -96,9 +96,13 @@ function M.config()
       '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR>',
       'Redraw / clear hlsearch / diff update',
     },
+    -- ['f'] = {
+    --   '<cmd> FzfLua files <CR>',
+    --   'Find files',
+    -- },
     ['f'] = {
-      '<cmd> FzfLua files <CR>',
-      'Find files',
+      '<cmd>Telescope find_files<cr>',
+      'find_files'
     },
     ['F'] = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
     ['m'] = { fun.conformFormat, 'Format buffer' },

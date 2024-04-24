@@ -3,7 +3,6 @@ local M = {
   {
     'tpope/vim-abolish',
     lazy = false,
-    vscode = true,
   },
 }
 

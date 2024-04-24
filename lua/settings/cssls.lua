@@ -1,8 +1,8 @@
 return {
   filetypes = { 'css', 'scss', 'less' },
   settings = {
-    css = { validate = false },
-    scss = { validate = false },
-    less = { validate = false },
+    css = { validate = true },
+    scss = { validate = true },
+    less = { validate = true },
   },
 }

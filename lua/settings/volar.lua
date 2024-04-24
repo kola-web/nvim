@@ -1,15 +1,12 @@
 local get_typescript_server_path = require('utils.init').get_typescript_server_path
 
 return {
-  filetypes = { 'vue' },
-  locale = 'zh-cn',
-  init_options = {
-    locale = 'zh-cn',
-    vue = {
-      hybridMode = false,
-    },
-  },
-  typescript = {
-    tsdk = get_typescript_server_path,
-  },
+  -- on_new_config = function(new_config, new_root_dir)
+  --   new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+  -- end,
+  -- init_options = {
+  --   vue = {
+  --     hybridMode = false,
+  --   },
+  -- },
 }
