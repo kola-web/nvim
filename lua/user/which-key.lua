@@ -152,7 +152,7 @@ function M.config()
     },
     g = {
       name = 'Git',
-      g = { '<cmd>Neogit<CR>', 'Neogit' },
+      g = { '<cmd>Neogit kind=replace<CR>', 'Neogit' },
       j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next Hunk' },
       k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev Hunk' },
       p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", 'Preview Hunk' },
