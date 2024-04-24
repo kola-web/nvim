@@ -96,13 +96,9 @@ function M.config()
       '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR>',
       'Redraw / clear hlsearch / diff update',
     },
-    -- ['f'] = {
-    --   '<cmd> FzfLua files <CR>',
-    --   'Find files',
-    -- },
     ['f'] = {
-      '<cmd>Telescope find_files<cr>',
-      'find_files'
+      '<cmd> FzfLua files <CR>',
+      'Find files',
     },
     ['F'] = { '<cmd>Telescope live_grep theme=ivy<cr>', 'Find Text' },
     ['m'] = { fun.conformFormat, 'Format buffer' },
@@ -156,7 +152,7 @@ function M.config()
     },
     g = {
       name = 'Git',
-      g = { '<cmd>lua _LAZYGIT_TOGGLE()<CR>', 'Lazygit' },
+      g = { '<cmd>Neogit<CR>', 'Neogit' },
       j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next Hunk' },
       k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev Hunk' },
       p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", 'Preview Hunk' },
@@ -168,7 +164,8 @@ function M.config()
         'Undo Stage Hunk',
       },
       o = { '<cmd>Telescope git_status<cr>', 'Open changed file' },
-      b = { '<cmd>Telescope git_branches<cr>', 'Checkout branch' },
+      b = { '<cmd>DiffviewFileHistory %<cr>', 'DiffviewFileHistory %' },
+      B = { '<cmd>DiffviewFileHistory<cr>', 'DiffviewFileHistory' },
       c = { '<cmd>Telescope git_commits<cr>', 'Checkout commit' },
       d = {
         '<cmd>Gitsigns diffthis HEAD<cr>',
