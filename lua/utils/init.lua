@@ -150,12 +150,22 @@ M.has_value = function(tab, val)
 end
 
 M.get_typescript_server_path = function(root_dir)
-  local found_ts = vim.fn.getcwd() .. '/node_modules/typescript/lib'
+  local util = require('lspconfig.util')
   local mason_registry = require('mason-registry')
-  local global_ts = mason_registry.get_package('typescript-language-server'):get_install_path() .. 'node_modules/typescript/lib'
-  if found_ts then
+  local global_ts = mason_registry.get_package('typescript-language-server'):get_install_path() .. '/node_modules/typescript/lib'
+  local found_ts = ''
+
+  local function check_dir(path)
+    found_ts = util.path.join(path, 'node_modules', 'typescript', 'lib')
+    if util.path.exists(found_ts) then
+      return path
+    end
+  end
+
+  if util.search_ancestors(root_dir, check_dir) then
     return found_ts
   else
+    print(global_ts)
     return global_ts
   end
 end

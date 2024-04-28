@@ -133,6 +133,12 @@ function M.config()
     },
     r = {
       name = 'Replace',
+      c = {
+        function()
+          require('utils.compile_scss')()
+        end,
+        'scss compile'
+      },
       d = { '<cmd>%s/<div/<view/g<cr><cmd>%s/<\\/div/<\\/view/g<cr>', 'div->view' },
       v = { '<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr>', 'view->div' },
       p = { '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', 'px-->rpx' },
