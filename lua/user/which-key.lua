@@ -137,7 +137,7 @@ function M.config()
         function()
           require('utils.compile_scss')()
         end,
-        'scss compile'
+        'scss compile',
       },
       d = { '<cmd>%s/<div/<view/g<cr><cmd>%s/<\\/div/<\\/view/g<cr>', 'div->view' },
       v = { '<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr>', 'view->div' },
@@ -155,6 +155,12 @@ function M.config()
       },
       a = { '<cmd>%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gcI<Left><Left><Left><Left><cr>', 'div->view' },
       j = { '<cmd>!pbpaste | quicktype -l typescript --just-types --top-level Person | pbcopy<cr>', 'quicktype' },
+      r = {
+        function()
+          require('utils.quickType').generate_type()
+        end,
+        'quicktype'
+      },
     },
     g = {
       name = 'Git',
