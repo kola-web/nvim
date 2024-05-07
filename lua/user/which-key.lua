@@ -137,7 +137,7 @@ function M.config()
         function()
           require('utils.compile_scss')()
         end,
-        'scss compile',
+        'toggle scss compile',
       },
       d = { '<cmd>%s/<div/<view/g<cr><cmd>%s/<\\/div/<\\/view/g<cr>', 'div->view' },
       v = { '<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr>', 'view->div' },

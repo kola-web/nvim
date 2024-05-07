@@ -7,10 +7,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
-M.setup = function(name)
+M.setup = function()
   require('lazy').setup({
     spec = {
-      { import = name },
+      { import = 'user' },
+      { import = 'user.preview' },
       { import = 'vscode' },
       { import = 'lsp' },
       -- { import = 'lsp-zero' },

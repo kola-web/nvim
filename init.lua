@@ -4,7 +4,7 @@ if not vim.g.vscode then
   require('autocommands')
   require('user.colorscheme')
 end
-require('Lazy').setup('user')
+require('Lazy').setup()
 
 local has = vim.fn.has
 local is_mac = has('macunix')
