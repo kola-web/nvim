@@ -21,7 +21,8 @@ local enabled = {
   'vim-abolish',
   'vim-repeat',
   'nvim-surround',
-  'substitute.nvim'
+  'substitute.nvim',
+  'flash.nvim'
 }
 
 local Config = require('lazy.core.config')

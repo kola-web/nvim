@@ -20,6 +20,7 @@ M.servers = {
   'eslint',
   'rust_analyzer',
   'tailwindcss',
+  'jqls',
   -- 'efm',
 }
 
@@ -165,7 +166,6 @@ M.get_typescript_server_path = function(root_dir)
   if util.search_ancestors(root_dir, check_dir) then
     return found_ts
   else
-    print(global_ts)
     return global_ts
   end
 end
