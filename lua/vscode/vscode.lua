@@ -17,7 +17,11 @@ local enabled = {
   'vim-textobj-xmlattr',
   'vim-textobj-line',
   'targets.vim',
-  "nvim-treesitter",
+  'nvim-treesitter',
+  'vim-abolish',
+  'vim-repeat',
+  'nvim-surround',
+  'substitute.nvim'
 }
 
 local Config = require('lazy.core.config')
@@ -27,15 +31,13 @@ Config.options.defaults.cond = function(plugin)
   return vim.tbl_contains(enabled, plugin.name) or plugin.vscode
 end
 
--- Add some vscode specific keymaps
--- vim.keymap.set('n', '<leader>', function()
---   vscode.call('whichkey.show')
--- end)
-
+----------------------
 -- auto commands
+----------------------
 local function augroup(name)
   return vim.api.nvim_create_augroup('lazyvim_' .. name, { clear = true })
 end
+
 -- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = augroup('highlight_yank'),

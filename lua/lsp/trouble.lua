@@ -3,11 +3,11 @@ local M = {
   branch = 'dev',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   keys = {
-    { '<leader>o', '<cmd>Trouble symbols toggle pinned=true results.win = { relative=win, position=right } focus=true<cr>', desc = 'outline (Trouble)' },
-    { '<leader>xx', '<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>', desc = 'Document Diagnostics (Trouble)' },
-    { '<leader>xX', '<cmd>Trouble diagnostics toggle<cr> focus=true', desc = 'Workspace Diagnostics (Trouble)' },
-    { '<leader>xl', '<cmd>Trouble loclist toggle<cr> focus=true', desc = 'loclist' },
-    { '<leader>xq', '<cmd>Trouble qflist toggle<cr> focus=true', desc = 'quickfix' },
+    { '<leader>o',  '<cmd>Trouble symbols toggle pinned=true results.win = { relative=win, position=right } focus=true<cr>', desc = 'outline (Trouble)' },
+    { '<leader>xx', '<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>',                                           desc = 'Document Diagnostics (Trouble)' },
+    { '<leader>xX', '<cmd>Trouble diagnostics toggle<cr> focus=true',                                                        desc = 'Workspace Diagnostics (Trouble)' },
+    { '<leader>xl', '<cmd>Trouble loclist toggle<cr> focus=true',                                                            desc = 'loclist' },
+    { '<leader>xq', '<cmd>Trouble qflist toggle<cr> focus=true',                                                             desc = 'quickfix' },
   },
   opts = {},
   config = function(_, opts)

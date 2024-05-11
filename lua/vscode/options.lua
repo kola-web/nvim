@@ -12,6 +12,7 @@ local opt = vim.opt
 
 opt.clipboard = 'unnamedplus' -- Sync with system clipboard
 opt.whichwrap:append('<,>,[,],h,l') -- 允许在到达行首/行尾时使用的键
+opt.iskeyword:append('-,#') -- 将包含 `-,#` 的单词视为单个单词
 
 
 return {}
