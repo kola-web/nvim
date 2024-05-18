@@ -3,10 +3,6 @@ local M = {
   event = 'VeryLazy',
   dependencies = {
     {
-      'echasnovski/mini.bufremove',
-      version = '*',
-    },
-    {
       'nvim-tree/nvim-web-devicons',
     },
     {

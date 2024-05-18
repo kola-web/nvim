@@ -66,7 +66,7 @@ opt.winminwidth = 5 -- 窗口的最小宽度
 opt.wrap = false -- 禁用换行
 
 -- gui
-opt.guifont = 'JetBrainsMono Nerd Font:h14' -- 在图形化的 neovim 应用程序中使用的字体
+opt.guifont = 'JetBrainsMono Nerd Font:h10' -- 在图形化的 neovim 应用程序中使用的字体
 
 if vim.fn.has('nvim-0.10') == 1 then
   opt.smoothscroll = true

@@ -4,6 +4,18 @@ local M = {
   event = 'VeryLazy',
   config = true,
   keys = {
+    -- t = { '<cmd>TodoTrouble<cr>', 'Todo' },
+    -- T = { '<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>', 'Todo/FIX/FIXME' },
+    {
+      '<leader>xt',
+      '<cmd>TodoTrouble<cr>',
+      desc = 'Todo',
+    },
+    {
+      '<leader>xT',
+      '<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>',
+      desc = 'Todo/FIX/FIXME',
+    },
     {
       ']t',
       function()

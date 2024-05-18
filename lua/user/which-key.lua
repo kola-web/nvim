@@ -87,9 +87,7 @@ function M.config()
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     ['q'] = { '<cmd>q!<CR>', 'Quit' },
     ['c'] = {
-      function(n)
-        require('mini.bufremove').delete(n, false)
-      end,
+      "<cmd>bdelete<cr>",
       'Close Buffer',
     },
     h = {
@@ -197,8 +195,6 @@ function M.config()
     },
     x = {
       name = '+diagnostics/quickfix',
-      t = { '<cmd>TodoTrouble<cr>', 'Todo' },
-      T = { '<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>', 'Todo/FIX/FIXME' },
     },
     s = {
       name = 'Search',
