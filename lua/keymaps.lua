@@ -105,6 +105,12 @@ keymap('v', 'p', '"_dP', opts)
 keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
 
+keymap('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
+keymap('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
+
+keymap("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+keymap("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+
 -- substitute
 keymap('n', 's', "<cmd>lua require('substitute').operator()<cr>", opts)
 keymap('n', 'ss', "<cmd>lua require('substitute').line()<cr>", opts)

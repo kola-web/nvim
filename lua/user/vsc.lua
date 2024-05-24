@@ -75,7 +75,6 @@ local M = {
       update_debounce = 100,
       status_formatter = nil, -- Use default
       preview_config = {
-        -- Options passed to nvim_open_win
         border = 'single',
         style = 'minimal',
         relative = 'cursor',
@@ -88,6 +87,7 @@ local M = {
     'mhinz/vim-signify',
     event = 'BufReadPre',
     config = function()
+      vim.g.signify_skip = { vcs = { allow = { 'svn' } } }
       vim.g.signify_line_highlight = 0
       vim.g.signify_sign_add = '┃'
       vim.g.signify_sign_delete = '┃'

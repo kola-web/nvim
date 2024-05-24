@@ -21,9 +21,9 @@ local M = {
       -- mode = 'tabs', -- set to "tabs" to only show tabpages instead
       themable = true,
       -- stylua: ignore
-      close_command = function(n) require("mini.bufremove").delete(n, false) end,
-      -- stylua: ignore
-      right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+      close_command = "bdelete! %d", -- can be a string | function, | false see "Mouse actions"
+      right_mouse_command = 'bdelete! %d', -- can be a string | function | false, see "Mouse actions"
+      left_mouse_command = 'buffer %d', -- can be a string | function, | false see "Mouse actions"
       diagnostics = 'nvim_lsp',
       show_tab_indicators = true,
       separator_style = 'thick',

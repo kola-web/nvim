@@ -1,23 +1,44 @@
 local M = {
+  {
+    'folke/tokyonight.nvim',
+    priority = 1000,
+    lazy = false,
+    opts = { style = 'storm', transparent = false },
+    config = function(_, opts)
+      require('tokyonight').setup(opts)
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
+
   -- {
-  --   'folke/tokyonight.nvim',
   --   priority = 1000,
   --   lazy = false,
-  --   opts = { style = 'storm', transparent = false },
-  --   config = function(_, opts)
-  --     require('tokyonight').setup(opts)
-  --     vim.cmd([[colorscheme tokyonight]])
+  --   'sainnhe/gruvbox-material',
+  --   config = function()
+  --     vim.cmd([[colorscheme gruvbox-material]])
   --   end,
   -- },
 
-  {
-    priority = 1000,
-    lazy = false,
-    'sainnhe/gruvbox-material',
-    config = function()
-      vim.cmd([[colorscheme gruvbox-material]])
-    end,
-  },
+  -- {
+  --   priority = 1000,
+  --   lazy = false,
+  --   'oxfist/night-owl.nvim',
+  --   config = function()
+  --     require('night-owl').setup({
+  --     })
+  --     vim.cmd([[colorscheme night-owl]])
+  --   end,
+  -- },
+
+  -- {
+  --   priority = 1000,
+  --   lazy = false,
+  --   'projekt0n/github-nvim-theme',
+  --   config = function()
+  --     require('github-theme').setup({})
+  --     vim.cmd('colorscheme github_dark_dimmed')
+  --   end,
+  -- },
 
   -- {
   --   'craftzdog/solarized-osaka.nvim',

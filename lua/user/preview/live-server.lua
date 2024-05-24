@@ -1,6 +1,6 @@
 local M = {
   'barrett-ruth/live-server.nvim',
-  build = 'pnpm add -g live-server',
+  build = 'npm i -g live-server',
   cmd = { 'LiveServerStart', 'LiveServerStop' },
   config = true,
   keys = {
