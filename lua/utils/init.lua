@@ -170,4 +170,29 @@ M.get_typescript_server_path = function(root_dir)
   end
 end
 
+---@param opts? {system?:boolean}
+M.open = function(uri, opts)
+  opts = opts or {}
+  if not opts.system and M.file_exists(uri) then
+    return M.float({ style = '', file = uri })
+  end
+  local Config = require('lazy.core.config')
+  local cmd
+  if not opts.system and Config.options.ui.browser then
+    cmd = { Config.options.ui.browser, uri }
+  elseif vim.fn.has('win32') == 1 then
+    cmd = { 'explorer', uri }
+  elseif vim.fn.has('macunix') == 1 then
+    cmd = { 'open', uri }
+  else
+    if vim.fn.executable('xdg-open') == 1 then
+      cmd = { 'xdg-open', uri }
+    elseif vim.fn.executable('wslview') == 1 then
+      cmd = { 'wslview', uri }
+    else
+      cmd = { 'open', uri }
+    end
+  end
+end
+
 return M

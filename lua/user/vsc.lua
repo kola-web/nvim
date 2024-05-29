@@ -1,28 +1,39 @@
 local M = {
   {
     'sindrets/diffview.nvim',
-    opts = {
-      -- Each Integration is auto-detected through plugin presence, however, it can be disabled by setting to `false`
-      integrations = {
-        -- If enabled, use telescope for menu selection rather than vim.ui.select.
-        -- Allows multi-select and some things that vim.ui.select doesn't.
-        telescope = true,
-        -- Neogit only provides inline diffs. If you want a more traditional way to look at diffs, you can use `diffview`.
-        -- The diffview integration enables the diff popup.
-        --
-        -- Requires you to have `sindrets/diffview.nvim` installed.
-        diffview = true,
+    opts = function()
+      local act = require('diffview.actions')
+      return {
+        view = {
+          merge_tool = {
+            -- Config for conflicted files in diff views during a merge or rebase.
+            layout = 'diff3_mixed',
+            disable_diagnostics = true, -- Temporarily disable diagnostics for diff buffers while in the view.
+            winbar_info = true, -- See |diffview-config-view.x.winbar_info|
+          },
+        },
+        keymaps = {
+          -- disable_defaults = true,
+          view = {
+            -- The `view` bindings are active in the diff buffers, only when the current
+            -- tabpage is a Diffview.
+            { 'n', 'q', '<cmd>DiffviewClose<cr>', { desc = 'Close diffview' } },
 
-        -- If enabled, uses fzf-lua for menu selection. If the telescope integration
-        -- is also selected then telescope is used instead
-        -- Requires you to have `ibhagwan/fzf-lua` installed.
-        fzf_lua = true,
-      },
-    },
-  },
-  {
-    'NeogitOrg/neogit',
-    config = true,
+            { 'n', 'x', '<Nop>', { desc = 'nop x' } },
+            { 'n', 'xo', act.conflict_choose('ours'), { desc = '选择冲突的 OURS 版本(采用当前更改)' } },
+            { 'n', 'xt', act.conflict_choose('theirs'), { desc = '选择冲突的他们的版本(采用传图更改)' } },
+            { 'n', 'xb', act.conflict_choose('base'), { desc = '选择冲突的BASE版本(删除冲突部分)' } },
+            { 'n', 'xa', act.conflict_choose('all'), { desc = '选择冲突的所有版本(保留双方更改)' } },
+          },
+          file_panel = {
+            { 'n', 'q', '<cmd>DiffviewClose<cr>', { desc = 'Close diffview' } },
+          },
+          file_history_panel = {
+            { 'n', 'q', '<cmd>DiffviewClose<cr>', { desc = 'Close diffview' } },
+          },
+        },
+      }
+    end,
   },
   {
     'lewis6991/gitsigns.nvim',

@@ -73,7 +73,6 @@ keymap('n', 'BL', '<cmd>enew<cr><cmd>set filetype=lua<cr>', opts)
 -- keymap("n", "<C-z>", "<nop>", opts)
 
 -- vue jump
-keymap('n', ']t', '/<template<cr>', opts)
 keymap('n', ']s', '/<script<cr>', opts)
 keymap('n', ']c', '/<style<cr>', opts)
 

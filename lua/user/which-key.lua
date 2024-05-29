@@ -87,7 +87,7 @@ function M.config()
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     ['q'] = { '<cmd>q!<CR>', 'Quit' },
     ['c'] = {
-      "<cmd>bdelete<cr>",
+      '<cmd>bdelete<cr>',
       'Close Buffer',
     },
     h = {
@@ -162,7 +162,6 @@ function M.config()
     },
     g = {
       name = 'Git',
-      g = { '<cmd>Neogit kind=replace<CR>', 'Neogit' },
       j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next Hunk' },
       k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev Hunk' },
       p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", 'Preview Hunk' },
@@ -178,8 +177,8 @@ function M.config()
       B = { '<cmd>DiffviewFileHistory<cr>', 'DiffviewFileHistory' },
       c = { '<cmd>Telescope git_commits<cr>', 'Checkout commit' },
       d = {
-        '<cmd>Gitsigns diffthis HEAD<cr>',
-        'Diff',
+        '<cmd>DiffviewOpen<cr>',
+        'DiffviewOpen',
       },
     },
     l = {

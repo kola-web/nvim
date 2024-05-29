@@ -5,14 +5,6 @@ local M = {
   deactivate = function()
     vim.cmd([[Neotree close]])
   end,
-  init = function()
-    if vim.fn.argc(-1) == 1 then
-      local stat = vim.loop.fs_stat(vim.fn.argv(0))
-      if stat and stat.type == 'directory' then
-        require('neo-tree')
-      end
-    end
-  end,
   opts = {
     sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
     open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
@@ -59,40 +51,47 @@ local M = {
             end
           end
         end,
+        open_file_system = function(state)
+          require('utils.init').open(state.tree:get_node().path, { system = true })
+        end,
+        mini_component = function(state)
+          local fs_actions = require('neo-tree.sources.filesystem.lib.fs_actions')
+          local node = state.tree:get_node()
+          local currentPath = node._parent_id
+          vim.fn.system({
+            'cp',
+            '-R',
+            '/Users/lijialin/.config/nvim/template/' .. 'wxmlComponent',
+            currentPath,
+          })
+          fs_actions.rename_node(currentPath .. '/wxmlComponent', function(_, path)
+            vim.cmd('edit ' .. path .. '/index.wxml')
+          end)
+        end,
+        mini_page = function(state)
+          local fs_actions = require('neo-tree.sources.filesystem.lib.fs_actions')
+          local node = state.tree:get_node()
+          local currentPath = node._parent_id
+          vim.fn.system({
+            'cp',
+            '-R',
+            '/Users/lijialin/.config/nvim/template/' .. 'wxmlPage',
+            currentPath,
+          })
+          fs_actions.rename_node(currentPath .. '/wxmlPage', function(_, path)
+            vim.cmd('edit ' .. path .. '/index.wxml')
+          end)
+        end,
       },
       window = {
         mappings = {
-          ['<C-t>c'] = function(state)
-            local fs_actions = require('neo-tree.sources.filesystem.lib.fs_actions')
-            local node = state.tree:get_node()
-            local currentPath = node._parent_id
-            vim.fn.system({
-              'cp',
-              '-R',
-              '/Users/lijialin/.config/nvim/template/' .. 'wxmlComponent',
-              currentPath,
-            })
-            fs_actions.rename_node(currentPath .. '/wxmlComponent', function(_, path)
-              vim.cmd('edit ' .. path .. '/index.wxml')
-            end)
-          end,
-          ['<C-t>p'] = function(state)
-            local fs_actions = require('neo-tree.sources.filesystem.lib.fs_actions')
-            local node = state.tree:get_node()
-            local currentPath = node._parent_id
-            vim.fn.system({
-              'cp',
-              '-R',
-              '/Users/lijialin/.config/nvim/template/' .. 'wxmlPage',
-              currentPath,
-            })
-            fs_actions.rename_node(currentPath .. '/wxmlPage', function(_, path)
-              vim.cmd('edit ' .. path .. '/index.wxml')
-            end)
-          end,
+          ['<space>'] = 'none',
+          ['<C-t>c'] = 'mini_component',
+          ['<C-t>p'] = 'mini_page',
           ['Y'] = 'copy_file_name',
           ['<C-y>'] = 'copy_file_path',
           ['D'] = 'diff_files',
+          ['O'] = 'open_file_system',
         },
       },
     },
@@ -137,7 +136,7 @@ local M = {
     },
   },
   keys = {
-    { '<leader>e', '<cmd>Neotree<cr>', 'Explorer', mode = { 'n' } },
+    { '<leader>e', '<cmd>Neotree toggle<cr>', 'Explorer', mode = { 'n' } },
   },
 }
 
