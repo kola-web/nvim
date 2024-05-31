@@ -1,23 +1,23 @@
 local M = {
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   priority = 1000,
-  --   lazy = false,
-  --   opts = { style = 'storm', transparent = false },
-  --   config = function(_, opts)
-  --     require('tokyonight').setup(opts)
-  --     vim.cmd([[colorscheme tokyonight]])
-  --   end,
-  -- },
-
   {
+    'folke/tokyonight.nvim',
     priority = 1000,
     lazy = false,
-    'ellisonleao/gruvbox.nvim',
-    config = function()
-      vim.cmd([[colorscheme gruvbox]])
+    opts = { style = 'storm', transparent = false },
+    config = function(_, opts)
+      require('tokyonight').setup(opts)
+      vim.cmd([[colorscheme tokyonight]])
     end,
   },
+
+  -- {
+  --   priority = 1000,
+  --   lazy = false,
+  --   'ellisonleao/gruvbox.nvim',
+  --   config = function()
+  --     vim.cmd([[colorscheme gruvbox]])
+  --   end,
+  -- },
 
 
   -- {

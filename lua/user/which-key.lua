@@ -87,7 +87,7 @@ function M.config()
     ['w'] = { '<cmd>w!<CR>', 'Save' },
     ['q'] = { '<cmd>q!<CR>', 'Quit' },
     ['c'] = {
-      '<cmd>bdelete<cr>',
+      require('utils.ui').bufremove,
       'Close Buffer',
     },
     h = {
@@ -162,24 +162,20 @@ function M.config()
     },
     g = {
       name = 'Git',
+      g = { require('utils.lazygit')._lazygit_toggle, 'lazygit' },
+      b = { "<cmd>lua require 'gitsigns'.blame_line<cr>", 'Git Blame Line' },
       j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", 'Next Hunk' },
       k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", 'Prev Hunk' },
       p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", 'Preview Hunk' },
       r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", 'Reset Hunk' },
       R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", 'Reset Buffer' },
       s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", 'Stage Hunk' },
-      u = {
-        "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-        'Undo Stage Hunk',
-      },
+      u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", 'Undo Stage Hunk' },
       o = { '<cmd>Telescope git_status<cr>', 'Open changed file' },
-      b = { '<cmd>DiffviewFileHistory %<cr>', 'DiffviewFileHistory %' },
-      B = { '<cmd>DiffviewFileHistory<cr>', 'DiffviewFileHistory' },
+      h = { '<cmd>DiffviewFileHistory %<cr>', 'DiffviewFileHistory %' },
+      H = { '<cmd>DiffviewFileHistory<cr>', 'DiffviewFileHistory' },
       c = { '<cmd>Telescope git_commits<cr>', 'Checkout commit' },
-      d = {
-        '<cmd>DiffviewOpen<cr>',
-        'DiffviewOpen',
-      },
+      d = { '<cmd>DiffviewOpen<cr>', 'DiffviewOpen' },
     },
     l = {
       name = 'LSP',
@@ -345,4 +341,3 @@ function M.config()
 end
 
 return M
-
