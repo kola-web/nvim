@@ -44,10 +44,22 @@ local M = {
         blade = { 'blade-formatter' },
 
         rust = { 'rustfmt' },
+
+        nginx = { 'nginx-formatter' },
       },
       formatters = {
         ['blade-formatter'] = {
           prepend_args = { '-i', '2' },
+        },
+        -- ['nginx-formatter'] = {
+        --   command = 'nginx-formatter',
+        --   args = { '-input=', '$FILENAME' },
+        --   stdin = false,
+        -- },
+        ['nginx-formatter'] = {
+          command = 'nginxbeautifier',
+          args = { '--input', '$FILENAME' },
+          stdin = false,
         },
       },
     }

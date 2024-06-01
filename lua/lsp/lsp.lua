@@ -45,6 +45,10 @@ function M.config()
     end,
   })
 
+  lspconfig.nginx_language_server.setup({
+    capabilities = lsp_capabilities,
+  })
+
   local signs = {
     { name = 'DiagnosticSignError', text = icons.diagnostics.Error },
     { name = 'DiagnosticSignWarn', text = icons.diagnostics.Warning },
