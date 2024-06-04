@@ -4,13 +4,8 @@ local M = {
   dependencies = {
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
-
     { 'folke/neoconf.nvim', opts = { import = { vscode = false, coc = false, nlsp = false } } },
-    { 'folke/neodev.nvim', config = true },
-
     { 'b0o/schemastore.nvim' },
-
-    -- { 'SmiteshP/nvim-navic', opts = { highlight = true, icons = require('user.nvim-dev-icons').icons.kinds } },
   },
   opts = {
     inlay_hints = {
