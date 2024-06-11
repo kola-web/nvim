@@ -6,8 +6,8 @@ M.servers = {
   'lua_ls',
   'cssls',
   'html',
-  -- 'tsserver',
-  'vtsls',
+  'tsserver',
+  -- 'vtsls',
   'pyright',
   'bashls',
   'jsonls',
@@ -154,8 +154,8 @@ end
 M.get_typescript_server_path = function(root_dir)
   local util = require('lspconfig.util')
   local mason_registry = require('mason-registry')
-  -- local global_ts = mason_registry.get_package('typescript-language-server'):get_install_path() .. '/node_modules/typescript/lib'
-  local global_ts = mason_registry.get_package('vtsls'):get_install_path() .. '/node_modules/@vtsls/language-server/node_modules/typescript/lib'
+  local global_ts = mason_registry.get_package('typescript-language-server'):get_install_path() .. '/node_modules/typescript/lib'
+  -- local global_ts = mason_registry.get_package('vtsls'):get_install_path() .. '/node_modules/@vtsls/language-server/node_modules/typescript/lib'
   local found_ts = ''
 
   local function check_dir(path)

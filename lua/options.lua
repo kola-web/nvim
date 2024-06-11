@@ -82,9 +82,6 @@ vim.opt.foldlevel = 99 -- 打开文件时默认折叠级别
 -- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 -- vim.g.loaded_perl_provider = 0
 
--- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
-
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
   vim.g.neovide_scale_factor = 1.4
@@ -99,7 +96,8 @@ if vim.g.neovide then
   vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
   vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
   vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
-  vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+  vim.keymap.set('i', '<D-v>', '<C-R>*') -- Paste insert mode
+  vim.keymap.set('t', '<D-v>', '<C-R>*') -- Paste insert mode
 end
 
 if vim.g.vscode then

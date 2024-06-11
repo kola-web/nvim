@@ -19,10 +19,10 @@ keymap('i', '<C-e>', '<End>', opts)
 keymap('i', '<C-a>', '<Home>', opts)
 
 -- Allow clipboard copy paste in neovim
-keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
-keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
-keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
-keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+-- keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
+-- keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+-- keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+-- keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 
 -- better up/down
 keymap({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })

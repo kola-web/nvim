@@ -20,7 +20,11 @@ function M.config()
       ['--preview-window'] = 'up,50%',
       ['--info'] = 'default',
     },
-    winopts = {},
+    winopts = {
+      on_create = function()
+        vim.keymap.set('t', '<C-r>', [['<C-\><C-N>"'.nr2char(getchar()).'pi']], { expr = true, buffer = true })
+      end,
+    },
     fzf_colors = {
       ['bg'] = '-1',
     },
