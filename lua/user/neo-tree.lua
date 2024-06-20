@@ -142,7 +142,26 @@ local M = {
   },
   {
     'stevearc/oil.nvim',
-    opts = {},
+    opts = {
+      keymaps = {
+        ['g?'] = 'actions.show_help',
+        ['<CR>'] = 'actions.select',
+        ['<C-s>'] = { 'actions.select', opts = { vertical = true } },
+        ['<C-h>'] = { 'actions.select', opts = { horizontal = true } },
+        ['<C-t>'] = { 'actions.select', opts = { tab = true } },
+        ['<C-p>'] = 'actions.preview',
+        ['-'] = 'actions.close',
+        ['<C-l>'] = 'actions.refresh',
+        ['<'] = 'actions.parent',
+        ['>'] = 'actions.open_cwd',
+        ['`'] = 'actions.cd',
+        ['~'] = { 'actions.cd', opts = { scope = 'tab' } },
+        ['gs'] = 'actions.change_sort',
+        ['gx'] = 'actions.open_external',
+        ['g.'] = 'actions.toggle_hidden',
+        ['g\\'] = 'actions.toggle_trash',
+      },
+    },
     -- Optional dependencies
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     keys = {

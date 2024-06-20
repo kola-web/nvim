@@ -31,7 +31,6 @@ local M = {
       'saadparwaiz1/cmp_luasnip',
       'kola-web/cmp-path',
       -- 'hrsh7th/cmp-path',
-
       {
         'mattn/emmet-vim',
         init = function()
@@ -61,7 +60,7 @@ local M = {
       local has_value = require('utils.init').has_value
 
       return {
-        preselect = 'item',
+        preselect = cmp.PreselectMode.Item,
         completion = {
           completeopt = 'menu,menuone,noinsert',
         },
@@ -147,7 +146,9 @@ local M = {
           end,
         },
         experimental = {
-          ghost_text = true,
+          ghost_text = {
+            hl_group = 'CmpGhostText',
+          },
         },
         sorting = defaults.sorting,
       }

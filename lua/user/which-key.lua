@@ -197,16 +197,7 @@ function M.config()
       T = { '<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>', 'Todo/Fix/Fixme' },
       f = {
         function()
-          require('telescope').extensions.file_browser.file_browser({
-            path = '%:p:h',
-            cwd = vim.fn.expand('%:p:h'),
-            respect_gitignore = false,
-            hidden = true,
-            grouped = true,
-            previewer = false,
-            initial_mode = 'normal',
-            layout_config = { height = 40 },
-          })
+          require('telescope').extensions.file_browser.file_browser()
         end,
         'file_browser',
       },

@@ -203,4 +203,3 @@ vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinEnter' }, {
   end,
   desc = 'set nocursorline',
 })
-

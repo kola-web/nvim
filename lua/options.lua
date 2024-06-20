@@ -11,16 +11,10 @@ vim.g.root_spec = { 'lsp', { '.git', 'lua', '.svn' }, 'cwd' }
 
 local opt = vim.opt
 
-if not vim.env.SSH_TTY then
-  -- only set clipboard if not in ssh, to make sure the OSC 52
-  -- integration works automatically. Requires Neovim >= 0.10.0
-  opt.clipboard = 'unnamedplus' -- Sync with system clipboard
-end
-
 opt.autowrite = true -- 启用自动写入
 opt.backup = false -- 不创建备份文件
+opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus' -- 与系统剪贴板同步
 opt.completeopt = 'menu,menuone,noselect' -- 补全选项
-opt.conceallevel = 0 -- 在 markdown 文件中显示 `` 符号
 opt.confirm = true -- 在退出修改的缓冲区之前确认保存更改
 opt.cursorline = true -- 启用当前行高亮
 opt.expandtab = true -- 使用空格而不是制表符
@@ -31,6 +25,7 @@ opt.grepprg = 'rg --vimgrep' -- grep 命令
 opt.ignorecase = true -- 忽略大小写
 opt.inccommand = 'nosplit' -- 预览增量替换
 opt.laststatus = 3 -- 全局状态行
+opt.linebreak = true -- 在方便的地方换行
 opt.list = true -- 显示一些不可见字符（制表符等）
 opt.mouse = 'a' -- 启用鼠标模式
 opt.number = true -- 显示行号
@@ -48,6 +43,7 @@ opt.sidescrolloff = 8 -- 上下文列数
 opt.signcolumn = 'yes' -- 始终显示标志列，否则每次会移动文本
 opt.smartcase = true -- 大小写匹配
 opt.smartindent = true -- 自动插入缩进
+opt.smoothscroll = true
 opt.spelloptions = 'camel' -- 忽略驼峰单词
 opt.spelllang = { 'en', 'cjk' } -- 拼写语言
 opt.splitbelow = true -- 在当前窗口下方打开新窗口
