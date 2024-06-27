@@ -40,9 +40,7 @@ function M.config()
 
   -- LSP clients attached to buffer
   local clients_lsp = function()
-    local bufnr = vim.api.nvim_get_current_buf()
-
-    local clients = vim.lsp.buf_get_clients(bufnr)
+    local clients = vim.lsp.get_clients()
     if next(clients) == nil then
       return ''
     end
@@ -68,8 +66,7 @@ function M.config()
       lualine_a = { 'mode' },
       lualine_b = { 'branch', diff, diagnostics },
       lualine_c = {
-        -- { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
-        -- { 'filename', file_status = true, path = 1 },
+        { 'filename', file_status = true, path = 1 },
       },
       lualine_x = {
         {

@@ -7,18 +7,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    -- local filetype = vim.bo[bufnr].filetype
     local filetype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
 
-    -- if client and client.server_capabilities.documentSymbolProvider then
-    --   if filetype == 'vue' and client.name == 'tsserver' then
-    --     return
-    --   end
-    --   require('nvim-navic').attach(client, bufnr)
-    --   vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
-    -- end
-
-    -- diagnostic
     local diagnostic_goto = function(next, severity)
       local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
       severity = severity and vim.diagnostic.severity[severity] or nil

@@ -15,8 +15,6 @@ local M = {
         keymaps = {
           -- disable_defaults = true,
           view = {
-            -- The `view` bindings are active in the diff buffers, only when the current
-            -- tabpage is a Diffview.
             { 'n', 'q', '<cmd>DiffviewClose<cr>', { desc = 'Close diffview' } },
 
             { 'n', 'x', '<Nop>', { desc = 'nop x' } },

@@ -6,7 +6,7 @@ return {
   end,
   init_options = {
     vue = {
-      hybridMode = 'false',
+      hybridMode = false,
     },
   },
 }
