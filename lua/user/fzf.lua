@@ -22,7 +22,8 @@ function M.config()
     },
     winopts = {
       on_create = function()
-        vim.keymap.set('t', '<C-r>', [['<C-\><C-N>"'.nr2char(getchar()).'pi']], { expr = true, buffer = true })
+        -- vim.keymap.set('t', '<C-r>', [['<C-\><C-N>"'.nr2char(getchar()).'pi']], { expr = true, buffer = true })
+        -- vim.keymap.set('t', '<D-v>', '<C-r>*', { buffer = true })
       end,
     },
     fzf_colors = {
