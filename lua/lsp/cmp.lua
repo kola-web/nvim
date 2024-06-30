@@ -1,27 +1,5 @@
 local M = {
   {
-    'L3MON4D3/LuaSnip',
-    version = 'v2.*',
-    build = 'make install_jsregexp',
-    dependencies = {
-      {
-        'rafamadriz/friendly-snippets',
-        config = function()
-          require('luasnip/loaders/from_vscode').lazy_load()
-        end,
-      },
-    },
-    opts = {
-      history = true,
-      delete_check_events = 'TextChanged',
-    },
-    config = function(_, opts)
-      require('luasnip/loaders/from_vscode').lazy_load({ paths = '~/.config/nvim/snippets' })
-      require('luasnip').setup(opts)
-    end,
-    keys = {},
-  },
-  {
     'hrsh7th/nvim-cmp',
     version = false,
     event = 'InsertEnter',
@@ -156,6 +134,28 @@ local M = {
     config = function(_, opts)
       require('cmp').setup(opts)
     end,
+  },
+  {
+    'L3MON4D3/LuaSnip',
+    version = 'v2.*',
+    build = 'make install_jsregexp',
+    dependencies = {
+      {
+        'rafamadriz/friendly-snippets',
+        config = function()
+          require('luasnip/loaders/from_vscode').lazy_load()
+        end,
+      },
+    },
+    opts = {
+      history = true,
+      delete_check_events = 'TextChanged',
+    },
+    config = function(_, opts)
+      require('luasnip/loaders/from_vscode').lazy_load({ paths = '~/.config/nvim/snippets' })
+      require('luasnip').setup(opts)
+    end,
+    keys = {},
   },
 }
 

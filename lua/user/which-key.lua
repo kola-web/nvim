@@ -211,13 +211,13 @@ function M.config()
       k = { '<cmd>Telescope keymaps<cr>', 'Keymaps' },
       s = {
         function()
-          require('spectre').open()
+          require('grug-far').grug_far()
         end,
         'replace',
       },
       b = {
         function()
-          require('spectre').open_file_search()
+          require('grug-far').grug_far({ prefills = { flags = vim.fn.expand('%'), search = vim.fn.expand('<cword>') } })
         end,
         'replace',
       },
@@ -308,7 +308,7 @@ function M.config()
     S = { "<esc><cmd>'<,'>SnipRun<cr>", 'Run range' },
     s = {
       function()
-        require('spectre').open()
+        require('grug-far').with_visual_selection({ prefills = { flags = vim.fn.expand('%') } })
       end,
       'replace',
     },

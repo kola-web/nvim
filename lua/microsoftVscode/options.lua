@@ -6,7 +6,7 @@ local vscode = require('vscode-neovim')
 vim.notify = vscode.notify
 
 vim.g.mapleader = ' '
-vim.g.maplocalleader = '\\'
+vim.g.maplocalleader = ','
 
 local opt = vim.opt
 local o = vim.o
