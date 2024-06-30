@@ -1,14 +1,14 @@
 local M = {
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   priority = 1000,
-  --   lazy = false,
-  --   opts = { style = 'storm', transparent = false },
-  --   config = function(_, opts)
-  --     require('tokyonight').setup(opts)
-  --     vim.cmd([[colorscheme tokyonight]])
-  --   end,
-  -- },
+  {
+    'folke/tokyonight.nvim',
+    priority = 1000,
+    lazy = false,
+    opts = { style = 'storm', transparent = false },
+    config = function(_, opts)
+      require('tokyonight').setup(opts)
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
 
   -- {
   --   priority = 1000,
@@ -19,23 +19,23 @@ local M = {
   --   end,
   -- },
 
-  {
-    priority = 1000,
-    lazy = false,
-    'sainnhe/gruvbox-material',
-    config = function()
-      vim.cmd([[colorscheme gruvbox-material]])
-    end,
-  },
+  -- {
+  --   priority = 1000,
+  --   lazy = false,
+  --   'sainnhe/gruvbox-material',
+  --   config = function()
+  --     vim.cmd([[colorscheme gruvbox-material]])
+  --   end,
+  -- },
 
-  {
-    priority = 1000,
-    lazy = false,
-    'olimorris/onedarkpro.nvim',
-    config = function()
-      -- vim.cmd([[colorscheme onedark]])
-    end,
-  },
+  -- {
+  --   priority = 1000,
+  --   lazy = false,
+  --   'olimorris/onedarkpro.nvim',
+  --   config = function()
+  --     -- vim.cmd([[colorscheme onedark]])
+  --   end,
+  -- },
 
   -- {
   --   priority = 1000,

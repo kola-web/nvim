@@ -2,28 +2,29 @@ local M = {
   {
     'nvim-lualine/lualine.nvim',
     event = { 'VimEnter', 'InsertEnter', 'BufReadPre', 'BufAdd', 'BufNew', 'BufReadPost' },
-    config = function()
+    opts = function()
       local status_ok, lualine = pcall(require, 'lualine')
-      local icons = require('user.nvim-dev-icons')
+      local icons = require('utils.icons')
       if not status_ok then
         return
       end
 
       local diagnostics = {
         'diagnostics',
-        sources = { 'nvim_diagnostic' },
-        sections = { 'error', 'warn' },
-        symbols = { error = icons.icons.diagnostics.Error, warn = icons.icons.diagnostics.Warn },
-        colored = false,
-        always_visible = true,
+        symbols = {
+          error = icons.diagnostics.Error,
+          warn = icons.diagnostics.Warn,
+          info = icons.diagnostics.Info,
+          hint = icons.diagnostics.Hint,
+        },
       }
 
       local diff = {
         'diff',
         symbols = {
-          added = icons.icons.git.added,
-          modified = icons.icons.git.modified,
-          removed = icons.icons.git.removed,
+          added = icons.git.added,
+          modified = icons.git.modified,
+          removed = icons.git.removed,
         }, -- changes diff symbols
         source = function()
           local gitsigns = vim.b.gitsigns_status_dict
@@ -51,7 +52,16 @@ local M = {
         return '\u{f085} ' .. table.concat(c, '|')
       end
 
-      lualine.setup({
+      local trouble = require('trouble')
+      local symbols = trouble.statusline({
+        mode = 'lsp_document_symbols',
+        groups = {},
+        title = false,
+        filter = { range = true },
+        format = '{kind_icon}{symbol.name:Normal}',
+      })
+
+      local opts = {
         options = {
           globalstatus = true,
           icons_enabled = true,
@@ -63,9 +73,14 @@ local M = {
         },
         sections = {
           lualine_a = { 'mode' },
-          lualine_b = { 'branch', diff, diagnostics },
+          lualine_b = { 'branch' },
           lualine_c = {
+            diagnostics,
             { 'filename', file_status = true, path = 1 },
+            {
+              symbols and symbols.get,
+              cond = symbols and symbols.has,
+            },
           },
           lualine_x = {
             {
@@ -79,6 +94,7 @@ local M = {
               color = { fg = '#ff9e64' },
             },
             clients_lsp,
+            diff,
             'encoding',
             'fileformat',
             'filetype',
@@ -91,17 +107,11 @@ local M = {
           lualine_y = { 'progress' },
           lualine_z = { 'location' },
         },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = { 'filename' },
-          lualine_x = { 'location' },
-          lualine_y = {},
-          lualine_z = {},
-        },
+        inactive_sections = {},
         winbar = {},
         extensions = { 'neo-tree', 'lazy', 'fzf', 'trouble', 'mason' },
-      })
+      }
+      return opts
     end,
   },
 }

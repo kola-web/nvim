@@ -37,20 +37,6 @@ local M = {
     },
   },
   opts = {},
-  config = function(_, opts)
-    require('trouble').setup(opts)
-    local trouble = require('trouble')
-    local symbols = trouble.statusline({
-      mode = 'lsp_document_symbols',
-      groups = {},
-      title = false,
-      filter = { range = true },
-      format = '{kind_icon}{symbol.name:Normal}',
-    })
-    _G.my_symbols = symbols
-    -- vim.o.winbar = '%f %{%v:lua.my_symbols.get()%}'
-    vim.o.winbar = "%f %{%v:lua.my_symbols.get()%}"
-  end,
 }
 
 return M
