@@ -5,23 +5,14 @@ local M = {
   cmd = 'ConformInfo',
   opts = function()
     local util = require('conform.util')
-    local prettier = { 'prettier' }
-    local eslint = { 'prettier', 'eslint_d' }
-
-    -- os.execute('ESLINT_USE_FLAT_CONFIG=true ' .. vim.fn.stdpath('data') .. '/mason/bin/eslint_d restart')
-    -- local eslintOrPrettier = function()
-    --   if require('utils.init').is_eslint() then
-    --     return eslint
-    --   else
-    --     return prettier
-    --   end
-    -- end
+    local prettier = { 'prettierd' }
+    local eslint = { 'prettierd', 'eslint_d' }
 
     return {
       format = {
         timeout_ms = 3000,
-        async = false, -- not recommended to change
-        quiet = false, -- not recommended to change
+        async = false,
+        quiet = false,
       },
       formatters_by_ft = {
         lua = { 'stylua' },
@@ -51,11 +42,6 @@ local M = {
         ['blade-formatter'] = {
           prepend_args = { '-i', '2' },
         },
-        -- ['nginx-formatter'] = {
-        --   command = 'nginx-formatter',
-        --   args = { '-input=', '$FILENAME' },
-        --   stdin = false,
-        -- },
         ['nginx-formatter'] = {
           command = 'nginxbeautifier',
           args = { '--input', '$FILENAME' },
@@ -65,7 +51,6 @@ local M = {
     }
   end,
   init = function()
-    -- If you want the formatexpr, here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
 }

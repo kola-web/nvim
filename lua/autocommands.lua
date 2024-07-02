@@ -22,7 +22,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       keymap(mode, key, cmd, { buffer = bufnr, noremap = true, silent = true, desc = desc })
     end
 
-    createKeymap('n', 'gr', '<cmd>Trouble lsp_references focus=true<CR>', 'GoTo references')
 
     -- createKeymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', 'GoTo definition')
     -- createKeymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', 'GoTo declaration')
@@ -34,6 +33,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- createKeymap('n', '<leader>li', '<cmd>lua vim.lsp.buf.incoming_calls()<cr>', 'Lsp incoming_calls')
     -- createKeymap('n', '<leader>lo', '<cmd>lua vim.lsp.buf.outgoing_calls()<cr>', 'Lsp outgoing_calls')
 
+    createKeymap('n', 'gr', '<cmd>Trouble lsp_references<CR>', 'GoTo references')
     createKeymap('n', 'gd', '<cmd>Trouble lsp_definitions<CR>', 'GoTo definition')
     createKeymap('n', 'gD', '<cmd>Trouble lsp_declarations<CR>', 'GoTo declaration')
     createKeymap('n', 'go', '<cmd>Trouble lsp<CR>', 'lsp')

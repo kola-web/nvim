@@ -36,7 +36,10 @@ local M = {
       desc = 'Next Trouble/Quickfix Item',
     },
   },
-  opts = {},
+  opts = {
+    auto_close = true,
+    focus = true,
+  },
 }
 
 return M
