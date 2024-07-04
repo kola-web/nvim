@@ -52,9 +52,10 @@ opt.splitkeep = 'screen' -- 保持窗口布局
 opt.splitright = true -- 在当前窗口右侧打开新窗口
 opt.tabstop = 2 -- 制表符的空格数
 opt.termguicolors = true -- 真彩色支持
-opt.timeoutlen = 300 -- 默认超时长度为1000毫秒
+opt.timeoutlen = 1000 -- 默认超时长度为1000毫秒
 opt.undofile = true -- 保存撤销历史
-opt.undolevels = 10000 -- 可以撤销的最大更改次数
+opt.undolevels = 1000 -- 可以撤销的最大更改次数
+opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.whichwrap:append('<,>,[,],h,l') -- 允许在到达行首/行尾时使用的键
 opt.iskeyword:append('-,#') -- 将包含 `-,#` 的单词视为单个单词
 opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
@@ -65,19 +66,21 @@ opt.wrap = false -- 禁用换行
 -- gui
 opt.guifont = 'JetBrainsMono Nerd Font:h10' -- 在图形化的 neovim 应用程序中使用的字体
 
-if vim.fn.has('nvim-0.10') == 1 then
-  opt.smoothscroll = true
-end
-
--- vim.o.foldcolumn = '5'
--- vim.o.foldenable = true
-vim.opt.foldmethod = 'indent' -- 使用缩进来自动折叠代码块
-vim.o.foldlevelstart = 99
-
-vim.opt.foldlevel = 99 -- 打开文件时默认折叠级别
+-- vim.opt.fillchars = {
+--   foldopen = '',
+--   foldclose = '',
+--   fold = ' ',
+--   foldsep = ' ',
+--   diff = '╱',
+--   eob = ' ',
+-- }
+-- vim.opt.foldexpr = "v:lua.require'utils.ui'.foldexpr()"
 -- vim.opt.foldmethod = 'expr'
--- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
--- vim.g.loaded_perl_provider = 0
+-- vim.opt.foldtext = ''
+
+vim.opt.foldmethod = 'indent'
+vim.o.foldlevelstart = 99
+vim.opt.foldlevel = 99
 
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here

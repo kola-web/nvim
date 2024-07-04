@@ -13,6 +13,7 @@ local o = vim.o
 
 opt.autowrite = true -- 启用自动写入
 opt.backup = false -- 不创建备份文件
+opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus' -- 与系统剪贴板同步
 opt.completeopt = 'menu,menuone,noselect' -- 补全选项
 opt.conceallevel = 0 -- 在 markdown 文件中显示 `` 符号
 opt.confirm = true -- 在退出修改的缓冲区之前确认保存更改

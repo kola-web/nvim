@@ -22,17 +22,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       keymap(mode, key, cmd, { buffer = bufnr, noremap = true, silent = true, desc = desc })
     end
 
-
-    -- createKeymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', 'GoTo definition')
-    -- createKeymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', 'GoTo declaration')
-    -- createKeymap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'GoTo type_definition')
-    -- createKeymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', 'GoTo implementation')
-    -- createKeymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', 'GoTo references')
-    -- createKeymap('n', ']d', diagnostic_goto(true), 'Next Diagnostic')
-    -- createKeymap('n', '[d', diagnostic_goto(false), 'Prev Diagnostic')
-    -- createKeymap('n', '<leader>li', '<cmd>lua vim.lsp.buf.incoming_calls()<cr>', 'Lsp incoming_calls')
-    -- createKeymap('n', '<leader>lo', '<cmd>lua vim.lsp.buf.outgoing_calls()<cr>', 'Lsp outgoing_calls')
-
     createKeymap('n', 'gr', '<cmd>Trouble lsp_references<CR>', 'GoTo references')
     createKeymap('n', 'gd', '<cmd>Trouble lsp_definitions<CR>', 'GoTo definition')
     createKeymap('n', 'gD', '<cmd>Trouble lsp_declarations<CR>', 'GoTo declaration')
@@ -143,7 +132,7 @@ vim.api.nvim_create_autocmd('FileType', {
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup('wrap_spell'),
-  pattern = { 'gitcommit', 'markdown' },
+  pattern = { '*.txt', '*.tex', '*.typ', 'gitcommit', 'markdown' },
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
@@ -160,16 +149,16 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
--- vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
---   group = augroup('auto_create_dir'),
---   callback = function(event)
---     if event.match:match('^%w%w+:[\\/][\\/]') then
---       return
---     end
---     local file = vim.uv.fs_realpath(event.match) or event.match
---     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
---   end,
--- })
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  group = augroup('auto_create_dir'),
+  callback = function(event)
+    if event.match:match('^%w%w+:[\\/][\\/]') then
+      return
+    end
+    local file = vim.uv.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
+  end,
+})
 
 -- 禁止新行注释
 vim.api.nvim_create_autocmd('BufEnter', {
@@ -180,16 +169,16 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 
 -- 更加智能的当前行高亮
-vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
-  group = augroup('cursorline'),
-  callback = function()
-    vim.opt.cursorline = true
-  end,
-  desc = 'set cursorline',
-})
-vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinEnter' }, {
-  callback = function()
-    vim.opt.cursorline = false
-  end,
-  desc = 'set nocursorline',
-})
+-- vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
+--   group = augroup('cursorline'),
+--   callback = function()
+--     vim.opt.cursorline = true
+--   end,
+--   desc = 'set cursorline',
+-- })
+-- vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinEnter' }, {
+--   callback = function()
+--     vim.opt.cursorline = false
+--   end,
+--   desc = 'set nocursorline',
+-- })
