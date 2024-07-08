@@ -23,10 +23,20 @@ local M = {
     {
       '<C-S-L>',
       function()
-        return require('debugprint').debugprint({ variable = true })
+        return require('debugprint').debugprint({ above = false, variable = true, ignore_treesitter = false })
       end,
       desc = 'debugprint: cursor',
       expr = true,
+      mode = { 'n' },
+    },
+    {
+      '<C-S-L>',
+      function()
+        return require('debugprint').debugprint({ above = false, variable = true, ignore_treesitter = true })
+      end,
+      desc = 'debugprint: cursor',
+      expr = true,
+      mode = { 'v' },
     },
   },
 }

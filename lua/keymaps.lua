@@ -18,12 +18,6 @@ vim.g.mapleader = ' '
 keymap('i', '<C-e>', '<End>', opts)
 keymap('i', '<C-a>', '<Home>', opts)
 
--- Allow clipboard copy paste in neovim
--- keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
--- keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
--- keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
--- keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
-
 -- better up/down
 keymap({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 keymap({ 'n', 'x' }, '<Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -107,8 +101,8 @@ keymap('v', '>', '>gv', opts)
 keymap('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
 keymap('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
 
-keymap("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
-keymap("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+keymap('n', '[q', vim.cmd.cprev, { desc = 'Previous Quickfix' })
+keymap('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
 
 -- substitute
 keymap('n', 's', "<cmd>lua require('substitute').operator()<cr>", opts)
@@ -129,14 +123,6 @@ keymap('n', 'g=', '<Plug>(EasyAlign)')
 
 -- fzf-lua
 keymap('t', '<esc>', [[<C-\><C-n>]])
-
--- keymap({ 'i', 'n', 'v' }, '<C-->', function()
---   require('user.converter').toggleColorFormat()
--- end, opts)
-
--- 聪明地使用命令行历史
--- keymap("c", "<C-n>", "<down>", opts)
--- keymap("c", "<C-p>", "<up>", opts)
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 keymap('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next search result' })
@@ -160,25 +146,5 @@ keymap('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
 -- save file
 keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
-
--- function EnterOrIndentTag()
---   local file_type = vim.bo.filetype
---   local line = vim.fn.getline('.')
---   local col = vim.fn.getpos('.')[3]
---   local before = line:sub(col - 1, col - 1)
---   local after = line:sub(col, col)
---
---   if file_type == 'html' and before == '>' and after == '<' then
---     return vim.api.nvim_replace_termcodes('<CR><C-o>O', true, true, true)
---   elseif (file_type == 'css' or file_type == 'scss' or file_type == 'less') and before == '{' and after == '}' then
---     return vim.api.nvim_replace_termcodes('<CR><C-o>O', true, true, true)
---   elseif file_type == 'vue' and (before == '<' and after == '>') or (before == '{' and after == '}') then
---     return vim.api.nvim_replace_termcodes('<CR><C-o>O', true, true, true)
---   else
---     vim.api.nvim_replace_termcodes('<CR>', true, true, true)
---   end
--- end
-
--- keymap('i', '<CR>', EnterOrIndentTag, { noremap = true, expr = true })
 
 -- vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#<cr>", {desc="Close all buffers but the current one"}) -- https://stackoverflow.com/a/42071865/516188
