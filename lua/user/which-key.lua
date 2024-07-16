@@ -324,6 +324,7 @@ function M.config()
         'Run File',
       },
     },
+    z
   }
 
   which_key.setup(setup)

@@ -2,23 +2,17 @@ local M = {
   'neovim/nvim-lspconfig',
   lazy = true,
   dependencies = {
-    { 'williamboman/mason.nvim' },
-    { 'williamboman/mason-lspconfig.nvim' },
+    { 'mason-lspconfig.nvim' },
     { 'folke/neoconf.nvim', opts = { import = { vscode = false, coc = false, nlsp = false } } },
     { 'b0o/schemastore.nvim' },
   },
-  opts = {
-    inlay_hints = {
-      enabled = true,
-    },
-  },
+  opts = {},
 }
 
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 function M.config()
+  local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
   local lspconfig = require('lspconfig')
-  local icons = require('user.nvim-dev-icons').icons
+  local icons = require('utils.icons')
 
   require('mason-lspconfig').setup_handlers({
     function(server_name)
@@ -51,35 +45,20 @@ function M.config()
     { name = 'DiagnosticSignInfo', text = icons.diagnostics.Information },
   }
 
-  local config = {
-    virtual_lines = true,
-    virtual_text = {
-      spacing = 4,
-      source = 'always',
-      prefix = '●',
-      severity = {
-        min = vim.diagnostic.severity.ERROR,
-      },
-    },
-    signs = {
-      active = signs,
-    },
-    update_in_insert = false,
-    underline = true,
-    severity_sort = true,
-    float = {
-      focusable = true,
-      style = 'minimal',
-      border = 'rounded',
-      source = 'always',
-      header = '',
-      prefix = '',
-    },
-  }
-
   for _, sign in ipairs(signs) do
     vim.fn.sign_define(sign.name, { text = sign.text, texthl = sign.name, numhl = sign.name })
   end
+
+  local config = {
+    underline = true,
+    update_in_insert = false,
+    virtual_text = {
+      spacing = 4,
+      source = 'if_many',
+      prefix = '●',
+    },
+    severity_sort = true,
+  }
 
   vim.diagnostic.config(config)
 end

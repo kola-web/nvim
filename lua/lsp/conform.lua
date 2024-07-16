@@ -1,12 +1,11 @@
 local M = {
   'stevearc/conform.nvim',
-  dependencies = { 'mason.nvim' },
   event = { 'BufWritePre' },
   cmd = 'ConformInfo',
   opts = function()
     local util = require('conform.util')
-    local prettier = { 'prettierd' }
-    local eslint = { 'prettierd', 'eslint_d' }
+    local prettier = { 'prettier' }
+    local eslint = { 'prettier', 'eslint_d' }
 
     return {
       format = {

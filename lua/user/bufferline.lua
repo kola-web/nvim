@@ -5,9 +5,6 @@ local M = {
     {
       'nvim-tree/nvim-web-devicons',
     },
-    {
-      'catppuccin/nvim',
-    },
   },
   keys = {
     { '<S-tab>', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev buffer' },

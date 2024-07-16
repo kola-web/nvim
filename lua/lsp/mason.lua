@@ -2,6 +2,9 @@ local M = {
   'williamboman/mason.nvim',
   cmd = 'Mason',
   event = 'BufReadPre',
+  dependencies = {
+    { 'williamboman/mason-lspconfig.nvim' },
+  },
   opts = {
     ensure_installed = require('utils').null_servers,
   },

@@ -1,14 +1,8 @@
 return {
   on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = true
-    vim.api.nvim_create_autocmd('BufWritePost', {
+    vim.api.nvim_create_autocmd('BufWritePre', {
       buffer = bufnr,
-      group = vim.api.nvim_create_augroup(('eslint_fix_%d'):format(bufnr), { clear = true }),
-      callback = function()
-        if vim.fn.exists(':EslintFixAll') > 0 then
-          vim.cmd.EslintFixAll()
-        end
-      end,
+      command = 'EslintFixAll',
     })
   end,
   root_dir = require('lspconfig').util.root_pattern(

@@ -14,7 +14,7 @@ M.servers = {
   'yamlls',
   'emmet_language_server',
   'volar',
-  'marksman',
+  -- 'marksman',
   'intelephense',
   'docker_compose_language_service',
   'dockerls',
@@ -27,8 +27,6 @@ M.servers = {
 
 M.null_servers = {
   'prettier',
-  'eslint_d',
-  'prettierd',
   'black',
   'stylua',
   'flake8',

@@ -136,6 +136,7 @@ keymap('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search res
 keymap('i', ',', ',<c-g>u')
 keymap('i', '.', '.<c-g>u')
 keymap('i', ';', ';<c-g>u')
+keymap('i', ':', ':<c-g>u')
 
 keymap('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
 keymap('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
