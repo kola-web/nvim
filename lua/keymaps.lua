@@ -114,10 +114,6 @@ vim.keymap.set('n', 'sxx', "<cmd>lua require('substitute.exchange').line()<cr>",
 vim.keymap.set('x', 'X', "<cmd>lua require('substitute.exchange').visual()<cr>", opts)
 vim.keymap.set('n', 'sxc', "<cmd>lua require('substitute.exchange').cancel()<cr>", opts)
 
---abolish.vim
-keymap('n', 'ga', '<Plug>(abolish-coerce-word)')
-keymap('v', 'ga', '<Plug>(abolish-coerce)')
-
 keymap('x', 'g=', '<Plug>(EasyAlign)')
 keymap('n', 'g=', '<Plug>(EasyAlign)')
 
@@ -147,5 +143,7 @@ keymap('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
 -- save file
 keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
+keymap('n', '<leader>w', '<cmd>w<cr><esc>', { desc = 'save file' })
+keymap('n', '<leader>q', '<cmd>q!<CR>', { desc = 'quit' })
 
 -- vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#<cr>", {desc="Close all buffers but the current one"}) -- https://stackoverflow.com/a/42071865/516188
