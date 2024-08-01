@@ -1,6 +1,7 @@
 local M = {
   {
     'sindrets/diffview.nvim',
+    event = 'BufReadPre',
     opts = function()
       local act = require('diffview.actions')
       return {
@@ -32,6 +33,12 @@ local M = {
         },
       }
     end,
+    keys = {
+      { '<leader>gh', '<cmd>DiffviewFileHistory %<cr>', desc = 'DiffviewFileHistory %' },
+      { '<leader>gH', '<cmd>DiffviewFileHistory<cr>', desc = 'DiffviewFileHistory' },
+      { '<leader>gc', '<cmd>Telescope git_commits<cr>', desc = 'Checkout commit' },
+      { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'DiffviewOpen' },
+    },
   },
   {
     'lewis6991/gitsigns.nvim',
@@ -52,6 +59,17 @@ local M = {
         topdelete = { text = '' },
         changedelete = { text = '▎' },
       },
+    },
+    keys = {
+      { '<leader>gb', "<cmd>lua require 'gitsigns'.blame_line<cr>", desc = 'Git Blame Line' },
+      { '<leader>gk', "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", desc = 'Prev Hunk' },
+      { '<leader>gj', "<cmd>lua require 'gitsigns'.next_hunk()<cr>", desc = 'Next Hunk' },
+      { '<leader>gp', "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", desc = 'Preview Hunk' },
+      { '<leader>gr', "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = 'Reset Hunk' },
+      { '<leader>gR', "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = 'Reset Buffer' },
+      { '<leader>gs', "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", desc = 'Stage Hunk' },
+      { '<leader>gu', "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", desc = 'Undo Stage Hunk' },
+      { '<leader>go', '<cmd>Telescope git_status<cr>', desc = 'Open changed file' },
     },
   },
   {

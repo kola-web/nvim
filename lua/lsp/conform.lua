@@ -52,6 +52,15 @@ local M = {
   init = function()
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
+  keys = {
+    {
+      '<leader>m',
+      function()
+        require('utils.init').conformFormat()
+      end,
+      desc = 'format',
+    },
+  },
 }
 
 return M

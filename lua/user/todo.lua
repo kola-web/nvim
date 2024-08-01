@@ -6,6 +6,8 @@ local M = {
   keys = {
     -- t = { '<cmd>TodoTrouble<cr>', 'Todo' },
     -- T = { '<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>', 'Todo/FIX/FIXME' },
+    { '<leader>st', '<cmd>TodoTelescope', desc = 'Todo' },
+    { '<leader>sT', '<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>', desc = 'Todo/Fix/Fixme' },
     {
       '<leader>xt',
       '<cmd>TodoTrouble<cr>',

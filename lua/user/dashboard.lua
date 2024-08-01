@@ -39,6 +39,13 @@ local M = {
       },
     },
   },
+  keys = {
+    {
+      '<leader>;',
+      '<cmd>Dashboard<cr>',
+      desc = 'Dashboard',
+    },
+  },
 }
 
 return M

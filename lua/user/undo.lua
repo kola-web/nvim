@@ -4,7 +4,7 @@ local M = {
     {
       '<leader>u',
       '<cmd>UndotreeToggle<cr>',
-      'undotree',
+      desc = 'undotree',
       { mode = 'n' },
     },
   },

@@ -1,15 +1,7 @@
 local M = {
   'ibhagwan/fzf-lua',
   event = 'VeryLazy',
-}
-
-function M.config()
-  local status_ok, fzf = pcall(require, 'fzf-lua')
-  if not status_ok then
-    return
-  end
-
-  fzf.setup({
+  opts = {
     fzf_opts = {
       ['--layout'] = 'default',
       ['--marker'] = '+',
@@ -20,12 +12,6 @@ function M.config()
       ['--preview-window'] = 'up,50%',
       ['--info'] = 'default',
     },
-    winopts = {
-      on_create = function()
-        -- vim.keymap.set('t', '<C-r>', [['<C-\><C-N>"'.nr2char(getchar()).'pi']], { expr = true, buffer = true })
-        -- vim.keymap.set('t', '<D-v>', '<C-r>*', { buffer = true })
-      end,
-    },
     fzf_colors = {
       ['bg'] = '-1',
     },
@@ -34,7 +20,14 @@ function M.config()
       rg_opts = "--color=never --files --hidden --follow -g '!{.git,node_modules,miniprogram_npm,.yarn,static,.svn,statics,dist,dist_uat,dist_pro}'",
       fd_opts = "--color=never --type f --hidden --follow --exclude '{.git,node_modules,miniprogram_npm,.yarn,static,.svn,statics,dist,dist_uat,dist_pro}'",
     },
-  })
-end
+  },
+  keys = {
+    {
+      '<leader>f',
+      '<cmd>FzfLua files<CR>',
+      desc = 'find file',
+    },
+  },
+}
 
 return M

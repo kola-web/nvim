@@ -7,14 +7,12 @@ M.servers = {
   'cssls',
   'html',
   'tsserver',
-  -- 'vtsls',
   'pyright',
   'bashls',
   'jsonls',
   'yamlls',
   'emmet_language_server',
   'volar',
-  -- 'marksman',
   'intelephense',
   'docker_compose_language_service',
   'dockerls',
@@ -22,7 +20,6 @@ M.servers = {
   'rust_analyzer',
   'tailwindcss',
   'jqls',
-  -- 'efm',
 }
 
 M.null_servers = {

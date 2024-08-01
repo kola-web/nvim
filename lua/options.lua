@@ -1,86 +1,55 @@
--- This file is automatically loaded by plugins.core
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
--- LazyVim root dir detection
--- Each entry can be:
--- * the name of a detector function like `lsp` or `cwd`
--- * a pattern or array of patterns like `.git` or `lua`.
--- * a function with signature `function(buf) -> string|string[]`
-vim.g.root_spec = { 'lsp', { '.git', 'lua', '.svn' }, 'cwd' }
-
-local opt = vim.opt
-
-opt.autowrite = true -- 启用自动写入
-opt.backup = false -- 不创建备份文件
-opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus' -- 与系统剪贴板同步
-opt.completeopt = 'menu,menuone,noselect' -- 补全选项
-opt.conceallevel = 0 -- 在 markdown 文件中显示 `` 符号
-opt.confirm = true -- 在退出修改的缓冲区之前确认保存更改
-opt.cursorline = true -- 启用当前行高亮
-opt.expandtab = true -- 使用空格而不是制表符
-opt.fileencoding = 'utf-8' -- 文件编码为 UTF-8
-opt.formatoptions = 'jcroqlnt' -- tcqj
-opt.grepformat = '%f:%l:%c:%m' -- grep 命令输出格式
-opt.grepprg = 'rg --vimgrep' -- grep 命令
-opt.ignorecase = true -- 忽略大小写
-opt.inccommand = 'nosplit' -- 预览增量替换
-opt.laststatus = 3 -- 全局状态行
-opt.linebreak = true -- 在方便的地方换行
-opt.list = true -- 显示一些不可见字符（制表符等）
-opt.mouse = 'a' -- 启用鼠标模式
-opt.number = true -- 显示行号
-opt.pumblend = 10 -- 弹出菜单透明度
-opt.pumheight = 10 -- 弹出菜单中的最大条目数
-opt.relativenumber = true -- 相对行号
-opt.swapfile = false -- 不创建交换文件
-opt.scrolloff = 4 -- 上下文行数
-opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds' } -- 会话选项
-opt.shiftround = true -- 缩进四舍五入
-opt.shiftwidth = 2 -- 缩进大小
-opt.shortmess:append({ W = true, I = true, c = true, C = true }) -- 简短消息选项
-opt.showmode = false -- 不显示模式，因为有状态行
-opt.sidescrolloff = 8 -- 上下文列数
-opt.signcolumn = 'yes' -- 始终显示标志列，否则每次会移动文本
-opt.smartcase = true -- 大小写匹配
-opt.smartindent = true -- 自动插入缩进
-opt.smoothscroll = true
-opt.spelloptions = 'camel' -- 忽略驼峰单词
-opt.spelllang = { 'en', 'cjk' } -- 拼写语言
-opt.splitbelow = true -- 在当前窗口下方打开新窗口
-opt.splitkeep = 'screen' -- 保持窗口布局
-opt.splitright = true -- 在当前窗口右侧打开新窗口
-opt.tabstop = 2 -- 制表符的空格数
-opt.termguicolors = true -- 真彩色支持
-opt.timeoutlen = 1000 -- 默认超时长度为1000毫秒
-opt.undofile = true -- 保存撤销历史
-opt.undolevels = 1000 -- 可以撤销的最大更改次数
-opt.updatetime = 200 -- Save swap file and trigger CursorHold
-opt.whichwrap:append('<,>,[,],h,l') -- 允许在到达行首/行尾时使用的键
-opt.iskeyword:append('-,#') -- 将包含 `-,#` 的单词视为单个单词
-opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
-opt.wildmode = 'longest:full,full' -- Command-line completion mode
-opt.winminwidth = 5 -- 窗口的最小宽度
-opt.wrap = false -- 禁用换行
+vim.opt.backup = false -- 禁用备份文件的生成
+vim.opt.clipboard = 'unnamedplus' -- 启用 unnamedplus
+vim.opt.completeopt = 'menu,menuone,noinsert,noselect' -- 设置补全选项：显示菜单、至少一个匹配项、使用弹出窗口
+vim.opt.confirm = true -- 在关闭未保存的文件时提示确认
+vim.opt.cursorline = true -- 高亮显示当前行
+vim.opt.expandtab = true -- 将制表符转换为空格
+vim.opt.fileencoding = 'utf-8' -- 设置文件编码为 UTF-8
+vim.opt.grepprg = 'rg --vimgrep' -- 使用 ripgrep 作为 grep 的程序
+vim.opt.ignorecase = true -- 搜索时忽略大小写
+vim.opt.inccommand = 'nosplit' -- 实时替换，但不分割窗口
+vim.opt.list = true -- 启用特殊字符的显示（如制表符、空格）
+vim.opt.mouse = 'nv' -- 启用鼠标支持，模式为 normal 和 visual
+vim.opt.number = true -- 显示行号
+vim.opt.pumheight = 10 -- 弹出菜单的最大高度为 10 行
+vim.opt.relativenumber = true -- 启用相对行号显示
+vim.opt.swapfile = false -- 禁用交换文件
+vim.opt.scrolloff = 4 -- 光标上下移动时，保持至少 4 行的缓冲区
+vim.opt.shiftround = true -- 缩进时将缩进对齐到最近的 shiftwidth 的倍数
+vim.opt.shiftwidth = 2 -- 设置自动缩进的宽度为 2 个空格
+vim.opt.showmode = false -- 不显示当前模式（如插入、命令等）
+vim.opt.sidescrolloff = 8 -- 左右移动时，保持至少 8 列的缓冲区
+vim.opt.signcolumn = 'yes' -- 始终显示符号列（如断点、诊断信息）
+vim.opt.smartcase = true -- 启用智能大小写匹配
+vim.opt.smartindent = true -- 启用智能缩进
+vim.opt.spelloptions = 'camel' -- 拼写检查时支持 camelCase
+vim.opt.spelllang = { 'en', 'cjk' } -- 拼写检查的语言设置为英语和中日韩字符
+vim.opt.splitbelow = true -- 垂直分割窗口时，新窗口在下方
+vim.opt.tabstop = 2 -- 设置制表符宽度为 2 个空格
+vim.opt.termguicolors = true -- 启用真彩色支持
+vim.opt.timeoutlen = 1000 -- 设置映射序列的超时时间为 1000 毫秒
+vim.opt.undofile = true -- 启用撤销文件，保存撤销历史
+vim.opt.undolevels = 1000 -- 设置最大撤销级别为 1000
+vim.opt.updatetime = 200 -- 设置更新间隔为 200 毫秒
+vim.opt.iskeyword:append('-,#') -- 将连字符和井号作为关键词的一部分
+vim.opt.wildmode = 'longest:full,full' -- 设置命令行补全模式为最长匹配项和完整补全
+vim.opt.wrap = false -- 禁用自动换行
 
 -- gui
-opt.guifont = 'JetBrainsMono Nerd Font:h10' -- 在图形化的 neovim 应用程序中使用的字体
+vim.opt.guifont = 'JetBrainsMono Nerd Font:h10' -- 在图形化的 neovim 应用程序中使用的字体
 
--- vim.opt.fillchars = {
---   foldopen = '',
---   foldclose = '',
---   fold = ' ',
---   foldsep = ' ',
---   diff = '╱',
---   eob = ' ',
--- }
--- vim.opt.foldexpr = "v:lua.require'utils.ui'.foldexpr()"
--- vim.opt.foldmethod = 'expr'
--- vim.opt.foldtext = ''
-
-vim.opt.foldmethod = 'indent'
+vim.o.foldcolumn = '0'
+vim.o.foldenable = true
+vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
-vim.opt.foldlevel = 99
+vim.o.foldmethod = 'indent'
+-- vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
+vim.g.editorconfig = true
+vim.g.markdown_recommended_style = 0
 
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here

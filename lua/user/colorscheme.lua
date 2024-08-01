@@ -19,14 +19,23 @@ local M = {
   --   end,
   -- },
 
-  {
-    priority = 1000,
-    lazy = false,
-    'sainnhe/gruvbox-material',
-    config = function()
-      vim.cmd([[colorscheme gruvbox-material]])
-    end,
-  },
+  -- {
+  --   priority = 1000,
+  --   lazy = false,
+  --   'sainnhe/gruvbox-material',
+  --   config = function()
+  --     vim.cmd([[colorscheme gruvbox-material]])
+  --   end,
+  -- },
+
+  -- {
+  --   priority = 1000,
+  --   lazy = false,
+  --   'dracula/vim',
+  --   config = function()
+  --     vim.cmd([[colorscheme dracula]])
+  --   end,
+  -- },
 
   -- {
   --   priority = 1000,
@@ -58,22 +67,22 @@ local M = {
   --   end,
   -- },
 
-  -- {
-  --   'craftzdog/solarized-osaka.nvim',
-  --   lazy = false,
-  --   priority = 1000,
-  --   opts = {
-  --     transparent = false,
-  --     styles = {
-  --       sidebars = 'transparent',
-  --       floats = 'transparent',
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     require('solarized-osaka').setup(opts)
-  --     vim.cmd([[colorscheme solarized-osaka]])
-  --   end,
-  -- },
+  {
+    'craftzdog/solarized-osaka.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {
+      transparent = false,
+      styles = {
+        sidebars = 'transparent',
+        floats = 'transparent',
+      },
+    },
+    config = function(_, opts)
+      require('solarized-osaka').setup(opts)
+      vim.cmd([[colorscheme solarized-osaka]])
+    end,
+  },
 
   -- {
   --   priority = 1000,

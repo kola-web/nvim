@@ -1,13 +1,10 @@
 local M = {
   'windwp/nvim-autopairs',
   event = 'InsertEnter',
+  config = true,
   opts = {
-    check_ts = true,
-    enable_check_bracket_line = false,
+    disable_filetype = { "TelescopePrompt", "spectre_panel" },
   },
-  config = function(_, opts)
-    require('nvim-autopairs').setup(opts)
-  end,
 }
 
 return M

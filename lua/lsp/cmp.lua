@@ -38,6 +38,9 @@ local M = {
       local has_value = require('utils.init').has_value
 
       return {
+        performance = {
+          debounce = 150,
+        },
         preselect = cmp.PreselectMode.Item,
         completion = {
           completeopt = 'menu,menuone,noinsert',

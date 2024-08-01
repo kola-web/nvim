@@ -10,6 +10,40 @@ local M = {
       'folke/noice.nvim',
     },
   },
+  keys = {
+    {
+      '<leader>bb',
+      "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+      desc = 'Buffers',
+    },
+    {
+      '<leader>F',
+      '<cmd>Telescope live_grep theme=ivy<cr>',
+      desc = 'grep text',
+    },
+    {
+      '<leader>t',
+      '<cmd>Telescope filetypes<cr>',
+      desc = 'switch filetypes',
+    },
+
+    {
+      '<leader>sf',
+      function()
+        require('telescope').extensions.file_browser.file_browser()
+      end,
+      desc = 'file_browser',
+    },
+    { '<leader>sc', '<cmd>Telescope colorscheme<cr>', desc = 'colorscheme' },
+    { '<leader>sd', '<cmd>Telescope diagnostics<cr>', desc = 'diagnostics' },
+    { '<leader>sh', '<cmd>lua require"telescope.builtin".find_files({ hidden = true })<cr>', desc = 'hidden file' },
+    { '<leader>sH', '<cmd>Telescope help_tags<cr>', desc = 'Help' },
+    { '<leader>sM', '<cmd>Telescope man_pages<cr>', desc = 'Man Pages' },
+    { '<leader>sr', '<cmd>Telescope oldfiles<cr>', desc = 'Recent File' },
+    { '<leader>s`', '<cmd>Telescope registers<cr>', desc = 'Registers' },
+    { '<leader>sk', '<cmd>Telescope keymaps<cr>', desc = 'Keymaps' },
+    { '<leader>sp', '<cmd>Telescope package_info<cr>', desc = 'package_info' },
+  },
 }
 
 M.config = function()
@@ -140,5 +174,3 @@ M.config = function()
 end
 
 return M
-
--- 万丈红尘缤纷彩，

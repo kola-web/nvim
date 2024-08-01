@@ -31,6 +31,10 @@ local M = {
         end
       end, {})
     end,
+    keys = {
+      { '<leader>po', ':PeekOpen<CR>', desc = 'PeekOpen' },
+      { '<leader>pc', ':PeekClose<CR>', desc = 'PeekClose' },
+    },
   },
   { 'dhruvasagar/vim-table-mode', event = 'VeryLazy' },
 }

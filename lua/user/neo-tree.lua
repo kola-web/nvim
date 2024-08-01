@@ -137,7 +137,7 @@ local M = {
       },
     },
     keys = {
-      { '<leader>e', '<cmd>Neotree toggle<cr>', 'Explorer', mode = { 'n' } },
+      { '<leader>e', '<cmd>Neotree toggle<cr>', desc = 'Explorer' },
     },
   },
   {
@@ -165,7 +165,7 @@ local M = {
     -- Optional dependencies
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     keys = {
-      { '-', '<cmd>Oil<cr>', 'Open parent directory', mode = { 'n' } },
+      { '-', '<cmd>Oil<cr>', desc = 'Open parent directory', mode = { 'n' } },
     },
   },
 }

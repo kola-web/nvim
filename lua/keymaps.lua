@@ -56,13 +56,6 @@ keymap('n', 'BV', '<cmd>enew<cr><cmd>set filetype=vue<cr>', opts)
 keymap('n', 'BH', '<cmd>enew<cr><cmd>set filetype=html<cr>', opts)
 keymap('n', 'BL', '<cmd>enew<cr><cmd>set filetype=lua<cr>', opts)
 
--- Normal --
--- Better window navigation
--- keymap('n', '<C-h>', '<C-w>h', opts)
--- keymap('n', '<C-j>', '<C-w>j', opts)
--- keymap('n', '<C-k>', '<C-w>k', opts)
--- keymap('n', '<C-l>', '<C-w>l', opts)
-
 -- keymap('n', '<C-m>', '%', opts)
 -- keymap("n", "<C-z>", "<nop>", opts)
 
@@ -70,17 +63,11 @@ keymap('n', 'BL', '<cmd>enew<cr><cmd>set filetype=lua<cr>', opts)
 keymap('n', ']s', '/<script<cr>', opts)
 keymap('n', ']c', '/<style<cr>', opts)
 
--- Resize with arrows
--- keymap("n", "<C-Up>", ":resize -2<CR>", opts)
--- keymap("n", "<C-Down>", ":resize +2<CR>", opts)
--- keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
--- keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
-
 -- Navigate buffers
--- keymap('n', '<tab>', '<Cmd>BufferLineCycleNext<CR>', opts)
--- keymap('n', '<S-tab>', '<Cmd>BufferLineCyclePrev<CR>', opts)
-keymap('n', '<tab>', '<Cmd>bnext<CR>', opts)
-keymap('n', '<S-tab>', '<Cmd>bprevious<CR>', opts)
+keymap('n', '<tab>', '<Cmd>BufferLineCycleNext<CR>', opts)
+keymap('n', '<S-tab>', '<Cmd>BufferLineCyclePrev<CR>', opts)
+-- keymap('n', '<tab>', '<Cmd>bnext<CR>', opts)
+-- keymap('n', '<S-tab>', '<Cmd>bprevious<CR>', opts)
 
 -- smart n/N
 keymap('n', 'n', vim.v.searchforward == 1 and 'n' or 'N', opts)
@@ -98,24 +85,33 @@ keymap('v', 'p', '"_dP', opts)
 keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
 
+keymap('n', '<leader>h', '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR>', { desc = 'Redraw / clear hlsearch / diff update' })
+
+-- replace & complie
+keymap('n', '<leader>rc', require('utils.compile_scss'), { desc = 'toggle scss compile' })
+keymap('n', '<leader>rd', '<cmd>%s/<div/<view/g<cr><cmd>%s/<\\/div/<\\/view/g<cr>', { desc = 'div -> view' })
+keymap('n', '<leader>rv', '<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr>', { desc = 'view -> div' })
+keymap('n', '<leader>rp', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', { desc = 'px -> rpx' })
+keymap('n', '<leader>rP', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1))."px"#g<cr>', { desc = 'rpx -> px' })
+keymap('n', '<leader>ro', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 2)."px"#g<cr>', { desc = 'rpx/2 -> px' })
+keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', { desc = 'px -> rem' })
+keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', { desc = '1080px -> 750px' })
+keymap('n', '<leader>rr', require('utils.quickType').generate_type, { desc = 'quicktype' })
+
+-- git
+keymap('n', '<leader>gg', function()
+  require('utils.lazygit')._lazygit_toggle()
+end, { desc = 'lazygit' })
+
+keymap('n', '<leader>lc', function()
+  require('utils.init').compare_to_clipboard()
+end, { desc = 'diff clip' })
+
 keymap('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
 keymap('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
 
 keymap('n', '[q', vim.cmd.cprev, { desc = 'Previous Quickfix' })
 keymap('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
-
--- substitute
-keymap('n', 's', "<cmd>lua require('substitute').operator()<cr>", opts)
-keymap('n', 'ss', "<cmd>lua require('substitute').line()<cr>", opts)
-keymap('n', 'S', "<cmd>lua require('substitute').eol()<cr>", opts)
-keymap('x', 's', "<cmd>lua require('substitute').visual()<cr>", opts)
-vim.keymap.set('n', 'sx', "<cmd>lua require('substitute.exchange').operator()<cr>", opts)
-vim.keymap.set('n', 'sxx', "<cmd>lua require('substitute.exchange').line()<cr>", opts)
-vim.keymap.set('x', 'X', "<cmd>lua require('substitute.exchange').visual()<cr>", opts)
-vim.keymap.set('n', 'sxc', "<cmd>lua require('substitute.exchange').cancel()<cr>", opts)
-
-keymap('x', 'g=', '<Plug>(EasyAlign)')
-keymap('n', 'g=', '<Plug>(EasyAlign)')
 
 -- fzf-lua
 keymap('t', '<esc>', [[<C-\><C-n>]])
