@@ -45,7 +45,7 @@ local M = {
     config = function()
       local lsp_zero = require('lsp-zero')
       local icons = require('user.nvim-dev-icons').icons
-      local utils = require('utils')
+      local utils = require('util')
 
       lsp_zero.on_attach(function(client, bufnr)
         -- see :help lsp-zero-keybindings

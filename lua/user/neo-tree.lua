@@ -53,7 +53,7 @@ local M = {
             end
           end,
           open_file_system = function(state)
-            require('utils.init').open(state.tree:get_node().path, { system = true })
+            require('util.init').open(state.tree:get_node().path, { system = true })
           end,
           mini_component = function(state)
             local fs_actions = require('neo-tree.sources.filesystem.lib.fs_actions')

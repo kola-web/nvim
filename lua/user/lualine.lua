@@ -3,7 +3,7 @@ local M = {
   event = { 'VimEnter', 'InsertEnter', 'BufReadPre', 'BufAdd', 'BufNew', 'BufReadPost' },
   opts = function()
     local status_ok, lualine = pcall(require, 'lualine')
-    local icons = require('utils.icons')
+    local icons = require('util.icons')
     if not status_ok then
       return
     end

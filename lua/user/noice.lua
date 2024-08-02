@@ -1,5 +1,4 @@
 local M = {
-  -- Better `vim.notify()`
   {
     'rcarriga/nvim-notify',
     keys = {
@@ -51,6 +50,15 @@ local M = {
             },
           },
           view = 'mini',
+        },
+        {
+          filter = {
+            event = 'cmdline',
+            any = {
+              { find = 'emmet' },
+            },
+          },
+          opts = { skip = true },
         },
       },
       presets = {

@@ -125,15 +125,15 @@ end
 
 M.conformFormat = function()
   local extra_lang_args = {
-    javasciprt = { name = 'eslint' },
-    typescript = { name = 'eslint' },
-    javascriptreact = { name = 'eslint' },
-    vue = { name = 'eslint' },
+    javasciprt = { name = 'eslint', lsp_format = 'first' },
+    typescript = { name = 'eslint', lsp_format = 'first' },
+    javascriptreact = { name = 'eslint', lsp_format = 'first' },
+    vue = { name = 'eslint', lsp_format = 'first' },
   }
 
   local buf = vim.api.nvim_get_current_buf()
   local extra_args = extra_lang_args[vim.bo[buf].filetype] or {}
-  require('conform').format(vim.tbl_deep_extend('keep', { bufnr = buf, lsp_fallback = true }, extra_args))
+  require('conform').format(vim.tbl_deep_extend('keep', { bufnr = buf }, extra_args))
 end
 
 M.has_value = function(tab, val)
@@ -189,6 +189,13 @@ M.open = function(uri, opts)
     else
       cmd = { 'open', uri }
     end
+  end
+end
+
+M.CREATE_UNDO = vim.api.nvim_replace_termcodes('<c-G>u', true, true, true)
+function M.create_undo()
+  if vim.api.nvim_get_mode().mode == 'i' then
+    vim.api.nvim_feedkeys(M.CREATE_UNDO, 'n', false)
   end
 end
 

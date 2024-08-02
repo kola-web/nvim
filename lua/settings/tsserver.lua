@@ -17,7 +17,7 @@ return {
   },
 }
 
--- local fun = require('utils')
+-- local fun = require('util')
 --
 -- return {
 --   filetypes = fun.is_vue() and { 'null' } or { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },

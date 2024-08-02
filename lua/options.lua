@@ -1,55 +1,80 @@
+-- This file is automatically loaded by plugins.core
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
-vim.opt.backup = false -- 禁用备份文件的生成
-vim.opt.clipboard = 'unnamedplus' -- 启用 unnamedplus
-vim.opt.completeopt = 'menu,menuone,noinsert,noselect' -- 设置补全选项：显示菜单、至少一个匹配项、使用弹出窗口
-vim.opt.confirm = true -- 在关闭未保存的文件时提示确认
-vim.opt.cursorline = true -- 高亮显示当前行
-vim.opt.expandtab = true -- 将制表符转换为空格
-vim.opt.fileencoding = 'utf-8' -- 设置文件编码为 UTF-8
-vim.opt.grepprg = 'rg --vimgrep' -- 使用 ripgrep 作为 grep 的程序
-vim.opt.ignorecase = true -- 搜索时忽略大小写
-vim.opt.inccommand = 'nosplit' -- 实时替换，但不分割窗口
-vim.opt.list = true -- 启用特殊字符的显示（如制表符、空格）
-vim.opt.mouse = 'nv' -- 启用鼠标支持，模式为 normal 和 visual
-vim.opt.number = true -- 显示行号
-vim.opt.pumheight = 10 -- 弹出菜单的最大高度为 10 行
-vim.opt.relativenumber = true -- 启用相对行号显示
-vim.opt.swapfile = false -- 禁用交换文件
-vim.opt.scrolloff = 4 -- 光标上下移动时，保持至少 4 行的缓冲区
-vim.opt.shiftround = true -- 缩进时将缩进对齐到最近的 shiftwidth 的倍数
-vim.opt.shiftwidth = 2 -- 设置自动缩进的宽度为 2 个空格
-vim.opt.showmode = false -- 不显示当前模式（如插入、命令等）
-vim.opt.sidescrolloff = 8 -- 左右移动时，保持至少 8 列的缓冲区
-vim.opt.signcolumn = 'yes' -- 始终显示符号列（如断点、诊断信息）
-vim.opt.smartcase = true -- 启用智能大小写匹配
-vim.opt.smartindent = true -- 启用智能缩进
-vim.opt.spelloptions = 'camel' -- 拼写检查时支持 camelCase
-vim.opt.spelllang = { 'en', 'cjk' } -- 拼写检查的语言设置为英语和中日韩字符
-vim.opt.splitbelow = true -- 垂直分割窗口时，新窗口在下方
-vim.opt.tabstop = 2 -- 设置制表符宽度为 2 个空格
-vim.opt.termguicolors = true -- 启用真彩色支持
-vim.opt.timeoutlen = 1000 -- 设置映射序列的超时时间为 1000 毫秒
-vim.opt.undofile = true -- 启用撤销文件，保存撤销历史
-vim.opt.undolevels = 1000 -- 设置最大撤销级别为 1000
-vim.opt.updatetime = 200 -- 设置更新间隔为 200 毫秒
-vim.opt.iskeyword:append('-,#') -- 将连字符和井号作为关键词的一部分
-vim.opt.wildmode = 'longest:full,full' -- 设置命令行补全模式为最长匹配项和完整补全
-vim.opt.wrap = false -- 禁用自动换行
+-- LazyVim root dir detection
+-- Each entry can be:
+-- * the name of a detector function like `lsp` or `cwd`
+-- * a pattern or array of patterns like `.git` or `lua`.
+-- * a function with signature `function(buf) -> string|string[]`
+vim.g.root_spec = { 'lsp', { '.git', 'lua', '.svn' }, 'cwd' }
+
+local opt = vim.opt
+
+opt.autowrite = true -- Enable auto write
+opt.clipboard = 'unnamedplus' -- Sync with system clipboard
+opt.completeopt = 'menu,menuone,noselect'
+opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
+opt.confirm = true -- Confirm to save changes before exiting modified buffer
+opt.cursorline = true -- Enable highlighting of the current line
+opt.expandtab = true -- Use spaces instead of tabs
+opt.fillchars = {
+  foldopen = '',
+  foldclose = '',
+  fold = ' ',
+  foldsep = ' ',
+  diff = '╱',
+  eob = ' ',
+}
+opt.formatoptions = 'jcroqlnt' -- tcqj
+opt.grepformat = '%f:%l:%c:%m'
+opt.grepprg = 'rg --vimgrep'
+opt.ignorecase = true -- Ignore case
+opt.inccommand = 'nosplit' -- preview incremental substitute
+opt.iskeyword:append('-,#') -- 将包含 `-,#` 的单词视为单个单词
+opt.jumpoptions = 'view'
+opt.laststatus = 3 -- global statusline
+opt.linebreak = true -- Wrap lines at convenient points
+opt.list = true -- Show some invisible characters (tabs...
+opt.mouse = 'a' -- Enable mouse mode
+opt.number = true -- Print line number
+opt.pumblend = 10 -- Popup blend
+opt.pumheight = 10 -- Maximum number of entries in a popup
+opt.relativenumber = true -- Relative line numbers
+opt.scrolloff = 4 -- Lines of context
+opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds' }
+opt.shiftround = true -- Round indent
+opt.shiftwidth = 2 -- Size of an indent
+opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.showmode = false -- Dont show mode since we have a statusline
+opt.sidescrolloff = 8 -- Columns of context
+opt.signcolumn = 'yes' -- Always show the signcolumn, otherwise it would shift the text each time
+opt.smartcase = true -- Don't ignore case with capitals
+opt.smartindent = true -- Insert indents automatically
+opt.spelllang = { 'en', 'cjk' }
+opt.spelloptions:append('noplainbuffer,camel')
+opt.splitbelow = true -- Put new windows below current
+opt.splitkeep = 'screen'
+opt.splitright = true -- Put new windows right of current
+opt.tabstop = 2 -- Number of spaces tabs count for
+opt.termguicolors = true -- True color support
+opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
+opt.undofile = true
+opt.undolevels = 10000
+opt.updatetime = 200 -- Save swap file and trigger CursorHold
+opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
+opt.wildmode = 'longest:full,full' -- Command-line completion mode
+opt.winminwidth = 5 -- Minimum window width
+opt.wrap = false -- Disable line wrap
+
+-- opt.whichwrap:append('<,>,[,],h,l') -- 允许在到达行首/行尾时使用的键
 
 -- gui
-vim.opt.guifont = 'JetBrainsMono Nerd Font:h10' -- 在图形化的 neovim 应用程序中使用的字体
+opt.guifont = 'JetBrainsMono Nerd Font:h10' -- 在图形化的 neovim 应用程序中使用的字体
 
-vim.o.foldcolumn = '0'
-vim.o.foldenable = true
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldmethod = 'indent'
--- vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-
-vim.g.editorconfig = true
-vim.g.markdown_recommended_style = 0
+opt.foldmethod = 'indent'
+opt.foldlevelstart = 99
+opt.foldlevel = 99
 
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here

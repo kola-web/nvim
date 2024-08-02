@@ -20,10 +20,10 @@ local M = {
         -- mode = 'tabs', -- set to "tabs" to only show tabpages instead
         themable = true,
         close_command = function(n)
-          require('utils.ui').bufremove(n)
+          require('util.ui').bufremove(n)
         end, -- can be a string | function, | false see "Mouse actions"
         right_mouse_command = function(n)
-          require('utils.ui').bufremove(n)
+          require('util.ui').bufremove(n)
         end, -- can be a string | function | false, see "Mouse actions"
         left_mouse_command = 'buffer %d', -- can be a string | function, | false see "Mouse actions"
         diagnostics = 'nvim_lsp',

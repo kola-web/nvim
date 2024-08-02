@@ -4,7 +4,7 @@ local M = {
   cmd = 'ConformInfo',
   opts = function()
     local util = require('conform.util')
-    local prettier = { 'prettier' }
+    local prettier = { 'prettierd', 'prettier', stop_after_first = true }
     local eslint = { 'prettier', 'eslint_d' }
 
     return {
@@ -18,16 +18,16 @@ local M = {
         fish = { 'fish_indent' },
         sh = { 'shfmt' },
 
-        javascript = { prettier },
+        javascript = prettier,
         typescript = prettier,
         vue = prettier,
-        html = { prettier },
-        css = { prettier },
-        scss = { prettier },
-        wxss = { prettier },
-        json = { prettier },
-        yaml = { prettier },
-        markdown = { prettier },
+        html = prettier,
+        css = prettier,
+        scss = prettier,
+        wxss = prettier,
+        json = prettier,
+        yaml = prettier,
+        markdown = prettier,
 
         toml = { 'taplo' },
 
@@ -56,7 +56,7 @@ local M = {
     {
       '<leader>m',
       function()
-        require('utils.init').conformFormat()
+        require('util.init').conformFormat()
       end,
       desc = 'format',
     },

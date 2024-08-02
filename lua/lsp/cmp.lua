@@ -9,18 +9,6 @@ local M = {
       'saadparwaiz1/cmp_luasnip',
       'kola-web/cmp-path',
       -- 'hrsh7th/cmp-path',
-      {
-        'mattn/emmet-vim',
-        init = function()
-          -- vim.g.user_emmet_leader_key = '<c-y>'
-          vim.g.user_emmet_mode = 'i'
-          vim.g.user_emmet_settings = {
-            variables = {
-              lang = 'zh',
-            },
-          }
-        end,
-      },
     },
     opts = function()
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
@@ -35,7 +23,7 @@ local M = {
       local cmp = require('cmp')
       local defaults = require('cmp.config.default')()
 
-      local has_value = require('utils.init').has_value
+      local has_value = require('util').has_value
 
       return {
         performance = {
@@ -50,29 +38,33 @@ local M = {
             require('luasnip').lsp_expand(args.body)
           end,
         },
-        mapping = cmp.mapping.preset.insert({
+        mapping = {
           ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
           ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
           ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-          ['<C-e>'] = cmp.mapping({
+          ['<C-c>'] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
           }),
-          ['<tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.mapping.confirm({ select = true })()
-            elseif has_words_before() then
-              local filetype = vim.api.nvim_get_option_value('filetype', {})
-              local valid_filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'pug', 'typescriptreact', 'vue', 'wxml', 'php', 'blade' } -- 添加你需要的文件类型
-              if has_value(valid_filetypes, filetype) then
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>(emmet-expand-abbr)', true, true, true), 'i', true)
-              else
-                fallback()
+          ['<Tab>'] = function(fallback)
+            local opts = {
+              select = true,
+              behavior = cmp.ConfirmBehavior.Insert,
+            }
+            if cmp.core.view:visible() or vim.fn.pumvisible() == 1 then
+              require('util').create_undo()
+              if cmp.confirm(opts) then
+                return
               end
-            else
-              fallback()
+            elseif has_words_before() then
+              --     local filetype = vim.api.nvim_get_option_value('filetype', {})
+              --     local valid_filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'pug', 'typescriptreact', 'vue', 'wxml', 'php', 'blade' } -- 添加你需要的文件类型
+              --     if has_value(valid_filetypes, filetype) then end
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>(emmet-expand-abbr)', true, true, true), 'i', true)
+              return
             end
-          end, { 'i' }),
+            return fallback()
+          end,
           ['<C-j>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -93,7 +85,7 @@ local M = {
               fallback()
             end
           end, { 'i', 's' }),
-        }),
+        },
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
@@ -159,6 +151,27 @@ local M = {
       require('luasnip').setup(opts)
     end,
     keys = {},
+  },
+  {
+    'mattn/emmet-vim',
+    event = 'InsertEnter',
+    init = function()
+      vim.g.emmet_install_only_plug = 1
+      vim.g.user_emmet_settings = {
+        variables = {
+          lang = 'zh',
+        },
+      }
+    end,
+    keys = {
+      {
+        '<C-y>',
+        '<Plug>(emmet-expand-word)',
+        desc = 'emmet',
+        silent = true,
+        mode = { 'i' },
+      },
+    },
   },
 }
 
