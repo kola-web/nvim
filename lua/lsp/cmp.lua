@@ -26,9 +26,6 @@ local M = {
       local has_value = require('util').has_value
 
       return {
-        performance = {
-          debounce = 150,
-        },
         preselect = cmp.PreselectMode.Item,
         completion = {
           completeopt = 'menu,menuone,noinsert',
@@ -51,7 +48,7 @@ local M = {
               select = true,
               behavior = cmp.ConfirmBehavior.Insert,
             }
-            if cmp.core.view:visible() or vim.fn.pumvisible() == 1 then
+            if cmp.core.view:visible() then
               require('util').create_undo()
               if cmp.confirm(opts) then
                 return
@@ -88,9 +85,6 @@ local M = {
         },
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'nvim_lua' },
-          { name = 'buffer' },
           {
             name = 'path',
             option = {
@@ -103,18 +97,27 @@ local M = {
               },
             },
           },
+          { name = 'buffer' },
+          { name = 'luasnip' },
         }),
         formatting = {
-          fields = { 'abbr', 'menu', 'kind' },
           format = function(entry, item)
-            local short_name = {
-              nvim_lsp = 'LSP',
-              nvim_lua = 'nvim',
+            local icons = require('util.icons').kinds
+            if icons[item.kind] then
+              item.kind = icons[item.kind] .. item.kind
+            end
+
+            local widths = {
+              abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,
+              menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 30,
             }
 
-            local menu_name = short_name[entry.source.name] or entry.source.name
+            for key, width in pairs(widths) do
+              if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
+                item[key] = vim.fn.strcharpart(item[key], 0, width - 1) .. '…'
+              end
+            end
 
-            item.menu = string.format('[%s]', menu_name)
             return item
           end,
         },
@@ -153,10 +156,12 @@ local M = {
     keys = {},
   },
   {
-    'mattn/emmet-vim',
-    event = 'InsertEnter',
+    'kola-web/emmet-vim',
+    lazy = false,
     init = function()
-      vim.g.emmet_install_only_plug = 1
+      vim.g.user_emmet_leader_key = '<C-z>'
+      vim.g.user_emmet_install_global = 1
+      -- vim.g.emmet_install_only_plug = 1
       vim.g.user_emmet_settings = {
         variables = {
           lang = 'zh',
@@ -166,7 +171,7 @@ local M = {
     keys = {
       {
         '<C-y>',
-        '<Plug>(emmet-expand-word)',
+        '<Plug>(emmet-expand-abbr)',
         desc = 'emmet',
         silent = true,
         mode = { 'i' },
