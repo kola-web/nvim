@@ -48,7 +48,7 @@ local M = {
 
       highlight = {
         enable = true, -- false will disable the whole extension
-        disable = { 'html', 'vue' }, -- list of language that will be disabled
+        -- disable = { 'html', 'vue' }, -- list of language that will be disabled
       },
       autopairs = {
         enable = true,
