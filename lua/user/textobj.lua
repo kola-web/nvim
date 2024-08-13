@@ -3,10 +3,6 @@ local M = {
     'kana/vim-textobj-user',
     event = 'VeryLazy',
     dependencies = {
-      -- {
-      --   'kola-web/vim-indent-object',
-      --   cond = not vim.g.vscode,
-      -- },
       {
         -- ae ie
         'kana/vim-textobj-entire',
@@ -18,6 +14,10 @@ local M = {
       {
         -- al il
         'kana/vim-textobj-line',
+      },
+      {
+        -- ac ic
+        'glts/vim-textobj-comment',
       },
     },
   },
