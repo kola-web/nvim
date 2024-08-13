@@ -76,9 +76,9 @@ opt.guifont = 'JetBrainsMono Nerd Font:h10' -- 在图形化的 neovim 应用程�
 -- opt.foldlevel = 99
 
 -- opt.foldmethod = 'expr'
+-- opt.foldtext = ''
 opt.foldmethod = 'indent'
 opt.foldexpr = 'nvim_treesitter#foldexpr()'
--- opt.foldtext = ''
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 
