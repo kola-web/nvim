@@ -37,22 +37,6 @@ local M = {
     },
   },
   { 'dhruvasagar/vim-table-mode', event = 'VeryLazy' },
-  {
-    'OXY2DEV/markview.nvim',
-    lazy = false, -- Recommended
-    -- ft = 'markdown', -- If you decide to lazy-load anyway
-    opts = {
-      modes = { 'n', 'i', 'c' },
-      hybrid_modes = { 'n', 'v', 'x' },
-      tables = {
-        enable = false,
-      },
-    },
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-tree/nvim-web-devicons',
-    },
-  },
 }
 
 return M
