@@ -7,8 +7,8 @@ local M = {
     ---@type ibl.config
     opts = {
       indent = {
-        char = '│',
-        tab_char = '│',
+        char = '▏',
+        tab_char = '▏',
       },
       scope = { enabled = true },
       exclude = {
