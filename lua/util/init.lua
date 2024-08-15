@@ -5,6 +5,7 @@ M.root_patterns = { '.git', 'lua' }
 M.servers = {
   'lua_ls',
   'cssls',
+  'css_variables',
   'html',
   'tsserver',
   'pyright',

@@ -10,4 +10,35 @@ return {
     '.eslintrc.yml',
     '.eslintrc.json'
   ),
+  settings = {
+    experimental = {
+      useFlatConfig = true,
+    },
+    quiet = true,
+    rulesCustomizations = {
+      { rule = 'style/*', severity = 'off' },
+      { rule = 'format/*', severity = 'off' },
+      { rule = '*-indent', severity = 'off' },
+      { rule = '*-spacing', severity = 'off' },
+      { rule = '*-spaces', severity = 'off' },
+      { rule = '*-order', severity = 'off' },
+      { rule = '*-dangle', severity = 'off' },
+      { rule = '*-newline', severity = 'off' },
+      { rule = '*quotes', severity = 'off' },
+      { rule = '*semi', severity = 'off' },
+    },
+    validate = {
+      'javascript',
+      'javascriptreact',
+      'typescript',
+      'typescriptreact',
+      'vue',
+      'html',
+      'markdown',
+      'json',
+      'jsonc',
+      'yaml',
+      'toml',
+    },
+  },
 }

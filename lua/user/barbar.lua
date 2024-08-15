@@ -3,8 +3,8 @@ local M = {
     'romgrk/barbar.nvim',
     event = { 'VimEnter', 'InsertEnter', 'BufReadPre', 'BufAdd', 'BufNew', 'BufReadPost' },
     dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+      'lewis6991/gitsigns.nvim',
+      'nvim-tree/nvim-web-devicons',
     },
     init = function()
       vim.g.barbar_auto_setup = false
@@ -29,8 +29,7 @@ local M = {
           align = 'center',
         },
       },
-      insert_at_end = true,
-      highlight_visible = false,
+      insert_at_end = false,
     },
     keys = {
       { '<S-tab>', '<cmd>BufferPrevious<cr>', desc = 'Prev buffer' },

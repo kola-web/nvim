@@ -24,31 +24,3 @@ end
 if is_wsl == 1 then
   require('system.wsl')
 end
-
-local ts_utils = require('nvim-treesitter.ts_utils')
-
-local function get_node_at_cursor()
-  local node = ts_utils.get_node_at_cursor()
-  if not node then
-    return nil
-  end
-
-  while node do
-    local node_type = node:type()
-
-    if node_type == 'element' then
-      return 'HTML'
-    elseif node_type == 'stylesheet' then
-      return 'CSS'
-    end
-
-    node = node:parent()
-  end
-
-  return ''
-end
-
--- 输出光标所在的部分
-vim.keymap.set({ 'i', 'n' }, '<C-i>', function()
-  print(get_node_at_cursor())
-end, { noremap = true })
