@@ -43,6 +43,8 @@ local M = {
     { '<leader>s`', '<cmd>Telescope registers<cr>', desc = 'Registers' },
     { '<leader>sk', '<cmd>Telescope keymaps<cr>', desc = 'Keymaps' },
     { '<leader>sp', '<cmd>Telescope package_info<cr>', desc = 'package_info' },
+
+    { '<leader>lt', '<cmd>Telescope filetypes<cr>', desc = 'filetype' },
   },
 }
 

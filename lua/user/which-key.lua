@@ -12,6 +12,7 @@ local M = {
         { '<leader>c', icon = { icon = ' ' } },
         { '<leader>e', icon = { icon = ' ' } },
         { '<leader>f', icon = { icon = '󰈞 ' } },
+        { '<leader>j', group = 'splitjoin', icon = { icon = '󰯌 ' } },
         { '<leader>h', icon = { icon = ' ' } },
         { '<leader>o', icon = { icon = '󰙅 ' } },
         { '<leader>u', icon = { icon = '󰕌 ' } },

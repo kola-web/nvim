@@ -39,8 +39,6 @@ local M = {
     keys = {
       { mode = { 'x', 'o' }, 'ae', '<cmd>lua require("various-textobjs").entireBuffer()<CR>' },
 
-      -- { mode = { 'x', 'o' }, 'ix', '<cmd>lua require("various-textobjs").htmlAttribute("outer")<CR>' },
-
       { mode = { 'x', 'o' }, 'ih', '<cmd>lua require("various-textobjs").cssColor("outer")<CR>' },
 
       { mode = { 'x', 'o' }, 'ii', '<cmd>lua require("various-textobjs").indentation("inner","inner")<CR>' },
@@ -54,14 +52,16 @@ local M = {
       local ai = require('mini.ai')
       return {
         custom_textobjects = {
+          f = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }), -- function
+
+          -- <div #name name="name" :text="greetingMessage" v-slot="slotProps" #[dynamicSlotName] v-slot:[dynamicSlotName] ></div>
           -- x = { ' ()[#%w-]+[:=]?["{%[].-["}%]]()' },
           x = {
             {
-              ' [:#%w-]+=".-"',
-              " [:#%w-]+='.-'",
-              ' [:#%w-]+={.-}',
-              ' [:#%w-]+%[.-%]',
-              -- ' [#%w-]+',
+              ' ([@:]?[%w-]+)=".-"',
+              " ([@:]?[%w-]+)='.-'",
+              ' ([%w-]+)={.-}',
+              ' ([#]?[%w-]+)%[.-%]',
             },
             '^().*()$',
           },
