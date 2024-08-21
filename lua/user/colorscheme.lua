@@ -1,14 +1,14 @@
 local M = {
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   priority = 1000,
-  --   lazy = false,
-  --   opts = { style = 'storm', transparent = false },
-  --   config = function(_, opts)
-  --     require('tokyonight').setup(opts)
-  --     vim.cmd([[colorscheme tokyonight]])
-  --   end,
-  -- },
+  {
+    'folke/tokyonight.nvim',
+    priority = 1000,
+    lazy = false,
+    opts = { style = 'storm', transparent = false },
+    config = function(_, opts)
+      require('tokyonight').setup(opts)
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
 
   -- {
   --   priority = 1000,
@@ -19,20 +19,22 @@ local M = {
   --   end,
   -- },
 
-  {
-    priority = 1000,
-    lazy = false,
-    'sainnhe/gruvbox-material',
-    config = function()
-      vim.cmd([[colorscheme gruvbox-material]])
-    end,
-  },
+  -- {
+  --   priority = 1000,
+  --   lazy = false,
+  --   'sainnhe/gruvbox-material',
+  --   config = function()
+  --     vim.cmd([[colorscheme gruvbox-material]])
+  --   end,
+  -- },
 
   -- {
   --   priority = 1000,
   --   lazy = false,
-  --   'dracula/vim',
-  --   config = function()
+  --   'Mofiqul/dracula.nvim',
+  --   opts = {},
+  --   config = function(_, opts)
+  --     require('dracula').setup(opts)
   --     vim.cmd([[colorscheme dracula]])
   --   end,
   -- },
