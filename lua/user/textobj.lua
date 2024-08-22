@@ -27,8 +27,8 @@ local M = {
       vim.g.netrw_nogx = 1 -- disable netrw gx
     end,
     dependencies = { 'nvim-lua/plenary.nvim' },
-    config = true, -- default settings
-    submodules = false, -- not needed, submodules are required only for tests
+    config = true,
+    submodules = false,
   },
   {
     'chrisgrieser/nvim-various-textobjs',
@@ -39,10 +39,13 @@ local M = {
     keys = {
       { mode = { 'x', 'o' }, 'ae', '<cmd>lua require("various-textobjs").entireBuffer()<CR>' },
 
-      { mode = { 'x', 'o' }, 'ih', '<cmd>lua require("various-textobjs").cssColor("outer")<CR>' },
+      { mode = { 'x', 'o' }, 'ih', '<cmd>lua require("various-textobjs").cssColor("inner")<CR>' },
+      { mode = { 'x', 'o' }, 'ah', '<cmd>lua require("various-textobjs").cssColor("outer")<CR>' },
 
       { mode = { 'x', 'o' }, 'ii', '<cmd>lua require("various-textobjs").indentation("inner","inner")<CR>' },
       { mode = { 'x', 'o' }, 'ai', '<cmd>lua require("various-textobjs").indentation("outer","outer")<CR>' },
+
+      -- { mode = { 'x', 'o' }, 'ix', '<cmd>lua require("various-textobjs").htmlAttribute("outer")<CR>' },
     },
   },
   {
@@ -51,17 +54,17 @@ local M = {
     opts = function()
       local ai = require('mini.ai')
       return {
+        n_lines = 500,
         custom_textobjects = {
           f = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }), -- function
-
+          t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' }, -- tags
           -- <div #name name="name" :text="greetingMessage" v-slot="slotProps" #[dynamicSlotName] v-slot:[dynamicSlotName] ></div>
-          -- x = { ' ()[#%w-]+[:=]?["{%[].-["}%]]()' },
           x = {
             {
-              ' ([@:]?[%w-]+)=".-"',
-              " ([@:]?[%w-]+)='.-'",
-              ' ([%w-]+)={.-}',
-              ' ([#]?[%w-]+)%[.-%]',
+              '%s([@:]?[%w-]+=").-"',
+              "%s([@:]?[%w-]+=').-'",
+              '%s([%w-]+={).-}',
+              '%s([#]?[%w-]+)%[.-%]',
             },
             '^().*()$',
           },

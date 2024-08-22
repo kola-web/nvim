@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+  </head>
+  <body>
+    <div
+      #name
+      name="name"
+      :text="greetingMessage"
+      v-slot="slotProps"
+      #[dynamicSlotName]
+      v-slot:[dynamicSlotName]
+    ></div>
+  </body>
+</html>

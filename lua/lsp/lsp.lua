@@ -61,7 +61,7 @@ function M.config()
     function(server_name)
       local server_config = {
         capabilities = lsp_capabilities,
-        flags = { allow_incremental_sync = true, debounce_text_changes = 100000 },
+        flags = { allow_incremental_sync = false },
       }
 
       local neoConfig = {}
