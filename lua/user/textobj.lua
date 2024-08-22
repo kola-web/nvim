@@ -56,7 +56,7 @@ local M = {
       return {
         n_lines = 500,
         custom_textobjects = {
-          f = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }), -- function
+          f = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }, {}),
           t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' }, -- tags
           -- <div #name name="name" :text="greetingMessage" v-slot="slotProps" #[dynamicSlotName] v-slot:[dynamicSlotName] ></div>
           x = {

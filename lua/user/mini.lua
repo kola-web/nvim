@@ -37,7 +37,7 @@ local M = {
         func = nil,
       },
       exchange = {
-        prefix = 'sx',
+        prefix = 'S',
         reindent_linewise = true,
       },
       multiply = {
