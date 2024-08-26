@@ -1,24 +1,4 @@
 local M = {
-  -- {
-  --   'kana/vim-textobj-user',
-  --   event = 'VeryLazy',
-  --   dependencies = {
-  --     {
-  --       -- ae ie
-  --       'kana/vim-textobj-entire',
-  --     },
-  --     {
-  --       -- ax ix
-  --       'whatyouhide/vim-textobj-xmlattr',
-  --     },
-  --   },
-  -- },
-
-  -- {
-  --   'wellle/targets.vim',
-  --   event = 'VeryLazy',
-  -- },
-
   {
     'chrishrb/gx.nvim',
     keys = { { 'gx', '<cmd>Browse<cr>', mode = { 'n', 'x' } } },
@@ -56,8 +36,8 @@ local M = {
       return {
         n_lines = 500,
         custom_textobjects = {
-          f = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }, {}),
-          t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' }, -- tags
+          f = false,
+          t = false,
           -- <div #name name="name" :text="greetingMessage" v-slot="slotProps" #[dynamicSlotName] v-slot:[dynamicSlotName] ></div>
           x = {
             {
