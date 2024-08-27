@@ -75,12 +75,13 @@ opt.guifont = 'JetBrainsMono Nerd Font:h10' -- 在图形化的 neovim 应用程�
 -- opt.foldlevelstart = 99
 -- opt.foldlevel = 99
 
--- opt.foldmethod = 'expr'
 -- opt.foldtext = ''
+-- opt.foldmethod = 'expr'
 opt.foldmethod = 'indent'
 opt.foldexpr = 'nvim_treesitter#foldexpr()'
 opt.foldlevel = 99
 opt.foldlevelstart = 99
+opt.foldnestmax = 4
 
 if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here

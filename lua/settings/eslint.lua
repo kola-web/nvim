@@ -1,4 +1,17 @@
 return {
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact',
+    'vue',
+    'html',
+    'markdown',
+    'json',
+    'jsonc',
+    'yaml',
+    'toml',
+  },
   root_dir = require('lspconfig').util.root_pattern(
     'eslint.config.js',
     'eslint.config.cjs',
@@ -11,9 +24,12 @@ return {
     '.eslintrc.json'
   ),
   settings = {
-    experimental = {
-      useFlatConfig = true,
+    codeAction = {
+      showDocumentation = {
+        enable = true,
+      },
     },
+    useFlatConfig = true,
     quiet = true,
     rulesCustomizations = {
       { rule = 'style/*', severity = 'off' },
@@ -26,19 +42,6 @@ return {
       { rule = '*-newline', severity = 'off' },
       { rule = '*quotes', severity = 'off' },
       { rule = '*semi', severity = 'off' },
-    },
-    validate = {
-      'javascript',
-      'javascriptreact',
-      'typescript',
-      'typescriptreact',
-      'vue',
-      'html',
-      'markdown',
-      'json',
-      'jsonc',
-      'yaml',
-      'toml',
     },
   },
 }
