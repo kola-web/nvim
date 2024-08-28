@@ -9,14 +9,5 @@ return {
       tsdk = get_typescript_server_path(vim.fn.getcwd()),
     },
   },
-  settings = {
-    vue = {
-      inlayHints = {
-        inlineHandlerLeading = true,
-        missingProps = true,
-        optionsWrapper = true,
-        vBindShorthand = true,
-      },
-    },
-  },
+  settings = {},
 }

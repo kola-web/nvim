@@ -56,7 +56,7 @@ keymap('n', 'BV', '<cmd>enew<cr><cmd>set filetype=vue<cr>', opts)
 keymap('n', 'BH', '<cmd>enew<cr><cmd>set filetype=html<cr>', opts)
 keymap('n', 'BL', '<cmd>enew<cr><cmd>set filetype=lua<cr>', opts)
 
--- keymap('n', '<C-m>', '%', opts)
+keymap('n', '<C-m>', '%', opts)
 -- keymap("n", "<C-z>", "<nop>", opts)
 
 -- vue jump

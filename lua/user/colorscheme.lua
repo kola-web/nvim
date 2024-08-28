@@ -1,14 +1,20 @@
 local M = {
-  {
-    'folke/tokyonight.nvim',
-    priority = 1000,
-    lazy = false,
-    opts = { style = 'storm', transparent = false },
-    config = function(_, opts)
-      require('tokyonight').setup(opts)
-      vim.cmd([[colorscheme tokyonight]])
-    end,
-  },
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   priority = 1000,
+  --   lazy = false,
+  --   opts = {
+  --     style = 'storm',
+  --     transparent = false,
+  --     plugins = {
+  --       markdown = true,o
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     require('tokyonight').setup(opts)
+  --     vim.cmd([[colorscheme tokyonight]])
+  --   end,
+  -- },
 
   -- {
   --   priority = 1000,
@@ -45,16 +51,15 @@ local M = {
   --   'olimorris/onedarkpro.nvim',
   --   config = function()
   --     -- vim.cmd([[colorscheme onedark]])
-  --   end,
   -- },
+  --   end,
 
   -- {
   --   priority = 1000,
   --   lazy = false,
   --   'oxfist/night-owl.nvim',
   --   config = function()
-  --     require('night-owl').setup({
-  --     })
+  --     require('night-owl').setup({})
   --     vim.cmd([[colorscheme night-owl]])
   --   end,
   -- },
@@ -69,22 +74,22 @@ local M = {
   --   end,
   -- },
 
-  -- {
-  --   'craftzdog/solarized-osaka.nvim',
-  --   lazy = false,
-  --   priority = 1000,
-  --   opts = {
-  --     transparent = false,
-  --     styles = {
-  --       sidebars = 'transparent',
-  --       floats = 'transparent',
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     require('solarized-osaka').setup(opts)
-  --     vim.cmd([[colorscheme solarized-osaka]])
-  --   end,
-  -- },
+  {
+    'craftzdog/solarized-osaka.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {
+      transparent = false,
+      styles = {
+        sidebars = 'transparent',
+        floats = 'transparent',
+      },
+    },
+    config = function(_, opts)
+      require('solarized-osaka').setup(opts)
+      vim.cmd([[colorscheme solarized-osaka]])
+    end,
+  },
 
   -- {
   --   priority = 1000,
@@ -97,3 +102,5 @@ local M = {
 }
 
 return M
+
+
