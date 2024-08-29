@@ -1,4 +1,16 @@
 local M = {
+  -- align
+  {
+    'echasnovski/mini.align',
+    version = false,
+    opts = {
+      mappings = {
+        start = 'ge',
+        start_with_preview = 'gE',
+      },
+    },
+  },
+
   -- surround
   {
     'echasnovski/mini.surround',

@@ -86,9 +86,6 @@ vim.keymap.set('n', 'sxc', "<cmd>lua require('substitute.exchange').cancel()<cr>
 keymap('n', 'ga', '<Plug>(abolish-coerce-word)')
 keymap('v', 'ga', '<Plug>(abolish-coerce)')
 
-keymap('x', 'g=', '<Plug>(EasyAlign)')
-keymap('n', 'g=', '<Plug>(EasyAlign)')
-
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 keymap('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next search result' })
 keymap('x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
