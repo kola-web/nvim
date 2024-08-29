@@ -130,6 +130,8 @@ M.conformFormat = function()
     typescript = { name = 'eslint', lsp_format = 'first' },
     javascriptreact = { name = 'eslint', lsp_format = 'first' },
     vue = { name = 'eslint', lsp_format = 'first' },
+    json = { name = 'eslint', lsp_format = 'first' },
+    jsonc = { name = 'eslint', lsp_format = 'first' },
   }
 
   local buf = vim.api.nvim_get_current_buf()

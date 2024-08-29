@@ -1,5 +1,26 @@
 local M = {
   -- {
+  --   'catppuccin/nvim',
+  --   name = 'catppuccin',
+  --   priority = 1000,
+  --   opts = {
+  --     integrations = {
+  --       cmp = true,
+  --       gitsigns = true,
+  --       treesitter = true,
+  --       notify = false,
+  --       mini = {
+  --         enabled = true,
+  --         indentscope_color = '',
+  --       },
+  --     },
+  --   },
+  --   init = function()
+  --     vim.cmd([[colorscheme catppuccin]])
+  --   end,
+  -- },
+
+  -- {
   --   'folke/tokyonight.nvim',
   --   priority = 1000,
   --   lazy = false,
@@ -102,5 +123,3 @@ local M = {
 }
 
 return M
-
-
