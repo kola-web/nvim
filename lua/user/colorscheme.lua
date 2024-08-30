@@ -106,11 +106,20 @@ local M = {
         floats = 'transparent',
       },
     },
-    config = function(_, opts)
-      require('solarized-osaka').setup(opts)
+    init = function()
       vim.cmd([[colorscheme solarized-osaka]])
     end,
   },
+
+  -- {
+  --   'rebelot/kanagawa.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {},
+  --   init = function(_, opts)
+  --     vim.cmd([[colorscheme kanagawa]])
+  --   end,
+  -- },
 
   -- {
   --   priority = 1000,
