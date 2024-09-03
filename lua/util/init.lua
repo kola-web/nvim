@@ -21,7 +21,6 @@ M.servers = {
   'rust_analyzer',
   'tailwindcss',
   'jqls',
-  'powershell_es',
 }
 
 M.null_servers = {
