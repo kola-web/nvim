@@ -3,7 +3,7 @@ local M = {
   lazy = true,
   dependencies = {
     { 'mason-lspconfig.nvim' },
-    { 'folke/neoconf.nvim', opts = { import = { vscode = false, coc = false, nlsp = false } } },
+    { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {} },
     { 'b0o/schemastore.nvim' },
   },
   opts = {},
