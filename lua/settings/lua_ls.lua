@@ -5,14 +5,35 @@ return {
   },
   settings = {
     Lua = {
-      completion = {
-        callSnippet = 'Replace',
+      misc = {
+        -- parameters = { "--loglevel=trace" },
+      },
+      -- hover = { expandAlias = false },
+      type = {
+        castNumberToInteger = true,
       },
       diagnostics = {
-        globals = { 'vim' },
-      },
-      telemetry = {
-        enable = false,
+        disable = { 'incomplete-signature-doc', 'trailing-space' },
+        -- enable = false,
+        groupSeverity = {
+          strong = 'Warning',
+          strict = 'Warning',
+        },
+        groupFileStatus = {
+          ['ambiguity'] = 'Opened',
+          ['await'] = 'Opened',
+          ['codestyle'] = 'None',
+          ['duplicate'] = 'Opened',
+          ['global'] = 'Opened',
+          ['luadoc'] = 'Opened',
+          ['redefined'] = 'Opened',
+          ['strict'] = 'Opened',
+          ['strong'] = 'Opened',
+          ['type-check'] = 'Opened',
+          ['unbalanced'] = 'Opened',
+          ['unused'] = 'Opened',
+        },
+        unusedLocalExclude = { '_*' },
       },
     },
   },

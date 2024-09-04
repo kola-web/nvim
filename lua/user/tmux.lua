@@ -1,6 +1,7 @@
 local M = {
   {
     'mrjones2014/smart-splits.nvim',
+    lazy = false,
     build = 'bash ./kitty/install-kittens.bash',
     -- stylua: ignore
     keys = {
