@@ -4,8 +4,7 @@ local M = {
   cmd = 'ConformInfo',
   opts = function()
     local util = require('conform.util')
-    local prettier = { 'prettierd', 'prettier', stop_after_first = true }
-    local eslint = { 'prettier', 'eslint_d' }
+    local prettier = { 'prettier', stop_after_first = true }
 
     return {
       format = {
