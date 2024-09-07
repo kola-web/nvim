@@ -126,12 +126,12 @@ end
 
 M.conformFormat = function()
   local extra_lang_args = {
-    javasciprt = { name = 'eslint', lsp_format = 'first' },
-    typescript = { name = 'eslint', lsp_format = 'first' },
-    javascriptreact = { name = 'eslint', lsp_format = 'first' },
-    vue = { name = 'eslint', lsp_format = 'first' },
-    json = { name = 'eslint', lsp_format = 'first' },
-    jsonc = { name = 'eslint', lsp_format = 'first' },
+    javasciprt = { name = 'eslint', lsp_format = 'last' },
+    typescript = { name = 'eslint', lsp_format = 'last' },
+    javascriptreact = { name = 'eslint', lsp_format = 'last' },
+    vue = { name = 'eslint', lsp_format = 'last' },
+    json = { name = 'eslint', lsp_format = 'last' },
+    jsonc = { name = 'eslint', lsp_format = 'last' },
   }
 
   local buf = vim.api.nvim_get_current_buf()
