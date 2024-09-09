@@ -3,6 +3,7 @@ local M = {
   dependencies = {
     'nvim-telescope/telescope.nvim',
   },
+  opts = {},
   event = 'VeryLazy',
 }
 

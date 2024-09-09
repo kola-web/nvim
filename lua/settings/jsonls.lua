@@ -74,4 +74,7 @@ return {
       schemas = extended_schemas,
     },
   },
+  init_options = {
+    provideFormatter = false,
+  },
 }
