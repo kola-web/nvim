@@ -116,11 +116,13 @@ opt.guifont = 'JetBrainsMono Nerd Font:h10' -- 在图形化的 neovim 应用程�
 
 -- opt.foldtext = ''
 -- opt.foldmethod = 'expr'
+-- opt.foldexpr = 'nvim_treesitter#foldexpr()' -- 使用 Treesitter 的表达式进行折叠
+
+opt.foldenable = true -- 启用折叠
 opt.foldmethod = 'indent' -- 折叠方法设置为基于缩进
-opt.foldexpr = 'nvim_treesitter#foldexpr()' -- 使用 Treesitter 的表达式进行折叠
 opt.foldlevel = 99 -- 设置折叠级别
 opt.foldlevelstart = 99 -- 启动时的折叠级别
-opt.foldnestmax = 4 -- 最大嵌套折叠级别
+opt.foldnestmax = 30 -- 最大嵌套折叠级别
 
 if vim.g.neovide then
   -- 在 Neovide 中才执行的设置
