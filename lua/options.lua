@@ -135,3 +135,6 @@ if vim.g.vscode then
   local vscode = require('vscode-neovim') -- 加载 vscode-neovim 插件
   vim.notify = vscode.notify -- 使用 vscode 的通知方法
 end
+
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
