@@ -87,8 +87,8 @@ local M = {
         window = {
           mappings = {
             ['<space>'] = 'none',
-            ['<C-t>c'] = 'mini_component',
-            ['<C-t>p'] = 'mini_page',
+            ['wc'] = 'mini_component',
+            ['wp'] = 'mini_page',
             ['Y'] = 'copy_file_name',
             ['<C-y>'] = 'copy_file_path',
             ['D'] = 'diff_files',
@@ -99,6 +99,7 @@ local M = {
       window = {
         mappings = {
           ['<space>'] = 'none',
+          ['w'] = 'none',
         },
       },
       default_component_configs = {
