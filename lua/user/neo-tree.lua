@@ -10,6 +10,9 @@ local M = {
       sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
       open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
       filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+        },
         bind_to_cwd = false,
         follow_current_file = { enabled = true },
         use_libuv_file_watcher = true,

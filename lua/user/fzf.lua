@@ -25,6 +25,8 @@ local M = {
     },
     previewers = {
       builtin = {
+        syntax_limit_b = 1024 * 1024 * 0.3, -- syntax limit (bytes), 0=nolimit
+        limit_b = 1024 * 1024 * 2, -- preview limit (bytes), 0=nolimit
         extensions = {
           ['png'] = { 'viu', '-b' },
           ['jpg'] = { 'viu', '-b' },
