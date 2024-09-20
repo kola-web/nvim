@@ -41,7 +41,7 @@ local M = {
           -- <div #name name="name" :text="greetingMessage" v-slot="slotProps" #[dynamicSlotName] v-slot:[dynamicSlotName] ></div>
           x = {
             {
-              '%s([@:]?[%w-]+=").-"',
+              '%s([@:]?[%w:-]+=").-"',
               "%s([@:]?[%w-]+=').-'",
               '%s([%w-]+={).-}',
               '%s([#]?[%w-]+)%[.-%]',

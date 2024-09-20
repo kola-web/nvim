@@ -37,21 +37,21 @@ local M = {
   --   end,
   -- },
 
-  {
-    'rebelot/kanagawa.nvim',
-    priority = 1000,
-    lazy = false,
-    opts = {
-      style = 'storm',
-      transparent = false,
-      plugins = {
-        markdown = true,
-      },
-    },
-    init = function()
-      vim.cmd([[colorscheme kanagawa]])
-    end,
-  },
+  -- {
+  --   'rebelot/kanagawa.nvim',
+  --   priority = 1000,
+  --   lazy = false,
+  --   opts = {
+  --     style = 'storm',
+  --     transparent = false,
+  --     plugins = {
+  --       markdown = true,
+  --     },
+  --   },
+  --   init = function()
+  --     vim.cmd([[colorscheme kanagawa]])
+  --   end,
+  -- },
   -- {
   --   priority = 1000,
   --   lazy = false,
@@ -61,14 +61,14 @@ local M = {
   --   end,
   -- },
 
-  -- {
-  --   priority = 1000,
-  --   lazy = false,
-  --   'sainnhe/gruvbox-material',
-  --   config = function()
-  --     vim.cmd([[colorscheme gruvbox-material]])
-  --   end,
-  -- },
+  {
+    priority = 1000,
+    lazy = false,
+    'sainnhe/gruvbox-material',
+    config = function()
+      vim.cmd([[colorscheme gruvbox-material]])
+    end,
+  },
 
   -- {
   --   priority = 1000,
