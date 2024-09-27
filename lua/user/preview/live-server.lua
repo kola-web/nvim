@@ -1,12 +1,11 @@
 local M = {
-  'barrett-ruth/live-server.nvim',
-  build = 'npm i -g live-server',
-  cmd = { 'LiveServerStart', 'LiveServerStop', 'LiveServerToggle' },
-  config = true,
+  'ray-x/web-tools.nvim',
+  build = 'npm i -g browser-sync',
+  opts = {},
   keys = {
     {
       '<leader>ph',
-      '<cmd>LiveServerToggle<cr>',
+      '<cmd>BrowserPreview {-f}<cr>',
       desc = 'live-server',
     },
   },
