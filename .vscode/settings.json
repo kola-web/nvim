@@ -3,5 +3,5 @@
     "vim",
     "vscode"
   ],
-  "stylua.targetReleaseVersion": "latest"
+  "stylua.targetReleaseVersion": "latest",
 }

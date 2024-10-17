@@ -8,4 +8,9 @@ return {
     },
     provideFormatter = false,
   },
+  settings = {
+    customData = {
+      vim.fn.stdpath('config') .. '/data/wxml.html-data.json',
+    },
+  },
 }

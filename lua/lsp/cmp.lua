@@ -1,6 +1,7 @@
 local M = {
   {
-    'hrsh7th/nvim-cmp',
+    'iguanacucumber/magazine.nvim',
+    name = 'nvim-cmp',
     version = false,
     event = 'InsertEnter',
     dependencies = {
@@ -90,7 +91,7 @@ local M = {
             option = {
               pathMappings = {
                 ['@'] = '${folder}/src',
-                -- ['/'] = '${folder}/src/public/',
+                ['/'] = '${folder}/src/',
                 -- ['~@'] = '${folder}/src',
                 -- ['/images'] = '${folder}/src/images',
                 -- ['/components'] = '${folder}/src/components',
