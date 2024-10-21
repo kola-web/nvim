@@ -20,7 +20,7 @@ M.servers = {
   'eslint',
   'rust_analyzer',
   'tailwindcss',
-  'jqls',
+  -- 'jqls',
 }
 
 M.null_servers = {
