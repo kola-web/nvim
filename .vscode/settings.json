@@ -4,4 +4,5 @@
     "vscode"
   ],
   "stylua.targetReleaseVersion": "latest",
+  "html.customData": ["./data/wxml.html-data.json"]
 }
