@@ -152,6 +152,7 @@ local M = {
     },
     config = function(_, opts)
       require('luasnip/loaders/from_vscode').lazy_load({ paths = '~/.config/nvim/snippets' })
+      require('luasnip/loaders/from_vscode').lazy_load({ paths = 'C:/Users/l1556/AppData/Local/nvim/snippets' })
       require('luasnip').setup(opts)
     end,
     keys = {},
