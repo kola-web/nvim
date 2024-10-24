@@ -8,7 +8,7 @@ local M = {
 
     return {
       format = {
-        timeout_ms = 3000,
+        timeout_ms = 10000,
         async = false,
         quiet = false,
       },

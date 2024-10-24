@@ -7,7 +7,7 @@ local M = {
       vim.cmd([[Neotree close]])
     end,
     opts = {
-      sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
+      sources = { 'filesystem', 'buffers', 'document_symbols' },
       open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
       filesystem = {
         filtered_items = {
@@ -157,4 +157,3 @@ local M = {
 }
 
 return M
-
