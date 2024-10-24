@@ -105,7 +105,7 @@ opt.wildmode = 'longest:full,full' -- 命令行补全模式
 -- opt.whichwrap:append('<,>,[,],h,l') -- 允许在到达行首/行尾时使用的键
 
 -- 图形化界面
--- opt.guifont = 'JetBrainsMono Nerd Font:h10' -- 在图形化的 neovim 应用程序中使用的字体
+opt.guifont = 'Cascadia Code NF:h10' -- 在图形化的 neovim 应用程序中使用的字体
 
 -- opt.foldtext = ''
 -- opt.foldmethod = 'expr'
