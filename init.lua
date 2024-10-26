@@ -1,11 +1,3 @@
-if not vim.g.vscode then
-  require('options')
-  require('keymaps')
-  require('autocommands')
-  require('user.colorscheme')
-end
-require('Lazy').setup()
-
 local has = vim.fn.has
 local is_mac = has('macunix')
 local is_linux = has('unix')
@@ -25,3 +17,11 @@ end
 if is_wsl == 1 then
   require('system.wsl')
 end
+
+if not vim.g.vscode then
+  require('options')
+  require('keymaps')
+  require('autocommands')
+  require('user.colorscheme')
+end
+require('Lazy').setup()
