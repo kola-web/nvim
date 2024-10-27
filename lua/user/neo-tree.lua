@@ -6,91 +6,88 @@ local M = {
     deactivate = function()
       vim.cmd([[Neotree close]])
     end,
-    opts = function()
-      print(vim.g.kola_name)
-      return {
-        sources = { 'filesystem', 'buffers', 'document_symbols' },
-        open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
-        filesystem = {
-          filtered_items = {
-            hide_dotfiles = false,
-          },
-          bind_to_cwd = false,
-          follow_current_file = { enabled = true },
-          use_libuv_file_watcher = true,
-          commands = {
-            copy_file_name = function(state)
-              local node = state.tree:get_node()
-              vim.fn.setreg('*', node.name, 'c')
-            end,
-            copy_file_path = function(state)
-              local node = state.tree:get_node()
-              local full_path = node.path
-              local relative_path = full_path:sub(#state.path + 2)
-              vim.fn.setreg('*', relative_path, 'c')
-            end,
-            diff_files = function(state)
-              local node = state.tree:get_node()
-              local log = require('neo-tree.log')
-              state.clipboard = state.clipboard or {}
-              if diff_Node and diff_Node ~= tostring(node.id) then
-                local current_Diff = node.id
-                require('neo-tree.utils').open_file(state, diff_Node, open)
-                vim.cmd('vert diffs ' .. current_Diff)
-                log.info('Diffing ' .. diff_Name .. ' against ' .. node.name)
+    opts = {
+      sources = { 'filesystem', 'buffers', 'document_symbols' },
+      open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+        },
+        bind_to_cwd = false,
+        follow_current_file = { enabled = true },
+        use_libuv_file_watcher = true,
+        commands = {
+          copy_file_name = function(state)
+            local node = state.tree:get_node()
+            vim.fn.setreg('*', node.name, 'c')
+          end,
+          copy_file_path = function(state)
+            local node = state.tree:get_node()
+            local full_path = node.path
+            local relative_path = full_path:sub(#state.path + 2)
+            vim.fn.setreg('*', relative_path, 'c')
+          end,
+          diff_files = function(state)
+            local node = state.tree:get_node()
+            local log = require('neo-tree.log')
+            state.clipboard = state.clipboard or {}
+            if diff_Node and diff_Node ~= tostring(node.id) then
+              local current_Diff = node.id
+              require('neo-tree.utils').open_file(state, diff_Node, open)
+              vim.cmd('vert diffs ' .. current_Diff)
+              log.info('Diffing ' .. diff_Name .. ' against ' .. node.name)
+              diff_Node = nil
+              current_Diff = nil
+              state.clipboard = {}
+              require('neo-tree.ui.renderer').redraw(state)
+            else
+              local existing = state.clipboard[node.id]
+              if existing and existing.action == 'diff' then
+                state.clipboard[node.id] = nil
                 diff_Node = nil
-                current_Diff = nil
-                state.clipboard = {}
                 require('neo-tree.ui.renderer').redraw(state)
               else
-                local existing = state.clipboard[node.id]
-                if existing and existing.action == 'diff' then
-                  state.clipboard[node.id] = nil
-                  diff_Node = nil
-                  require('neo-tree.ui.renderer').redraw(state)
-                else
-                  state.clipboard[node.id] = { action = 'diff', node = node }
-                  diff_Name = state.clipboard[node.id].node.name
-                  diff_Node = tostring(state.clipboard[node.id].node.id)
-                  log.info('Diff source file ' .. diff_Name)
-                  require('neo-tree.ui.renderer').redraw(state)
-                end
+                state.clipboard[node.id] = { action = 'diff', node = node }
+                diff_Name = state.clipboard[node.id].node.name
+                diff_Node = tostring(state.clipboard[node.id].node.id)
+                log.info('Diff source file ' .. diff_Name)
+                require('neo-tree.ui.renderer').redraw(state)
               end
-            end,
-            open_file_system = function(state)
-              require('util.init').open(state.tree:get_node().path, { system = true })
-            end,
-            mini_component = vim.g.mini_component,
-            mini_page = vim.g.mini_page,
-          },
-          window = {
-            mappings = {
-              ['<space>'] = 'none',
-              ['wc'] = 'mini_component',
-              ['wp'] = 'mini_page',
-              ['Y'] = 'copy_file_name',
-              ['<C-y>'] = 'copy_file_path',
-              ['D'] = 'diff_files',
-              ['O'] = 'open_file_system',
-            },
-          },
+            end
+          end,
+          open_file_system = function(state)
+            require('util.init').open(state.tree:get_node().path, { system = true })
+          end,
+          mini_component = vim.g.mini_component,
+          mini_page = vim.g.mini_page,
         },
         window = {
           mappings = {
             ['<space>'] = 'none',
-            ['w'] = 'none',
+            ['wc'] = 'mini_component',
+            ['wp'] = 'mini_page',
+            ['Y'] = 'copy_file_name',
+            ['<C-y>'] = 'copy_file_path',
+            ['D'] = 'diff_files',
+            ['O'] = 'open_file_system',
           },
         },
-        default_component_configs = {
-          indent = {
-            with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-            expander_collapsed = '',
-            expander_expanded = '',
-            expander_highlight = 'NeoTreeExpander',
-          },
+      },
+      window = {
+        mappings = {
+          ['<space>'] = 'none',
+          ['w'] = 'none',
         },
-      }
-    end,
+      },
+      default_component_configs = {
+        indent = {
+          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+          expander_collapsed = '',
+          expander_expanded = '',
+          expander_highlight = 'NeoTreeExpander',
+        },
+      },
+    },
     config = function(_, opts)
       require('neo-tree').setup(opts)
     end,

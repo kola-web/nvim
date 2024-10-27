@@ -7,7 +7,7 @@ M.servers = {
   'cssls',
   'css_variables',
   'html',
-  'ts_ls',
+  'tsserver',
   'pyright',
   'bashls',
   'jsonls',
