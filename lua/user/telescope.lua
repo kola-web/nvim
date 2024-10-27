@@ -16,11 +16,11 @@ local M = {
       "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
       desc = 'Buffers',
     },
-    -- {
-    --   '<leader>f',
-    --   '<cmd>Telescope find_files<cr>',
-    --   desc = 'find file',
-    -- },
+    {
+      '<leader>f',
+      '<cmd>Telescope find_files<cr>',
+      desc = 'find file',
+    },
     {
       '<leader>F',
       '<cmd>Telescope live_grep theme=ivy<cr>',
@@ -33,7 +33,7 @@ local M = {
     },
 
     {
-      '<leader>sf',
+      '<leader>E',
       function()
         require('telescope').extensions.file_browser.file_browser()
       end,
@@ -109,10 +109,11 @@ M.config = function()
       file_ignore_patterns = {
         '.git/',
         '.svn/',
-        'node_modules',
-        'miniprogram_npm',
+        'node_modules/',
+        'miniprogram_npm/',
         '.yarn/',
-        'dist',
+        'dist/',
+        'dist_pro/'
       },
       mappings = {
         i = {
@@ -150,9 +151,9 @@ M.config = function()
     extensions = {
       file_browser = {
         initial_mode = 'normal',
-        theme = 'dropdown',
+        -- theme = 'dropdown',
         -- disables netrw and use telescope-file-browser in its place
-        hijack_netrw = false,
+        hijack_netrw = true,
         mappings = {
           ['i'] = {
             -- your custom insert mode mappings
