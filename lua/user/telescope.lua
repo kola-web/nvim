@@ -9,6 +9,7 @@ local M = {
     {
       'folke/noice.nvim',
     },
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
   },
   keys = {
     {
@@ -113,7 +114,7 @@ M.config = function()
         'miniprogram_npm/',
         '.yarn/',
         'dist/',
-        'dist_pro/'
+        'dist_pro/',
       },
       mappings = {
         i = {
