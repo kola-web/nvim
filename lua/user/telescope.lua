@@ -108,13 +108,13 @@ M.config = function()
       selection_caret = ' ',
       buffer_previewer_maker = new_maker,
       file_ignore_patterns = {
-        '.git/',
-        '.svn/',
-        'node_modules/',
-        'miniprogram_npm/',
-        '.yarn/',
-        'dist/',
-        'dist_pro/',
+        '.git',
+        '.svn',
+        'node_modules',
+        'miniprogram_npm',
+        '.yarn',
+        'dist',
+        'dist_pro',
       },
       mappings = {
         i = {
