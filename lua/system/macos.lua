@@ -1,7 +1,7 @@
 vim.g.mini_component = function(state)
   local fs_actions = require('neo-tree.sources.filesystem.lib.fs_actions')
   local node = state.tree:get_node()
-  local currentPath = node.id
+  local currentPath = node.type == 'file' and node._parent_id or node.id
   vim.fn.system({
     'cp',
     '-R',
@@ -16,7 +16,7 @@ end
 vim.g.mini_page = function(state)
   local fs_actions = require('neo-tree.sources.filesystem.lib.fs_actions')
   local node = state.tree:get_node()
-  local currentPath = node.id
+  local currentPath = node.type == 'file' and node._parent_id or node.id
   vim.fn.system({
     'cp',
     '-R',
