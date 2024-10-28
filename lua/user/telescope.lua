@@ -9,7 +9,6 @@ local M = {
     {
       'folke/noice.nvim',
     },
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' },
   },
   keys = {
     {
@@ -17,11 +16,11 @@ local M = {
       "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
       desc = 'Buffers',
     },
-    {
-      '<leader>f',
-      '<cmd>Telescope find_files<cr>',
-      desc = 'find file',
-    },
+    -- {
+    --   '<leader>f',
+    --   '<cmd>Telescope find_files<cr>',
+    --   desc = 'find file',
+    -- },
     {
       '<leader>F',
       '<cmd>Telescope live_grep theme=ivy<cr>',

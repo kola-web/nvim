@@ -40,11 +40,11 @@ local M = {
     },
   },
   keys = {
-    -- {
-    --   '<leader>f',
-    --   '<cmd>FzfLua files<CR>',
-    --   desc = 'find file',
-    -- },
+    {
+      '<leader>f',
+      '<cmd>FzfLua files<CR>',
+      desc = 'find file',
+    },
   },
 }
 
