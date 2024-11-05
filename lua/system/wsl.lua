@@ -5,7 +5,7 @@ vim.g.mini_component = function(state)
   vim.fn.system({
     'cp',
     '-R',
-    '/Users/lijialin/.config/nvim/template/' .. 'wxmlComponent',
+    '/home/kola/.config/nvim/template/' .. 'wxmlComponent',
     currentPath,
   })
   fs_actions.rename_node(currentPath .. '/wxmlComponent', function(_, path)
@@ -20,7 +20,7 @@ vim.g.mini_page = function(state)
   vim.fn.system({
     'cp',
     '-R',
-    '/Users/lijialin/.config/nvim/template/' .. 'wxmlPage',
+    '/home/kola/.config/nvim/template/' .. 'wxmlPage',
     currentPath,
   })
   fs_actions.rename_node(currentPath .. '/wxmlPage', function(_, path)
