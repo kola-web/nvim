@@ -14,9 +14,9 @@ local M = {
       ['--info'] = 'default',
       ['--no-scrollbar'] = true,
     },
-    fzf_colors = {
-      ['bg'] = '-1',
-    },
+    -- fzf_colors = {
+    --   ['bg'] = '-1',
+    -- },
     file_ignore_patterns = { 'node_modules', '.git', 'dist', 'dist_pro', 'dist_uat', '.yarn', 'miniprogram_npm' },
     files = {
       -- previewer = 'bat',

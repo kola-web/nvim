@@ -2,7 +2,7 @@ if not vim.g.vscode then
   return {}
 end
 
-local vscode = require('vscode-neovim')
+local vscode = require('vscode')
 
 -- Silent keymap option
 local opts = { silent = true, noremap = true }
