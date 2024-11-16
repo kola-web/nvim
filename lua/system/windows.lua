@@ -41,7 +41,7 @@ vim.g.mini_page = function(state)
 end
 
 vim.g.nvim_tree_mini_component = function(state)
-  -- local api = require('nvim-tree.api')
+  local api = require('nvim-tree.api')
   local node = require('nvim-tree.lib').get_node_at_cursor()
   local currentPath = node.fs_stat.type == 'file' and node.parent.absolute_path or node.absolute_path
   vim.fn.system({
@@ -54,6 +54,7 @@ vim.g.nvim_tree_mini_component = function(state)
       .. currentPath
       .. '\\wxmlComponent" | ForEach-Object { $_.IsReadOnly = $false }',
   })
+  api.tree.open(currentPath .. '\\wxmlComponent')
   -- api.fs.rename(currentPath .. '/wxmlComponent', function(_, path)
   --   vim.cmd('edit ' .. path .. '/index.wxml')
   -- end)

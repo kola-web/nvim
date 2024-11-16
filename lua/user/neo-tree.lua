@@ -1,7 +1,6 @@
 local M = {
   {
     'nvim-neo-tree/neo-tree.nvim',
-    enabled = false,
     branch = 'v3.x',
     cmd = 'Neotree',
     deactivate = function()
@@ -129,42 +128,42 @@ local M = {
       { '-', '<cmd>Oil<cr>', desc = 'Open parent directory', mode = { 'n' } },
     },
   },
-  {
-    'nvim-tree/nvim-tree.lua',
-    version = '*',
-    lazy = false,
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
-    config = function()
-      local function my_on_attach(bufnr)
-        local api = require('nvim-tree.api')
-
-        local function opts(desc)
-          return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-        end
-
-        -- custom mappings
-        vim.keymap.set('n', 'wc', vim.g.nvim_tree_mini_component, opts('mini_component'))
-        vim.keymap.set('n', 'wp', vim.g.nvim_tree_mini_page, opts('mini_page'))
-      end
-      require('nvim-tree').setup({
-        on_attach = my_on_attach,
-      })
-    end,
-    keys = function()
-      local api = require('nvim-tree.api')
-      return {
-        {
-          '<leader>e',
-          function()
-            api.tree.toggle({ find_file = true, focus = true })
-          end,
-          desc = 'Explorer',
-        },
-      }
-    end,
-  },
+  -- {
+  --   'nvim-tree/nvim-tree.lua',
+  --   version = '*',
+  --   lazy = false,
+  --   dependencies = {
+  --     'nvim-tree/nvim-web-devicons',
+  --   },
+  --   config = function()
+  --     local function my_on_attach(bufnr)
+  --       local api = require('nvim-tree.api')
+  --
+  --       local function opts(desc)
+  --         return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  --       end
+  --
+  --       -- custom mappings
+  --       vim.keymap.set('n', 'wc', vim.g.nvim_tree_mini_component, opts('mini_component'))
+  --       vim.keymap.set('n', 'wp', vim.g.nvim_tree_mini_page, opts('mini_page'))
+  --     end
+  --     require('nvim-tree').setup({
+  --       on_attach = my_on_attach,
+  --     })
+  --   end,
+  --   keys = function()
+  --     local api = require('nvim-tree.api')
+  --     return {
+  --       {
+  --         '<leader>e',
+  --         function()
+  --           api.tree.toggle({ find_file = true, focus = true })
+  --         end,
+  --         desc = 'Explorer',
+  --       },
+  --     }
+  --   end,
+  -- },
 }
 
 return M
