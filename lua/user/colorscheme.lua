@@ -61,14 +61,14 @@ local M = {
   --   end,
   -- },
 
-  -- {
-  --   priority = 1000,
-  --   lazy = false,
-  --   'sainnhe/gruvbox-material',
-  --   config = function()
-  --     vim.cmd([[colorscheme gruvbox-material]])
-  --   end,
-  -- },
+  {
+    priority = 1000,
+    lazy = false,
+    'sainnhe/gruvbox-material',
+    config = function()
+      vim.cmd([[colorscheme gruvbox-material]])
+    end,
+  },
 
   -- {
   --   priority = 1000,
@@ -110,21 +110,21 @@ local M = {
   --   end,
   -- },
 
-  {
-    'craftzdog/solarized-osaka.nvim',
-    lazy = false,
-    priority = 1000,
-    opts = {
-      transparent = false,
-      styles = {
-        sidebars = 'transparent',
-        floats = 'transparent',
-      },
-    },
-    init = function()
-      vim.cmd([[colorscheme solarized-osaka]])
-    end,
-  },
+  -- {
+  --   'craftzdog/solarized-osaka.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {
+  --     transparent = false,
+  --     styles = {
+  --       sidebars = 'transparent',
+  --       floats = 'transparent',
+  --     },
+  --   },
+  --   init = function()
+  --     vim.cmd([[colorscheme solarized-osaka]])
+  --   end,
+  -- },
 
   -- {
   --   'rebelot/kanagawa.nvim',

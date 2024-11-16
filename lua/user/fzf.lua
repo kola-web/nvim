@@ -1,6 +1,7 @@
 local M = {
   'ibhagwan/fzf-lua',
   event = 'VeryLazy',
+  enabled = false,
   opts = {
     'telescope',
     fzf_opts = {
