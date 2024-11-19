@@ -13,8 +13,7 @@ local M = {
   },
   { 'Bilal2453/luvit-meta', lazy = true },
   {
-    'iguanacucumber/magazine.nvim',
-    name = 'nvim-cmp',
+    'hrsh7th/nvim-cmp',
     opts = function(_, opts)
       opts.sources = opts.sources or {}
       table.insert(opts.sources, {

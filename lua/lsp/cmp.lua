@@ -1,7 +1,6 @@
 local M = {
   {
-    'iguanacucumber/magazine.nvim',
-    name = 'nvim-cmp',
+    'hrsh7th/nvim-cmp',
     version = false,
     event = 'InsertEnter',
     dependencies = {
