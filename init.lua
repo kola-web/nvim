@@ -25,3 +25,4 @@ if not vim.g.vscode then
   require('user.colorscheme')
 end
 require('Lazy').setup()
+
