@@ -106,7 +106,7 @@ local M = {
       inactive_sections = {},
       winbar = {
         lualine_b = {
-          'filename',
+          { 'filename', file_status = true, path = 4 },
           {
             symbols and symbols.get,
             cond = symbols and symbols.has,

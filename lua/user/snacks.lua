@@ -6,16 +6,7 @@ local M = {
     ---@type snacks.Config
     return {
       bufdelete = { enabled = true },
-      dashboard = {
-        enabled = true,
-        sections = {
-          { section = 'header' },
-          { section = 'keys', gap = 1 },
-          { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = { 2, 2 } },
-          { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 2 },
-          { section = 'startup' },
-        },
-      },
+      dashboard = { enabled = true },
       notifier = { enabled = true },
       bigfile = { enabled = true },
       quickfile = { enabled = true },
