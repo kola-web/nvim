@@ -68,7 +68,7 @@ local M = {
         theme = 'auto',
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
-        disabled_filetypes = { 'alpha', 'dashboard' },
+        disabled_filetypes = { 'alpha', 'dashboard',"neo-tree" },
         always_divide_middle = true,
       },
       sections = {
@@ -106,13 +106,14 @@ local M = {
       inactive_sections = {},
       winbar = {
         lualine_b = {
+          'filename',
           {
             symbols and symbols.get,
             cond = symbols and symbols.has,
           },
         },
       },
-      extensions = { 'neo-tree', 'lazy', 'fzf', 'trouble', 'mason' },
+      extensions = { 'neo-tree', 'lazy', 'fzf', 'trouble', 'mason', 'quickfix', 'oil' },
     }
     return opts
   end,
