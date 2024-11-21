@@ -61,7 +61,6 @@ local M = {
       },
     },
     keys = {
-      { '<leader>gb', "<cmd>lua require 'gitsigns'.blame_line<cr>", desc = 'Git Blame Line' },
       { '<leader>gk', "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", desc = 'Prev Hunk' },
       { '<leader>gj', "<cmd>lua require 'gitsigns'.next_hunk()<cr>", desc = 'Next Hunk' },
       { '<leader>gp', "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", desc = 'Preview Hunk' },

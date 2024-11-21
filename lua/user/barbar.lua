@@ -36,9 +36,9 @@ local M = {
       { '<tab>', '<cmd>BufferNext<cr>', desc = 'Next buffer' },
       { '(', '<cmd>BufferMovePrevious<cr>', desc = 'move prev' },
       { ')', '<cmd>BufferMoveNext<cr>', desc = 'move move' },
-      { '<leader>bo', '<cmd>BufferCloseAllButCurrent<cr>', desc = 'buffer Close All But Current' },
       { '<leader>br', '<cmd>BufferRestore<cr>', desc = 'Restore buffer' },
-      { '<leader>c', '<cmd>BufferClose<cr>', desc = 'close current buffer' },
+      -- { '<leader>bo', '<cmd>BufferCloseAllButCurrent<cr>', desc = 'buffer Close All But Current' },
+      -- { '<leader>c', '<cmd>BufferClose<cr>', desc = 'close current buffer' },
     },
   },
 }

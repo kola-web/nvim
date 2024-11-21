@@ -25,12 +25,12 @@ keymap({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = t
 keymap({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Move Lines
-keymap('n', '<D-j>', '<cmd>m .+1<cr>==', { desc = 'Move down' })
-keymap('n', '<D-k>', '<cmd>m .-2<cr>==', { desc = 'Move up' })
-keymap('i', '<D-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move down' })
-keymap('i', '<D-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
-keymap('v', '<D-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
-keymap('v', '<D-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
+keymap('n', '<A-j>', "<cmd>execute 'move .+' . v:count1<cr>==", { desc = 'Move Down' })
+keymap('n', '<A-k>', "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = 'Move Up' })
+keymap('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move Down' })
+keymap('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move Up' })
+keymap('v', '<A-j>', ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = 'Move Down' })
+keymap('v', '<A-k>', ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = 'Move Up' })
 
 -- fold
 keymap('n', 'z1', '<cmd>set foldlevel=1<cr>', { desc = 'Fold level 1' })
@@ -95,11 +95,6 @@ keymap('n', '<leader>ro', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 
 keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', { desc = 'px -> rem' })
 keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', { desc = '1080px -> 750px' })
 keymap('n', '<leader>rr', require('util.quickType').generate_type, { desc = 'quicktype' })
-
--- git
-keymap('n', '<leader>gg', function()
-  require('util.lazygit')._lazygit_toggle()
-end, { desc = 'lazygit' })
 
 keymap('n', '<leader>lc', function()
   require('util.init').compare_to_clipboard()
