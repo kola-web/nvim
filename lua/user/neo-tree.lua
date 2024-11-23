@@ -75,7 +75,7 @@ local M = {
             end
           end,
           open_file_system = function(state)
-            require('util.init').open(state.tree:get_node().path, { system = true })
+            require('util').open(state.tree:get_node().path, { system = true })
           end,
           mini_component = vim.g.mini_component,
           mini_page = vim.g.mini_page,
@@ -106,6 +106,15 @@ local M = {
           expander_highlight = 'NeoTreeExpander',
         },
       },
+      event_handlers = {
+        -- 打开文件自动关闭
+        {
+          event = 'file_open_requested',
+          handler = function()
+            require('neo-tree.command').execute({ action = 'close' })
+          end,
+        },
+      },
     },
     config = function(_, opts)
       require('neo-tree').setup(opts)
@@ -116,7 +125,13 @@ local M = {
       'MunifTanjim/nui.nvim',
     },
     keys = {
-      { '<leader>e', '<cmd>Neotree toggle<cr>', desc = 'Explorer' },
+      {
+        '<leader>e',
+        function()
+          require('neo-tree.command').execute({ toggle = true, dir = require('util').get_root() })
+        end,
+        desc = 'Explorer',
+      },
     },
   },
   {
