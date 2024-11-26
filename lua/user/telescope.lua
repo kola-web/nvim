@@ -145,6 +145,7 @@ M.config = function()
     pickers = {
       find_files = {
         find_command = find_command,
+        hidden = true,
       },
       buffers = {
         initial_mode = 'normal',
