@@ -15,12 +15,6 @@ local M = {
       { "<C-down>", function() require("smart-splits").resize_down() end, desc = "resize down" },
       { "<C-up>", function() require("smart-splits").resize_up() end, desc = "resize up" },
       { "<C-right>", function() require("smart-splits").resize_right() end, desc = "resize right" },
-
-
-      { "<leader>bh",function () require('smart-splits').swap_buf_left() end, desc = "swap buf left" },
-      { "<leader>bh",function () require('smart-splits').swap_buf_down() end, desc = "swap buf down" },
-      { "<leader>bk",function () require('smart-splits').swap_buf_up() end, desc = "swap buf up" },
-      { "<leader>bl",function () require('smart-splits').swap_buf_right() end, desc = "swap buf right" },
     },
   },
 }

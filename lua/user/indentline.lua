@@ -1,32 +1,33 @@
 local M = {
   {
     'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-    event = 'BufReadPre',
-    ---@module "ibl"
-    ---@type ibl.config
-    opts = {
-      indent = {
-        char = '▏',
-        tab_char = '▏',
-      },
-      scope = { enabled = true },
-      exclude = {
-        buftypes = { 'terminal', 'nofile' },
-        filetypes = {
-          'help',
-          'alpha',
-          'dashboard',
-          'neo-tree',
-          'Trouble',
-          'lazy',
-          'mason',
-          'notify',
-          'toggleterm',
-          'lazyterm',
+    opts = function()
+      return {
+        indent = {
+          char = '│',
+          tab_char = '│',
         },
-      },
-    },
+        scope = { show_start = false, show_end = false },
+        exclude = {
+          filetypes = {
+            'Trouble',
+            'alpha',
+            'dashboard',
+            'help',
+            'lazy',
+            'mason',
+            'neo-tree',
+            'notify',
+            'snacks_notif',
+            'snacks_terminal',
+            'snacks_win',
+            'toggleterm',
+            'trouble',
+          },
+        },
+      }
+    end,
+    main = 'ibl',
   },
 }
 

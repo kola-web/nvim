@@ -1,6 +1,16 @@
 local M = {
   'nvim-lualine/lualine.nvim',
-  event = { 'VimEnter', 'InsertEnter', 'BufReadPre', 'BufAdd', 'BufNew', 'BufReadPost' },
+  event = 'VeryLazy',
+  init = function()
+    vim.g.lualine_laststatus = vim.o.laststatus
+    if vim.fn.argc(-1) > 0 then
+      -- set an empty statusline till lualine loads
+      vim.o.statusline = ' '
+    else
+      -- hide the statusline on the starter page
+      vim.o.laststatus = 0
+    end
+  end,
   opts = function()
     local status_ok, lualine = pcall(require, 'lualine')
     local icons = require('util.icons')
@@ -11,19 +21,19 @@ local M = {
     local diagnostics = {
       'diagnostics',
       symbols = {
-        error = icons.diagnostics.Error,
-        warn = icons.diagnostics.Warn,
-        info = icons.diagnostics.Info,
-        hint = icons.diagnostics.Hint,
+        error = icons.diagnostics.BoldError,
+        warn = icons.diagnostics.BoldWarning,
+        info = icons.diagnostics.BoldInformation,
+        hint = icons.diagnostics.BoldHint,
       },
     }
 
     local diff = {
       'diff',
       symbols = {
-        added = icons.git.added,
-        modified = icons.git.modified,
-        removed = icons.git.removed,
+        added = icons.git.LineAdded,
+        modified = icons.git.LineModified,
+        removed = icons.git.LineRemoved,
       }, -- changes diff symbols
       source = function()
         local gitsigns = vim.b.gitsigns_status_dict
@@ -53,7 +63,7 @@ local M = {
 
     local trouble = require('trouble')
     local symbols = trouble.statusline({
-      mode = 'lsp_document_symbols',
+      mode = 'symbols',
       groups = {},
       title = false,
       filter = { range = true },
@@ -63,44 +73,49 @@ local M = {
 
     local opts = {
       options = {
-        globalstatus = true,
-        icons_enabled = true,
         theme = 'auto',
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
-        disabled_filetypes = { 'alpha', 'dashboard', winbar = {
-          'neo-tree',
-        } },
+        globalstatus = vim.o.laststatus == 3,
+        disabled_filetypes = {
+          'dashboard',
+          'alpha',
+          'snacks_dashboard',
+          winbar = {
+            'neo-tree',
+            'NvimTree',
+          },
+        },
         always_divide_middle = true,
       },
       sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch' },
         lualine_c = {
+          diff,
           diagnostics,
-          { 'filename', file_status = true, path = 1 },
         },
         lualine_x = {
           {
-            require('noice').api.status.command.get,
-            cond = require('noice').api.status.command.has,
+            function()
+              return require('noice').api.status.command.get()
+            end,
+            cond = function()
+              return package.loaded['noice'] and require('noice').api.status.command.has()
+            end,
             color = { fg = '#ff9e64' },
           },
           {
-            require('noice').api.status.mode.get,
-            cond = require('noice').api.status.mode.has,
+            function()
+              return require('noice').api.status.mode.get()
+            end,
+            cond = function()
+              return package.loaded['noice'] and require('noice').api.status.mode.has()
+            end,
             color = { fg = '#ff9e64' },
           },
           clients_lsp,
-          diff,
           'encoding',
           'fileformat',
           'filetype',
-          {
-            require('lazy.status').updates,
-            cond = require('lazy.status').has_updates,
-            color = { fg = '#54A5FF' },
-          },
         },
         lualine_y = { 'progress' },
         lualine_z = { 'location' },
