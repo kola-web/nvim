@@ -5,6 +5,7 @@ local M = {
   opts = function()
     local util = require('conform.util')
     local prettier = { 'prettier', stop_after_first = true }
+    -- local prettierd = { 'prettierd', stop_after_first = true }
 
     return {
       format = {

@@ -25,6 +25,7 @@ M.servers = {
 
 M.null_servers = {
   'prettier',
+  'prettierd',
   'black',
   'stylua',
   'flake8',
