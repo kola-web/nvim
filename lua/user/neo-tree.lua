@@ -129,9 +129,16 @@ local M = {
     },
     keys = {
       {
+        '<leader>E',
+        function()
+          require('neo-tree.command').execute({ toggle = true, reveal_force_cwd = true })
+        end,
+        desc = 'Explorer NeoTree (Root Dir)',
+      },
+      {
         '<leader>e',
         function()
-          require('neo-tree.command').execute({ toggle = true, dir = require('utils.init').get_root() })
+          require('neo-tree.command').execute({ toggle = true })
         end,
         desc = 'Explorer NeoTree (Root Dir)',
       },

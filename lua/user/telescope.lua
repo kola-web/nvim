@@ -4,9 +4,6 @@ local M = {
   cmd = { 'Telescope' },
   dependencies = {
     {
-      'nvim-telescope/telescope-file-browser.nvim',
-    },
-    {
       'folke/noice.nvim',
     },
   },
@@ -32,13 +29,6 @@ local M = {
       desc = 'switch filetypes',
     },
 
-    {
-      '<leader>E',
-      function()
-        require('telescope').extensions.file_browser.file_browser()
-      end,
-      desc = 'file_browser',
-    },
     { '<leader>sc', '<cmd>Telescope colorscheme<cr>', desc = 'colorscheme' },
     { '<leader>sd', '<cmd>Telescope diagnostics<cr>', desc = 'diagnostics' },
     { '<leader>sh', '<cmd>lua require"telescope.builtin".find_files({ hidden = true })<cr>', desc = 'hidden file' },
@@ -158,26 +148,6 @@ M.config = function()
       },
     },
     extensions = {
-      file_browser = {
-        initial_mode = 'normal',
-        -- theme = 'dropdown',
-        -- disables netrw and use telescope-file-browser in its place
-        hijack_netrw = true,
-        mappings = {
-          ['i'] = {
-            -- your custom insert mode mappings
-            ['<C-w>'] = function()
-              vim.cmd('normal vbd')
-            end,
-          },
-          ['n'] = {
-            -- your custom normal mode mappings
-            ['/'] = function()
-              vim.cmd('startinsert')
-            end,
-          },
-        },
-      },
       package_info = {
         initial_mode = 'normal',
       },
@@ -185,7 +155,6 @@ M.config = function()
   }
 
   telescope.setup(opts)
-  telescope.load_extension('file_browser')
   telescope.load_extension('noice')
   telescope.load_extension('package_info')
 end
