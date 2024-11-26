@@ -63,7 +63,7 @@ local M = {
         diagnostics = 'nvim_lsp',
         always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
-          local icons = require('util.icons').diagnostics
+          local icons = require('utils.icons').diagnostics
           local ret = (diag.error and icons.Error .. diag.error .. ' ' or '') .. (diag.warning and icons.Warning .. diag.warning or '')
           return vim.trim(ret)
         end,
@@ -77,7 +77,7 @@ local M = {
         },
         ---@param opts bufferline.IconFetcherOpts
         get_element_icon = function(opts)
-          return require('util.icons').ft[opts.filetype]
+          return require('utils.icons').ft[opts.filetype]
         end,
       },
     },

@@ -57,7 +57,7 @@ local M = {
     {
       '<leader>m',
       function()
-        require('util.init').conformFormat()
+        require('utils.init').conformFormat()
       end,
       desc = 'format',
     },

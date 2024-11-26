@@ -6,7 +6,7 @@ local M = {
     { 'williamboman/mason-lspconfig.nvim' },
   },
   opts = {
-    ensure_installed = require('util').null_servers,
+    ensure_installed = require('utils.init').null_servers,
   },
 }
 
@@ -37,7 +37,7 @@ function M.config(_, opts)
   end
 
   require('mason-lspconfig').setup({
-    ensure_installed = require('util').servers,
+    ensure_installed = require('utils.init').servers,
     automatic_installation = true,
   })
 end

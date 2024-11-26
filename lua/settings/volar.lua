@@ -1,4 +1,4 @@
-local get_typescript_server_path = require('util.init').get_typescript_server_path
+local get_typescript_server_path = require('utils.init').get_typescript_server_path
 
 return {
   init_options = {

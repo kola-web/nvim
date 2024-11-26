@@ -13,7 +13,7 @@ local M = {
   end,
   opts = function()
     local status_ok, lualine = pcall(require, 'lualine')
-    local icons = require('util.icons')
+    local icons = require('utils.icons')
     if not status_ok then
       return
     end

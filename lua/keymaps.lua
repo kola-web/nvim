@@ -78,7 +78,7 @@ keymap('v', '>', '>gv', opts)
 keymap('n', '<leader>h', '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR>', { desc = 'Redraw / clear hlsearch / diff update' })
 
 -- replace & complie
-keymap('n', '<leader>rc', require('util.compile_scss'), { desc = 'toggle scss compile' })
+keymap('n', '<leader>rc', require('utils.compile_scss'), { desc = 'toggle scss compile' })
 keymap('n', '<leader>rd', '<cmd>%s/<div/<view/g<cr><cmd>%s/<\\/div/<\\/view/g<cr>', { desc = 'div -> view' })
 keymap('n', '<leader>rv', '<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr>', { desc = 'view -> div' })
 keymap('n', '<leader>rp', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', { desc = 'px -> rpx' })
@@ -86,10 +86,10 @@ keymap('n', '<leader>rP', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1))."
 keymap('n', '<leader>ro', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 2)."px"#g<cr>', { desc = 'rpx/2 -> px' })
 keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', { desc = 'px -> rem' })
 keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', { desc = '1080px -> 750px' })
-keymap('n', '<leader>rr', require('util.quickType').generate_type, { desc = 'quicktype' })
+keymap('n', '<leader>rr', require('utils.quickType').generate_type, { desc = 'quicktype' })
 
 keymap('n', '<leader>lc', function()
-  require('util.init').compare_to_clipboard()
+  require('utils.init').compare_to_clipboard()
 end, { desc = 'diff clip' })
 
 keymap('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })

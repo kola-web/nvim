@@ -13,6 +13,7 @@ local M = {
       git = { enabled = true },
       words = { enabled = true },
       rename = { enabled = true },
+      statuscolumn = { enabled = true }, -- we set this in options.lua
     }
   end,
   keys = {

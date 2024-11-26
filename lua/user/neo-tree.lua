@@ -71,7 +71,7 @@ local M = {
             end
           end,
           open_file_system = function(state)
-            require('util').open(state.tree:get_node().path, { system = true })
+            require('utils.init').open(state.tree:get_node().path, { system = true })
           end,
           mini_component = vim.g.mini_component,
           mini_page = vim.g.mini_page,
@@ -110,6 +110,7 @@ local M = {
       },
     },
     config = function(_, opts)
+      -- LSP 集成文件重命名
       local function on_move(data)
         Snacks.rename.on_rename_file(data.source, data.destination)
       end
@@ -130,7 +131,7 @@ local M = {
       {
         '<leader>e',
         function()
-          require('neo-tree.command').execute({ toggle = true, dir = require('util').get_root() })
+          require('neo-tree.command').execute({ toggle = true, dir = require('utils.init').get_root() })
         end,
         desc = 'Explorer NeoTree (Root Dir)',
       },

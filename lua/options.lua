@@ -29,12 +29,12 @@ opt.wrap = false -- 将长行显示为单行
 
 opt.signcolumn = 'yes' -- 始终显示标记列（否则会导致文本位移）
 opt.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
+  foldopen = '',
+  foldclose = '',
+  fold = ' ',
+  foldsep = ' ',
+  diff = '╱',
+  eob = ' ',
 }
 
 opt.ignorecase = true -- 搜索时忽略大小写（使用 `\C` 强制区分大小写）
@@ -101,6 +101,8 @@ opt.undolevels = 10000 -- 设置撤销级别
 opt.updatetime = 200 -- 保存交换文件并触发 CursorHold 的时间间隔
 
 opt.wildmode = 'longest:full,full' -- 命令行补全模式
+
+opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 
 -- opt.whichwrap:append('<,>,[,],h,l') -- 允许在到达行首/行尾时使用的键
 

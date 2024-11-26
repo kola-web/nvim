@@ -45,7 +45,7 @@ local M = {
       '<leader><leader>w',
       mode = 'n',
       function()
-        require('util.init').flashWord()
+        require('utils.init').flashWord()
       end,
       desc = 'Flash flashWord',
     },

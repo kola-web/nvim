@@ -23,7 +23,7 @@ local M = {
       local cmp = require('cmp')
       local defaults = require('cmp.config.default')()
 
-      local has_value = require('util').has_value
+      local has_value = require('utils.init').has_value
 
       return {
         preselect = cmp.PreselectMode.Item,
@@ -49,7 +49,7 @@ local M = {
               behavior = cmp.ConfirmBehavior.Insert,
             }
             if cmp.core.view:visible() then
-              require('util').create_undo()
+              require('utils.init').create_undo()
               if cmp.confirm(opts) then
                 return
               end
@@ -102,7 +102,7 @@ local M = {
         }),
         formatting = {
           format = function(entry, item)
-            local icons = require('util.icons').kinds
+            local icons = require('utils.icons').kinds
             if icons[item.kind] then
               item.kind = icons[item.kind] .. item.kind
             end
