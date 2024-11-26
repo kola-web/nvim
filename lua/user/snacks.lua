@@ -3,7 +3,6 @@ local M = {
   priority = 1000,
   lazy = false,
   opts = function()
-    ---@type snacks.Config
     return {
       bufdelete = { enabled = true },
       dashboard = { enabled = true },
@@ -12,6 +11,8 @@ local M = {
       quickfile = { enabled = true },
       lazygit = { enabled = true },
       git = { enabled = true },
+      words = { enabled = true },
+      rename = { enabled = true },
     }
   end,
   keys = {
