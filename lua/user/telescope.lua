@@ -63,22 +63,6 @@ M.config = function()
 
   local previewers = require('telescope.previewers')
 
-  local new_maker = function(filepath, bufnr, opts)
-    opts = opts or {}
-
-    filepath = vim.fn.expand(filepath)
-    vim.loop.fs_stat(filepath, function(_, stat)
-      if not stat then
-        return
-      end
-      if stat.size > 100000 then
-        return
-      else
-        previewers.buffer_previewer_maker(filepath, bufnr, opts)
-      end
-    end)
-  end
-
   local function flash(prompt_bufnr)
     require('flash').jump({
       pattern = '^',
@@ -100,12 +84,25 @@ M.config = function()
 
   local open_with_trouble = require('trouble.sources.telescope').open
 
+  local function find_command()
+    if 1 == vim.fn.executable('rg') then
+      return { 'rg', '--files', '--color', 'never', '-g', '!.git' }
+    elseif 1 == vim.fn.executable('fd') then
+      return { 'fd', '--type', 'f', '--color', 'never', '-E', '.git' }
+    elseif 1 == vim.fn.executable('fdfind') then
+      return { 'fdfind', '--type', 'f', '--color', 'never', '-E', '.git' }
+    elseif 1 == vim.fn.executable('find') and vim.fn.has('win32') == 0 then
+      return { 'find', '.', '-type', 'f' }
+    elseif 1 == vim.fn.executable('where') then
+      return { 'where', '/r', '.', '*' }
+    end
+  end
+
   local opts = {
     defaults = {
       -- prompt_prefix = ' ',
       prompt_prefix = '',
       selection_caret = ' ',
-      buffer_previewer_maker = new_maker,
       file_ignore_patterns = {
         '.git',
         '.svn',
@@ -133,10 +130,21 @@ M.config = function()
           ['<c-t>'] = open_with_trouble,
         },
       },
+      get_selection_window = function()
+        local wins = vim.api.nvim_list_wins()
+        table.insert(wins, 1, vim.api.nvim_get_current_win())
+        for _, win in ipairs(wins) do
+          local buf = vim.api.nvim_win_get_buf(win)
+          if vim.bo[buf].buftype == '' then
+            return win
+          end
+        end
+        return 0
+      end,
     },
     pickers = {
       find_files = {
-        find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix' },
+        find_command = find_command,
       },
       buffers = {
         initial_mode = 'normal',
