@@ -92,6 +92,10 @@ local M = {
         lualine_c = {
           diff,
           diagnostics,
+          {
+            symbols.get,
+            cond = symbols.has,
+          },
         },
         lualine_x = {
           {
@@ -121,15 +125,7 @@ local M = {
         lualine_z = { 'location' },
       },
       inactive_sections = {},
-      winbar = {
-        lualine_b = {
-          { 'filename', file_status = true, path = 4 },
-          {
-            symbols and symbols.get,
-            cond = symbols and symbols.has,
-          },
-        },
-      },
+      winbar = {},
       extensions = { 'neo-tree', 'lazy', 'fzf', 'trouble', 'mason', 'quickfix', 'oil' },
     }
     return opts
