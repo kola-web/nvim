@@ -131,13 +131,6 @@ local M = {
       {
         '<leader>E',
         function()
-          require('neo-tree.command').execute({ toggle = true, reveal_force_cwd = true })
-        end,
-        desc = 'Explorer NeoTree (Root Dir)',
-      },
-      {
-        '<leader>e',
-        function()
           require('neo-tree.command').execute({ toggle = true })
         end,
         desc = 'Explorer NeoTree (Root Dir)',
@@ -145,31 +138,67 @@ local M = {
     },
   },
   {
-    'stevearc/oil.nvim',
-    opts = {
-      keymaps = {
-        ['g?'] = 'actions.show_help',
-        ['<CR>'] = 'actions.select',
-        ['<C-s>'] = { 'actions.select', opts = { vertical = true } },
-        ['<C-h>'] = { 'actions.select', opts = { horizontal = true } },
-        ['<C-t>'] = { 'actions.select', opts = { tab = true } },
-        ['<C-p>'] = 'actions.preview',
-        ['-'] = 'actions.close',
-        ['<C-l>'] = 'actions.refresh',
-        ['<'] = 'actions.parent',
-        ['>'] = 'actions.open_cwd',
-        ['`'] = 'actions.cd',
-        ['~'] = { 'actions.cd', opts = { scope = 'tab' } },
-        ['gs'] = 'actions.change_sort',
-        ['gx'] = 'actions.open_external',
-        ['g.'] = 'actions.toggle_hidden',
-        ['g\\'] = 'actions.toggle_trash',
-      },
-    },
-    -- Optional dependencies
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    'echasnovski/mini.files',
+    version = '*',
+    opts = function()
+      return {
+        -- Customization of shown content
+        content = {
+          -- Predicate for which file system entries to show
+          filter = nil,
+          -- What prefix to show to the left of file system entry
+          prefix = nil,
+          -- In which order to show file system entries
+          sort = nil,
+        },
+
+        -- Module mappings created only inside explorer.
+        -- Use `''` (empty string) to not create one.
+        mappings = {
+          close = 'q',
+          go_in = 'l',
+          go_in_plus = 'L',
+          go_out = 'h',
+          go_out_plus = 'H',
+          mark_goto = "'",
+          mark_set = 'm',
+          reset = '<BS>',
+          reveal_cwd = '@',
+          show_help = 'g?',
+          synchronize = '=',
+          trim_left = '<',
+          trim_right = '>',
+        },
+
+        -- General options
+        options = {
+          -- Whether to delete permanently or move into module-specific trash
+          permanent_delete = true,
+          -- Whether to use for editing directories
+          use_as_default_explorer = true,
+        },
+
+        -- Customization of explorer windows
+        windows = {
+          -- Maximum number of windows to show side by side
+          max_number = math.huge,
+          -- Whether to show preview of file/directory under cursor
+          preview = false,
+          -- Width of focused window
+          width_focus = 50,
+          -- Width of non-focused window
+          width_nofocus = 15,
+          -- Width of preview window
+          width_preview = 25,
+        },
+      }
+    end,
     keys = {
-      { '-', '<cmd>Oil<cr>', desc = 'Open parent directory', mode = { 'n' } },
+      {
+        '<leader>e',
+        '<cmd>lua MiniFiles.open()<cr>',
+        desc = 'mini files',
+      },
     },
   },
 }
