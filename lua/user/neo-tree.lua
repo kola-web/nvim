@@ -129,7 +129,7 @@ local M = {
     },
     keys = {
       {
-        '<leader>E',
+        '<leader>e',
         function()
           require('neo-tree.command').execute({ toggle = true })
         end,
@@ -195,7 +195,7 @@ local M = {
     end,
     keys = {
       {
-        '<leader>e',
+        '<leader>E',
         '<cmd>lua MiniFiles.open()<cr>',
         desc = 'mini files',
       },
