@@ -131,6 +131,10 @@ if vim.g.neovide then
   vim.keymap.set({ 'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't' }, '<D-v>', function()
     vim.api.nvim_paste(vim.fn.getreg('+'), true, -1) -- 将剪贴板内容粘贴到 Neovim
   end, { noremap = true, silent = true })
+
+  vim.keymap.set({ 'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't' }, '<C-v>', function()
+    vim.api.nvim_paste(vim.fn.getreg('+'), true, -1) -- 将剪贴板内容粘贴到 Neovim
+  end, { noremap = true, silent = true })
 end
 
 if vim.g.vscode then
