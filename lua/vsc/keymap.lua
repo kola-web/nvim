@@ -25,16 +25,22 @@ keymap({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = t
 keymap({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Better window navigation
-keymap({ 'n', 'x' }, '<C-h>', function() vscode.call('workbench.action.navigateLeft') end, { silent = true })
-keymap({ 'n', 'x' }, '<C-j>', function() vscode.call('workbench.action.navigateDown') end, { silent = true })
-keymap({ 'n', 'x' }, '<C-k>', function() vscode.call('workbench.action.navigateUp') end, { silent = true })
-keymap({ 'n', 'x' }, '<C-l>', function() vscode.call('workbench.action.navigateRight') end, { silent = true })
-
+keymap({ 'n', 'x' }, '<C-h>', function()
+  vscode.call('workbench.action.navigateLeft')
+end, { silent = true })
+keymap({ 'n', 'x' }, '<C-j>', function()
+  vscode.call('workbench.action.navigateDown')
+end, { silent = true })
+keymap({ 'n', 'x' }, '<C-k>', function()
+  vscode.call('workbench.action.navigateUp')
+end, { silent = true })
+keymap({ 'n', 'x' }, '<C-l>', function()
+  vscode.call('workbench.action.navigateRight')
+end, { silent = true })
 
 -- All
 keymap('', '<S-l>', '$', opts)
 keymap('', '<S-h>', '^', opts)
-
 
 -- keymap('n', '<C-m>', '%', opts)
 -- keymap("n", "<C-z>", "<nop>", opts)
@@ -72,16 +78,6 @@ keymap('v', 'p', '"_dP', opts)
 keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
 
--- substitute
-keymap('n', 's', "<cmd>lua require('substitute').operator()<cr>", opts)
-keymap('n', 'ss', "<cmd>lua require('substitute').line()<cr>", opts)
-keymap('n', 'S', "<cmd>lua require('substitute').eol()<cr>", opts)
-keymap('x', 's', "<cmd>lua require('substitute').visual()<cr>", opts)
-vim.keymap.set('n', 'sx', "<cmd>lua require('substitute.exchange').operator()<cr>", opts)
-vim.keymap.set('n', 'sxx', "<cmd>lua require('substitute.exchange').line()<cr>", opts)
-vim.keymap.set('x', 'X', "<cmd>lua require('substitute.exchange').visual()<cr>", opts)
-vim.keymap.set('n', 'sxc', "<cmd>lua require('substitute.exchange').cancel()<cr>", opts)
-
 --abolish.vim
 keymap('n', 'ga', '<Plug>(abolish-coerce-word)')
 keymap('v', 'ga', '<Plug>(abolish-coerce)')
@@ -94,5 +90,28 @@ keymap('n', 'N', "'nN'[v:searchforward].'zv'", { expr = true, desc = 'Prev searc
 keymap('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
 keymap('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
 
+-- stylua: ignore start
+keymap('', '<space>', function() vscode.call('whichkey.show') end, { silent = true })
+keymap('n', '(', function() vscode.call('workbench.action.moveEditorLeftInGroup') end, opts)
+keymap('n', ')', function() vscode.call('workbench.action.moveEditorRightInGroup') end, opts)
+
+keymap('n', 'za', function() vscode.call('editor.toggleFold') end, opts)
+keymap('n', 'zR', function() vscode.call('editor.unfoldAll') end, opts)
+keymap('n', 'zM', function() vscode.call('editor.foldAll') end, opts)
+keymap('n', 'zo', function() vscode.call('editor.unfold') end, opts)
+keymap('n', 'zO', function() vscode.call('editor.unfoldRecursively') end, opts)
+keymap('n', 'zc', function() vscode.call('editor.fold') end, opts)
+keymap('n', 'zC', function() vscode.call('editor.foldRecursively') end, opts)
+
+keymap('n', 'z1', function() vscode.call('editor.foldLevel1') end, opts)
+keymap('n', 'z2', function() vscode.call('editor.foldLevel2') end, opts)
+keymap('n', 'z3', function() vscode.call('editor.foldLevel3') end, opts)
+keymap('n', 'z4', function() vscode.call('editor.foldLevel4') end, opts)
+keymap('n', 'z5', function() vscode.call('editor.foldLevel5') end, opts)
+keymap('n', 'z6', function() vscode.call('editor.foldLevel6') end, opts)
+keymap('n', 'z7', function() vscode.call('editor.foldLevel7') end, opts)
+
+keymap('x', 'zV', function() vscode.call('editor.foldAllExcept') end, opts)
+-- stylua: ignore end
 
 return {}

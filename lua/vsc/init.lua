@@ -10,19 +10,14 @@ local opts = { silent = true, noremap = true }
 local enabled = {
   'lazy.nvim',
   'vim-repeat',
-  'mini.indentscope',
-  'vim-textobj-user',
-  'vim-indent-object',
-  'vim-textobj-entire',
-  'vim-textobj-xmlattr',
-  'vim-textobj-line',
-  'targets.vim',
   'nvim-treesitter',
   'vim-abolish',
   'vim-repeat',
   'nvim-surround',
-  'substitute.nvim',
-  'flash.nvim'
+  'flash.nvim',
+  'mini.operators',
+  'mini.ai',
+  'nvim-various-textobjs',
 }
 
 local Config = require('lazy.core.config')
