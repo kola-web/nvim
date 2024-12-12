@@ -11,13 +11,14 @@ local enabled = {
   'lazy.nvim',
   'vim-repeat',
   'nvim-treesitter',
-  'vim-abolish',
   'vim-repeat',
   'nvim-surround',
   'flash.nvim',
+  'vim-abolish',
   'mini.operators',
   'mini.ai',
   'nvim-various-textobjs',
+  'fast-cursor-move.nvim',
 }
 
 local Config = require('lazy.core.config')
@@ -42,4 +43,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-return {}
+return {
+  {
+    'nvim-treesitter/nvim-treesitter',
+    opts = { highlight = { enable = false } },
+  },
+  {
+    'xiyaowong/fast-cursor-move.nvim',
+    cond = vim.g.vscode,
+    config = function()
+      vim.g.fast_cursor_move_acceleration = false
+    end,
+  },
+}
