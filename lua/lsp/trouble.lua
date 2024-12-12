@@ -1,6 +1,5 @@
 local M = {
   'folke/trouble.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
   keys = {
     { '<leader>o', '<cmd>Trouble symbols toggle pinned=true results.win = { relative=win, position=right } focus=true<cr>', desc = 'outline (Trouble)' },
     { '<leader>xx', '<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>', desc = 'Document Diagnostics (Trouble)' },
