@@ -140,19 +140,36 @@ local M = {
   {
     'echasnovski/mini.files',
     version = '*',
-    opts = function()
-      return {
-        windows = {
-          preview = true,
-          width_focus = 30,
-          width_preview = 30,
-        },
-        options = {
-          -- Whether to use for editing directories
-          -- Disabled by default in LazyVim because neo-tree is used for that
-          use_as_default_explorer = false,
-        },
-      }
+    opts = {
+      windows = {
+        preview = true,
+        width_focus = 30,
+        width_preview = 30,
+      },
+      options = {
+        -- Whether to use for editing directories
+        -- Disabled by default in LazyVim because neo-tree is used for that
+        use_as_default_explorer = false,
+      },
+      mappings = {
+        go_in = 'L',
+        go_in_plus = 'l',
+        go_out = 'H',
+        go_out_plus = 'h',
+        synchronize = '<cr>',
+      },
+    },
+    config = function(_, opts)
+      require('mini.files').setup(opts)
+      -- 转义文件名，防止 Lua 模式匹配问题
+
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesBufferCreate',
+        callback = function(args)
+          vim.keymap.set('n', 'wc', vim.g.mini_file_mini_component, { buffer = args.data.buf_id, desc = 'mini_component' })
+          vim.keymap.set('n', 'wp', vim.g.mini_file_mini_page, { buffer = args.data.buf_id, desc = 'mini_page' })
+        end,
+      })
     end,
     keys = {
       {

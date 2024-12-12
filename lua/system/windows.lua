@@ -40,3 +40,38 @@ vim.g.mini_page = function(state)
   end)
 end
 
+local function escape_pattern(text)
+  return text:gsub('([%.%+%-%*%?%[%]%^%$%(%)%%])', '%%%1')
+end
+
+vim.g.mini_file_mini_component = function()
+  local file = MiniFiles.get_fs_entry()
+  local currentPath = file.fs_type == 'directory' and file.path or string.gsub(file.path, '/' .. escape_pattern(file.name), '', 1)
+  vim.fn.system({
+    'pwsh',
+    '-Command',
+    'Copy-Item -Recurse -Path "$HOME\\AppData\\Local\\nvim\\template\\wxmlComponent" -Destination "'
+      .. currentPath
+      .. '"; '
+      .. 'Get-ChildItem -Recurse -Path "'
+      .. currentPath
+      .. '\\wxmlComponent" | ForEach-Object { $_.IsReadOnly = $false }',
+  })
+  MiniFiles.synchronize()
+end
+
+vim.g.mini_file_mini_page = function()
+  local file = MiniFiles.get_fs_entry()
+  local currentPath = file.fs_type == 'directory' and file.path or string.gsub(file.path, '/' .. escape_pattern(file.name), '', 1)
+  vim.fn.system({
+    'pwsh',
+    '-Command',
+    'Copy-Item -Recurse -Path "$HOME\\AppData\\Local\\nvim\\template\\wxmlPage" -Destination "'
+      .. currentPath
+      .. '"; '
+      .. 'Get-ChildItem -Recurse -Path "'
+      .. currentPath
+      .. '\\wxmlPage" | ForEach-Object { $_.IsReadOnly = $false }',
+  })
+  MiniFiles.synchronize()
+end
