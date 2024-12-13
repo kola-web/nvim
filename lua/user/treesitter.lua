@@ -3,11 +3,6 @@ local M = {
     'nvim-treesitter/nvim-treesitter',
     event = { 'BufReadPost', 'BufNewFile' },
     build = ':TSUpdate',
-    dependencies = {
-      {
-        'windwp/nvim-ts-autotag',
-      },
-    },
     opts = {
       ensure_installed = {
         'bash',
@@ -85,6 +80,9 @@ local M = {
 
       configs.setup(opts)
     end,
+  },
+  {
+    'windwp/nvim-ts-autotag',
   },
 }
 

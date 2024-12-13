@@ -4,34 +4,24 @@ local M = {
   event = 'VeryLazy',
   config = true,
   keys = {
-    -- t = { '<cmd>TodoTrouble<cr>', 'Todo' },
-    -- T = { '<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>', 'Todo/FIX/FIXME' },
-    { '<leader>st', '<cmd>TodoTelescope', desc = 'Todo' },
-    { '<leader>sT', '<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>', desc = 'Todo/Fix/Fixme' },
-    {
-      '<leader>xt',
-      '<cmd>TodoTrouble<cr>',
-      desc = 'Todo',
-    },
-    {
-      '<leader>xT',
-      '<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>',
-      desc = 'Todo/FIX/FIXME',
-    },
     {
       ']t',
       function()
         require('todo-comments').jump_next()
       end,
-      desc = 'Next todo comment',
+      desc = 'Next Todo Comment',
     },
     {
       '[t',
       function()
         require('todo-comments').jump_prev()
       end,
-      desc = 'Previous todo comment',
+      desc = 'Previous Todo Comment',
     },
+    { '<leader>xt', '<cmd>Trouble todo toggle<cr>', desc = 'Todo (Trouble)' },
+    { '<leader>xT', '<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>', desc = 'Todo/Fix/Fixme (Trouble)' },
+    { '<leader>st', '<cmd>TodoTelescope<cr>', desc = 'Todo' },
+    { '<leader>sT', '<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>', desc = 'Todo/Fix/Fixme' },
   },
 }
 

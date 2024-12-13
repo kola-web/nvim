@@ -1,8 +1,10 @@
+local has = vim.fn.has
+local is_win = has('win32')
 local M = {
   {
     'mrjones2014/smart-splits.nvim',
     lazy = false,
-    build = 'bash ./kitty/install-kittens.bash',
+    build = is_win and '' or 'bash ./kitty/install-kittens.bash',
     -- stylua: ignore
     keys = {
       -- add a keymap to browse plugin files
