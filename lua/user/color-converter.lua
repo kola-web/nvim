@@ -2,7 +2,7 @@ local M = {
   'NTBBloodbath/color-converter.nvim',
   keys = {
     {
-      '<C-->',
+      '<A-->',
       '<Plug>ColorConvertCycle',
       desc = 'ColorConvertCycle',
       silent = true,

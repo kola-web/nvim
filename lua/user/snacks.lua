@@ -3,7 +3,7 @@ local M = {
   priority = 1000,
   lazy = false,
   opts = {
-    bufdelete = { enabled = true },
+    bigfile = { enabled = true },
     dashboard = {
       enabled = true,
       preset = {
@@ -23,29 +23,24 @@ local M = {
         -- stylua: ignore end
       },
     },
-    notifier = { enabled = true },
-    notify = { enabled = true },
-    bigfile = { enabled = true },
-    quickfile = { enabled = true },
-    lazygit = { enabled = true },
-    indent = { enabled = true },
-    input = { enabled = true },
     git = { enabled = true },
+    input = { enabled = true },
+    notifier = { enabled = true },
+    quickfile = { enabled = true },
     words = { enabled = true },
-    rename = { enabled = true },
     statuscolumn = { enabled = true }, -- we set this in options.lua
-    zen = { enabled = true },
   },
   keys = {
     -- stylua: ignore start
-    { '<leader>c', function() Snacks.bufdelete() end, desc = 'buf del', mode = { 'n' }},
-    {'<leader>bo', function() Snacks.bufdelete.other() end, desc = 'buf del other', mode = { 'n' }},
-    {'<leader>gg', function() Snacks.lazygit() end, desc = 'lazygit', mode = { 'n' }},
-    {'<leader>gl', function() Snacks.lazygit.log() end, desc = 'lazygit log file', mode = { 'n' }},
-    {'<leader>gb', function() Snacks.git.blame_line() end, desc = 'git blame line', mode = { 'n' }},
-    {'<leader>z', function() Snacks.zen() end, desc = 'zen modal', mode = { 'n' }},
-    {']]', function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', mode = { 'n', 't' }},
-    {'[[', function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' }},
+    { '<leader>c', function() Snacks.bufdelete() end,               desc = 'buf del',          mode = { 'n' }},
+    {'<leader>bo', function() Snacks.bufdelete.other() end,         desc = 'buf del other',    mode = { 'n' }},
+    {'<leader>gg', function() Snacks.lazygit() end,                 desc = 'lazygit',          mode = { 'n' }},
+    {'<leader>gl', function() Snacks.lazygit.log() end,             desc = 'lazygit log file', mode = { 'n' }},
+    {'<leader>gb', function() Snacks.git.blame_line() end,          desc = 'git blame line',   mode = { 'n' }},
+    {'<leader>z',  function() Snacks.zen() end,                     desc = 'zen modal',        mode = { 'n' }},
+    { "<C-\\>",    function() Snacks.terminal() end,                desc = "Toggle Terminal" },
+    {']]',         function() Snacks.words.jump(vim.v.count1) end,  desc = 'Next Reference',   mode = { 'n', 't' }},
+    {'[[',         function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference',   mode = { 'n', 't' }},
     -- stylua: ignore end
   },
 }
