@@ -24,4 +24,9 @@ if not vim.g.vscode then
   require('autocommands')
   require('user.colorscheme')
 end
+
+if vim.g.neovide then
+  require('system.neovide')
+end
+
 require('Lazy').setup()
