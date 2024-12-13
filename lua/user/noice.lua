@@ -2,13 +2,8 @@ local M = {
   {
     'folke/noice.nvim',
     event = 'VeryLazy',
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-      'rcarriga/nvim-notify',
-    },
     opts = {
       lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
           ['vim.lsp.util.stylize_markdown'] = true,
@@ -41,8 +36,6 @@ local M = {
         bottom_search = true,
         command_palette = true,
         long_message_to_split = true,
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
       },
     },
     -- stylua: ignore

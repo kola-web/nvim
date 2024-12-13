@@ -5,12 +5,12 @@ local M = {
     { 'mason-lspconfig.nvim' },
     { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {} },
     { 'b0o/schemastore.nvim' },
+    { 'saghen/blink.cmp' },
   },
   opts = {},
 }
 
 function M.config()
-  local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
   local lspconfig = require('lspconfig')
   local icons = require('utils.icons')
 
@@ -60,7 +60,7 @@ function M.config()
   require('mason-lspconfig').setup_handlers({
     function(server_name)
       local server_config = {
-        capabilities = lsp_capabilities,
+        capabilities = require('blink.cmp').get_lsp_capabilities(),
         flags = { allow_incremental_sync = false },
       }
 
