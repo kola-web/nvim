@@ -37,7 +37,6 @@ local M = {
     { '<leader>sr', '<cmd>Telescope oldfiles<cr>', desc = 'Recent File' },
     { '<leader>s`', '<cmd>Telescope registers<cr>', desc = 'Registers' },
     { '<leader>sk', '<cmd>Telescope keymaps<cr>', desc = 'Keymaps' },
-    { '<leader>sp', '<cmd>Telescope package_info<cr>', desc = 'package_info' },
 
     { '<leader>lt', '<cmd>Telescope filetypes<cr>', desc = 'filetype' },
   },
@@ -147,16 +146,11 @@ M.config = function()
         initial_mode = 'normal',
       },
     },
-    extensions = {
-      package_info = {
-        initial_mode = 'normal',
-      },
-    },
+    extensions = {},
   }
 
   telescope.setup(opts)
   telescope.load_extension('noice')
-  telescope.load_extension('package_info')
 end
 
 return M

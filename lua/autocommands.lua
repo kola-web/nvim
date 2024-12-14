@@ -105,3 +105,12 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
   desc = 'Disable New Line Comment',
 })
+
+-- Fix conceallevel for json files
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  group = augroup('json_conceal'),
+  pattern = { 'json', 'jsonc', 'json5' },
+  callback = function()
+    vim.opt_local.conceallevel = 0
+  end,
+})

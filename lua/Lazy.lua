@@ -10,7 +10,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 M.setup = function()
   require('lazy').setup({
     spec = {
-      { import = 'vsc' },
+      { import = 'vscodeNeovim' },
       { import = 'user' },
       { import = 'user.preview' },
       { import = 'lsp' },

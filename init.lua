@@ -1,3 +1,5 @@
+require('options')
+
 if not vim.g.vscode then
   local has = vim.fn.has
   local is_mac = has('macunix')
@@ -19,7 +21,6 @@ if not vim.g.vscode then
     require('system.wsl')
   end
 
-  require('options')
   require('keymaps')
   require('autocommands')
   require('user.colorscheme')

@@ -48,11 +48,4 @@ return {
     'nvim-treesitter/nvim-treesitter',
     opts = { highlight = { enable = false } },
   },
-  {
-    'xiyaowong/fast-cursor-move.nvim',
-    cond = vim.g.vscode,
-    config = function()
-      vim.g.fast_cursor_move_acceleration = false
-    end,
-  },
 }

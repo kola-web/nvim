@@ -6,18 +6,18 @@ local M = {
   },
   keys = {
     {
-      '<leader>na',
+      '<leader>l;',
       function()
         require('scissors').addNewSnippet()
       end,
-      'snippet add',
+      desc = 'snippet add',
     },
     {
-      '<leader>ne',
+      '<leader>l:',
       function()
         require('scissors').editSnippet()
       end,
-      'snippet edit',
+      desc = 'snippet edit',
     },
   },
 }

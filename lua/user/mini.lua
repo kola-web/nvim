@@ -30,15 +30,6 @@ local M = {
     },
   },
 
-  -- 高亮光标下单词
-  {
-    'echasnovski/mini.cursorword',
-    version = false,
-    opts = {
-      deily = 100,
-    },
-  },
-
   -- 替换、排序
   {
     'echasnovski/mini.operators',
