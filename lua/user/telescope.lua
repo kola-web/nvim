@@ -1,6 +1,5 @@
 local M = {
   'nvim-telescope/telescope.nvim',
-  event = 'Bufenter',
   cmd = { 'Telescope' },
   dependencies = {
     {

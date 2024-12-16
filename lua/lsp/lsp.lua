@@ -1,7 +1,8 @@
 local M = {
   'neovim/nvim-lspconfig',
-  lazy = true,
+  event = 'VeryLazy',
   dependencies = {
+    'mason.nvim',
     { 'mason-lspconfig.nvim' },
     { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {} },
     { 'b0o/schemastore.nvim' },
@@ -17,9 +18,8 @@ function M.config()
   vim.api.nvim_create_autocmd('LspAttach', {
     desc = 'LSP actions',
     callback = function(args)
-      local bufnr = args.buf
+      local buffer = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      local filetype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
 
       local diagnostic_goto = function(next, severity)
         local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
@@ -31,9 +31,10 @@ function M.config()
 
       local keymap = vim.keymap.set
       local function createKeymap(mode, key, cmd, desc)
-        keymap(mode, key, cmd, { buffer = bufnr, noremap = true, silent = true, desc = desc })
+        keymap(mode, key, cmd, { buffer = buffer, noremap = true, silent = true, desc = desc })
       end
 
+      createKeymap('n', 'gK', '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help')
       createKeymap('n', 'gr', '<cmd>Trouble lsp_references<CR>', 'GoTo references')
       createKeymap('n', 'gd', '<cmd>Trouble lsp_definitions<CR>', 'GoTo definition')
       createKeymap('n', 'gD', '<cmd>Trouble lsp_declarations<CR>', 'GoTo declaration')
@@ -51,7 +52,6 @@ function M.config()
       createKeymap('n', '<leader>lo', '<cmd>Trouble lsp_outgoing_calls<cr>', 'Lsp outgoing_calls')
       createKeymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code action')
       createKeymap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename')
-      createKeymap('n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help')
       createKeymap('n', '<leader>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', 'Setloclist')
       createKeymap('n', '<leader>lm', '<cmd>EslintFixAll<CR>', 'EslintFixAll')
     end,

@@ -1,7 +1,7 @@
 local M = {
   {
     'sindrets/diffview.nvim',
-    event = 'BufReadPre',
+    event = 'VeryLazy',
     opts = function()
       local act = require('diffview.actions')
       return {
@@ -42,7 +42,7 @@ local M = {
   },
   {
     'lewis6991/gitsigns.nvim',
-    event = 'BufReadPre',
+    event = 'VeryLazy',
     opts = {
       signs = {
         add = { text = '▎' },

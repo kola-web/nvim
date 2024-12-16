@@ -1,7 +1,7 @@
 local M = {
   {
     'nvim-treesitter/nvim-treesitter',
-    event = { 'BufReadPost', 'BufNewFile' },
+    event = { 'VeryLazy' },
     build = ':TSUpdate',
     opts = {
       ensure_installed = {
@@ -83,6 +83,7 @@ local M = {
   },
   {
     'windwp/nvim-ts-autotag',
+    event = { 'BufReadPre', 'BufNewFile' },
   },
 }
 

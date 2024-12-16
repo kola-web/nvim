@@ -4,7 +4,7 @@ local M = {
     'nvim-telescope/telescope.nvim',
   },
   opts = {},
-  event = 'VeryLazy',
+  lazy = true,
 }
 
 M.config = function()
