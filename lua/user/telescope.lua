@@ -100,6 +100,9 @@ M.config = function()
         'dist',
         'dist_pro',
       },
+      preview = {
+        filesize_limit = 0.1,
+      },
       mappings = {
         i = {
           ['<Down>'] = actions.move_selection_next,
