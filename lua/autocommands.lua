@@ -114,3 +114,13 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     vim.opt_local.conceallevel = 0
   end,
 })
+
+-- File type specific settings
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+  group = vim.api.nvim_create_augroup('AutoHotkeyComment', {}),
+  pattern = { '*.ahk', '*.ahk2' },
+  callback = function()
+    vim.bo.commentstring = '; %s'
+    vim.bo.comments = 's1:/*,mb:*,ex:*/,:;'
+  end,
+})

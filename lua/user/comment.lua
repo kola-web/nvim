@@ -2,7 +2,12 @@ local M = {
   {
     'folke/ts-comments.nvim',
     event = 'VeryLazy',
-    opts = {},
+    opts = {
+      lang = {
+        autohotkey = '; %s',
+        ahk = '; %s',
+      },
+    },
   },
 }
 

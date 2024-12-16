@@ -28,7 +28,7 @@ local M = {
     indent = {},
     notifier = { enabled = true },
     quickfile = { enabled = true },
-    scope = { enabled = true, edge  = false },
+    scope = { enabled = true, edge = false },
     statuscolumn = { enabled = true }, -- we set this in options.lua
     words = { enabled = true },
   },
@@ -77,7 +77,5 @@ local M = {
     })
   end,
 }
-
-print(11)
 
 return M
