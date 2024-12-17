@@ -44,17 +44,8 @@ local M = {
         notifier = { enabled = true },
         quickfile = { enabled = true },
         scope = {
-          enabled = true,
-          keys = {
-            textobject = {
-              ii = {
-                cursor = true,
-              },
-              ai = {
-                cursor = true,
-              },
-            },
-          },
+          enabled = false,
+          keys = {},
         },
         statuscolumn = { enabled = true }, -- we set this in options.lua
         scroll = { enabled = false },

@@ -11,6 +11,26 @@ local M = {
     submodules = false,
   },
   {
+    'chrisgrieser/nvim-various-textobjs',
+    lazy = true,
+    opts = {
+      keymaps = {
+        useDefaults = false,
+      },
+    },
+    keys = {
+      { mode = { 'x', 'o' }, 'ae', '<cmd>lua require("various-textobjs").entireBuffer()<CR>' },
+
+      { mode = { 'x', 'o' }, 'ih', '<cmd>lua require("various-textobjs").cssColor("inner")<CR>' },
+      { mode = { 'x', 'o' }, 'ah', '<cmd>lua require("various-textobjs").cssColor("outer")<CR>' },
+
+      { mode = { 'x', 'o' }, 'ii', '<cmd>lua require("various-textobjs").indentation("inner","inner")<CR>' },
+      { mode = { 'x', 'o' }, 'ai', '<cmd>lua require("various-textobjs").indentation("outer","outer")<CR>' },
+
+      -- { mode = { 'x', 'o' }, 'ix', '<cmd>lua require("various-textobjs").htmlAttribute("outer")<CR>' },
+    },
+  },
+  {
     'echasnovski/mini.ai',
     version = false,
     opts = function()
@@ -20,14 +40,6 @@ local M = {
         custom_textobjects = {
           f = false,
           t = false,
-          e = function()
-            local from = { line = 1, col = 1 }
-            local to = {
-              line = vim.fn.line('$'),
-              col = math.max(vim.fn.getline('$'):len(), 1),
-            }
-            return { from = from, to = to }
-          end,
           -- <div #name name="name" :text="greetingMessage" v-slot="slotProps" #[dynamicSlotName] v-slot:[dynamicSlotName] ></div>
           x = {
             {
