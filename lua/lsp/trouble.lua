@@ -2,10 +2,12 @@ local M = {
   'folke/trouble.nvim',
   keys = {
     { '<leader>o', '<cmd>Trouble symbols toggle pinned=true results.win = { relative=win, position=right } focus=true<cr>', desc = 'outline (Trouble)' },
-    { '<leader>xx', '<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>', desc = 'Document Diagnostics (Trouble)' },
-    { '<leader>xX', '<cmd>Trouble diagnostics toggle<cr> focus=true', desc = 'Workspace Diagnostics (Trouble)' },
-    { '<leader>xl', '<cmd>Trouble loclist toggle<cr> focus=true', desc = 'loclist (Trouble)' },
-    { '<leader>xq', '<cmd>Trouble qflist toggle<cr> focus=true', desc = 'quickfix (Trouble)' },
+    { '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', desc = 'Diagnostics (Trouble)' },
+    { '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', desc = 'Buffer Diagnostics (Trouble)' },
+    { '<leader>cs', '<cmd>Trouble symbols toggle<cr>', desc = 'Symbols (Trouble)' },
+    { '<leader>cS', '<cmd>Trouble lsp toggle<cr>', desc = 'LSP references/definitions/... (Trouble)' },
+    { '<leader>xL', '<cmd>Trouble loclist toggle<cr>', desc = 'Location List (Trouble)' },
+    { '<leader>xQ', '<cmd>Trouble qflist toggle<cr>', desc = 'Quickfix List (Trouble)' },
     {
       '[q',
       function()
