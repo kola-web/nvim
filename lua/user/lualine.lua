@@ -105,6 +105,7 @@ local M = {
             cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
             color = function() return { fg = Snacks.util.color("Debug") } end,
           },
+            clients_lsp,
           -- stylua: ignore
           {
             require("lazy.status").updates,

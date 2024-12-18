@@ -21,6 +21,10 @@ function M.config()
       local buffer = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
 
+      if client.name == 'eslint' then
+        client.server_capabilities.documentFormattingProvider = true
+      end
+
       local diagnostic_goto = function(next, severity)
         local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
         severity = severity and vim.diagnostic.severity[severity] or nil
