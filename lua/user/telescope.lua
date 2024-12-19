@@ -33,7 +33,7 @@ local M = {
     { '<leader>sh', '<cmd>lua require"telescope.builtin".find_files({ hidden = true })<cr>', desc = 'hidden file' },
     { '<leader>sH', '<cmd>Telescope help_tags<cr>', desc = 'Help' },
     { '<leader>sM', '<cmd>Telescope man_pages<cr>', desc = 'Man Pages' },
-    { '<leader>sr', '<cmd>Telescope oldfiles<cr>', desc = 'Recent File' },
+    { '<leader>so', '<cmd>Telescope oldfiles<cr>', desc = 'Recent File' },
     { '<leader>s`', '<cmd>Telescope registers<cr>', desc = 'Registers' },
     { '<leader>sk', '<cmd>Telescope keymaps<cr>', desc = 'Keymaps' },
 

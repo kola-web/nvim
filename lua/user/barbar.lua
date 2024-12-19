@@ -30,7 +30,12 @@ local M = {
   --   version = '*',
   --   opts = {
   --     format = function(buf_id, label)
-  --       local suffix = vim.bo[buf_id].modified and '* ' or ''
+  --       local suffix = ''
+  --       if vim.bo[buf_id].modified then
+  --         suffix = '● '
+  --       elseif vim.bo[buf_id].readonly then
+  --         suffix = ' '
+  --       end
   --       return MiniTabline.default_format(buf_id, label) .. suffix
   --     end,
   --   },

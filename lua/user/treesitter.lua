@@ -85,11 +85,11 @@ local M = {
     'windwp/nvim-ts-autotag',
     event = { 'BufReadPre', 'BufNewFile' },
   },
-  {
-    'windwp/nvim-autopairs',
-    event = 'InsertEnter',
-    config = true,
-  },
+  -- {
+  --   'windwp/nvim-autopairs',
+  --   event = 'InsertEnter',
+  --   config = true,
+  -- },
 }
 
 return M

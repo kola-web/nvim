@@ -27,6 +27,14 @@ local M = {
         desc = 'Remote Flash',
       },
       {
+        'R',
+        mode = { 'o', 'x' },
+        function()
+          require('flash').treesitter_search()
+        end,
+        desc = 'Treesitter Search',
+      },
+      {
         '<leader><leader>s',
         mode = 'n',
         function()
