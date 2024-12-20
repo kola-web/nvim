@@ -118,9 +118,9 @@ keymap('i', ':', ':<c-g>u')
 keymap('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
 keymap('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
 keymap('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
-keymap('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
+keymap('n', '<leader><tab>n', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
 keymap('n', '<leader><tab>c', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
-keymap('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+keymap('n', '<leader><tab>p', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
 -- save file
 keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<Esc><Cmd>silent! update | redraw<CR>', { desc = 'Save file' })

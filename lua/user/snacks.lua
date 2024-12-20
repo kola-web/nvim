@@ -43,12 +43,11 @@ local M = {
         indent = { enabled = true },
         notifier = { enabled = true },
         quickfile = { enabled = true },
-        scope = {
-          enabled = false,
-          keys = {},
-        },
+        -- scope = {
+        --   enabled = false,
+        -- },
+        -- scroll = { enabled = true },
         statuscolumn = { enabled = true }, -- we set this in options.lua
-        scroll = { enabled = false },
         terminal = {
           win = {
             keys = {
