@@ -20,7 +20,6 @@ local M = {
     -- optional: provides snippets for the snippet source
     dependencies = {
       'rafamadriz/friendly-snippets',
-      'kola-web/cmp-path',
     },
 
     -- use a release tag to download pre-built binaries
@@ -100,34 +99,9 @@ local M = {
           'lsp',
           'snippets',
           'buffer',
-          'cmp-path',
         },
         -- optionally disable cmdline completions
         -- cmdline = {},
-        providers = {
-          -- create provider
-          ['cmp-path'] = {
-            name = 'path', -- IMPORTANT: use the same name as you would for nvim-cmp
-            module = 'blink.compat.source',
-
-            -- all blink.cmp source config options work as normal:
-            score_offset = -3,
-
-            -- this table is passed directly to the proxied completion source
-            -- as the `option` field in nvim-cmp's source config
-            --
-            -- this is NOT the same as the opts in a plugin's lazy.nvim spec
-            opts = {
-              pathMappings = {
-                ['@'] = '${folder}/src',
-                ['/'] = '${folder}/src/',
-                -- ['~@'] = '${folder}/src',
-                -- ['/images'] = '${folder}/src/images',
-                -- ['/components'] = '${folder}/src/components',
-              },
-            },
-          },
-        },
       },
 
       -- experimental signature help support
@@ -144,9 +118,11 @@ local M = {
       opts.appearance.kind_icons = require('utils.icons').kinds
     end,
   },
-
   {
     'saghen/blink.cmp',
+    dependencies = {
+      'folke/lazydev.nvim',
+    },
     opts = {
       sources = {
         -- add lazydev to your completion providers
@@ -205,6 +181,42 @@ local M = {
               --
               -- Not everything will work (obviously).
               additional_rg_options = {},
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    'saghen/blink.cmp',
+    dependencies = {
+      'kola-web/cmp-path',
+    },
+    opts = {
+      sources = {
+        -- add lazydev to your completion providers
+        default = { 'cmp-path' },
+        providers = {
+          -- create provider
+          ['cmp-path'] = {
+            name = 'path', -- IMPORTANT: use the same name as you would for nvim-cmp
+            module = 'blink.compat.source',
+
+            -- all blink.cmp source config options work as normal:
+            score_offset = -3,
+
+            -- this table is passed directly to the proxied completion source
+            -- as the `option` field in nvim-cmp's source config
+            --
+            -- this is NOT the same as the opts in a plugin's lazy.nvim spec
+            opts = {
+              pathMappings = {
+                ['@'] = '${folder}/src',
+                ['/'] = '${folder}/src/',
+                -- ['~@'] = '${folder}/src',
+                -- ['/images'] = '${folder}/src/images',
+                -- ['/components'] = '${folder}/src/components',
+              },
             },
           },
         },
