@@ -109,7 +109,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 -- Fix conceallevel for json files
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   group = augroup('json_conceal'),
-  pattern = { 'json', 'jsonc', 'json5' },
+  pattern = { 'json', 'jsonc', 'json5', 'yml', 'yaml' },
   callback = function()
     vim.opt_local.conceallevel = 0
   end,
