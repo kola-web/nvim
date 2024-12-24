@@ -18,7 +18,6 @@ local enabled = {
   'mini.operators',
   'mini.ai',
   'nvim-various-textobjs',
-  'fast-cursor-move.nvim',
 }
 
 local Config = require('lazy.core.config')

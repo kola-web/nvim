@@ -19,24 +19,19 @@ keymap('i', '<C-e>', '<End>', opts)
 keymap('i', '<C-a>', '<Home>', opts)
 
 -- better up/down
-keymap({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-keymap({ 'n', 'x' }, '<Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-keymap({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-keymap({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- keymap({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- keymap({ 'n', 'x' }, '<Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- keymap({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- keymap({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
 
 -- Better window navigation
-keymap({ 'n', 'x' }, '<C-h>', function()
-  vscode.call('workbench.action.navigateLeft')
-end, { silent = true })
-keymap({ 'n', 'x' }, '<C-j>', function()
-  vscode.call('workbench.action.navigateDown')
-end, { silent = true })
-keymap({ 'n', 'x' }, '<C-k>', function()
-  vscode.call('workbench.action.navigateUp')
-end, { silent = true })
-keymap({ 'n', 'x' }, '<C-l>', function()
-  vscode.call('workbench.action.navigateRight')
-end, { silent = true })
+-- stylua: ignore start
+keymap({ 'n', 'x' }, '<C-h>', function() vscode.call('workbench.action.navigateLeft') end, { silent = true })
+keymap({ 'n', 'x' }, '<C-j>', function() vscode.call('workbench.action.navigateDown') end, { silent = true })
+keymap({ 'n', 'x' }, '<C-k>', function() vscode.call('workbench.action.navigateUp') end, { silent = true })
+keymap({ 'n', 'x' }, '<C-l>', function() vscode.call('workbench.action.navigateRight') end, { silent = true })
+-- stylua: ignore end
 
 -- All
 keymap('', '<S-l>', '$', opts)
