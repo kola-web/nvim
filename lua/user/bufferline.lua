@@ -26,17 +26,10 @@ local M = {
           local ret = (diag.error and icons.Error .. diag.error .. ' ' or '') .. (diag.warning and icons.Warn .. diag.warning or '')
           return vim.trim(ret)
         end,
-        offsets = {
-          {
-            filetype = 'neo-tree',
-            text = 'Neo-tree',
-            highlight = 'Directory',
-            text_align = 'left',
-          },
-        },
         get_element_icon = function(opts)
           return require('utils.icons').ft[opts.filetype]
         end,
+        sort_by = 'insert_after_current',
       },
     },
     config = function(_, opts)
