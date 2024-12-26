@@ -90,43 +90,17 @@ local M = {
     },
     opts = {
       sources = {
-        -- add lazydev to your completion providers
         default = { 'ripgrep' },
         providers = {
-          -- 👇🏻👇🏻 add the ripgrep provider config below
           ripgrep = {
             module = 'blink-ripgrep',
             name = 'Ripgrep',
-            -- the options below are optional, some default values are shown
             ---@module "blink-ripgrep"
             ---@type blink-ripgrep.Options
             opts = {
-              -- For many options, see `rg --help` for an exact description of
-              -- the values that ripgrep expects.
-
-              -- the minimum length of the current word to start searching
-              -- (if the word is shorter than this, the search will not start)
               prefix_min_len = 3,
-
-              -- The number of lines to show around each match in the preview
-              -- (documentation) window. For example, 5 means to show 5 lines
-              -- before, then the match, and another 5 lines after the match.
               context_size = 5,
-
-              -- The maximum file size of a file that ripgrep should include in
-              -- its search. Useful when your project contains large files that
-              -- might cause performance issues.
-              -- Examples:
-              -- "1024" (bytes by default), "200K", "1M", "1G", which will
-              -- exclude files larger than that size.
               max_filesize = '1M',
-
-              -- (advanced) Any additional options you want to give to ripgrep.
-              -- See `rg -h` for a list of all available options. Might be
-              -- helpful in adjusting performance in specific situations.
-              -- If you have an idea for a default, please open an issue!
-              --
-              -- Not everything will work (obviously).
               additional_rg_options = {},
             },
           },
@@ -141,21 +115,12 @@ local M = {
     },
     opts = {
       sources = {
-        -- add lazydev to your completion providers
         default = { 'cmp-path' },
         providers = {
-          -- create provider
           ['cmp-path'] = {
-            name = 'path', -- IMPORTANT: use the same name as you would for nvim-cmp
+            name = 'path',
             module = 'blink.compat.source',
-
-            -- all blink.cmp source config options work as normal:
             score_offset = -3,
-
-            -- this table is passed directly to the proxied completion source
-            -- as the `option` field in nvim-cmp's source config
-            --
-            -- this is NOT the same as the opts in a plugin's lazy.nvim spec
             opts = {
               pathMappings = {
                 ['@'] = '${folder}/src',

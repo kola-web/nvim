@@ -2,9 +2,6 @@ local M = {
   {
     'nvim-lualine/lualine.nvim',
     event = 'VeryLazy',
-    dependencies = {
-      'bwpge/lualine-pretty-path',
-    },
     init = function()
       vim.g.lualine_laststatus = vim.o.laststatus
       if vim.fn.argc(-1) > 0 then
@@ -68,16 +65,14 @@ local M = {
               },
             },
             -- { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
-            -- {
-            --   'filename',
-            --   file_status = true, -- Displays file status (readonly status, modified status)
-            --   newfile_status = false, -- Display new file status (new file means no write after created)
-            --   separator = '',
-            --   padding = { left = 0, right = 1 },
-            --   path = 1,
-            --   shorting_target = 500, -- Shortens path to leave 40 spaces in the window
-            -- },
-            'pretty_path',
+            {
+              'filename',
+              file_status = true, -- Displays file status (readonly status, modified status)
+              newfile_status = false, -- Display new file status (new file means no write after created)
+              separator = '',
+              padding = { left = 0, right = 1 },
+              path = 1,
+            },
             {
               symbols and symbols.get,
               cond = function()
