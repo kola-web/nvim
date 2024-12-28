@@ -1,11 +1,7 @@
 local M = {
   'nvim-telescope/telescope.nvim',
+  enabled = false,
   cmd = { 'Telescope' },
-  dependencies = {
-    {
-      'folke/noice.nvim',
-    },
-  },
   keys = {
     {
       '<leader>bb',
