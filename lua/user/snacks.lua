@@ -100,10 +100,11 @@ local M = {
     end,
     keys = {
       -- stylua: ignore start
-      { '<leader>z',  function() Snacks.zen() end,                     desc = 'zen modal',        mode = { 'n' }},
-      { '<leader>Z',  function() Snacks.zen.zoom() end,                desc = 'Toggle Zoom' },
       { '<leader>c',  function() Snacks.bufdelete() end,               desc = 'buf del',          mode = { 'n' }},
       {'<leader>bo',  function() Snacks.bufdelete.other() end,         desc = 'buf del other',    mode = { 'n' }},
+
+      { '<leader>z',  function() Snacks.zen() end,                     desc = 'zen modal',        mode = { 'n' }},
+      { '<leader>Z',  function() Snacks.zen.zoom() end,                desc = 'Toggle Zoom' },
       {'<leader>gg',  function() Snacks.lazygit() end,                 desc = 'lazygit',          mode = { 'n' }},
       {'<leader>gl',  function() Snacks.lazygit.log() end,             desc = 'lazygit log file', mode = { 'n' }},
       { "<leader>gf", function() Snacks.lazygit.log_file() end,        desc = "Lazygit Current File History" },

@@ -1,13 +1,14 @@
 local M = {
-  'ray-x/web-tools.nvim',
-  build = 'npm i -g browser-sync',
-  opts = {},
+  'brianhuster/live-preview.nvim',
+  dependencies = {
+    -- 'brianhuster/autosave.nvim', -- Not required, but recomended for autosaving and sync scrolling
+  },
+  opts = {
+    autokill = true,
+    picker = 'fzf-lua',
+  },
   keys = {
-    {
-      '<leader>ph',
-      '<cmd>BrowserPreview {-f}<cr>',
-      desc = 'live-server',
-    },
+    { '<leader>ph', '<cmd>LivePreview start<cr>', desc = 'Open buffer in live preview' },
   },
 }
 
