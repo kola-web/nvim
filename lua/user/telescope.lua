@@ -1,6 +1,6 @@
 local M = {
   'nvim-telescope/telescope.nvim',
-  enabled = false,
+  enabled = true,
   cmd = { 'Telescope' },
   keys = {
     {

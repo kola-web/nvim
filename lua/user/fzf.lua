@@ -1,6 +1,6 @@
 local M = {
   'ibhagwan/fzf-lua',
-  enabled = true,
+  enabled = false,
   cmd = 'FzfLua',
   event = 'VeryLazy',
   opts = function()
