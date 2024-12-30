@@ -35,16 +35,6 @@ local M = {
         return '\u{f085} ' .. table.concat(c, '|')
       end
 
-      local trouble = require('trouble')
-      local symbols = trouble.statusline({
-        mode = 'symbols',
-        groups = {},
-        title = false,
-        filter = { range = true },
-        format = '{kind_icon}{symbol.name:Normal}',
-        hl_group = 'lualine_c_normal',
-      })
-
       local opts = {
         options = {
           theme = 'auto',
@@ -72,12 +62,6 @@ local M = {
               separator = '',
               padding = { left = 0, right = 1 },
               path = 1,
-            },
-            {
-              symbols and symbols.get,
-              cond = function()
-                return vim.b.trouble_lualine ~= false and symbols.has()
-              end,
             },
           },
           lualine_x = {

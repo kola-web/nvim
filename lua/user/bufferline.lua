@@ -1,4 +1,34 @@
 local M = {
+  {
+    'romgrk/barbar.nvim',
+    event = 'VeryLazy',
+    init = function()
+      vim.g.barbar_auto_setup = false
+    end,
+    opts = {
+      animation = false,
+      sidebar_filetypes = {
+        ['neo-tree'] = {
+          text = 'neo-tree',
+          align = 'center',
+        },
+      },
+      icons = {
+        separator = { left = '│', right = '│' },
+        separator_at_end = false,
+      },
+      minimum_padding = 0,
+    },
+    keys = {
+      { '<S-tab>', '<cmd>BufferPrevious<cr>', desc = 'Prev buffer' },
+      { '<tab>', '<cmd>BufferNext<cr>', desc = 'Next buffer' },
+      { '(', '<cmd>BufferMovePrevious<cr>', desc = 'move prev' },
+      { ')', '<cmd>BufferMoveNext<cr>', desc = 'move move' },
+      { '<leader>br', '<cmd>BufferRestore<cr>', desc = 'Restore buffer' },
+      { '<leader>bp', '<Cmd>BufferPin<CR>', desc = 'Toggle Pin' },
+    },
+  },
+
   -- {
   --   'akinsho/bufferline.nvim',
   --   event = 'VeryLazy',
@@ -29,63 +59,27 @@ local M = {
   --       get_element_icon = function(opts)
   --         return require('utils.icons').ft[opts.filetype]
   --       end,
-  --       sort_by = 'insert_after_current',
+  --       persist_buffer_sort = true,
+  --       sort_by = 'insert_at_end',
   --     },
   --   },
-  --   config = function(_, opts)
-  --     require('bufferline').setup(opts)
-  --     -- Fix bufferline when restoring a session
-  --     vim.api.nvim_create_autocmd({ 'BufAdd', 'BufDelete' }, {
-  --       callback = function()
-  --         vim.schedule(function()
-  --           pcall(nvim_bufferline)
-  --         end)
-  --       end,
-  --     })
-  --   end,
   -- },
 
   -- {
-  --   'romgrk/barbar.nvim',
-  --   event = 'VeryLazy',
-  --   init = function()
-  --     vim.g.barbar_auto_setup = false
-  --   end,
+  --   'echasnovski/mini.tabline',
+  --   version = '*',
   --   opts = {
-  --     animation = false,
-  --     sidebar_filetypes = {
-  --       ['neo-tree'] = {
-  --         text = 'neo-tree',
-  --         align = 'center',
-  --       },
-  --     },
-  --     insert_at_end = false,
-  --   },
-  --   keys = {
-  --     { '<S-tab>', '<cmd>BufferPrevious<cr>', desc = 'Prev buffer' },
-  --     { '<tab>', '<cmd>BufferNext<cr>', desc = 'Next buffer' },
-  --     { '(', '<cmd>BufferMovePrevious<cr>', desc = 'move prev' },
-  --     { ')', '<cmd>BufferMoveNext<cr>', desc = 'move move' },
-  --     { '<leader>br', '<cmd>BufferRestore<cr>', desc = 'Restore buffer' },
-  --     { '<leader>bp', '<Cmd>BufferPin<CR>', desc = 'Toggle Pin' },
+  --     format = function(buf_id, label)
+  --       local suffix = ''
+  --       if vim.bo[buf_id].modified then
+  --         suffix = '● '
+  --       elseif vim.bo[buf_id].readonly then
+  --         suffix = ' '
+  --       end
+  --       return MiniTabline.default_format(buf_id, label) .. suffix
+  --     end,
   --   },
   -- },
-
-  {
-    'echasnovski/mini.tabline',
-    version = '*',
-    opts = {
-      format = function(buf_id, label)
-        local suffix = ''
-        if vim.bo[buf_id].modified then
-          suffix = '● '
-        elseif vim.bo[buf_id].readonly then
-          suffix = ' '
-        end
-        return MiniTabline.default_format(buf_id, label) .. suffix
-      end,
-    },
-  },
 }
 
 return M
