@@ -48,6 +48,7 @@ M.config = function()
   local previewers = require('telescope.previewers')
 
   local function flash(prompt_bufnr)
+    ---@diagnostic disable-next-line: missing-fields
     require('flash').jump({
       pattern = '^',
       label = { after = { 0, 0 } },

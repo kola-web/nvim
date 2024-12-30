@@ -38,9 +38,11 @@ function M.config()
         keymap(mode, key, cmd, { buffer = buffer, noremap = true, silent = true, desc = desc })
       end
 
+      createKeymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help')
       createKeymap('n', 'gK', '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help')
-      createKeymap('n', 'gr', '<cmd>Trouble lsp_references<CR>', 'GoTo references')
       createKeymap('n', 'gd', '<cmd>Trouble lsp_definitions<CR>', 'GoTo definition')
+      createKeymap('n', 'gr', '<cmd>Trouble lsp_references<CR>', 'GoTo references')
+      createKeymap('n', 'gy', '<cmd>Trouble lsp_type_definitions<CR>', 'GoTo references')
       createKeymap('n', 'gD', '<cmd>Trouble lsp_declarations<CR>', 'GoTo declaration')
       createKeymap('n', 'go', '<cmd>Trouble lsp<CR>', 'lsp')
       createKeymap('n', 'gi', '<cmd>Trouble lsp_implementations<CR>', 'GoTo implementation')
