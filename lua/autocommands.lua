@@ -124,3 +124,11 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
     vim.bo.comments = 's1:/*,mb:*,ex:*/,:;'
   end,
 })
+
+vim.api.nvim_create_autocmd({ 'User' }, {
+  group = augroup('session'),
+  pattern = { 'PersistenceLoadPre' },
+  callback = function()
+    Snacks.bufdelete.all()
+  end,
+})
