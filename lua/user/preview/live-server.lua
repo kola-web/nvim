@@ -5,10 +5,10 @@ local M = {
   },
   opts = {
     autokill = true,
-    picker = 'fzf-lua',
+    -- picker = 'fzf-lua',
   },
   keys = {
-    { '<leader>ph', '<cmd>LivePreview start<cr>', desc = 'Open buffer in live preview' },
+    { '<leader>qh', '<cmd>LivePreview start<cr>', desc = 'Open buffer in live preview' },
   },
 }
 

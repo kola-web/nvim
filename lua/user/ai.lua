@@ -1,84 +1,19 @@
 local M = {
-  -- {
-  --   'github/copilot.vim',
-  --   event = 'InsertEnter',
-  --   config = function()
-  --     vim.g.copilot_enabled = true
-  --     vim.g.copilot_no_tab_map = true
-  --   end,
-  --   keys = {
-  --     { '<C-l>', 'copilot#Accept("")', desc = 'Copilot panel', mode = { 'i' }, expr = true, replace_keycodes = false, silent = true },
-  --     { '<C-s>', '<Plug>(copilot-suggest)', desc = 'Copilot suggest', mode = { 'i' }, noremap = true, silent = true },
-  --     { '<C-n>', '<Plug>(copilot-next)', desc = 'Copilot next', mode = { 'i' }, noremap = true, silent = true },
-  --     { '<C-p>', '<Plug>(copilot-previous)', desc = 'Copilot prev', mode = { 'i' }, noremap = true, silent = true },
-  --     { '<leader>ao', '<cmd>Copilot panel<cr>', desc = 'Copilot panel' },
-  --     { '<leader>ae', '<cmd>Copilot enable<cr>', desc = 'Copilot enable' },
-  --     { '<leader>ad', '<cmd>Copilot disable<cr>', desc = 'Copilot disable' },
-  --   },
-  -- },
   {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    build = ':Copilot auth',
+    'github/copilot.vim',
     event = 'InsertEnter',
-    opts = {
-      suggestion = {
-        enabled = not vim.g.ai_cmp,
-        auto_trigger = true,
-        keymap = {
-          accept = false, -- handled by nvim-cmp / blink.cmp
-          next = '<M-]>',
-          prev = '<M-[>',
-        },
-      },
-      panel = { enabled = false },
-      filetypes = {
-        markdown = true,
-        help = true,
-      },
-    },
+    config = function()
+      vim.g.copilot_enabled = true
+      vim.g.copilot_no_tab_map = true
+    end,
     keys = {
-      {
-        '<C-l>',
-        function()
-          require('copilot.suggestion').accept()
-        end,
-        desc = 'Copilot Accept',
-        mode = { 'i' },
-        expr = true,
-        replace_keycodes = false,
-        silent = true,
-      },
-      {
-        '<C-j>',
-        function()
-          require('copilot.suggestion').next()
-        end,
-        desc = 'Copilot next',
-        mode = { 'i' },
-        noremap = true,
-        silent = true,
-      },
-      {
-        '<C-k>',
-        function()
-          require('copilot.suggestion').prev()
-        end,
-        desc = 'Copilot prev',
-        mode = { 'i' },
-        noremap = true,
-        silent = true,
-      },
-      {
-        '<C-x>',
-        function()
-          require('copilot.suggestion').dismiss()
-        end,
-        desc = 'Copilot dismiss',
-        mode = { 'i' },
-        noremap = true,
-        silent = true,
-      },
+      { '<C-l>', 'copilot#Accept("")', desc = 'Copilot panel', mode = { 'i' }, expr = true, replace_keycodes = false, silent = true },
+      { '<C-s>', '<Plug>(copilot-suggest)', desc = 'Copilot suggest', mode = { 'i' }, noremap = true, silent = true },
+      { '<C-j>', '<Plug>(copilot-next)', desc = 'Copilot next', mode = { 'i' }, noremap = true, silent = true },
+      { '<C-k>', '<Plug>(copilot-previous)', desc = 'Copilot prev', mode = { 'i' }, noremap = true, silent = true },
+      { '<leader>ao', '<cmd>Copilot panel<cr>', desc = 'Copilot panel' },
+      { '<leader>ae', '<cmd>Copilot enable<cr>', desc = 'Copilot enable' },
+      { '<leader>ad', '<cmd>Copilot disable<cr>', desc = 'Copilot disable' },
     },
   },
   {
