@@ -56,13 +56,11 @@ local M = {
             },
             -- { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
             {
-              'filename',
-              file_status = true, -- Displays file status (readonly status, modified status)
-              newfile_status = false, -- Display new file status (new file means no write after created)
-              separator = '',
-              padding = { left = 0, right = 1 },
-              path = 1,
-            },
+              function()
+                return require('utils').get_root_dir()
+              end,
+              icon = '',
+            }, -- 显示根目录名
           },
           lualine_x = {
             Snacks.profiler.status(),

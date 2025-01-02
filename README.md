@@ -12,11 +12,12 @@ sharkdp.fd
 Python.Python.3.12
 zig.zig
 7zip.7zip
-DEVCOM.LuaJIT 
+DEVCOM.LuaJIT
 ```
 
-
 获取当前buffer的filetype
+
 ```lua
 lua print(vim.bo.filetype)
+
 ```
