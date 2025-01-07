@@ -6,7 +6,6 @@ local M = {
     { 'mason-lspconfig.nvim' },
     { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {} },
     { 'b0o/schemastore.nvim' },
-    -- { 'saghen/blink.cmp' },
   },
   opts = {},
 }
@@ -111,3 +110,4 @@ function M.config()
 end
 
 return M
+

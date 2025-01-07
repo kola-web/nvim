@@ -4,91 +4,74 @@ local function has_words_before()
 end
 
 local M = {
-  -- {
-  --   'saghen/blink.cmp',
-  --   lazy = false,
-  --   dependencies = {
-  --     'rafamadriz/friendly-snippets',
-  --
-  --     'mikavilpas/blink-ripgrep.nvim',
-  --     'folke/lazydev.nvim',
-  --
-  --     'saghen/blink.compat',
-  --     'kola-web/cmp-path',
-  --   },
-  --   version = '*',
-  --   opts = {
-  --     keymap = {
-  --       preset = 'super-tab',
-  --       ['<Tab>'] = {
-  --         function(cmp)
-  --           if cmp.snippet_active() then
-  --             return cmp.accept()
-  --           else
-  --             return cmp.select_and_accept()
-  --           end
-  --         end,
-  --         function()
-  --           if has_words_before() then
-  --             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>(emmet-expand-abbr)', true, true, true), 'i', true)
-  --             return 'fallback'
-  --           end
-  --         end,
-  --         'snippet_forward',
-  --         'fallback',
-  --       },
-  --     },
-  --     appearance = {
-  --       use_nvim_cmp_as_default = false,
-  --       nerd_font_variant = 'mono',
-  --       kind_icons = require('utils.icons').kinds,
-  --     },
-  --     sources = {
-  --       default = {
-  --         -- 'path',
-  --         'cmp-path',
-  --         'lsp',
-  --         'snippets',
-  --         'buffer',
-  --         'ripgrep',
-  --         'lazydev',
-  --       },
-  --       providers = {
-  --         ['cmp-path'] = {
-  --           name = 'path',
-  --           module = 'blink.compat.source',
-  --           score_offset = -3,
-  --           opts = {
-  --             pathMappings = {
-  --               ['@'] = '${folder}/src',
-  --               ['/'] = '${folder}/src/',
-  --               -- ['~@'] = '${folder}/src',
-  --               -- ['/images'] = '${folder}/src/images',
-  --               -- ['/components'] = '${folder}/src/components',
-  --             },
-  --           },
-  --         },
-  --         ripgrep = {
-  --           module = 'blink-ripgrep',
-  --           name = 'Ripgrep',
-  --           ---@module "blink-ripgrep"
-  --           ---@type blink-ripgrep.Options
-  --           opts = {
-  --             prefix_min_len = 3,
-  --             context_size = 5,
-  --             max_filesize = '1M',
-  --             additional_rg_options = {},
-  --           },
-  --         },
-  --         lazydev = {
-  --           name = 'LazyDev',
-  --           module = 'lazydev.integrations.blink',
-  --         },
-  --       },
-  --     },
-  --   },
-  --   opts_extend = { 'sources.default' },
-  -- },
+  {
+    'saghen/blink.cmp',
+    lazy = false,
+    enabled = false,
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+
+      'mikavilpas/blink-ripgrep.nvim',
+      'folke/lazydev.nvim',
+    },
+    version = '*',
+    opts = {
+      keymap = {
+        preset = 'super-tab',
+        ['<Tab>'] = {
+          function(cmp)
+            if cmp.snippet_active() then
+              return cmp.accept()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          function()
+            if has_words_before() then
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>(emmet-expand-abbr)', true, true, true), 'i', true)
+              return 'fallback'
+            end
+          end,
+          'snippet_forward',
+          'fallback',
+        },
+      },
+      appearance = {
+        use_nvim_cmp_as_default = false,
+        nerd_font_variant = 'mono',
+        kind_icons = require('utils.icons').kinds,
+      },
+      sources = {
+        default = {
+          'path',
+          'lsp',
+          'snippets',
+          'buffer',
+          'ripgrep',
+          'lazydev',
+        },
+        providers = {
+          ripgrep = {
+            module = 'blink-ripgrep',
+            name = 'Ripgrep',
+            ---@module "blink-ripgrep"
+            ---@type blink-ripgrep.Options
+            opts = {
+              prefix_min_len = 3,
+              context_size = 5,
+              max_filesize = '1M',
+              additional_rg_options = {},
+            },
+          },
+          lazydev = {
+            name = 'LazyDev',
+            module = 'lazydev.integrations.blink',
+          },
+        },
+      },
+    },
+    opts_extend = { 'sources.default' },
+  },
 }
 
 return M
