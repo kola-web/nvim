@@ -20,23 +20,23 @@ local M = {
   --   end,
   -- },
 
-  -- {
-  --   'folke/tokyonight.nvim',
-  --   priority = 1000,
-  --   lazy = false,
-  --   opts = {
-  --     style = 'storm',
-  --     -- style = 'day',
-  --     transparent = false,
-  --     plugins = {
-  --       markdown = true,
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     require('tokyonight').setup(opts)
-  --     vim.cmd([[colorscheme tokyonight]])
-  --   end,
-  -- },
+  {
+    'folke/tokyonight.nvim',
+    priority = 1000,
+    lazy = false,
+    opts = {
+      style = 'storm',
+      -- style = 'day',
+      transparent = false,
+      plugins = {
+        markdown = true,
+      },
+    },
+    config = function(_, opts)
+      require('tokyonight').setup(opts)
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
 
   -- {
   --   'rebelot/kanagawa.nvim',
@@ -63,14 +63,14 @@ local M = {
   --   end,
   -- },
 
-  {
-    priority = 1000,
-    lazy = false,
-    'sainnhe/gruvbox-material',
-    config = function()
-      vim.cmd([[colorscheme gruvbox-material]])
-    end,
-  },
+  -- {
+  --   priority = 1000,
+  --   lazy = false,
+  --   'sainnhe/gruvbox-material',
+  --   config = function()
+  --     vim.cmd([[colorscheme gruvbox-material]])
+  --   end,
+  -- },
 
   -- {
   --   priority = 1000,
