@@ -5,6 +5,7 @@ vim.filetype.add({
     wxml = 'html',
     wxss = 'css',
     wxs = 'javascript',
+    wpy = 'vue',
     ['code-snippets'] = 'jsonc', -- Included in the plugin
     template = 'nginx',
     ['code-profile'] = 'json',
