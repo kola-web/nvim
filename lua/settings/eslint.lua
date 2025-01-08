@@ -24,7 +24,7 @@ return {
     'pcss',
     'postcss',
   },
-  -- root_dir = require('lspconfig').util.root_pattern('eslint.config.js', 'eslint.config.cjs', 'eslint.config.mjs'),
+  root_dir = require('lspconfig').util.root_pattern('eslint.config.js', 'eslint.config.cjs', 'eslint.config.mjs'),
   settings = {
     rulesCustomizations = {
       { rule = 'style/*', severity = 'off', fixable = true },

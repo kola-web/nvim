@@ -59,6 +59,13 @@ local M = {
           scope_incremental = false,
           node_decremental = '<bs>',
         },
+        is_supported = function()
+          local mode = vim.api.nvim_get_mode().mode
+          if mode == 'c' then
+            return false
+          end
+          return true
+        end,
       },
     },
     config = function(_, opts)
