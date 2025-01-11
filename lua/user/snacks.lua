@@ -107,8 +107,6 @@ local M = {
       { "<leader>S",  function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" },
       { "<leader>un", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
       { "<C-\\>",     function() Snacks.terminal() end,                desc = "Toggle Terminal" },
-      {']]',          function() Snacks.words.jump(vim.v.count1) end,  desc = 'Next Reference',   mode = { 'n', 't' }},
-      {'[[',          function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference',   mode = { 'n', 't' }},
       -- stylua: ignore end
     },
     init = function()
@@ -138,8 +136,6 @@ local M = {
           Snacks.toggle.animate():map('<leader>ua')
           Snacks.toggle.indent():map('<leader>ug')
           Snacks.toggle.scroll():map('<leader>uS')
-          Snacks.toggle.profiler():map('<leader>dpp')
-          Snacks.toggle.profiler_highlights():map('<leader>dph')
           Snacks.toggle.inlay_hints():map('<leader>uh')
           Snacks.toggle.zoom():map('<leader>wm'):map('<leader>uZ')
           Snacks.toggle.zen():map('<leader>uz')

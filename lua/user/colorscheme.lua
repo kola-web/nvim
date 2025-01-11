@@ -20,23 +20,39 @@ local M = {
   --   end,
   -- },
 
-  {
-    'folke/tokyonight.nvim',
-    priority = 1000,
-    lazy = false,
-    opts = {
-      style = 'storm',
-      -- style = 'day',
-      transparent = false,
-      plugins = {
-        markdown = true,
-      },
-    },
-    config = function(_, opts)
-      require('tokyonight').setup(opts)
-      vim.cmd([[colorscheme tokyonight]])
-    end,
-  },
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   priority = 1000,
+  --   lazy = false,
+  --   opts = {
+  --     style = 'storm',
+  --     -- style = 'day',
+  --     transparent = false,
+  --     plugins = {
+  --       markdown = true,
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     require('tokyonight').setup(opts)
+  --     vim.cmd([[colorscheme tokyonight]])
+  --   end,
+  -- },
+
+  -- {
+  --   'neanias/everforest-nvim',
+  --   version = false,
+  --   lazy = false,
+  --   priority = 1000, -- make sure to load this before all the other start plugins
+  --   -- Optional; default configuration will be used if setup isn't called.
+  --   config = function()
+  --     require('everforest').setup({
+  --       background = 'medium',
+  --       italics = true,
+  --       disable_italic_comments = false,
+  --     })
+  --     vim.cmd([[colorscheme everforest]])
+  --   end,
+  -- },
 
   -- {
   --   'rebelot/kanagawa.nvim',
@@ -63,14 +79,14 @@ local M = {
   --   end,
   -- },
 
-  -- {
-  --   priority = 1000,
-  --   lazy = false,
-  --   'sainnhe/gruvbox-material',
-  --   config = function()
-  --     vim.cmd([[colorscheme gruvbox-material]])
-  --   end,
-  -- },
+  {
+    priority = 1000,
+    lazy = false,
+    'sainnhe/gruvbox-material',
+    config = function()
+      vim.cmd([[colorscheme gruvbox-material]])
+    end,
+  },
 
   -- {
   --   priority = 1000,
