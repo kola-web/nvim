@@ -21,7 +21,7 @@ local M = {
   end,
   keys = {
     {
-      '<C-S-L>',
+      '<leader>dd',
       function()
         return require('debugprint').debugprint({ above = false, variable = true, ignore_treesitter = false })
       end,
@@ -30,7 +30,7 @@ local M = {
       mode = { 'n' },
     },
     {
-      '<C-S-L>',
+      '<leader>dd',
       function()
         return require('debugprint').debugprint({ above = false, variable = true, ignore_treesitter = true })
       end,
