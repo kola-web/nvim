@@ -174,13 +174,13 @@ local M = {
         end,
         desc = 'Open mini.files (Directory of Current File)',
       },
-      {
-        '<leader>E',
-        function()
-          require('mini.files').open(vim.uv.cwd(), true)
-        end,
-        desc = 'Open mini.files (cwd)',
-      },
+      -- {
+      --   '<leader>E',
+      --   function()
+      --     require('mini.files').open(vim.uv.cwd(), true)
+      --   end,
+      --   desc = 'Open mini.files (cwd)',
+      -- },
     },
   },
 }

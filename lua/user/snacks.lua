@@ -29,10 +29,59 @@ local M = {
             { section = 'startup' },
           },
         },
+        explorer = {
+          enabled = true,
+        },
         git = { enabled = true },
         input = { enabled = true },
         indent = { enabled = true },
         notifier = { enabled = true },
+        picker = {
+          enabled = true,
+          exclude = {
+            '.git',
+            '.svn',
+            '.DS_store',
+            'node_modules',
+            'miniprogram_npm',
+            '.yarn',
+            'dist',
+            'dist_pro',
+          },
+          win = {
+            input = {
+              keys = {
+                ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
+                ['s'] = { 'flash' },
+                ['<c-t>'] = {
+                  'trouble_open',
+                  mode = { 'n', 'i' },
+                },
+              },
+            },
+          },
+          actions = {
+            flash = function(picker)
+              require('flash').jump({
+                pattern = '^',
+                label = { after = { 0, 0 } },
+                search = {
+                  mode = 'search',
+                  exclude = {
+                    function(win)
+                      return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= 'snacks_picker_list'
+                    end,
+                  },
+                },
+                action = function(match)
+                  local idx = picker.list:row2idx(match.pos[1])
+                  picker.list:_move(idx, true, true)
+                end,
+              })
+            end,
+            trouble_open = require('trouble.sources.snacks').actions.trouble_open,
+          },
+        },
         quickfile = { enabled = true },
         -- scope = {
         --   enabled = false,
@@ -107,6 +156,16 @@ local M = {
       { "<leader>S",  function() Snacks.scratch.select() end,          desc = "Select Scratch Buffer" },
       { "<leader>un", function() Snacks.notifier.hide() end,           desc = "Dismiss All Notifications" },
       { "<C-\\>",     function() Snacks.terminal() end,                desc = "Toggle Terminal" },
+
+      { "<leader>f", function() Snacks.picker.files() end, desc = "Find Files" },
+      { "<leader>F", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>bb", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end }) end, desc = "Buffers" },
+      { "<leader>sc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+      { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
+      { "<leader>o", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+      { "<leader>O", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+
+      { "<leader>E", function() Snacks.explorer() end, desc = "explorer" },
       -- stylua: ignore end
     },
     init = function()

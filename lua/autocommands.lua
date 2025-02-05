@@ -31,7 +31,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     createKeymap('n', 'gr', '<cmd>Trouble lsp_references<CR>', 'GoTo references')
     createKeymap('n', 'gy', '<cmd>Trouble lsp_type_definitions<CR>', 'GoTo references')
     createKeymap('n', 'gD', '<cmd>Trouble lsp_declarations<CR>', 'GoTo declaration')
-    createKeymap('n', 'go', '<cmd>Trouble lsp<CR>', 'lsp')
     createKeymap('n', 'gI', '<cmd>Trouble lsp_implementations<CR>', 'GoTo implementation')
     createKeymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Float diagnostic')
     createKeymap('n', ']d', diagnostic_goto(true), 'Next Diagnostic')

@@ -2,8 +2,8 @@ local M = {
   'folke/trouble.nvim',
   event = 'VeryLazy',
   keys = {
-    { '<leader>o', '<cmd>Trouble symbols toggle focus=true<cr>', desc = 'Symbols (Trouble)' },
-    { '<leader>O', '<cmd>Trouble lsp toggle<cr>', desc = 'LSP references/definitions/... (Trouble)' },
+    -- { '<leader>o', '<cmd>Trouble symbols toggle focus=true<cr>', desc = 'Symbols (Trouble)' },
+    -- { '<leader>O', '<cmd>Trouble lsp toggle<cr>', desc = 'LSP references/definitions/... (Trouble)' },
     { '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', desc = 'Diagnostics (Trouble)' },
     { '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', desc = 'Buffer Diagnostics (Trouble)' },
     { '<leader>xL', '<cmd>Trouble loclist toggle<cr>', desc = 'Location List (Trouble)' },
@@ -52,15 +52,15 @@ local M = {
     local trouble = require('trouble')
     trouble.setup(opts)
 
-    -- local symbols = trouble.statusline({
-    --   mode = 'lsp_document_symbols',
-    --   groups = {},
-    --   title = false,
-    --   filter = { range = true },
-    --   format = '{kind_icon}{symbol.name:Normal}',
-    -- })
-    -- _G.my_symbols = symbols
-    -- vim.o.winbar = '%f %{%v:lua.my_symbols.get()%}'
+    local symbols = trouble.statusline({
+      mode = 'lsp_document_symbols',
+      groups = {},
+      title = false,
+      filter = { range = true },
+      format = '{kind_icon}{symbol.name:Normal}',
+    })
+    _G.my_symbols = symbols
+    vim.o.winbar = '%f %{%v:lua.my_symbols.get()%}'
   end,
 }
 
