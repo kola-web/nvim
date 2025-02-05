@@ -62,16 +62,6 @@ local M = {
         desc = 'Quick Chat (CopilotChat)',
         mode = { 'n', 'v' },
       },
-      -- Show prompts actions with telescope
-      {
-        '<leader>ap',
-        function()
-          local actions = require('CopilotChat.actions')
-          require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
-        end,
-        desc = 'Prompt Actions (CopilotChat)',
-        mode = { 'n', 'v' },
-      },
     },
     config = function(_, opts)
       local chat = require('CopilotChat')

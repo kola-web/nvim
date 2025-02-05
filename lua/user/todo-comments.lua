@@ -1,7 +1,7 @@
 local M = {
   {
     'folke/todo-comments.nvim',
-    cmd = { 'TodoTrouble', 'TodoTelescope' },
+    cmd = { 'TodoTrouble' },
     event = 'VeryLazy',
     opts = {},
     -- stylua: ignore start

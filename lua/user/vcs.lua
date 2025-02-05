@@ -36,7 +36,6 @@ local M = {
     keys = {
       { '<leader>gh', '<cmd>DiffviewFileHistory %<cr>', desc = 'DiffviewFileHistory %' },
       { '<leader>gH', '<cmd>DiffviewFileHistory<cr>', desc = 'DiffviewFileHistory' },
-      { '<leader>gc', '<cmd>Telescope git_commits<cr>', desc = 'Checkout commit' },
       { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'DiffviewOpen' },
     },
   },
@@ -68,7 +67,6 @@ local M = {
       { '<leader>gR', "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = 'Reset Buffer' },
       { '<leader>gs', "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", desc = 'Stage Hunk' },
       { '<leader>gu', "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", desc = 'Undo Stage Hunk' },
-      { '<leader>go', '<cmd>Telescope git_status<cr>', desc = 'Open changed file' },
     },
   },
   {
