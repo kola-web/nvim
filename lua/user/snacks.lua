@@ -94,7 +94,7 @@ local M = {
       { '<leader>c',  function() Snacks.bufdelete() end,               desc = 'buf del',          mode = { 'n' }},
       {'<leader>bo',  function() Snacks.bufdelete.other() end,         desc = 'buf del other',    mode = { 'n' }},
 
-      { '<leader>;',  function() Snacks.dashboard.open() end,         desc = 'dashboard',          mode = { 'n' }},
+      { '<leader>D',  function() Snacks.dashboard.open() end,         desc = 'dashboard',          mode = { 'n' }},
 
       { '<leader>z',  function() Snacks.zen() end,                     desc = 'zen modal',        mode = { 'n' }},
       { '<leader>Z',  function() Snacks.zen.zoom() end,                desc = 'Toggle Zoom' },

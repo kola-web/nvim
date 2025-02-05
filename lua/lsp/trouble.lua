@@ -52,15 +52,15 @@ local M = {
     local trouble = require('trouble')
     trouble.setup(opts)
 
-    local symbols = trouble.statusline({
-      mode = 'lsp_document_symbols',
-      groups = {},
-      title = false,
-      filter = { range = true },
-      format = '{kind_icon}{symbol.name:Normal}',
-    })
-    _G.my_symbols = symbols
-    vim.o.winbar = '%f %{%v:lua.my_symbols.get()%}'
+    -- local symbols = trouble.statusline({
+    --   mode = 'lsp_document_symbols',
+    --   groups = {},
+    --   title = false,
+    --   filter = { range = true },
+    --   format = '{kind_icon}{symbol.name:Normal}',
+    -- })
+    -- _G.my_symbols = symbols
+    -- vim.o.winbar = '%f %{%v:lua.my_symbols.get()%}'
   end,
 }
 
