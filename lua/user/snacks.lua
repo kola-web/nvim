@@ -158,7 +158,7 @@ local M = {
       { "<leader>un", function() Snacks.notifier.hide() end,                                                   desc = "Dismiss All Notifications" },
       { "<C-\\>",     function() Snacks.terminal() end,                                                        desc = "Toggle Terminal" },
 
-      { "<leader>f",  function() Snacks.picker.files() end,                                                    desc = "Find Files" },
+      { "<leader>f",  function() Snacks.picker.files({args = {'--path-separator', '/'}}) end,                                                    desc = "Find Files" },
       { "<leader>F",  function() Snacks.picker.grep({ layout = {  preset = "ivy" } }) end,                     desc = "Grep" },
       { "<leader>bb", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end }) end, desc = "Buffers" },
       { "<leader>sc", function() Snacks.picker.colorschemes() end,                                             desc = "Colorschemes" },
