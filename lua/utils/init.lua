@@ -215,4 +215,27 @@ M.get_root_dir = function()
   return vim.fn.fnamemodify(cwd, ':t') -- 获取目录名
 end
 
+M.scratch_open = function()
+  local filetypes = vim.fn.getcompletion('', 'filetype')
+  Snacks.picker.select(filetypes, {
+    prompt = 'filetype',
+  }, function(selected)
+    Snacks.scratch.open({
+      ft = selected,
+      win = {
+        title = 'Scratch Buffer',
+      },
+    })
+  end)
+end
+
+M.select_filetype = function()
+  local filetypes = vim.fn.getcompletion('', 'filetype')
+  Snacks.picker.select(filetypes, {
+    prompt = 'filetype',
+  }, function(selected)
+    vim.bo.filetype = selected
+  end)
+end
+
 return M
