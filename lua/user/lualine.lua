@@ -81,7 +81,7 @@ local M = {
               cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
               color = function() return { fg = Snacks.util.color("Debug") } end,
             },
-              clients_lsp,
+            clients_lsp,
             -- stylua: ignore
             {
               require("lazy.status").updates,
@@ -107,6 +107,7 @@ local M = {
               end,
             },
             { 'filetype', icon_only = false, separator = '', padding = { left = 1, right = 1 } },
+            { 'fileformat', icons_enabled = true, symbols = { unix = 'LF', dos = 'CRLF', mac = 'CR' } },
           },
           lualine_y = {
             { 'progress', separator = ' ', padding = { left = 1, right = 0 } },
