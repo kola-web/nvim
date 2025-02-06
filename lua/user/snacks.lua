@@ -6,7 +6,6 @@ local M = {
     opts = function()
       -- Terminal Mappings
       local function term_nav(dir)
-        ---@param self snacks.terminal
         return function(self)
           return self:is_floating() and '<c-' .. dir .. '>' or vim.schedule(function()
             vim.cmd.wincmd(dir)
@@ -140,36 +139,182 @@ local M = {
       }
     end,
     keys = {
-      -- stylua: ignore start
-      { '<leader>c',  function() Snacks.bufdelete() end,                                                       desc = 'buf del',          mode = { 'n' }},
-      {'<leader>bo',  function() Snacks.bufdelete.other() end,                                                 desc = 'buf del other',    mode = { 'n' }},
-
-      { '<leader>D',  function() Snacks.dashboard.open() end,                                                  desc = 'dashboard',        mode = { 'n' }},
-
-      { '<leader>z',  function() Snacks.zen() end,                                                             desc = 'zen modal',        mode = { 'n' }},
-      { '<leader>Z',  function() Snacks.zen.zoom() end,                                                        desc = 'Toggle Zoom' },
-      {'<leader>gg',  function() Snacks.lazygit() end,                                                         desc = 'lazygit',          mode = { 'n' }},
-      {'<leader>gl',  function() Snacks.lazygit.log() end,                                                     desc = 'lazygit log file', mode = { 'n' }},
-      { "<leader>gf", function() Snacks.lazygit.log_file() end,                                                desc = "Lazygit Current File History" },
-      {'<leader>gb',  function() Snacks.git.blame_line() end,                                                  desc = 'git blame line',   mode = { 'n' }},
-      { "<leader>n",  function() Snacks.notifier.show_history() end,                                           desc = "Notification History" },
-      { "<leader>.",  require("utils").scratch_open,                                                           desc = "Toggle Scratch Buffer" },
-      { "<leader>S",  function() Snacks.scratch.select() end,                                                  desc = "Select Scratch Buffer" },
-      { "<leader>un", function() Snacks.notifier.hide() end,                                                   desc = "Dismiss All Notifications" },
-      { "<C-\\>",     function() Snacks.terminal() end,                                                        desc = "Toggle Terminal" },
-
-      { "<leader>f",  function() Snacks.picker.files({args = {'--path-separator', '/'}}) end,                                                    desc = "Find Files" },
-      { "<leader>F",  function() Snacks.picker.grep({ layout = {  preset = "ivy" } }) end,                     desc = "Grep" },
-      { "<leader>bb", function() Snacks.picker.buffers({ on_show = function() vim.cmd.stopinsert() end }) end, desc = "Buffers" },
-      { "<leader>sc", function() Snacks.picker.colorschemes() end,                                             desc = "Colorschemes" },
-      { "<leader>su", function() Snacks.picker.undo() end,                                                     desc = "Undo History" },
-      { "<leader>o",  function() Snacks.picker.lsp_symbols() end,                                              desc = "LSP Symbols" },
-      { "<leader>O",  function() Snacks.picker.lsp_workspace_symbols() end,                                    desc = "LSP Workspace Symbols" },
-
-      { "<leader>E",  function() Snacks.explorer() end,                                                        desc = "explorer" },
-
-      { "<leader>lt", require("utils").select_filetype,                                                           desc = "select filetype" },
-      -- stylua: ignore end
+      {
+        '<leader>c',
+        function()
+          Snacks.bufdelete()
+        end,
+        desc = 'buf del',
+        mode = { 'n' },
+      },
+      {
+        '<leader>bo',
+        function()
+          Snacks.bufdelete.other()
+        end,
+        desc = 'buf del other',
+        mode = { 'n' },
+      },
+      {
+        '<leader>D',
+        function()
+          Snacks.dashboard.open()
+        end,
+        desc = 'dashboard',
+        mode = { 'n' },
+      },
+      {
+        '<leader>z',
+        function()
+          Snacks.zen()
+        end,
+        desc = 'zen modal',
+        mode = { 'n' },
+      },
+      {
+        '<leader>Z',
+        function()
+          Snacks.zen.zoom()
+        end,
+        desc = 'Toggle Zoom',
+      },
+      {
+        '<leader>gg',
+        function()
+          Snacks.lazygit()
+        end,
+        desc = 'lazygit',
+        mode = { 'n' },
+      },
+      {
+        '<leader>gl',
+        function()
+          Snacks.lazygit.log()
+        end,
+        desc = 'lazygit log file',
+        mode = { 'n' },
+      },
+      {
+        '<leader>gf',
+        function()
+          Snacks.lazygit.log_file()
+        end,
+        desc = 'Lazygit Current File History',
+      },
+      {
+        '<leader>gb',
+        function()
+          Snacks.git.blame_line()
+        end,
+        desc = 'git blame line',
+        mode = { 'n' },
+      },
+      {
+        '<leader>n',
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = 'Notification History',
+      },
+      { '<leader>.', require('utils').scratch_open, desc = 'Toggle Scratch Buffer' },
+      {
+        '<leader>S',
+        function()
+          Snacks.scratch.select()
+        end,
+        desc = 'Select Scratch Buffer',
+      },
+      {
+        '<leader>un',
+        function()
+          Snacks.notifier.hide()
+        end,
+        desc = 'Dismiss All Notifications',
+      },
+      {
+        '<C-\\>',
+        function()
+          Snacks.terminal()
+        end,
+        desc = 'Toggle Terminal',
+      },
+      {
+        '<leader>f',
+        function()
+          Snacks.picker.files({ hidden = true, args = { '--path-separator', '/' } })
+        end,
+        desc = 'Find Files',
+      },
+      {
+        '<leader>F',
+        function()
+          Snacks.picker.grep({ layout = { preset = 'ivy' } })
+        end,
+        desc = 'Grep',
+      },
+      {
+        '<leader>bb',
+        function()
+          Snacks.picker.buffers({
+            on_show = function()
+              vim.cmd.stopinsert()
+            end,
+          })
+        end,
+        desc = 'Buffers',
+      },
+      {
+        '<leader>sc',
+        function()
+          Snacks.picker.colorschemes({
+            on_show = function()
+              vim.cmd.stopinsert()
+            end,
+          })
+        end,
+        desc = 'Colorschemes',
+      },
+      {
+        '<leader>su',
+        function()
+          Snacks.picker.undo({
+            on_show = function()
+              vim.cmd.stopinsert()
+            end,
+          })
+        end,
+        desc = 'Undo History',
+      },
+      {
+        '<leader>o',
+        function()
+          Snacks.picker.lsp_symbols({
+            on_show = function()
+              vim.cmd.stopinsert()
+            end,
+          })
+        end,
+        desc = 'LSP Symbols',
+      },
+      {
+        '<leader>O',
+        function()
+          Snacks.picker.lsp_workspace_symbols({
+            on_show = function()
+              vim.cmd.stopinsert()
+            end,
+          })
+        end,
+        desc = 'LSP Workspace Symbols',
+      },
+      {
+        '<leader>E',
+        function()
+          Snacks.explorer()
+        end,
+        desc = 'explorer',
+      },
+      { '<leader>lt', require('utils').select_filetype, desc = 'select filetype' },
     },
     init = function()
       vim.api.nvim_create_autocmd('User', {
