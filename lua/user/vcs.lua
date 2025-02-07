@@ -39,10 +39,12 @@ local M = {
       { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'DiffviewOpen' },
     },
   },
+
   {
     'lewis6991/gitsigns.nvim',
     event = 'VeryLazy',
     opts = {
+      current_line_blame = true,
       signs = {
         add = { text = '▎' },
         change = { text = '▎' },
@@ -69,6 +71,7 @@ local M = {
       { '<leader>gu', "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", desc = 'Undo Stage Hunk' },
     },
   },
+
   {
     'mhinz/vim-signify',
     event = 'BufReadPre',
