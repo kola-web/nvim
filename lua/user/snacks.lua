@@ -12,6 +12,11 @@ local M = {
           end)
         end
       end
+      local normal = {
+        on_show = function()
+          vim.cmd.stopinsert()
+        end,
+      }
 
       return {
         bigfile = {
@@ -80,6 +85,15 @@ local M = {
               })
             end,
             trouble_open = require('trouble.sources.snacks').actions.trouble_open,
+          },
+          sources = {
+            buffers = vim.tbl_deep_extend('force', normal, {}),
+            colorschemes = vim.tbl_deep_extend('force', normal, {}),
+            undo = vim.tbl_deep_extend('force', normal, {}),
+            marks = vim.tbl_deep_extend('force', normal, {}),
+            lsp_symbols = vim.tbl_deep_extend('force', normal, {}),
+            lsp_workspace_symbols = vim.tbl_deep_extend('force', normal, {}),
+            select = vim.tbl_deep_extend('force', normal, {}),
           },
         },
         quickfile = { enabled = true },
@@ -255,55 +269,49 @@ local M = {
       {
         '<leader>bb',
         function()
-          Snacks.picker.buffers({
-            on_show = function()
-              vim.cmd.stopinsert()
-            end,
-          })
+          Snacks.picker.buffers()
         end,
         desc = 'Buffers',
       },
       {
         '<leader>sc',
         function()
-          Snacks.picker.colorschemes({
-            on_show = function()
-              vim.cmd.stopinsert()
-            end,
-          })
+          Snacks.picker.colorschemes()
         end,
         desc = 'Colorschemes',
       },
       {
         '<leader>su',
         function()
-          Snacks.picker.undo({
-            on_show = function()
-              vim.cmd.stopinsert()
-            end,
-          })
+          Snacks.picker.undo()
         end,
         desc = 'Undo History',
       },
       {
+        '<leader>sk',
+        function()
+          Snacks.picker.keymaps()
+        end,
+        desc = 'keymaps',
+      },
+      {
+        '<leader>sm',
+        function()
+          Snacks.picker.marks()
+        end,
+        desc = 'marks',
+      },
+      {
         '<leader>o',
         function()
-          Snacks.picker.lsp_symbols({
-            on_show = function()
-              vim.cmd.stopinsert()
-            end,
-          })
+          Snacks.picker.lsp_symbols()
         end,
         desc = 'LSP Symbols',
       },
       {
         '<leader>O',
         function()
-          Snacks.picker.lsp_workspace_symbols({
-            on_show = function()
-              vim.cmd.stopinsert()
-            end,
-          })
+          Snacks.picker.lsp_workspace_symbols()
         end,
         desc = 'LSP Workspace Symbols',
       },
