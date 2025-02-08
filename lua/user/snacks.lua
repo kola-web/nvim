@@ -307,13 +307,13 @@ local M = {
         end,
         desc = 'LSP Workspace Symbols',
       },
-      {
-        '<leader>E',
-        function()
-          Snacks.explorer()
-        end,
-        desc = 'explorer',
-      },
+      -- {
+      --   '<leader>E',
+      --   function()
+      --     Snacks.explorer()
+      --   end,
+      --   desc = 'explorer',
+      -- },
       { '<leader>lt', require('utils').select_filetype, desc = 'select filetype' },
     },
     init = function()
