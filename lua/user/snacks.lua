@@ -62,6 +62,14 @@ local M = {
                   'trouble_open',
                   mode = { 'n', 'i' },
                 },
+                ['<c-j>'] = {
+                  'history_forward',
+                  mode = { 'n', 'i' },
+                },
+                ['<c-k>'] = {
+                  'history_back',
+                  mode = { 'n', 'i' },
+                },
               },
             },
           },
