@@ -45,21 +45,21 @@ local M = {
     event = 'VeryLazy',
     opts = {
       current_line_blame = true,
-      signs = {
-        add = { text = '▎' },
-        change = { text = '▎' },
-        delete = { text = '' },
-        topdelete = { text = '' },
-        changedelete = { text = '▎' },
-        untracked = { text = '▎' },
-      },
-      signs_staged = {
-        add = { text = '▎' },
-        change = { text = '▎' },
-        delete = { text = '' },
-        topdelete = { text = '' },
-        changedelete = { text = '▎' },
-      },
+      -- signs = {
+      --   add = { text = '▎' },
+      --   change = { text = '▎' },
+      --   delete = { text = '' },
+      --   topdelete = { text = '' },
+      --   changedelete = { text = '▎' },
+      --   untracked = { text = '▎' },
+      -- },
+      -- signs_staged = {
+      --   add = { text = '▎' },
+      --   change = { text = '▎' },
+      --   delete = { text = '' },
+      --   topdelete = { text = '' },
+      --   changedelete = { text = '▎' },
+      -- },
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 
@@ -87,27 +87,16 @@ local M = {
         map('n', '[H', function()
           gs.nav_hunk('first')
         end, 'First Hunk')
-        map({ 'n', 'v' }, '<leader>ghs', ':Gitsigns stage_hunk<CR>', 'Stage Hunk')
-        map({ 'n', 'v' }, '<leader>ghr', ':Gitsigns reset_hunk<CR>', 'Reset Hunk')
-        map('n', '<leader>gs', gs.stage_buffer, 'Stage Buffer')
+        map({ 'n', 'v' }, '<leader>gs', ':Gitsigns stage_hunk<CR>', 'Stage Hunk')
+        map({ 'n', 'v' }, '<leader>gr', ':Gitsigns reset_hunk<CR>', 'Reset Hunk')
         map('n', '<leader>gu', gs.undo_stage_hunk, 'Undo Stage Hunk')
-        map('n', '<leader>gr', gs.reset_buffer, 'Reset Buffer')
-        map('n', '<leader>gp', gs.preview_hunk_inline, 'Preview Hunk Inline')
-        -- map('n', '<leader>gb', function() gs.blame_line({ full = true }) end, 'Blame Line')
-        map('n', '<leader>gB', function() gs.blame() end, 'Blame Buffer')
-        map('n', '<leader>gd', gs.diffthis, 'Diff This') map('n', '<leader>ghD', function() gs.diffthis('~') end, 'Diff This ~')
+        map('n', '<leader>gS', gs.stage_buffer, 'Stage Buffer')
+        map('n', '<leader>gR', gs.reset_buffer, 'Reset Buffer')
+        map('n', '<leader>gi', gs.preview_hunk_inline, 'Preview Hunk Inline')
+        map('n', '<leader>gp', gs.preview_hunk, 'Preview Preview Hunk')
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', 'GitSigns Select Hunk')
       end,
     },
-    -- keys = {
-    --   { '[h', "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", desc = 'Prev Hunk' },
-    --   { '<leader>gj', "<cmd>lua require 'gitsigns'.next_hunk()<cr>", desc = 'Next Hunk' },
-    --   { '<leader>gp', "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", desc = 'Preview Hunk' },
-    --   { '<leader>gr', "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = 'Reset Hunk' },
-    --   { '<leader>gR', "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = 'Reset Buffer' },
-    --   { '<leader>gs', "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", desc = 'Stage Hunk' },
-    --   { '<leader>gu', "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", desc = 'Undo Stage Hunk' },
-    -- },
   },
 
   {
@@ -115,10 +104,10 @@ local M = {
     event = 'BufReadPre',
     config = function()
       vim.g.signify_skip = { vcs = { allow = { 'svn' } } }
-      vim.g.signify_line_highlight = 0
-      vim.g.signify_sign_add = '┃'
-      vim.g.signify_sign_delete = '┃'
-      vim.g.signify_sign_change = '┃'
+      -- vim.g.signify_line_highlight = 0
+      -- vim.g.signify_sign_add = '┃'
+      -- vim.g.signify_sign_delete = '┃'
+      -- vim.g.signify_sign_change = '┃'
     end,
   },
 }
