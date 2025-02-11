@@ -216,6 +216,7 @@ M.get_root_dir = function()
 end
 
 M.scratch_open = function()
+  local filetypes = vim.fn.getcompletion('', 'filetype')
   Snacks.picker.select(filetypes, {
     prompt = 'filetype',
   }, function(selected)
