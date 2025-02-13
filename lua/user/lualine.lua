@@ -35,6 +35,11 @@ local M = {
         return '\u{f085} ' .. table.concat(c, '|')
       end
 
+      local codecompanion = {
+        require('utils.lueline-ai'),
+        separator = { left = icons.kinds.Copilot },
+      }
+
       local opts = {
         options = {
           theme = 'auto',
@@ -62,7 +67,7 @@ local M = {
             }, -- 显示根目录名
           },
           lualine_x = {
-            Snacks.profiler.status(),
+            codecompanion,
             -- stylua: ignore
             {
               function() return require("noice").api.status.command.get() end,
