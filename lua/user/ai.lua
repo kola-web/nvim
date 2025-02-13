@@ -21,9 +21,10 @@ local M = {
     lazy = true,
     event = { 'InsertEnter', 'CmdlineEnter' },
     opts = {
-      language = 'Chinese',
+      strategies = {},
       opts = {
         log_level = 'DEBUG',
+        language = 'Chinese',
       },
     },
     keys = {
