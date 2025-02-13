@@ -1,25 +1,4 @@
 local M = {
-  -- {
-  --   'catppuccin/nvim',
-  --   name = 'catppuccin',
-  --   priority = 1000,
-  --   opts = {
-  --     integrations = {
-  --       cmp = true,
-  --       gitsigns = true,
-  --       treesitter = true,
-  --       notify = false,
-  --       mini = {
-  --         enabled = true,
-  --         indentscope_color = '',
-  --       },
-  --     },
-  --   },
-  --   init = function()
-  --     vim.cmd([[colorscheme catppuccin]])
-  --   end,
-  -- },
-
   {
     'folke/tokyonight.nvim',
     priority = 1000,
@@ -32,27 +11,10 @@ local M = {
         markdown = true,
       },
     },
-    config = function(_, opts)
-      -- require('tokyonight').setup(opts)
+    init = function(_, opts)
       -- vim.cmd([[colorscheme tokyonight]])
     end,
   },
-
-  -- {
-  --   'neanias/everforest-nvim',
-  --   version = false,
-  --   lazy = false,
-  --   priority = 1000, -- make sure to load this before all the other start plugins
-  --   -- Optional; default configuration will be used if setup isn't called.
-  --   config = function()
-  --     require('everforest').setup({
-  --       background = 'medium',
-  --       italics = true,
-  --       disable_italic_comments = false,
-  --     })
-  --     vim.cmd([[colorscheme everforest]])
-  --   end,
-  -- },
 
   -- {
   --   'rebelot/kanagawa.nvim',
@@ -143,36 +105,6 @@ local M = {
       vim.cmd([[colorscheme solarized-osaka]])
     end,
   },
-
-  -- {
-  --   'rebelot/kanagawa.nvim',
-  --   lazy = false,
-  --   priority = 1000,
-  --   opts = {},
-  --   init = function(_, opts)
-  --     vim.cmd([[colorscheme kanagawa]])
-  --   end,
-  -- },
-
-  -- {
-  --   priority = 1000,
-  --   lazy = false,
-  --   'rebelot/kanagawa.nvim',
-  --   config = function()
-  --     vim.cmd([[colorscheme kanagawa]])
-  --   end,
-  -- },
-
-  -- {
-  --   'maxmx03/solarized.nvim',
-  --   priority = 1000,
-  --   lazy = false,
-  --   opts = {},
-  --   config = function(_, opts)
-  --     require('solarized').setup(opts)
-  --     vim.cmd([[colorscheme solarized]])
-  --   end,
-  -- },
 }
 
 return M
