@@ -124,6 +124,13 @@ local M = {
             end,
           },
         },
+        winbar = {
+          lualine_c = {
+            {
+              '%f %{%v:lua.my_symbols.get()%}',
+            },
+          },
+        },
         extensions = { 'neo-tree', 'lazy' },
       }
       return opts

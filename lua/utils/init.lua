@@ -34,6 +34,8 @@ M.null_servers = {
   'taplo',
   'blade-formatter',
   'rustfmt',
+
+  'js-debug-adapter',
 }
 
 M.dap_servers = {

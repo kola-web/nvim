@@ -8,5 +8,6 @@ local pattern = [[([:@]?[%w-]+)=['"]?([^'">]*)['"]?]]
 
 -- 用 gmatch 遍历所有匹配的属性
 for attr, value in string.gmatch(str, pattern) do
-    print(attr, value)
+    print(value)
 end
+

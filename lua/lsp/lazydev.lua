@@ -10,6 +10,7 @@ local M = {
         { path = 'snacks.nvim', words = { 'Snacks' } },
         { path = 'lazy.nvim', words = { 'LazyVim' } },
         { path = 'mini.statusline', words = { 'MiniStatusline' } },
+        'nvim-dap-ui',
       },
     },
   },

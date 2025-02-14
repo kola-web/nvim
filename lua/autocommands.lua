@@ -39,8 +39,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     createKeymap('n', '[e', diagnostic_goto(false, 'ERROR'), 'Prev Error')
     createKeymap('n', ']w', diagnostic_goto(true, 'WARN'), 'Next Warning')
     createKeymap('n', '[w', diagnostic_goto(false, 'WARN'), 'Prev Warning')
-    createKeymap('n', ']]', function() Snacks.words.jump(vim.v.count1) end, 'Next Reference')
-    createKeymap('n', '[[', function() Snacks.words.jump(-vim.v.count1) end, 'Prev Reference')
+    createKeymap('n', ']]', function()
+      Snacks.words.jump(vim.v.count1)
+    end, 'Next Reference')
+    createKeymap('n', '[[', function()
+      Snacks.words.jump(-vim.v.count1)
+    end, 'Prev Reference')
     createKeymap('n', '<leader>lI', '<cmd>LspInfo<cr>', 'lspInfo')
     createKeymap('n', '<leader>li', '<cmd>Trouble lsp_incoming_calls<cr>', 'Lsp incoming_calls')
     createKeymap('n', '<leader>lo', '<cmd>Trouble lsp_outgoing_calls<cr>', 'Lsp outgoing_calls')
@@ -165,6 +169,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
   end,
 })
 
+-- 切换session后删除所有buffer
 vim.api.nvim_create_autocmd({ 'User' }, {
   group = augroup('session'),
   pattern = { 'PersistenceLoadPre' },
