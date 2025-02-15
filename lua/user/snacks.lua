@@ -105,9 +105,7 @@ local M = {
           },
         },
         quickfile = { enabled = true },
-        -- scope = {
-        --   enabled = false,
-        -- },
+        -- scope = { enabled = true },
         -- scroll = { enabled = true },
         statuscolumn = { enabled = true }, -- we set this in options.lua
         terminal = {
