@@ -43,10 +43,6 @@ local M = {
       { '<leader>qc', ':PeekClose<CR>', desc = 'PeekClose' },
     },
   },
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    opts = {},
-  },
 
   -- {
   --   'dhruvasagar/vim-table-mode',

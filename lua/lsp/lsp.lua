@@ -24,6 +24,10 @@ local M = {
         opts.capabilities or {}
       )
 
+      require('mason-lspconfig').setup({
+        ensure_installed = require('utils.init').servers,
+        automatic_installation = false,
+      })
       require('mason-lspconfig').setup_handlers({
         function(server_name)
           local server_config = {

@@ -3,7 +3,9 @@ local M = {
   cmd = 'Mason',
   build = ':MasonUpdate',
   dependencies = {
-    { 'williamboman/mason-lspconfig.nvim' },
+    {
+      'williamboman/mason-lspconfig.nvim',
+    },
   },
   opts = {
     ensure_installed = require('utils.init').null_servers,

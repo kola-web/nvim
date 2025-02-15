@@ -3,40 +3,38 @@ local M = {}
 M.root_patterns = { '.git', 'lua' }
 
 M.servers = {
-  'lua_ls',
-  'cssls',
-  'css_variables',
-  'html',
-  'ts_ls',
-  'pyright',
   'bashls',
-  'jsonls',
-  'yamlls',
-  'emmet_language_server',
-  'volar',
-  'intelephense',
+  'css_variables',
+  'cssls',
   'docker_compose_language_service',
   'dockerls',
+  'emmet_language_server',
   'eslint',
+  'html',
+  'intelephense',
+  'jsonls',
+  'lua_ls',
+  'pyright',
   'rust_analyzer',
   'tailwindcss',
-  'marksman',
+  'ts_ls',
+  'volar',
+  'yamlls',
   -- 'jqls',
 }
 
 M.null_servers = {
+  'black',
+  'blade-formatter',
+  'flake8',
+  'js-debug-adapter',
   'prettier',
   'prettierd',
-  'black',
-  'stylua',
-  'flake8',
+  'rustfmt',
   'shellcheck',
   'shfmt',
+  'stylua',
   'taplo',
-  'blade-formatter',
-  'rustfmt',
-
-  'js-debug-adapter',
 }
 
 M.dap_servers = {
