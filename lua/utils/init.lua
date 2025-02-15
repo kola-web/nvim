@@ -20,7 +20,7 @@ M.servers = {
   'eslint',
   'rust_analyzer',
   'tailwindcss',
-  'markdown_oxide',
+  'marksman',
   -- 'jqls',
 }
 
