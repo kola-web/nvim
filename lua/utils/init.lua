@@ -70,7 +70,8 @@ M.is_eslint = function()
   local util = require('lspconfig.util')
   local cwd = vim.fn.getcwd()
   local project_root = util.find_node_modules_ancestor(cwd)
-  local is_eslint = vim.fn.findfile('eslint.config.js', project_root) ~= '' or vim.fn.findfile('eslint.config.ts', project_root) ~= ''
+  local is_eslint = vim.fn.findfile('eslint.config.js', project_root) ~= '' or
+  vim.fn.findfile('eslint.config.ts', project_root) ~= ''
   return is_eslint
 end
 
@@ -158,7 +159,8 @@ end
 M.get_typescript_server_path = function(root_dir)
   local util = require('lspconfig.util')
   local mason_registry = require('mason-registry')
-  local global_ts = mason_registry.get_package('typescript-language-server'):get_install_path() .. '/node_modules/typescript/lib'
+  local global_ts = mason_registry.get_package('typescript-language-server'):get_install_path() ..
+  '/node_modules/typescript/lib'
   -- local global_ts = mason_registry.get_package('vtsls'):get_install_path() .. '/node_modules/@vtsls/language-server/node_modules/typescript/lib'
   local found_ts = ''
 
@@ -216,18 +218,14 @@ M.get_root_dir = function()
   return vim.fn.fnamemodify(cwd, ':t') -- 获取目录名
 end
 
-M.scratch_open = function()
-  local filetypes = vim.fn.getcompletion('', 'filetype')
-  Snacks.picker.select(filetypes, {
-    prompt = 'filetype',
-  }, function(selected)
-    Snacks.scratch.open({
-      ft = selected,
-      win = {
-        title = 'Scratch Buffer',
-      },
-    })
-  end)
+M.scratch_open = function(fileType)
+  Snacks.scratch.open({
+    name = fileType,
+    ft = fileType,
+    win = {
+      title = 'Scratch' .. fileType,
+    },
+  })
 end
 
 M.select_filetype = function()

@@ -128,7 +128,7 @@ local M = {
                   function(self)
                     local command = { 'node', vim.api.nvim_buf_get_name(self.buf) }
                     local result = vim.system(command, { text = true }):wait()
-                    Snacks.notify.info(result.stdout)
+                    -- Snacks.notify.info(result.stdout)
                   end,
                   desc = 'Source buffer',
                   mode = { 'n', 'x' },

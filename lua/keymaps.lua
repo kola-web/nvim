@@ -40,13 +40,15 @@ keymap('n', 'z0', '<cmd>set foldlevel=99<cr>', { desc = 'Fold level 99' })
 keymap('', '<S-l>', '$', opts)
 keymap('', '<S-h>', '^', opts)
 
-keymap('n', 'BB', '<cmd>enew<cr>', opts)
-keymap('n', 'BS', '<cmd>enew<cr><cmd>set filetype=json<cr>', opts)
-keymap('n', 'BJ', '<cmd>enew<cr><cmd>set filetype=javascript<cr>', opts)
-keymap('n', 'BT', '<cmd>enew<cr><cmd>set filetype=typescript<cr>', opts)
-keymap('n', 'BV', '<cmd>enew<cr><cmd>set filetype=vue<cr>', opts)
-keymap('n', 'BH', '<cmd>enew<cr><cmd>set filetype=html<cr>', opts)
-keymap('n', 'BL', '<cmd>enew<cr><cmd>set filetype=lua<cr>', opts)
+-- keymap('n', 'BB', '<cmd>enew<cr>', opts)
+-- keymap('n', 'BS', '<cmd>enew<cr><cmd>set filetype=json<cr>', opts)
+-- keymap('n', 'BJ', '<cmd>enew<cr><cmd>set filetype=javascript<cr>', opts)
+-- keymap('n', 'BT', '<cmd>enew<cr><cmd>set filetype=typescript<cr>', opts)
+-- keymap('n', 'BV', '<cmd>enew<cr><cmd>set filetype=vue<cr>', opts)
+-- keymap('n', 'BH', '<cmd>enew<cr><cmd>set filetype=html<cr>', opts)
+-- keymap('n', 'BL', '<cmd>enew<cr><cmd>set filetype=lua<cr>', opts)
+
+keymap('n', 'BJ', function() require('utils').scratch_open('javascript') end, opts)
 
 keymap('n', '<C-m>', '%', opts)
 -- keymap("n", "<C-z>", "<nop>", opts)
@@ -75,7 +77,8 @@ keymap('v', 'p', '"_dP', opts)
 keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
 
-keymap('n', '<leader>h', '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR>', { desc = 'Redraw / clear hlsearch / diff update' })
+keymap('n', '<leader>h', '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR>',
+  { desc = 'Redraw / clear hlsearch / diff update' })
 
 -- replace & complie
 keymap('n', '<leader>rc', require('utils.compile_scss'), { desc = 'toggle scss compile' })
@@ -84,12 +87,14 @@ keymap('n', '<leader>rv', '<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr
 keymap('n', '<leader>rp', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', { desc = 'px -> rpx' })
 keymap('n', '<leader>rP', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1))."px"#g<cr>', { desc = 'rpx -> px' })
 keymap('n', '<leader>ro', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 2)."px"#g<cr>', { desc = 'rpx/2 -> px' })
-keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', { desc = 'px -> rem' })
-keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', { desc = '1080px -> 750px' })
+keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>',
+  { desc = 'px -> rem' })
+keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>',
+  { desc = '1080px -> 750px' })
 keymap('n', '<leader>rr', require('utils.quickType').generate_type, { desc = 'quicktype' })
 
 -- code run
-keymap('n', '<leader>rb', require("utils.compile_run").compile_run, { desc = 'Run code' })
+keymap('n', '<leader>rb', require('utils.compile_run').compile_run, { desc = 'Run code' })
 
 keymap('n', '<leader>lc', function()
   require('utils.init').compare_to_clipboard()

@@ -6,7 +6,7 @@ M.split = function()
 end
 
 M.compile_run = function()
-  vim.cmd('w')
+  -- vim.cmd('w')
   -- check file type
   local ft = vim.bo.filetype
   if ft == 'dart' then
@@ -17,8 +17,13 @@ M.compile_run = function()
     M.split()
     vim.cmd('term gcc % -o %< && ./%< && rm %<')
   elseif ft == 'javascript' then
-    M.split()
-    vim.cmd('term node %')
+    -- M.split()
+    -- vim.cmd('term node %')
+
+
+    -- local command = { 'node', vim.api.nvim_buf_get_name(0) }
+    -- local result = vim.system(command, { text = true }):wait()
+    -- print(result)
   elseif ft == 'lua' then
     M.split()
     vim.cmd('term luajit %')
