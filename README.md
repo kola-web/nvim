@@ -9,7 +9,7 @@ JesseDuffield.lazygit
 ajeetdsouza.zoxide
 junegunn.fzf
 sharkdp.fd
-Python.Python.3.12
+Python.Python
 zig.zig
 7zip.7zip
 DEVCOM.LuaJIT

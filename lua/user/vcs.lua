@@ -45,21 +45,21 @@ local M = {
     event = 'VeryLazy',
     opts = {
       current_line_blame = true,
-      -- signs = {
-      --   add = { text = '▎' },
-      --   change = { text = '▎' },
-      --   delete = { text = '' },
-      --   topdelete = { text = '' },
-      --   changedelete = { text = '▎' },
-      --   untracked = { text = '▎' },
-      -- },
-      -- signs_staged = {
-      --   add = { text = '▎' },
-      --   change = { text = '▎' },
-      --   delete = { text = '' },
-      --   topdelete = { text = '' },
-      --   changedelete = { text = '▎' },
-      -- },
+      signs = {
+        add = { text = '▎' },
+        change = { text = '▎' },
+        delete = { text = '' },
+        topdelete = { text = '' },
+        changedelete = { text = '▎' },
+        untracked = { text = '▎' },
+      },
+      signs_staged = {
+        add = { text = '▎' },
+        change = { text = '▎' },
+        delete = { text = '' },
+        topdelete = { text = '' },
+        changedelete = { text = '▎' },
+      },
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
 
