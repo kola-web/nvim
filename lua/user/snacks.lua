@@ -128,7 +128,7 @@ local M = {
                   function(self)
                     local command = { 'node', vim.api.nvim_buf_get_name(self.buf) }
                     local result = vim.system(command, { text = true }):wait()
-                    -- Snacks.notify.info(result.stdout)
+                    require('utils').scratch_result(result)
                   end,
                   desc = 'Source buffer',
                   mode = { 'n', 'x' },
@@ -142,7 +142,7 @@ local M = {
                   function(self)
                     local command = { 'node', vim.api.nvim_buf_get_name(self.buf) }
                     local result = vim.system(command, { text = true }):wait()
-                    Snacks.notify.info(result.stdout)
+                    require('utils').scratch_result(result)
                   end,
                   desc = 'Source buffer',
                   mode = { 'n', 'x' },

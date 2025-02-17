@@ -48,7 +48,13 @@ keymap('', '<S-h>', '^', opts)
 -- keymap('n', 'BH', '<cmd>enew<cr><cmd>set filetype=html<cr>', opts)
 -- keymap('n', 'BL', '<cmd>enew<cr><cmd>set filetype=lua<cr>', opts)
 
+keymap('n', 'BB', function() require('utils').scratch_open(vim.bo.filetype) end, opts)
+keymap('n', 'BS', function() require('utils').scratch_open('json') end, opts)
 keymap('n', 'BJ', function() require('utils').scratch_open('javascript') end, opts)
+keymap('n', 'BT', function() require('utils').scratch_open('typescript') end, opts)
+keymap('n', 'BV', function() require('utils').scratch_open('vue') end, opts)
+keymap('n', 'BH', function() require('utils').scratch_open('html') end, opts)
+keymap('n', 'BL', function() require('utils').scratch_open('lua') end, opts)
 
 keymap('n', '<C-m>', '%', opts)
 -- keymap("n", "<C-z>", "<nop>", opts)
@@ -92,9 +98,6 @@ keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 1
 keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>',
   { desc = '1080px -> 750px' })
 keymap('n', '<leader>rr', require('utils.quickType').generate_type, { desc = 'quicktype' })
-
--- code run
-keymap('n', '<leader>rb', require('utils.compile_run').compile_run, { desc = 'Run code' })
 
 keymap('n', '<leader>lc', function()
   require('utils.init').compare_to_clipboard()

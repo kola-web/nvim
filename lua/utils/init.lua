@@ -70,8 +70,7 @@ M.is_eslint = function()
   local util = require('lspconfig.util')
   local cwd = vim.fn.getcwd()
   local project_root = util.find_node_modules_ancestor(cwd)
-  local is_eslint = vim.fn.findfile('eslint.config.js', project_root) ~= '' or
-  vim.fn.findfile('eslint.config.ts', project_root) ~= ''
+  local is_eslint = vim.fn.findfile('eslint.config.js', project_root) ~= '' or vim.fn.findfile('eslint.config.ts', project_root) ~= ''
   return is_eslint
 end
 
@@ -159,8 +158,7 @@ end
 M.get_typescript_server_path = function(root_dir)
   local util = require('lspconfig.util')
   local mason_registry = require('mason-registry')
-  local global_ts = mason_registry.get_package('typescript-language-server'):get_install_path() ..
-  '/node_modules/typescript/lib'
+  local global_ts = mason_registry.get_package('typescript-language-server'):get_install_path() .. '/node_modules/typescript/lib'
   -- local global_ts = mason_registry.get_package('vtsls'):get_install_path() .. '/node_modules/@vtsls/language-server/node_modules/typescript/lib'
   local found_ts = ''
 
@@ -224,7 +222,33 @@ M.scratch_open = function(fileType)
     ft = fileType,
     win = {
       title = 'Scratch' .. fileType,
+      position = 'float',
     },
+  })
+end
+
+M.scratch_result = function(result)
+  local filetype = vim.bo.filetype
+  local icon, icon_hl = Snacks.util.icon(filetype, 'filetype')
+  Snacks.win({
+    title = {
+      { ' ' },
+      { icon .. string.rep(' ', 2 - vim.api.nvim_strwidth(icon)), icon_hl },
+      { ' ' },
+      { vim.bo.filetype .. ' result' },
+      { ' ' },
+    },
+    text = result.stdout,
+    width = 100,
+    height = 30,
+    bo = { buftype = '', buflisted = false, bufhidden = 'hide', swapfile = false },
+    minimal = false,
+    noautocmd = false,
+    zindex = 20,
+    wo = { winhighlight = 'NormalFloat:Normal' },
+    border = 'rounded',
+    title_pos = 'center',
+    footer_pos = 'center',
   })
 end
 
