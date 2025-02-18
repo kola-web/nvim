@@ -7,7 +7,7 @@ vim.g.maplocalleader = '\\'
 -- * 检测器函数的名称，例如 `lsp` 或 `cwd`
 -- * 一个或多个模式，例如 `.git` 或 `lua`
 -- * 一个函数，签名为 `function(buf) -> string|string[]`
-vim.g.root_spec = { 'lsp', { '.git', 'lua' }, 'cwd' }
+-- vim.g.root_spec = { 'lsp', { '.git', 'lua' }, 'cwd' }
 
 local opt = vim.opt
 
@@ -27,7 +27,7 @@ opt.fillchars = {
   diff = '╱', -- 显示差异的字符
   eob = ' ', -- 末尾空白的字符
 }
-opt.foldmethod = "indent" -- 设置折叠方法为按缩进折叠
+opt.foldmethod = 'indent' -- 设置折叠方法为按缩进折叠
 opt.foldlevel = 99 -- 设置折叠级别为 99，表示不折叠
 opt.formatoptions = 'jcroqlnt' -- 设置格式化选项
 opt.grepformat = '%f:%l:%c:%m' -- 设置 grep 输出格式

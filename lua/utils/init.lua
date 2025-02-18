@@ -1,6 +1,6 @@
 local M = {}
 
-M.root_patterns = { '.git', 'lua' }
+M.root_patterns = { '.git', '.svn', 'lua' }
 
 M.servers = {
   'bashls',

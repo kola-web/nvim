@@ -97,8 +97,10 @@ keymap('n', '<leader>rv', '<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr
 keymap('n', '<leader>rp', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', { desc = 'px -> rpx' })
 keymap('n', '<leader>rP', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1))."px"#g<cr>', { desc = 'rpx -> px' })
 keymap('n', '<leader>ro', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 2)."px"#g<cr>', { desc = 'rpx/2 -> px' })
-keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', { desc = 'px -> rem' })
-keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', { desc = '1080px -> 750px' })
+keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>',
+  { desc = 'px -> rem' })
+keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>',
+  { desc = '1080px -> 750px' })
 keymap('n', '<leader>rr', require('utils.quickType').generate_type, { desc = 'quicktype' })
 
 keymap('x', 'zV', function() vscode.call('editor.foldAllExcept') end, opts)
@@ -119,8 +121,9 @@ keymap('n', 'z5', function() vscode.call('editor.foldLevel5') end, opts)
 keymap('n', 'z6', function() vscode.call('editor.foldLevel6') end, opts)
 keymap('n', 'z7', function() vscode.call('editor.foldLevel7') end, opts)
 
-keymap('n', 'j', 'gj', { noremap = false, silent = true })
-keymap('n', 'k', 'gk', { noremap = false, silent = true })
+vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = false, silent = true })
+vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = false, silent = true })
+
 -- stylua: ignore end
 
 return {}
