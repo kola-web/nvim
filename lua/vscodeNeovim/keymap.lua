@@ -90,6 +90,19 @@ keymap('', '<space>', function() vscode.call('whichkey.show') end, { silent = tr
 keymap('n', '(', function() vscode.call('workbench.action.moveEditorLeftInGroup') end, opts)
 keymap('n', ')', function() vscode.call('workbench.action.moveEditorRightInGroup') end, opts)
 
+
+keymap('n', '<leader>rc', require('utils.compile_scss'), { desc = 'toggle scss compile' })
+keymap('n', '<leader>rd', '<cmd>%s/<div/<view/g<cr><cmd>%s/<\\/div/<\\/view/g<cr>', { desc = 'div -> view' })
+keymap('n', '<leader>rv', '<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr>', { desc = 'view -> div' })
+keymap('n', '<leader>rp', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', { desc = 'px -> rpx' })
+keymap('n', '<leader>rP', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1))."px"#g<cr>', { desc = 'rpx -> px' })
+keymap('n', '<leader>ro', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 2)."px"#g<cr>', { desc = 'rpx/2 -> px' })
+keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', { desc = 'px -> rem' })
+keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', { desc = '1080px -> 750px' })
+keymap('n', '<leader>rr', require('utils.quickType').generate_type, { desc = 'quicktype' })
+
+keymap('x', 'zV', function() vscode.call('editor.foldAllExcept') end, opts)
+
 keymap('n', 'za', function() vscode.call('editor.toggleFold') end, opts)
 keymap('n', 'zR', function() vscode.call('editor.unfoldAll') end, opts)
 keymap('n', 'zM', function() vscode.call('editor.foldAll') end, opts)
@@ -106,40 +119,8 @@ keymap('n', 'z5', function() vscode.call('editor.foldLevel5') end, opts)
 keymap('n', 'z6', function() vscode.call('editor.foldLevel6') end, opts)
 keymap('n', 'z7', function() vscode.call('editor.foldLevel7') end, opts)
 
-keymap('n', '<leader>rc', require('utils.compile_scss'), { desc = 'toggle scss compile' })
-keymap('n', '<leader>rd', '<cmd>%s/<div/<view/g<cr><cmd>%s/<\\/div/<\\/view/g<cr>', { desc = 'div -> view' })
-keymap('n', '<leader>rv', '<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr>', { desc = 'view -> div' })
-keymap('n', '<leader>rp', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', { desc = 'px -> rpx' })
-keymap('n', '<leader>rP', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1))."px"#g<cr>', { desc = 'rpx -> px' })
-keymap('n', '<leader>ro', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 2)."px"#g<cr>', { desc = 'rpx/2 -> px' })
-keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', { desc = 'px -> rem' })
-keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', { desc = '1080px -> 750px' })
-keymap('n', '<leader>rr', require('utils.quickType').generate_type, { desc = 'quicktype' })
-
-keymap('x', 'zV', function() vscode.call('editor.foldAllExcept') end, opts)
+keymap('n', 'j', 'gj', { noremap = false, silent = true })
+keymap('n', 'k', 'gk', { noremap = false, silent = true })
 -- stylua: ignore end
-
-local function mapMove(key, direction)
-  -- print("Mapping move key: ", key, direction)
-  vim.keymap.set('n', key, function()
-    local count = vim.v.count
-    local v = 1
-    local style = 'wrappedLine'
-    if count > 0 then
-      v = count
-      style = 'line'
-    end
-    vscode.action('cursorMove', {
-      args = {
-        to = direction,
-        by = style,
-        value = v,
-      },
-    })
-  end)
-end
-
-mapMove('k', 'up')
-mapMove('j', 'down')
 
 return {}
