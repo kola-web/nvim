@@ -126,6 +126,7 @@ local M = {
                 ['source'] = {
                   '<cr>',
                   function(self)
+                    vim.cmd('write')
                     local command = { 'node', vim.api.nvim_buf_get_name(self.buf) }
                     local result = vim.system(command, { text = true }):wait()
                     require('utils').scratch_result(result)
@@ -140,6 +141,7 @@ local M = {
                 ['source'] = {
                   '<cr>',
                   function(self)
+                    vim.cmd('write')
                     local command = { 'node', vim.api.nvim_buf_get_name(self.buf) }
                     local result = vim.system(command, { text = true }):wait()
                     require('utils').scratch_result(result)
