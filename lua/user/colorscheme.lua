@@ -12,7 +12,7 @@ local M = {
       },
     },
     init = function(_, opts)
-      vim.cmd([[colorscheme tokyonight]])
+      -- vim.cmd([[colorscheme tokyonight]])
     end,
   },
 
@@ -41,14 +41,15 @@ local M = {
   --   end,
   -- },
 
-  -- {
-  --   priority = 1000,
-  --   lazy = false,
-  --   'sainnhe/gruvbox-material',
-  --   config = function()
-  --     vim.cmd([[colorscheme gruvbox-material]])
-  --   end,
-  -- },
+  {
+    priority = 1000,
+    lazy = false,
+    'sainnhe/gruvbox-material',
+    config = function()
+      vim.g.gruvbox_material_transparent_background = 1
+      vim.cmd([[colorscheme gruvbox-material]])
+    end,
+  },
 
   -- {
   --   priority = 1000,
