@@ -12,7 +12,7 @@ local M = {
       },
     },
     init = function(_, opts)
-      -- vim.cmd([[colorscheme tokyonight]])
+      vim.cmd([[colorscheme tokyonight]])
     end,
   },
 
@@ -102,7 +102,7 @@ local M = {
       },
     },
     init = function()
-      vim.cmd([[colorscheme solarized-osaka]])
+      -- vim.cmd([[colorscheme solarized-osaka]])
     end,
   },
 }

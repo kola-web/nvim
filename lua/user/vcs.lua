@@ -100,7 +100,7 @@ local M = {
   },
 
   {
-    'mhinz/vim-signify',
+    'kola-web/vim-signify',
     event = 'BufReadPre',
     config = function()
       vim.g.signify_skip = { vcs = { allow = { 'svn' } } }
@@ -108,10 +108,6 @@ local M = {
       -- vim.g.signify_sign_add = '┃'
       -- vim.g.signify_sign_delete = '┃'
       -- vim.g.signify_sign_change = '┃'
-      -- vim.g.signify_vcs_cmds = {
-      --   svn = 'svn diff % -x -U0 -- %',
-      --   svn = 'wsl svn diff --diff-cmd %d -x -U0 -- %f',
-      -- }
       -- vim.g.signify_vcs_cmds_diffmode = {
       --   svn = 'wsl svn cat %f',
       -- }
