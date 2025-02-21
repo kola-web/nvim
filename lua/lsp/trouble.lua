@@ -61,7 +61,7 @@ local M = {
     })
     _G.my_symbols = symbols
 
-    -- vim.o.winbar = '%f %{%v:lua.my_symbols.get()%}'
+    vim.o.winbar = '%f %{%v:lua.my_symbols.get()%}'
   end,
 }
 
