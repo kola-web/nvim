@@ -50,9 +50,8 @@ local M = {
       vim.g.gruvbox_material_disable_italic_comment = 1
       vim.g.gruvbox_material_enable_bold = 1
       vim.g.gruvbox_material_enable_italic = 1
-      vim.g.gruvbox_material_cursor = 1
       -- `'grey'`, `'red'`, `'orange'`, `'yellow'`, `'green'`, `'aqua'`, `'blue'`, `'purple'
-      vim.g.gruvbox_material_visual = 'grey'
+      vim.g.gruvbox_material_visual = 'red'
       vim.cmd([[colorscheme gruvbox-material]])
     end,
   },
