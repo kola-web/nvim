@@ -35,6 +35,7 @@ M.null_servers = {
   'shfmt',
   'stylua',
   'taplo',
+  'hadolint',
 }
 
 M.dap_servers = {
