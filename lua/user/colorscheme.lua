@@ -46,7 +46,9 @@ local M = {
     lazy = false,
     'sainnhe/gruvbox-material',
     config = function()
-      vim.g.gruvbox_material_transparent_background = 2
+      if not vim.g.neovide then
+        vim.g.gruvbox_material_transparent_background = 2
+      end
       vim.cmd([[colorscheme gruvbox-material]])
     end,
   },
