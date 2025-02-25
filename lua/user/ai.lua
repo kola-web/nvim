@@ -21,6 +21,7 @@ local M = {
     lazy = true,
     event = { 'InsertEnter', 'CmdlineEnter' },
     opts = {
+      adapters = {},
       strategies = {},
       opts = {
         log_level = 'DEBUG',
