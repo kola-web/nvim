@@ -72,7 +72,7 @@ opt.wildmode = 'longest:full,full' -- 命令行补全模式
 opt.winminwidth = 5 -- 设置最小窗口宽度
 opt.wrap = false -- 禁用自动换行
 -- 图形化界面
-opt.guifont = 'Cascadia Code NF:h14' -- 在图形化的 neovim 应用程序中使用的字体
+opt.guifont = 'Maple Mono NF CN:h12' -- 在图形化的 neovim 应用程序中使用的字体
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
