@@ -47,7 +47,7 @@ return {
     --- @type table<string, string> [Emmet Docs](https://docs.emmet.io/customization/snippets/#variables)
     variables = {},
     extensionsPath = {
-      vim.fn.stdpath('config') .. '/data/emmet.json',
+      vim.fn.stdpath('config') .. '/emmet',
     },
   },
 }
