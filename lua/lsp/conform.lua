@@ -40,11 +40,6 @@ local M = {
         ['blade-formatter'] = {
           prepend_args = { '-i', '2' },
         },
-        ['nginx-formatter'] = {
-          command = 'nginxbeautifier',
-          args = { '--input', '$FILENAME' },
-          stdin = false,
-        },
       },
     }
   end,
