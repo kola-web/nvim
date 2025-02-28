@@ -35,8 +35,6 @@ local M = {
         blade = { 'blade-formatter' },
 
         rust = { 'rustfmt' },
-
-        nginx = { 'nginx-formatter' },
       },
       formatters = {
         ['blade-formatter'] = {

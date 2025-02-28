@@ -20,6 +20,7 @@ M.servers = {
   'ts_ls',
   'volar',
   'yamlls',
+  'nginx_language_server',
   -- 'jqls',
 }
 
