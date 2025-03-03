@@ -123,6 +123,8 @@ vim.api.nvim_create_autocmd('FileType', {
     'lazy',
     'noice',
     'DressingSelect',
+    'codecompanion',
+    'DiffviewFiles'
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
