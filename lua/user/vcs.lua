@@ -41,6 +41,24 @@ local M = {
             { 'n', 'xB', actions.conflict_choose_all('base'), { desc = '为整个文件选择冲突的BASE版本' } },
             { 'n', 'xA', actions.conflict_choose_all('all'), { desc = '为整个文件选择冲突的所有版本' } },
             { 'n', 'dX', actions.conflict_choose_all('none'), { desc = '删除整个文件的冲突区域' } },
+            {
+              'n',
+              '<cr>',
+              function()
+                actions.conflict_choose('theirs')()
+                actions.next_conflict()
+              end,
+              { desc = '选择冲突的THEIRS版本,并跳转到下一个冲突' },
+            },
+            {
+              'n',
+              '<bs>',
+              function()
+                actions.conflict_choose('ours')()
+                actions.next_conflict()
+              end,
+              { desc = '选择冲突的OURS版本,并跳转到下一个冲突' },
+            },
 
             { 'n', 'q', '<cmd>DiffviewClose<cr>', { desc = 'Close diffview' } },
           },
