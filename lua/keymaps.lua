@@ -56,7 +56,7 @@ keymap('n', 'BV', function() require('utils').scratch_open('vue') end, opts)
 keymap('n', 'BH', function() require('utils').scratch_open('html') end, opts)
 keymap('n', 'BL', function() require('utils').scratch_open('lua') end, opts)
 
-keymap('n', '<C-m>', '%', opts)
+-- keymap('n', '<C-m>', '%', {noremap=false})
 -- keymap("n", "<C-z>", "<nop>", opts)
 
 -- vue jump

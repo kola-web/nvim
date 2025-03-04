@@ -51,52 +51,24 @@ local M = {
         'regex',
         'blade',
       },
-      incremental_selection = {
+      matchup = {
         enable = true,
-        keymaps = {
-          init_selection = '<cr>',
-          node_incremental = '<cr>',
-          scope_incremental = false,
-          node_decremental = '<bs>',
-        },
-        is_supported = function()
-          local mode = vim.api.nvim_get_mode().mode
-          if mode == 'c' then
-            return false
-          end
-          return true
-        end,
+        enable_quotes = true,
       },
-    },
-    config = function(_, opts)
-      local configs = require('nvim-treesitter.configs')
-      local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-
-      parser_config.blade = {
-        install_info = {
-          url = 'https://github.com/EmranMR/tree-sitter-blade',
-          files = { 'src/parser.c' },
-          branch = 'main',
-        },
-        filetype = 'blade',
-      }
-
-      configs.setup(opts)
-    end,
-    keys = {
-      { '<cr>', desc = 'Increment Selection' },
-      { '<bs>', desc = 'Decrement Selection', mode = 'x' },
     },
   },
   {
     'windwp/nvim-ts-autotag',
     event = { 'BufReadPre', 'BufNewFile' },
   },
-  -- {
-  --   'windwp/nvim-autopairs',
-  --   event = 'InsertEnter',
-  --   config = true,
-  -- },
+  {
+    'andymass/vim-matchup',
+    lazy = false,
+    keys = {
+      { '<cr>', '<plug>(matchup-%)', desc = 'matchup', silent = true, mode = { 'n', 'x' } },
+      { '<cr>', '<plug>(matchup-%)', desc = 'matchup', silent = true, mode = { 'o' } },
+    },
+  },
 }
 
 return M
