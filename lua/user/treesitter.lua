@@ -49,13 +49,17 @@ local M = {
         'typescript',
         'yaml',
         'regex',
-        'blade',
+        -- 'blade',
       },
       matchup = {
         enable = true,
         enable_quotes = true,
       },
     },
+    config = function(_, opts)
+      local configs = require('nvim-treesitter.configs')
+      configs.setup(opts)
+    end,
   },
   {
     'windwp/nvim-ts-autotag',

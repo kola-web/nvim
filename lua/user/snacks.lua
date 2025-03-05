@@ -216,7 +216,7 @@ local M = {
           Snacks.toggle.indent():map('<leader>ug')
           Snacks.toggle.scroll():map('<leader>uS')
           Snacks.toggle.inlay_hints():map('<leader>uh')
-          Snacks.toggle.zoom():map('<leader>wm'):map('<leader>uZ')
+          Snacks.toggle.zoom():map('<leader>uZ')
           Snacks.toggle.zen():map('<leader>uz')
         end,
       })
