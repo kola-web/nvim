@@ -32,7 +32,7 @@ M.setup = function()
       patterns = { 'kola-web' },
       fallback = true,
     },
-    install = { colorscheme = { 'gruvbox-material' } },
+    install = { colorscheme = { 'tokyodark' } },
     checker = { enabled = true, notify = false }, -- automatically check for plugin updates
     change_detection = {
       enabled = true,

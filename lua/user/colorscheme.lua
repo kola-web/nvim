@@ -1,19 +1,53 @@
+local colorscheme = 'tokyodark'
+
+local init = function(theme)
+  return function()
+    if theme == colorscheme then
+      vim.cmd.colorscheme(colorscheme)
+    end
+  end
+end
+
 local M = {
   {
     'folke/tokyonight.nvim',
-    priority = 1000,
-    lazy = false,
+    lazy = true,
     opts = {
       style = 'storm',
-      -- style = 'day',
       transparent = false,
       plugins = {
         markdown = true,
       },
     },
-    init = function(_, opts)
-      vim.cmd([[colorscheme tokyonight]])
-    end,
+    init = init('tokyonight'),
+  },
+  {
+    'sainnhe/gruvbox-material',
+    lazy = true,
+  },
+  {
+    'rebelot/kanagawa.nvim',
+    lazy = true,
+    opts = {},
+    init = init('kanagawa'),
+  },
+  {
+    'craftzdog/solarized-osaka.nvim',
+    lazy = true,
+    opts = {
+      transparent = false,
+      styles = {
+        sidebars = 'transparent',
+        floats = 'transparent',
+      },
+    },
+    init = init('solarized-osaka'),
+  },
+  {
+    'tiagovla/tokyodark.nvim',
+    lazy = true,
+    opts = {},
+    init = init('tokyodark'),
   },
 
   -- {
@@ -40,19 +74,6 @@ local M = {
   --     vim.cmd([[colorscheme gruvbox]])
   --   end,
   -- },
-
-  {
-    priority = 1000,
-    lazy = false,
-    'sainnhe/gruvbox-material',
-    config = function()
-      -- if not vim.g.neovide then
-      --   vim.g.gruvbox_material_transparent_background = 2
-      -- end
-      -- vim.g.gruvbox_material_enable_italic = true
-      -- vim.cmd([[colorscheme gruvbox-material]])
-    end,
-  },
 
   -- {
   --   priority = 1000,
@@ -93,22 +114,9 @@ local M = {
   --     vim.cmd('colorscheme github_dark_dimmed')
   --   end,
   -- },
-
-  {
-    'craftzdog/solarized-osaka.nvim',
-    lazy = false,
-    priority = 1000,
-    opts = {
-      transparent = false,
-      styles = {
-        sidebars = 'transparent',
-        floats = 'transparent',
-      },
-    },
-    init = function()
-      -- vim.cmd([[colorscheme solarized-osaka]])
-    end,
-  },
 }
+
+-- vim.cmd('colorscheme tokyonight')
+-- vim.cmd.colorscheme('tokyodark')
 
 return M
