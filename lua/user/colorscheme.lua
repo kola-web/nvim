@@ -12,7 +12,7 @@ local M = {
       },
     },
     init = function(_, opts)
-      -- vim.cmd([[colorscheme tokyonight]])
+      vim.cmd([[colorscheme tokyonight]])
     end,
   },
 
@@ -49,8 +49,8 @@ local M = {
       -- if not vim.g.neovide then
       --   vim.g.gruvbox_material_transparent_background = 2
       -- end
-      vim.g.gruvbox_material_enable_italic = true
-      vim.cmd([[colorscheme gruvbox-material]])
+      -- vim.g.gruvbox_material_enable_italic = true
+      -- vim.cmd([[colorscheme gruvbox-material]])
     end,
   },
 

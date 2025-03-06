@@ -49,6 +49,7 @@ local M = {
         'typescript',
         'yaml',
         'regex',
+        'powershell'
         -- 'blade',
       },
       matchup = {

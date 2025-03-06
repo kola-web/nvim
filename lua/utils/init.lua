@@ -21,6 +21,7 @@ M.servers = {
   'volar',
   'yamlls',
   'nginx_language_server',
+  'powershell_es',
   -- 'jqls',
 }
 
@@ -141,6 +142,7 @@ M.conformFormat = function()
     json = { name = 'eslint', lsp_format = 'last' },
     jsonc = { name = 'eslint', lsp_format = 'last' },
     dockerfile = { name = 'dockerls', lsp_format = 'prefer' },
+    powershell = { name = 'powershell_es', lsp_format = 'prefer' },
   }
 
   local buf = vim.api.nvim_get_current_buf()

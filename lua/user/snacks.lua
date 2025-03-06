@@ -226,7 +226,7 @@ local M = {
     '2kabhishek/nerdy.nvim',
     cmd = 'Nerdy',
     keys = {
-      { '<leader>si', '<cmd>Nerdy<cr>', desc = 'buf del', mode = { 'n' } },
+      { '<leader>si', '<cmd>Nerdy<cr>', desc = 'nerd font icon', mode = { 'n' } },
     },
   },
 }
