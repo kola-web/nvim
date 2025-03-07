@@ -124,7 +124,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'noice',
     'DressingSelect',
     'codecompanion',
-    'DiffviewFiles'
+    'DiffviewFiles',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -177,5 +177,12 @@ vim.api.nvim_create_autocmd({ 'User' }, {
   pattern = { 'PersistenceLoadPre' },
   callback = function()
     Snacks.bufdelete.all()
+  end,
+})
+
+-- 修复cmdline windows <cr>被全局映射覆盖的问题
+vim.api.nvim_create_autocmd('CmdwinEnter', {
+  callback = function()
+    vim.keymap.set('n', '<cr>', '<cr>', { buffer = 0, noremap = true })
   end,
 })
