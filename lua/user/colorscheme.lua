@@ -49,6 +49,12 @@ local M = {
     opts = {},
     init = init('tokyodark'),
   },
+  {
+    'ellisonleao/gruvbox.nvim',
+    lazy = true,
+    opts = {},
+    init = init('gruvbox'),
+  },
 
   -- {
   --   'rebelot/kanagawa.nvim',
@@ -63,15 +69,6 @@ local M = {
   --   },
   --   init = function()
   --     vim.cmd([[colorscheme kanagawa]])
-  --   end,
-  -- },
-
-  -- {
-  --   priority = 1000,
-  --   lazy = false,
-  --   'ellisonleao/gruvbox.nvim',
-  --   config = function()
-  --     vim.cmd([[colorscheme gruvbox]])
   --   end,
   -- },
 
