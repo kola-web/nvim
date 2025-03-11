@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local buffer = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-    if client.name == 'eslint' then
+    if client and client.name == 'eslint' then
       client.server_capabilities.documentFormattingProvider = true
     end
 
