@@ -158,11 +158,16 @@ local M = {
       require('mini.files').setup(opts)
       -- 转义文件名，防止 Lua 模式匹配问题
 
+      local copy_file_path = require('utils.init').copy_file_path
+      local add_to_gitignore = require('utils.init').add_to_gitignore
+
       vim.api.nvim_create_autocmd('User', {
         pattern = 'MiniFilesBufferCreate',
         callback = function(args)
           vim.keymap.set('n', 'wc', vim.g.mini_file_mini_component, { buffer = args.data.buf_id, desc = 'mini_component' })
           vim.keymap.set('n', 'wp', vim.g.mini_file_mini_page, { buffer = args.data.buf_id, desc = 'mini_page' })
+          vim.keymap.set('n', '<C-y>', copy_file_path, { buffer = args.data.buf_id, desc = 'copy_file_path' })
+          vim.keymap.set('n', 'gi', add_to_gitignore, { buffer = args.data.buf_id, desc = 'Add to .gitignore' })
         end,
       })
     end,

@@ -241,7 +241,7 @@ local M = {
   },
 
   {
-    'kola-web/vim-signify',
+    'mhinz/vim-signify',
     event = 'BufReadPre',
     config = function()
       vim.g.signify_skip = { vcs = { allow = { 'svn' } } }

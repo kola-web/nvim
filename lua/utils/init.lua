@@ -266,4 +266,63 @@ M.select_filetype = function()
   end)
 end
 
+M.add_to_gitignore = function()
+  local file = MiniFiles.get_fs_entry()
+  local currentPath = file.path
+  local projectRoot = vim.fn.getcwd()
+  local relativePath = currentPath:sub(#projectRoot + 2):gsub('[\r\n]+$', '') -- 去除末尾换行符
+  local gitignorePath = projectRoot .. '/.gitignore'
+
+  -- 打开或创建 .gitignore 文件
+  local gitignoreFile = io.open(gitignorePath, 'a+')
+  if not gitignoreFile then
+    print('无法打开或创建 .gitignore 文件')
+    return
+  end
+
+  -- 检查文件路径是否已经存在
+  local exists = false
+  for line in gitignoreFile:lines() do
+    if line == relativePath then
+      exists = true
+      break
+    end
+  end
+
+  -- 如果不存在，则追加路径
+  if not exists then
+    gitignoreFile:write(relativePath .. '\n')
+    print('已将 ' .. relativePath .. ' 添加到 .gitignore')
+  else
+    print(relativePath .. ' 已存在于 .gitignore 中')
+  end
+
+  gitignoreFile:close()
+
+  -- 使用 Git 删除文件
+  local deleteCommand = 'git rm --cached ' .. vim.fn.shellescape(relativePath)
+  local result = os.execute(deleteCommand)
+  if result == 0 then
+    print('已使用 Git 删除 ' .. relativePath)
+  else
+    print('无法使用 Git 删除 ' .. relativePath)
+  end
+end
+
+M.copy_file_path = function()
+  local file = MiniFiles.get_fs_entry()
+  local currentPath = file.path
+
+  -- 检查当前操作系统并使用相应的命令复制到剪贴板
+  if vim.fn.has('mac') == 1 then
+    os.execute('echo "' .. currentPath .. '" | pbcopy')
+  elseif vim.fn.has('unix') == 1 then
+    os.execute('echo "' .. currentPath .. '" | xclip -selection clipboard')
+  elseif vim.fn.has('win32') == 1 then
+    os.execute('echo ' .. currentPath .. ' | clip')
+  else
+    print('Unsupported OS')
+  end
+end
+
 return M
