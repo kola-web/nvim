@@ -1,4 +1,4 @@
-local colorscheme = 'tokyodark'
+local colorscheme = 'gruvbox-material'
 
 local init = function(theme)
   return function()
@@ -24,6 +24,7 @@ local M = {
   {
     'sainnhe/gruvbox-material',
     lazy = true,
+    init = init('gruvbox-material')
   },
   {
     'rebelot/kanagawa.nvim',
