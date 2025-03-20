@@ -154,12 +154,12 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 })
 
 -- 禁止新行注释
-vim.api.nvim_create_autocmd('BufEnter', {
-  callback = function()
-    vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
-  end,
-  desc = 'Disable New Line Comment',
-})
+-- vim.api.nvim_create_autocmd('BufEnter', {
+--   callback = function()
+--     vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
+--   end,
+--   desc = 'Disable New Line Comment',
+-- })
 
 -- File type specific settings
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
