@@ -105,7 +105,6 @@ local M = {
           end, { 'i', 's' }),
         },
         sources = cmp.config.sources({
-          { name = 'luasnip' },
           { name = 'nvim_lsp' },
           {
             name = 'path',
@@ -120,6 +119,7 @@ local M = {
             },
           },
           { name = 'buffer' },
+          { name = 'luasnip' },
         }),
         formatting = {
           format = function(entry, item)
