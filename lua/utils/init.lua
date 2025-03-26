@@ -249,7 +249,7 @@ M.scratch_result = function(result)
     bo = { buftype = '', buflisted = false, bufhidden = 'hide', swapfile = false },
     minimal = false,
     noautocmd = false,
-    zindex = 20,
+    zindex = 100,
     wo = { winhighlight = 'NormalFloat:Normal' },
     border = 'rounded',
     title_pos = 'center',
