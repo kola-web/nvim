@@ -70,6 +70,7 @@ local M = {
                   'history_back',
                   mode = { 'n', 'i' },
                 },
+                ['<c-v>'] = '',
               },
             },
           },
