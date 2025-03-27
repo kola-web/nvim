@@ -25,13 +25,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
       keymap(mode, key, cmd, { buffer = buffer, noremap = true, silent = true, desc = desc })
     end
 
-    createKeymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help')
-    createKeymap('n', 'gK', '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help')
     createKeymap('n', 'gd', '<cmd>Trouble lsp_definitions<CR>', 'GoTo definition')
-    createKeymap('n', 'gr', '<cmd>Trouble lsp_references<CR>', 'GoTo references')
+    createKeymap('n', 'grr', '<cmd>Trouble lsp_references<CR>', 'GoTo references')
+    createKeymap('n', 'gri', '<cmd>Trouble lsp_implementations<CRq', 'GoTo implementation')
     createKeymap('n', 'gy', '<cmd>Trouble lsp_type_definitions<CR>', 'GoTo references')
     createKeymap('n', 'gD', '<cmd>Trouble lsp_declarations<CR>', 'GoTo declaration')
-    createKeymap('n', 'gI', '<cmd>Trouble lsp_implementations<CR>', 'GoTo implementation')
     createKeymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Float diagnostic')
     createKeymap('n', ']d', diagnostic_goto(true), 'Next Diagnostic')
     createKeymap('n', '[d', diagnostic_goto(false), 'Prev Diagnostic')
@@ -52,6 +50,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     createKeymap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename')
     createKeymap('n', '<leader>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', 'Setloclist')
     createKeymap('n', '<leader>lm', '<cmd>EslintFixAll<CR>', 'EslintFixAll')
+    createKeymap('n', 'gK', function()
+      local new_config = not vim.diagnostic.config().virtual_lines
+      vim.diagnostic.config({ virtual_lines = new_config })
+    end, 'Toggle diagnostic virtual_lines')
   end,
 })
 
@@ -182,7 +184,17 @@ vim.api.nvim_create_autocmd({ 'User' }, {
 
 -- 修复cmdline windows <cr>被全局映射覆盖的问题
 vim.api.nvim_create_autocmd('CmdwinEnter', {
+  group = augroup('set_default_cr'),
   callback = function()
+    vim.keymap.set('n', '<cr>', '<cr>', { buffer = 0, noremap = true })
+  end,
+})
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup('set_default_cr'),
+  pattern = {
+    'qf',
+  },
+  callback = function(event)
     vim.keymap.set('n', '<cr>', '<cr>', { buffer = 0, noremap = true })
   end,
 })

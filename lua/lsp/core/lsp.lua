@@ -49,17 +49,6 @@ local M = {
         end,
       })
 
-      local signs = {
-        { name = 'DiagnosticSignError', text = icons.diagnostics.Error },
-        { name = 'DiagnosticSignWarn', text = icons.diagnostics.Warning },
-        { name = 'DiagnosticSignHint', text = icons.diagnostics.Hint },
-        { name = 'DiagnosticSignInfo', text = icons.diagnostics.Information },
-      }
-
-      for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { text = sign.text, texthl = sign.name, numhl = sign.name })
-      end
-
       local config = {
         underline = true,
         update_in_insert = false,
@@ -67,8 +56,18 @@ local M = {
           spacing = 4,
           source = 'if_many',
           prefix = '●',
+          current_line = false,
         },
+        virtual_lines = false,
         severity_sort = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+            [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+          },
+        },
       }
 
       vim.diagnostic.config(config)

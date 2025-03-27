@@ -134,7 +134,6 @@ keymap('n', '<leader><tab>c', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
 keymap('n', '<leader><tab>p', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
 -- save file
-keymap({ 'i', 'x', 'n', 's' }, '<C-s>', '<Esc><Cmd>silent! update | redraw<CR>', { desc = 'Save file' })
 keymap('n', '<leader>w', '<Cmd>silent! update | redraw<CR>', { desc = 'save file' })
 
 -- vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#<cr>", {desc="Close all buffers but the current one"}) -- https://stackoverflow.com/a/42071865/516188
