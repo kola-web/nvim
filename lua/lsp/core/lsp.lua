@@ -40,7 +40,7 @@ local M = {
             neoConfig = require('neoconf').get(server_name) or {}
           end
 
-          local require_ok, conf_opts = pcall(require, 'settings.' .. server_name)
+          local require_ok, conf_opts = pcall(require, 'lsp.' .. server_name)
           if require_ok then
             server_config = vim.tbl_deep_extend('force', conf_opts, neoConfig, server_config) or {}
           end
