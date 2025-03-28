@@ -105,6 +105,7 @@ local M = {
           end, { 'i', 's' }),
         },
         sources = cmp.config.sources({
+          { name = 'lazydev' },
           { name = 'nvim_lsp' },
           {
             name = 'path',
@@ -156,33 +157,21 @@ local M = {
   },
   {
     'L3MON4D3/LuaSnip',
-    version = 'v2.*',
+    lazy = true,
     build = 'make install_jsregexp',
     dependencies = {
-      'rafamadriz/friendly-snippets',
+      {
+        'rafamadriz/friendly-snippets',
+        config = function()
+          require('luasnip.loaders.from_vscode').lazy_load()
+          require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snippets' } })
+        end,
+      },
     },
     opts = {
       history = true,
       delete_check_events = 'TextChanged',
     },
-    config = function(_, opts)
-      -- require('luasnip/loaders/from_vscode').lazy_load({ paths = '~/.config/nvim/snippets' })
-      -- require('luasnip/loaders/from_vscode').lazy_load({ paths = '~/AppData/Local/nvim/snippets' })
-      require('luasnip.loaders.from_vscode').lazy_load()
-      require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snippets' } })
-      require('luasnip').setup(opts)
-    end,
-    keys = {},
-  },
-  {
-    'hrsh7th/nvim-cmp',
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, {
-        name = 'lazydev',
-        group_index = 0,
-      })
-    end,
   },
 }
 return M
