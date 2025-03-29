@@ -11,6 +11,7 @@ local M = {
         { '<leader>a', group = 'ai', icon = { icon = ' ' } },
         { '<leader>b', group = 'buffer', icon = { icon = ' ' } },
         { '<leader>c', icon = { icon = ' ' } },
+        { '<leader>d', group = 'debug' },
         { '<leader>e', icon = { icon = ' ' } },
         { '<leader>f', icon = { icon = '󰈞 ' } },
         { '<leader>j', group = 'splitjoin', icon = { icon = '󰯌 ' } },

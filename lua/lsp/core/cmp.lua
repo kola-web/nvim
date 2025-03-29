@@ -1,9 +1,10 @@
+local enabled = true
 local M = {
   {
     'hrsh7th/nvim-cmp',
     version = false,
     event = 'InsertEnter',
-    enabled = true,
+    enabled = enabled,
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
@@ -158,6 +159,7 @@ local M = {
   {
     'L3MON4D3/LuaSnip',
     lazy = true,
+    enabled = enabled,
     build = 'make install_jsregexp',
     dependencies = {
       {
