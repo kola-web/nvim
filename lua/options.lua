@@ -20,15 +20,17 @@ opt.confirm = true -- 在退出修改过的缓冲区时确认是否保存
 opt.cursorline = true -- 启用当前行高亮
 opt.expandtab = true -- 使用空格代替制表符
 opt.fillchars = {
-  foldopen = '', -- 折叠展开时的字符
-  foldclose = '', -- 折叠关闭时的字符
-  fold = ' ', -- 折叠中的字符
-  foldsep = ' ', -- 折叠分隔符
   diff = '╱', -- 显示差异的字符
   eob = ' ', -- 末尾空白的字符
 }
-opt.foldmethod = 'indent' -- 设置折叠方法为按缩进折叠
+
+opt.foldenable = true
+-- opt.foldmethod = 'indent' -- 设置折叠方法为按缩进折叠
+opt.foldmethod = 'expr' -- 设置折叠方法为表达式
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+opt.foldtext = ''
 opt.foldlevel = 99 -- 设置折叠级别为 99，表示不折叠
+opt.foldlevelstart = 9 -- 设置折叠级别开始为 1
 opt.formatoptions = 'jcroqlnt' -- 设置格式化选项
 opt.grepformat = '%f:%l:%c:%m' -- 设置 grep 输出格式
 opt.grepprg = 'rg --vimgrep' -- 使用 ripgrep 作为 grep 程序

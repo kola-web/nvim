@@ -31,4 +31,3 @@ if vim.g.neovide then
 end
 
 require('Lazy').setup()
-

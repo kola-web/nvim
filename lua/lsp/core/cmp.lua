@@ -10,7 +10,6 @@ local M = {
       'hrsh7th/cmp-buffer',
       'saadparwaiz1/cmp_luasnip',
       'kola-web/cmp-path',
-      -- 'hrsh7th/cmp-path',
     },
     opts = function()
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
@@ -108,6 +107,8 @@ local M = {
         sources = cmp.config.sources({
           { name = 'lazydev' },
           { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'buffer' },
           {
             name = 'path',
             option = {
@@ -120,8 +121,6 @@ local M = {
               },
             },
           },
-          { name = 'buffer' },
-          { name = 'luasnip' },
         }),
         formatting = {
           format = function(entry, item)
