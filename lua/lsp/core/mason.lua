@@ -10,6 +10,9 @@ local M = {
   opts = {
     ensure_installed = require('utils.init').null_servers,
   },
+  -- init = function()
+  --   vim.env.PATH = vim.fn.stdpath('data') .. '/mason/bin;' .. vim.env.PATH
+  -- end,
   config = function(_, opts)
     require('mason').setup(opts)
     local mr = require('mason-registry')

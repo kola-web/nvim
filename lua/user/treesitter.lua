@@ -49,8 +49,8 @@ local M = {
         'typescript',
         'yaml',
         'regex',
-        'powershell'
-        -- 'blade',
+        'powershell',
+        'blade',
       },
       matchup = {
         enable = true,
