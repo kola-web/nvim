@@ -25,10 +25,7 @@ opt.fillchars = {
 }
 
 opt.foldenable = true
--- opt.foldmethod = 'indent' -- 设置折叠方法为按缩进折叠
-opt.foldmethod = 'expr' -- 设置折叠方法为表达式
-opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-opt.foldtext = ''
+opt.foldmethod = 'indent' -- 设置折叠方法为按缩进折叠
 opt.foldlevel = 99 -- 设置折叠级别为 99，表示不折叠
 opt.foldlevelstart = 9 -- 设置折叠级别开始为 1
 opt.formatoptions = 'jcroqlnt' -- 设置格式化选项

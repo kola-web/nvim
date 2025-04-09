@@ -55,6 +55,7 @@ local M = {
       matchup = {
         enable = true,
         enable_quotes = true,
+        disable_virtual_text = true,
       },
     },
     config = function(_, opts)
