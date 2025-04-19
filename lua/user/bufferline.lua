@@ -16,11 +16,14 @@ local M = {
     },
     opts = {
       options = {
-        -- stylua: ignore
-        close_command = function(n) Snacks.bufdelete(n) end,
-        -- stylua: ignore
-        right_mouse_command = function(n) Snacks.bufdelete(n) end,
+        close_command = function(n)
+          Snacks.bufdelete(n)
+        end,
+        right_mouse_command = function(n)
+          Snacks.bufdelete(n)
+        end,
         diagnostics = 'nvim_lsp',
+        always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
           local icons = require('utils.icons').diagnostics
           local ret = (diag.error and icons.Error .. diag.error .. ' ' or '') .. (diag.warning and icons.Warn .. diag.warning or '')
@@ -29,10 +32,21 @@ local M = {
         get_element_icon = function(opts)
           return require('utils.icons').ft[opts.filetype]
         end,
-        persist_buffer_sort = true,
-        sort_by = 'insert_at_end',
       },
     },
+    config = function(_, opts)
+      local bufferline = require('bufferline')
+      bufferline.setup(opts)
+
+      -- Fix bufferline when restoring a session
+      vim.api.nvim_create_autocmd({ 'BufAdd', 'BufDelete' }, {
+        callback = function()
+          vim.schedule(function()
+            pcall(nvim_bufferline)
+          end)
+        end,
+      })
+    end,
   },
 
   -- {

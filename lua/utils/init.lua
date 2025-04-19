@@ -22,6 +22,7 @@ M.servers = {
   'yamlls',
   'nginx_language_server',
   'powershell_es',
+  'pylsp',
   -- 'jqls',
 }
 
@@ -29,6 +30,8 @@ M.null_servers = {
   'black',
   'blade-formatter',
   'flake8',
+  'hadolint',
+  'isort',
   'js-debug-adapter',
   'prettier',
   'prettierd',
@@ -37,7 +40,6 @@ M.null_servers = {
   'shfmt',
   'stylua',
   'taplo',
-  'hadolint',
 }
 
 M.dap_servers = {

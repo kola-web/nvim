@@ -35,6 +35,8 @@ local M = {
         blade = { 'blade-formatter' },
 
         rust = { 'rustfmt' },
+
+        python = { 'isort', 'black' },
       },
       formatters = {
         ['blade-formatter'] = {
