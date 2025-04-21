@@ -11,6 +11,18 @@ local M = {
       },
     },
   },
+  {
+    'NTBBloodbath/color-converter.nvim',
+    opts = {},
+    keys = {
+      {
+        '<A-->',
+        '<Plug>ColorConvertCycle',
+        desc = 'ColorConvertCycle',
+        silent = true,
+      },
+    },
+  },
 }
 
 return M

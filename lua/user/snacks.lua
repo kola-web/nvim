@@ -22,6 +22,12 @@ local M = {
         bigfile = {
           enabled = true,
           size = 0.1 * 1024 * 1024, -- 0.1MB
+          setup = function(ctx)
+            if vim.fn.exists(':NoMatchParen') ~= 0 then
+              vim.cmd([[NoMatchParen]])
+            end
+            Snacks.util.wo(0, { foldmethod = 'manual', statuscolumn = '', conceallevel = 0 })
+          end,
         },
         dashboard = {
           enabled = true,
