@@ -189,10 +189,12 @@ vim.api.nvim_create_autocmd('CmdwinEnter', {
     vim.keymap.set('n', '<cr>', '<cr>', { buffer = 0, noremap = true })
   end,
 })
+
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup('set_default_cr'),
   pattern = {
     'qf',
+    'vim'
   },
   callback = function(event)
     vim.keymap.set('n', '<cr>', '<cr>', { buffer = 0, noremap = true })
