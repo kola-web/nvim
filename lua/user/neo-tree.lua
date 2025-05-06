@@ -168,6 +168,9 @@ local M = {
           vim.keymap.set('n', 'wp', vim.g.mini_file_mini_page, { buffer = args.data.buf_id, desc = 'mini_page' })
           vim.keymap.set('n', '<C-y>', copy_file_path, { buffer = args.data.buf_id, desc = 'copy_file_path' })
           vim.keymap.set('n', 'gi', add_to_gitignore, { buffer = args.data.buf_id, desc = 'Add to .gitignore' })
+          -- insert mode  move corsor right
+          vim.keymap.set('i', '<C-f>', '<C-o>l', { buffer = args.data.buf_id, desc = 'move cursor right' })
+          vim.keymap.set('i', '<C-b>', '<C-o>h', { buffer = args.data.buf_id, desc = 'move cursor left' })
         end,
       })
     end,
