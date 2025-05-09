@@ -4,7 +4,7 @@ local M = {
     event = 'VeryLazy',
     dependencies = {
       'mason.nvim',
-      { 'mason-lspconfig.nvim' },
+      { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
       { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {} },
       { 'b0o/schemastore.nvim' },
     },

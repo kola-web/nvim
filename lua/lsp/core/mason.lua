@@ -1,5 +1,6 @@
 local M = {
-  'williamboman/mason.nvim',
+  'mason-org/mason.nvim',
+  version = '^1.0.0',
   cmd = 'Mason',
   build = ':MasonUpdate',
   dependencies = {
