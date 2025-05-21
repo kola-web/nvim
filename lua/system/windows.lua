@@ -58,6 +58,7 @@ vim.g.mini_file_mini_component = function()
       .. '\\wxmlComponent" | ForEach-Object { $_.IsReadOnly = $false }',
   })
   MiniFiles.synchronize()
+  vim.fn.search('wxmlComponent', 'w') -- 'w' 标志表示包裹搜索（wrap around）
 end
 
 vim.g.mini_file_mini_page = function()
@@ -74,4 +75,5 @@ vim.g.mini_file_mini_page = function()
       .. '\\wxmlPage" | ForEach-Object { $_.IsReadOnly = $false }',
   })
   MiniFiles.synchronize()
+  vim.fn.search('wxmlComponent', 'w') -- 'w' 标志表示包裹搜索（wrap around）
 end

@@ -38,6 +38,7 @@ vim.g.mini_file_mini_component = function(state)
     currentPath,
   })
   MiniFiles.synchronize()
+  vim.fn.search('wxmlComponent', 'w') -- 'w' 标志表示包裹搜索（wrap around）
 end
 
 vim.g.mini_file_mini_page = function(state)
@@ -50,4 +51,5 @@ vim.g.mini_file_mini_page = function(state)
     currentPath,
   })
   MiniFiles.synchronize()
+  vim.fn.search('wxmlComponent', 'w') -- 'w' 标志表示包裹搜索（wrap around）
 end
