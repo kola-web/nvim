@@ -45,8 +45,8 @@ local function escape_pattern(text)
 end
 
 vim.g.mini_file_mini_component = function()
-  local file = MiniFiles.get_fs_entry()
-  local currentPath = file.fs_type == 'directory' and file.path or string.gsub(file.path, '/' .. escape_pattern(file.name), '', 1)
+  local file = MiniFiles.get_explorer_state().branch
+  local currentPath = file[#file]
   vim.fn.system({
     'pwsh',
     '-Command',
@@ -61,8 +61,8 @@ vim.g.mini_file_mini_component = function()
 end
 
 vim.g.mini_file_mini_page = function()
-  local file = MiniFiles.get_fs_entry()
-  local currentPath = file.fs_type == 'directory' and file.path or string.gsub(file.path, '/' .. escape_pattern(file.name), '', 1)
+  local file = MiniFiles.get_explorer_state().branch
+  local currentPath = file[#file]
   vim.fn.system({
     'pwsh',
     '-Command',

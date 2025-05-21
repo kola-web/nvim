@@ -29,8 +29,8 @@ vim.g.mini_page = function(state)
 end
 
 vim.g.mini_file_mini_component = function(state)
-  local file = MiniFiles.get_fs_entry()
-  local currentPath = file.fs_type == 'directory' and file.path or string.gsub(file.path, '/' .. escape_pattern(file.name), '', 1)
+  local file = MiniFiles.get_explorer_state().branch
+  local currentPath = file[#file]
   vim.fn.system({
     'cp',
     '-R',
@@ -41,8 +41,8 @@ vim.g.mini_file_mini_component = function(state)
 end
 
 vim.g.mini_file_mini_page = function(state)
-  local file = MiniFiles.get_fs_entry()
-  local currentPath = file.fs_type == 'directory' and file.path or string.gsub(file.path, '/' .. escape_pattern(file.name), '', 1)
+  local file = MiniFiles.get_explorer_state().branch
+  local currentPath = file[#file]
   vim.fn.system({
     'cp',
     '-R',
