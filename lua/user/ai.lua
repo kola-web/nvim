@@ -5,6 +5,11 @@ local M = {
     config = function()
       vim.g.copilot_enabled = true
       vim.g.copilot_no_tab_map = true
+      vim.g.copilot_filetypes = {
+        ['grug-far'] = false,
+        ['grug-far-history'] = false,
+        ['grug-far-help'] = false,
+      }
     end,
     keys = {
       { '<C-l>', 'copilot#Accept("")', desc = 'Copilot panel', mode = { 'i' }, expr = true, replace_keycodes = false, silent = true },

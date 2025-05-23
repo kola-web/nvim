@@ -127,6 +127,7 @@ vim.api.nvim_create_autocmd('FileType', {
     'DressingSelect',
     'codecompanion',
     'DiffviewFiles',
+    'grug-far',
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -194,7 +195,7 @@ vim.api.nvim_create_autocmd('FileType', {
   group = augroup('set_default_cr'),
   pattern = {
     'qf',
-    'vim'
+    'vim',
   },
   callback = function(event)
     vim.keymap.set('n', '<cr>', '<cr>', { buffer = 0, noremap = true })

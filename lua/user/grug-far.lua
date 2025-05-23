@@ -4,10 +4,15 @@ local M = {
     cmd = 'GrugFar',
     opts = {
       headerMaxWidth = 80,
+      keymaps = {
+        replace = { n = '<enter>' },
+        gotoLocation = { n = '<C-]>' },
+        pickHistoryEntry = { n = '<C-]>' },
+      },
     },
     keys = {
       {
-        '<leader>rs',
+        '<leader>sr',
         function()
           local grug = require('grug-far')
           local ext = vim.bo.buftype == '' and vim.fn.expand('%:e')
