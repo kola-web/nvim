@@ -8,6 +8,7 @@
 -- vim.g.neovide_scroll_animation_far_lines = 0
 -- vim.g.neovide_scroll_animation_length = 0.00
 
+vim.opt.title = true -- 设置窗口标题
 vim.g.neovide_cursor_vfx_mode = 'railgun'
 vim.g.neovide_detach_on_quit = 'always_quit'
 

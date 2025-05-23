@@ -70,7 +70,6 @@ opt.virtualedit = 'block' -- 允许光标在视觉块模式下移动到没有文
 opt.wildmode = 'longest:full,full' -- 命令行补全模式
 opt.winminwidth = 5 -- 设置最小窗口宽度
 opt.wrap = false -- 禁用自动换行
-opt.title = true -- 设置窗口标题
 
 -- 图形化界面
 opt.guifont = 'Maple Mono NF CN:h12' -- 在图形化的 neovim 应用程序中使用的字体
