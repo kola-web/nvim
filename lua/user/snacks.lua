@@ -193,7 +193,7 @@ local M = {
       {'<leader>gl', function() Snacks.lazygit.log() end,                                                          desc = 'lazygit log file', mode = { 'n' } },
       {'<leader>gf', function() Snacks.lazygit.log_file() end,                                                     desc = 'Lazygit Current File History' },
       {'<leader>gb', function() Snacks.git.blame_line() end,                                                       desc = 'git blame line', mode = { 'n' } },
-      {'<leader>n',  function() Snacks.notifier.show_history() end,                                                desc = 'Notification History' },
+      {'<leader>n',  function() Snacks.picker.notifications() end,                                                desc = 'Notification History' },
       {'<leader>.',  require('utils').scratch_open,                                                                desc = 'Toggle Scratch Buffer' },
       {'<leader>S',  function() Snacks.scratch.select() end,                                                       desc = 'Select Scratch Buffer' },
       {'<leader>un', function() Snacks.notifier.hide() end,                                                        desc = 'Dismiss All Notifications' },
