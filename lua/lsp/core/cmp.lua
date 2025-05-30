@@ -1,10 +1,8 @@
-local enabled = true
 local M = {
   {
     'hrsh7th/nvim-cmp',
     version = false,
     event = 'InsertEnter',
-    enabled = enabled,
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
@@ -55,9 +53,6 @@ local M = {
                 return
               end
             elseif has_words_before() then
-              --     local filetype = vim.api.nvim_get_option_value('filetype', {})
-              --     local valid_filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'pug', 'typescriptreact', 'vue', 'wxml', 'php', 'blade' } -- 添加你需要的文件类型
-              --     if has_value(valid_filetypes, filetype) then end
               vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>(emmet-expand-abbr)', true, true, true), 'i', true)
               return
             end
@@ -158,7 +153,6 @@ local M = {
   {
     'L3MON4D3/LuaSnip',
     lazy = true,
-    enabled = enabled,
     build = 'make install_jsregexp',
     dependencies = {
       {
