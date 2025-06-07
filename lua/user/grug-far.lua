@@ -4,11 +4,7 @@ local M = {
     cmd = 'GrugFar',
     opts = {
       headerMaxWidth = 80,
-      keymaps = {
-        replace = { n = '<enter>' },
-        gotoLocation = { n = '<C-]>' },
-        pickHistoryEntry = { n = '<C-]>' },
-      },
+      keymaps = {},
     },
     keys = {
       {
