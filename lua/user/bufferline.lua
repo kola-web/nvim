@@ -23,7 +23,16 @@ local M = {
           Snacks.bufdelete(n)
         end,
         diagnostics = 'nvim_lsp',
-        always_show_bufferline = false,
+        always_show_bufferline = true,
+        numbers = function(opts)
+          local state = require('bufferline.state')
+          for i, buf in ipairs(state.components) do
+            if buf.id == opts.id then
+              return i
+            end
+          end
+          return opts.ordinal
+        end,
         diagnostics_indicator = function(_, _, diag)
           local icons = require('utils.icons').diagnostics
           local ret = (diag.error and icons.Error .. diag.error .. ' ' or '') .. (diag.warning and icons.Warn .. diag.warning or '')
