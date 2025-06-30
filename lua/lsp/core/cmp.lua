@@ -64,7 +64,7 @@ local M = {
           {
             name = 'path',
             option = {
-              pathMappings = {
+              path_mappings = {
                 ['@'] = '${folder}/src',
                 ['/'] = '${folder}/src/',
                 -- ['~@'] = '${folder}/src',

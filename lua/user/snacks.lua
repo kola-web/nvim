@@ -45,6 +45,7 @@ local M = {
         git = { enabled = true },
         input = { enabled = true },
         indent = { enabled = true },
+        image = { enabled = true },
         notifier = { enabled = true },
         picker = {
           enabled = true,
