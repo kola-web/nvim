@@ -1,5 +1,5 @@
-return {
-  root_dir = require('lspconfig.util').root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git', '.svn'),
+local neoConfig = require('neoconf').get('emmet_language_server') or {}
+local conf = vim.tbl_deep_extend('force', {
   filetypes = {
     'css',
     'eruby',
@@ -50,4 +50,6 @@ return {
       vim.fn.stdpath('config') .. '/emmet',
     },
   },
-}
+}, neoConfig)
+
+return conf

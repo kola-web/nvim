@@ -3,8 +3,8 @@ local M = {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
-      'mason.nvim',
-      { 'mason-org/mason-lspconfig.nvim', version = '^1.0.0' },
+      { 'mason-org/mason-lspconfig.nvim' },
+      'mason-org/mason-lspconfig.nvim',
       { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {} },
       { 'b0o/schemastore.nvim' },
     },
@@ -31,30 +31,39 @@ local M = {
         opts.capabilities or {}
       )
 
+      vim.lsp.config('*', {
+        capabilities = capabilities,
+        flags = { allow_incremental_sync = false },
+      })
+
       require('mason-lspconfig').setup({
         ensure_installed = require('utils.init').servers,
-        automatic_installation = false,
+        automatic_enable = true,
       })
-      require('mason-lspconfig').setup_handlers({
-        function(server_name)
-          local server_config = {
-            capabilities = capabilities,
-            flags = { allow_incremental_sync = false },
-          }
 
-          local neoConfig = {}
-          if server_name == 'emmet_language_server' then
-            neoConfig = require('neoconf').get(server_name) or {}
-          end
 
-          local require_ok, conf_opts = pcall(require, 'lsp.' .. server_name)
-          if require_ok then
-            server_config = vim.tbl_deep_extend('force', conf_opts, neoConfig, server_config) or {}
-          end
+local neoConfig = require('neoconf').get('emmet_language_server') or {}
 
-          lspconfig[server_name].setup(server_config)
-        end,
-      })
+      -- require('mason-lspconfig').setup_handlers({
+      --   function(server_name)
+      --     local server_config = {
+      --       capabilities = capabilities,
+      --       flags = { allow_incremental_sync = false },
+      --     }
+      --
+      --     local neoConfig = {}
+      --     if server_name == 'emmet_language_server' then
+      --       neoConfig = require('neoconf').get(server_name) or {}
+      --     end
+      --
+      --     local require_ok, conf_opts = pcall(require, 'lsp.' .. server_name)
+      --     if require_ok then
+      --       server_config = vim.tbl_deep_extend('force', conf_opts, neoConfig, server_config) or {}
+      --     end
+      --
+      --     lspconfig[server_name].setup(server_config)
+      --   end,
+      -- })
 
       local config = {
         underline = true,

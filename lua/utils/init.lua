@@ -16,14 +16,12 @@ M.servers = {
   'lua_ls',
   'pyright',
   'rust_analyzer',
-  -- 'ts_ls',
   'vtsls',
-  'volar',
+  'vue_ls',
   'yamlls',
   'nginx_language_server',
   'powershell_es',
   'pylsp',
-  -- 'jqls',
 }
 
 M.null_servers = {
