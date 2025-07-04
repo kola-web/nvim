@@ -16,7 +16,7 @@ M.servers = {
   'lua_ls',
   'pyright',
   'rust_analyzer',
-  'vtsls',
+  'ts_ls',
   'vue_ls',
   'yamlls',
   'nginx_language_server',
