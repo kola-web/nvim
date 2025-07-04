@@ -36,34 +36,15 @@ local M = {
         flags = { allow_incremental_sync = false },
       })
 
+      local emmet_language_server = require('neoconf').get('emmet_language_server') or {}
+      vim.lsp.config('emmet_language_server', emmet_language_server)
+
       require('mason-lspconfig').setup({
         ensure_installed = require('utils.init').servers,
         automatic_enable = true,
       })
 
-
-local neoConfig = require('neoconf').get('emmet_language_server') or {}
-
-      -- require('mason-lspconfig').setup_handlers({
-      --   function(server_name)
-      --     local server_config = {
-      --       capabilities = capabilities,
-      --       flags = { allow_incremental_sync = false },
-      --     }
-      --
-      --     local neoConfig = {}
-      --     if server_name == 'emmet_language_server' then
-      --       neoConfig = require('neoconf').get(server_name) or {}
-      --     end
-      --
-      --     local require_ok, conf_opts = pcall(require, 'lsp.' .. server_name)
-      --     if require_ok then
-      --       server_config = vim.tbl_deep_extend('force', conf_opts, neoConfig, server_config) or {}
-      --     end
-      --
-      --     lspconfig[server_name].setup(server_config)
-      --   end,
-      -- })
+      local neoConfig = require('neoconf').get('emmet_language_server') or {}
 
       local config = {
         underline = true,

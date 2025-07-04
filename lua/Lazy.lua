@@ -13,7 +13,7 @@ M.setup = function()
       { import = 'vscodeNeovim' },
       { import = 'user' },
       { import = 'user.preview' },
-      { import = 'lsp.core' },
+      { import = 'lsp' },
       -- { import = 'lsp-zero' },
       -- { import = 'coc' },
     },

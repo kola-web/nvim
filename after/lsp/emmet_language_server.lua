@@ -1,5 +1,4 @@
-local neoConfig = require('neoconf').get('emmet_language_server') or {}
-local conf = vim.tbl_deep_extend('force', {
+return {
   filetypes = {
     'css',
     'eruby',
@@ -50,6 +49,4 @@ local conf = vim.tbl_deep_extend('force', {
       vim.fn.stdpath('config') .. '/emmet',
     },
   },
-}, neoConfig)
-
-return conf
+}
