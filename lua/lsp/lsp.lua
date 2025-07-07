@@ -3,8 +3,6 @@ local M = {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
-      { 'mason-org/mason-lspconfig.nvim' },
-      'mason-org/mason-lspconfig.nvim',
       { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {} },
       { 'b0o/schemastore.nvim' },
     },
@@ -38,11 +36,6 @@ local M = {
 
       local emmet_language_server = require('neoconf').get('emmet_language_server') or {}
       vim.lsp.config('emmet_language_server', emmet_language_server)
-
-      require('mason-lspconfig').setup({
-        ensure_installed = require('utils.init').servers,
-        automatic_enable = true,
-      })
 
       local neoConfig = require('neoconf').get('emmet_language_server') or {}
 

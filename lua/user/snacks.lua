@@ -78,6 +78,19 @@ local M = {
                   mode = { 'n', 'i' },
                 },
                 ['<c-v>'] = '',
+                ['<c-l>'] = { 'focus_preview', mode = { 'n', 'i' } },
+                ['l'] = 'confirm',
+              },
+            },
+            list = {
+              keys = {
+                ['<c-l>'] = { 'focus_preview', mode = { 'n', 'i' } },
+                ['l'] = 'confirm',
+              },
+            },
+            preview = {
+              keys = {
+                ['<c-h>'] = { 'focus_list', mode = { 'n', 'i' } },
               },
             },
           },

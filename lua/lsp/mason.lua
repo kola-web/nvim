@@ -6,9 +6,6 @@ local M = {
     opts = {
       ensure_installed = require('utils.init').null_servers,
     },
-    -- init = function()
-    --   vim.env.PATH = vim.fn.stdpath('data') .. '/mason/bin;' .. vim.env.PATH
-    -- end,
     config = function(_, opts)
       require('mason').setup(opts)
       local mr = require('mason-registry')
@@ -36,7 +33,7 @@ local M = {
     'mason-org/mason-lspconfig.nvim',
     opts = {
       ensure_installed = require('utils.init').servers,
-      automatic_enable = false,
+      automatic_enable = true,
     },
   },
 }
