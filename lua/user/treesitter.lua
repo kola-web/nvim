@@ -71,10 +71,6 @@ local M = {
   {
     'andymass/vim-matchup',
     lazy = false,
-    keys = {
-      { '<cr>', '<plug>(matchup-%)', desc = 'matchup', silent = true, mode = { 'n', 'x' } },
-      { '<cr>', '<plug>(matchup-%)', desc = 'matchup', silent = true, mode = { 'o' } },
-    },
   },
 }
 

@@ -2,14 +2,11 @@ local M = {
   'folke/flash.nvim',
   event = 'VeryLazy',
   opts = {
-    labels = 'asdfghjklqwertyuiopzxcvbnm',
+    labels = 'asdfghjkl;',
     jump = {
       nohlsearch = true,
     },
     modes = {
-      search = {
-        -- enabled = false,
-      },
       char = {
         -- enabled = false,
         highlight = { backdrop = false },
@@ -51,7 +48,7 @@ local M = {
         desc = 'Flash treesitter',
       },
       {
-        '<leader><leader>w',
+        '<cr>',
         mode = 'n',
         function()
           require('utils.init').flashWord()
