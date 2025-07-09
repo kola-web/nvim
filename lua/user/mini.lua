@@ -2,6 +2,7 @@ local M = {
   {
     'echasnovski/mini.pairs',
     event = 'VeryLazy',
+    version = '*',
     opts = {
       modes = { insert = true, command = true, terminal = false },
     },
@@ -10,7 +11,7 @@ local M = {
   -- align
   {
     'echasnovski/mini.align',
-    version = false,
+    version = '*',
     opts = {
       mappings = {
         start = 'ge',
@@ -22,7 +23,7 @@ local M = {
   -- surround
   {
     'echasnovski/mini.surround',
-    version = false,
+    version = '*',
     opts = {
       mappings = {
         add = 'ys', -- Add surrounding in Normal and Visual modes
@@ -41,7 +42,7 @@ local M = {
   -- 替换、排序
   {
     'echasnovski/mini.operators',
-    version = false,
+    version = '*',
     opts = {
       evaluate = {
         prefix = nil,
@@ -68,7 +69,7 @@ local M = {
 
   {
     'echasnovski/mini.splitjoin',
-    version = false,
+    version = '*',
     opts = {
       mappings = {
         toggle = '<leader>j',
@@ -78,7 +79,7 @@ local M = {
 
   {
     'echasnovski/mini.icons',
-    version = false,
+    version = '*',
     opts = {
       file = {
         ['.eslintrc.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
