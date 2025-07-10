@@ -6,10 +6,19 @@ local M = {
       { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {} },
       { 'b0o/schemastore.nvim' },
     },
-    opts = {},
+    opts = {
+      capabilities = {
+        workspace = {
+          fileOperations = {
+            didRename = true,
+            willRename = true,
+          },
+        },
+      },
+    },
     config = function(_, opts)
+      -- local icons = require('utils.icons')
       local lspconfig = require('lspconfig')
-      local icons = require('utils.icons')
 
       local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
       local has_blink, blink = pcall(require, 'blink.cmp')
@@ -28,9 +37,8 @@ local M = {
         has_blink and blink.get_lsp_capabilities() or {},
         opts.capabilities or {}
       )
-
       vim.lsp.config('*', {
-        capabilities = capabilities,
+        capabilities = vim.deepcopy(capabilities),
         flags = { allow_incremental_sync = false },
       })
 
@@ -39,28 +47,39 @@ local M = {
 
       local neoConfig = require('neoconf').get('emmet_language_server') or {}
 
-      local config = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 4,
-          source = 'if_many',
-          prefix = '●',
-          current_line = false,
-        },
-        virtual_lines = false,
-        severity_sort = true,
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
-            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
-            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
-            [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
-          },
-        },
-      }
+      -- local config = {
+      --   underline = true,
+      --   update_in_insert = false,
+      --   virtual_text = {
+      --     spacing = 4,
+      --     source = 'if_many',
+      --     prefix = '●',
+      --     current_line = false,
+      --   },
+      --   virtual_lines = false,
+      --   severity_sort = true,
+      --   signs = {
+      --     text = {
+      --       [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+      --       [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+      --       [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+      --       [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+      --     },
+      --   },
+      -- }
 
-      vim.diagnostic.config(config)
+      -- vim.diagnostic.config(config)
+    end,
+  },
+  {
+    'rachartier/tiny-inline-diagnostic.nvim',
+    event = 'VeryLazy', -- Or `LspAttach`
+    priority = 1000, -- needs to be loaded in first
+    config = function()
+      require('tiny-inline-diagnostic').setup({
+        preset = 'classic',
+      })
+      vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
     end,
   },
 }
