@@ -7,6 +7,13 @@ local M = {
       { 'b0o/schemastore.nvim' },
     },
     opts = {
+      inlay_hints = {
+        enabled = true,
+        exclude = {}, -- filetypes for which you don't want to enable inlay hints
+      },
+      codelens = {
+        enabled = false,
+      },
       capabilities = {
         workspace = {
           fileOperations = {
@@ -37,6 +44,7 @@ local M = {
         has_blink and blink.get_lsp_capabilities() or {},
         opts.capabilities or {}
       )
+
       vim.lsp.config('*', {
         capabilities = vim.deepcopy(capabilities),
         flags = { allow_incremental_sync = false },
@@ -47,28 +55,60 @@ local M = {
 
       local neoConfig = require('neoconf').get('emmet_language_server') or {}
 
-      -- local config = {
-      --   underline = true,
-      --   update_in_insert = false,
-      --   virtual_text = {
-      --     spacing = 4,
-      --     source = 'if_many',
-      --     prefix = '●',
-      --     current_line = false,
-      --   },
-      --   virtual_lines = false,
-      --   severity_sort = true,
-      --   signs = {
-      --     text = {
-      --       [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
-      --       [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
-      --       [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
-      --       [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
-      --     },
-      --   },
-      -- }
+      vim.api.nvim_create_autocmd('LspAttach', {
+        desc = 'LSP actions',
+        callback = function(args)
+          local buffer = args.buf
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-      -- vim.diagnostic.config(config)
+          if client and client.name == 'eslint' then
+            client.server_capabilities.documentFormattingProvider = true
+          end
+
+          local diagnostic_goto = function(next, severity)
+            local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+            severity = severity and vim.diagnostic.severity[severity] or nil
+            return function()
+              go({ severity = severity })
+            end
+          end
+
+          local keymap = vim.keymap.set
+          local function createKeymap(mode, key, cmd, desc)
+            keymap(mode, key, cmd, { buffer = buffer, noremap = true, silent = true, desc = desc })
+          end
+
+          createKeymap('n', 'gd', '<cmd>Trouble lsp_definitions<CR>', 'GoTo definition')
+          createKeymap('n', 'grr', '<cmd>Trouble lsp_references<CR>', 'GoTo references')
+          createKeymap('n', 'gri', '<cmd>Trouble lsp_implementations<CRq', 'GoTo implementation')
+          createKeymap('n', 'gy', '<cmd>Trouble lsp_type_definitions<CR>', 'GoTo references')
+          createKeymap('n', 'gD', '<cmd>Trouble lsp_declarations<CR>', 'GoTo declaration')
+          createKeymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Float diagnostic')
+          createKeymap('n', ']d', diagnostic_goto(true), 'Next Diagnostic')
+          createKeymap('n', '[d', diagnostic_goto(false), 'Prev Diagnostic')
+          createKeymap('n', ']e', diagnostic_goto(true, 'ERROR'), 'Next Error')
+          createKeymap('n', '[e', diagnostic_goto(false, 'ERROR'), 'Prev Error')
+          createKeymap('n', ']w', diagnostic_goto(true, 'WARN'), 'Next Warning')
+          createKeymap('n', '[w', diagnostic_goto(false, 'WARN'), 'Prev Warning')
+          createKeymap('n', ']]', function()
+            Snacks.words.jump(vim.v.count1)
+          end, 'Next Reference')
+          createKeymap('n', '[[', function()
+            Snacks.words.jump(-vim.v.count1)
+          end, 'Prev Reference')
+          createKeymap('n', '<leader>lI', '<cmd>LspInfo<cr>', 'lspInfo')
+          createKeymap('n', '<leader>li', '<cmd>Trouble lsp_incoming_calls<cr>', 'Lsp incoming_calls')
+          createKeymap('n', '<leader>lo', '<cmd>Trouble lsp_outgoing_calls<cr>', 'Lsp outgoing_calls')
+          createKeymap('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Code action')
+          createKeymap('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename')
+          createKeymap('n', '<leader>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', 'Setloclist')
+          createKeymap('n', '<leader>lm', '<cmd>EslintFixAll<CR>', 'EslintFixAll')
+          createKeymap('n', 'gK', function()
+            local new_config = not vim.diagnostic.config().virtual_lines
+            vim.diagnostic.config({ virtual_lines = new_config })
+          end, 'Toggle diagnostic virtual_lines')
+        end,
+      })
     end,
   },
   {

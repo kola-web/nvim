@@ -49,6 +49,9 @@ local M = {
         notifier = { enabled = true },
         picker = {
           enabled = true,
+          sort = {
+            fields = { 'score:desc', 'idx' },
+          },
           exclude = {
             '.git',
             '.svn',
