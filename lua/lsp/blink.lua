@@ -78,6 +78,11 @@ local M = {
             module = 'lazydev.integrations.blink',
             score_offset = 100, -- show at a higher priority than lsp
           },
+          path = {
+            opts = {
+              ignore_root_slash = true,
+            },
+          },
         },
       },
       fuzzy = { implementation = 'prefer_rust_with_warning' },
