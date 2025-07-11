@@ -1,7 +1,7 @@
 local M = {
   {
     'saghen/blink.cmp',
-    dependencies = { 'rafamadriz/friendly-snippets', 'kola-web/blink-alias-path' },
+    dependencies = { 'rafamadriz/friendly-snippets' },
     version = '1.*',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -44,6 +44,7 @@ local M = {
       },
       completion = {
         documentation = { auto_show = false },
+        accept = { auto_brackets = { enabled = false } },
         menu = {
           draw = {
             components = {
@@ -70,16 +71,12 @@ local M = {
         },
       },
       sources = {
-        default = { 'lsp', 'aliasPath', 'snippets', 'buffer', 'lazydev' },
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
         providers = {
           lazydev = {
             name = 'LazyDev',
             module = 'lazydev.integrations.blink',
             score_offset = 100, -- show at a higher priority than lsp
-          },
-          aliasPath = {
-            name = 'aliasPath',
-            module = 'blink-alias-path',
           },
         },
       },
