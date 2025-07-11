@@ -3,6 +3,7 @@ local M = {
     'hrsh7th/nvim-cmp',
     version = false,
     event = 'InsertEnter',
+    enabled = false,
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
@@ -12,10 +13,6 @@ local M = {
     opts = function()
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
       unpack = unpack or table.unpack
-      local function has_words_before()
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
-      end
 
       local luasnip = require('luasnip')
       local cmp = require('cmp')
@@ -47,7 +44,7 @@ local M = {
               if cmp.confirm(opts) then
                 return
               end
-            elseif has_words_before() then
+            elseif require('utils.init').has_words_before() then
               vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Plug>(emmet-expand-abbr)', true, true, true), 'i', true)
               return
             end
@@ -111,6 +108,7 @@ local M = {
     'L3MON4D3/LuaSnip',
     lazy = true,
     build = 'make install_jsregexp',
+    enabled = false,
     dependencies = {
       {
         'rafamadriz/friendly-snippets',
