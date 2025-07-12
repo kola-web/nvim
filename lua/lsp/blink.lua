@@ -1,7 +1,7 @@
 local M = {
   {
     'saghen/blink.cmp',
-    dependencies = { 'rafamadriz/friendly-snippets' },
+    dependencies = { 'rafamadriz/friendly-snippets', 'kola-web/blink-alias-path' },
     version = '1.*',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -71,7 +71,7 @@ local M = {
         },
       },
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
+        default = { 'lsp', 'aliasPath', 'snippets', 'buffer', 'lazydev' },
         providers = {
           lazydev = {
             name = 'LazyDev',
@@ -81,6 +81,17 @@ local M = {
           path = {
             opts = {
               ignore_root_slash = true,
+            },
+          },
+          aliasPath = {
+            name = 'aliasPath',
+            module = 'blink-alias-path',
+            opts = {
+              ignore_root_slash = false,
+              path_mappings = {
+                ['@'] = '${folder}/src',
+                ['/'] = '${folder}/src/',
+              },
             },
           },
         },
