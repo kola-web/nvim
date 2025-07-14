@@ -31,8 +31,8 @@ local M = {
 
         ['<Up>'] = { 'select_prev', 'fallback' },
         ['<Down>'] = { 'select_next', 'fallback' },
-        ['<C-p>'] = { 'snippet_backward', 'select_prev', 'fallback_to_mappings' },
-        ['<C-n>'] = { 'snippet_forward', 'select_next', 'fallback_to_mappings' },
+        ['<C-p>'] = { 'select_prev', 'snippet_backward', 'fallback_to_mappings' },
+        ['<C-n>'] = { 'select_next', 'snippet_forward', 'fallback_to_mappings' },
 
         ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
@@ -43,10 +43,11 @@ local M = {
         nerd_font_variant = 'mono',
       },
       completion = {
-        documentation = { auto_show = false },
+        documentation = { auto_show = false, auto_show_delay_ms = 200 },
         accept = { auto_brackets = { enabled = false } },
         menu = {
           draw = {
+            treesitter = { 'lsp' },
             components = {
               kind_icon = {
                 text = function(ctx)
@@ -67,6 +68,11 @@ local M = {
                 end,
               },
             },
+          },
+        },
+        list = {
+          selection = {
+            auto_insert = false,
           },
         },
       },

@@ -1,9 +1,7 @@
 local M = {
   'danymat/neogen',
   dependencies = 'nvim-treesitter/nvim-treesitter',
-  opts = {
-    snippet_engine = 'luasnip',
-  },
+  opts = {},
   keys = {
     {
       '<leader>ll',
