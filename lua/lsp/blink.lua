@@ -8,7 +8,7 @@ local M = {
     opts = {
       keymap = {
         preset = 'none',
-        ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+        ['<C-y>'] = { 'show', 'show_documentation', 'hide_documentation' },
         ['<C-e>'] = { 'hide' },
         ['<Tab>'] = {
           function(cmp)
@@ -43,7 +43,7 @@ local M = {
         nerd_font_variant = 'mono',
       },
       completion = {
-        documentation = { auto_show = false, auto_show_delay_ms = 200 },
+        documentation = { auto_show = true, auto_show_delay_ms = 200 },
         accept = { auto_brackets = { enabled = false } },
         menu = {
           draw = {
