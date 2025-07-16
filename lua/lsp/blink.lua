@@ -100,11 +100,16 @@ local M = {
               },
             },
           },
+          lsp = {
+            fallbacks = {},
+          },
         },
       },
-      fuzzy = { implementation = 'prefer_rust_with_warning' },
+      cmdline = {
+        enabled = false,
+        sources = {},
+      },
     },
-    opts_extend = { 'sources.default' },
   },
 }
 
