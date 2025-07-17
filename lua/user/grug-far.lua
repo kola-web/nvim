@@ -1,6 +1,7 @@
 local M = {
   {
     'MagicDuck/grug-far.nvim',
+    event = 'VeryLazy',
     cmd = 'GrugFar',
     opts = {
       headerMaxWidth = 80,
