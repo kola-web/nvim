@@ -122,6 +122,73 @@ M.flashWord = function()
   })
 end
 
+local function add_fold(match)
+  vim.api.nvim_win_call(match.win, function()
+    local fold = vim.fn.foldclosed(match.pos[1])
+    match.fold = fold ~= -1 and fold or nil
+  end)
+end
+
+M.label2_jump = function(multi_window, pattern)
+  local Flash = require('flash')
+  Flash.jump({
+    search = { mode = 'search', multi_window = multi_window },
+    label = { after = false, before = { 0, 0 }, uppercase = false, format = format },
+    pattern = pattern,
+    action = function(match, state)
+      state:hide()
+      Flash.jump({
+        search = { max_length = 0, multi_window = multi_window },
+        highlight = { matches = false },
+        label = { format = format },
+        matcher = function(win)
+          -- limit matches to the current label
+          return vim.tbl_filter(function(m)
+            return m.label == match.label and m.win == win
+          end, state.results)
+        end,
+        labeler = function(matches)
+          for _, m in ipairs(matches) do
+            m.label = m.label2 -- use the second label
+          end
+        end,
+      })
+    end,
+    matcher = function(win, _state, _opts)
+      local Search = require('flash.search')
+      local search = Search.new(win, _state)
+      local matches = {} ---@type Flash.Match[]
+      local folds = {} ---@type table<number, boolean>
+
+      for _, match in ipairs(search:get(_opts)) do
+        local skip = false
+        add_fold(match)
+
+        -- Only label the first match in each fold
+        if not skip and match.fold then
+          if folds[match.fold] then
+            skip = true
+          else
+            folds[match.fold] = true
+          end
+        end
+        if not skip then
+          table.insert(matches, match)
+        end
+      end
+      return matches
+    end,
+    labeler = function(matches, state)
+      local labels = state:labels()
+      for m, match in ipairs(matches) do
+        match.label1 = labels[math.floor((m - 1) / #labels) + 1]
+        match.label2 = labels[(m - 1) % #labels + 1]
+        match.label = match.label1
+      end
+    end,
+  })
+end
+
 M.closeOtherAllBuffer = function()
   local bufs = vim.api.nvim_list_bufs()
   local current_buf = vim.api.nvim_get_current_buf()

@@ -31,7 +31,7 @@ local M = {
         desc = 'Treesitter Search',
       },
       {
-        '<cr>',
+        '<leader><leader>s',
         mode = 'n',
         function()
           require('flash').jump()
@@ -46,14 +46,15 @@ local M = {
         end,
         desc = 'Flash treesitter',
       },
-      -- {
-      --   '<cr>',
-      --   mode = 'n',
-      --   function()
-      --     require('utils.init').flashWord()
-      --   end,
-      --   desc = 'Flash flashWord',
-      -- },
+      {
+        '<cr>',
+        mode = 'n',
+        function()
+          require('utils.init').flashWord()
+          -- require('utils.init').label2_jump(false, [[\<]])
+        end,
+        desc = 'Flash flashWord',
+      },
       {
         '<leader><leader>/',
         mode = 'n',
