@@ -59,7 +59,7 @@ local M = {
             'node_modules',
             'miniprogram_npm',
             '.yarn',
-            '.idea',
+            '.dist',
             'dist',
             'dist_uat',
             'dist_pro',
