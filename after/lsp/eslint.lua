@@ -39,4 +39,7 @@ return {
       { rule = '*semi', severity = 'off', fixable = true },
     },
   },
+  on_attach = function(client, _)
+    client.server_capabilities.documentFormattingProvider = true
+  end,
 }
