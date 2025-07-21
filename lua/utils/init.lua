@@ -17,7 +17,7 @@ M.servers = {
   'rust_analyzer',
   -- 'ts_ls',
   'vtsls',
-  'vue_ls',
+  'vue_ls@3.0',
   'yamlls',
   'nginx_language_server',
   'powershell_es',
