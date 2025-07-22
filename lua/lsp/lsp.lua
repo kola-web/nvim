@@ -25,7 +25,27 @@ local M = {
     },
     config = function(_, opts)
       local icons = require('utils.icons')
-      local lspconfig = require('lspconfig')
+
+      vim.diagnostic.config({
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          spacing = 4,
+          source = 'if_many',
+          prefix = '●',
+          current_line = false,
+        },
+        virtual_lines = false,
+        severity_sort = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+            [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+          },
+        },
+      })
 
       local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
       local has_blink, blink = pcall(require, 'blink.cmp')
@@ -54,29 +74,6 @@ local M = {
       vim.lsp.config('emmet_language_server', emmet_language_server)
 
       vim.lsp.enable(require('utils.init').servers)
-
-      local config = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 4,
-          source = 'if_many',
-          prefix = '●',
-          current_line = false,
-        },
-        virtual_lines = false,
-        severity_sort = true,
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
-            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
-            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
-            [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
-          },
-        },
-      }
-
-      vim.diagnostic.config(config)
     end,
   },
 }

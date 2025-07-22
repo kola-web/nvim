@@ -1,12 +1,10 @@
 local vue_language_server_path = vim.fn.expand('$MASON/packages') .. '/vue-language-server' .. '/node_modules/@vue/language-server'
 
+---@type vim.lsp.Config
 return {
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  filetypes = { 'vue' },
   settings = {
-    complete_function_calls = true,
     vtsls = {
-      enableMoveToFileCodeAction = true,
-      autoUseWorkspaceTsdk = true,
       tsserver = {
         globalPlugins = {
           {
@@ -14,34 +12,22 @@ return {
             location = vue_language_server_path,
             languages = { 'vue' },
             configNamespace = 'typescript',
+            enableForWorkspaceTypeScriptVersions = true,
           },
-        },
-      },
-      experimental = {
-        maxInlayHintLength = 30,
-        completion = {
-          enableServerSideFuzzyMatch = true,
         },
       },
     },
     typescript = {
-      updateImportsOnFileMove = { enabled = 'always' },
-      suggest = {
-        completeFunctionCalls = true,
-      },
+      tsserver = { maxTsServerMemory = 8092 },
       inlayHints = {
         enumMemberValues = { enabled = true },
-        functionLikeReturnTypes = { enabled = true },
-        parameterNames = { enabled = 'literals' },
-        parameterTypes = { enabled = true },
-        propertyDeclarationTypes = { enabled = true },
-        variableTypes = { enabled = false },
+      },
+    },
+    javascript = {
+      tsserver = { maxTsServerMemory = 8092 },
+      inlayHints = {
+        enumMemberValues = { enabled = true },
       },
     },
   },
-  on_attach = function(client, _)
-    client.server_capabilities.documentFormattingProvider = nil
-    -- Only above 3.0.3
-    client.server_capabilities.semanticTokensProvider.full = true
-  end,
 }
