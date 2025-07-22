@@ -52,6 +52,11 @@ local M = {
           sort = {
             fields = { 'score:desc', 'idx' },
           },
+          formatters = {
+            file = {
+              truncate = 100,
+            },
+          },
           exclude = {
             '.git',
             '.svn',
