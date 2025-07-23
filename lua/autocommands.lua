@@ -39,6 +39,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     createKeymap('n', '[[', function()
       Snacks.words.jump(-vim.v.count1)
     end, 'Prev Reference')
+    createKeymap('n', '<leader>ll', '<cmd>LspRestart<cr>', 'LspRestart')
     createKeymap('n', '<leader>lI', '<cmd>LspInfo<cr>', 'lspInfo')
     createKeymap('n', '<leader>li', '<cmd>Trouble lsp_incoming_calls<cr>', 'Lsp incoming_calls')
     createKeymap('n', '<leader>lo', '<cmd>Trouble lsp_outgoing_calls<cr>', 'Lsp outgoing_calls')

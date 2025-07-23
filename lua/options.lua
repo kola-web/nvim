@@ -13,6 +13,7 @@ local opt = vim.opt
 
 opt.autowrite = true -- 启用自动保存
 -- 仅在非 SSH 环境下设置剪贴板，以确保 OSC 52 集成可以自动工作。需要 Neovim >= 0.10.0
+opt.breakindent = true -- 启用断行缩进
 opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus' -- 与系统剪贴板同步
 opt.completeopt = 'menu,menuone,noselect'
 opt.conceallevel = 0 -- 隐藏 * 标记用于粗体和斜体，但不隐藏带有替换标记的文本

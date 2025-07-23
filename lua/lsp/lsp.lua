@@ -3,6 +3,8 @@ local M = {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
+      { 'mason.nvim' },
+      { 'mason-lspconfig.nvim' },
       { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {} },
       { 'b0o/schemastore.nvim' },
     },
@@ -27,16 +29,10 @@ local M = {
       local icons = require('utils.icons')
 
       vim.diagnostic.config({
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 4,
-          source = 'if_many',
-          prefix = '●',
-          current_line = false,
-        },
-        virtual_lines = false,
         severity_sort = true,
+        float = { border = 'rounded', source = 'if_many' },
+        underline = { severity = vim.diagnostic.severity.ERROR },
+        -- update_in_insert = false,
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
@@ -44,6 +40,20 @@ local M = {
             [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
             [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
           },
+        },
+        virtual_text = {
+          source = 'if_many',
+          spacing = 2,
+          current_line = true,
+          format = function(diagnostic)
+            local diagnostic_message = {
+              [vim.diagnostic.severity.ERROR] = diagnostic.message,
+              [vim.diagnostic.severity.WARN] = diagnostic.message,
+              [vim.diagnostic.severity.INFO] = diagnostic.message,
+              [vim.diagnostic.severity.HINT] = diagnostic.message,
+            }
+            return diagnostic_message[diagnostic.severity]
+          end,
         },
       })
 

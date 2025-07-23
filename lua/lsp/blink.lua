@@ -76,7 +76,7 @@ local M = {
           },
         },
       },
-      -- signature = { enabled = false },
+      signature = { enabled = true },
       sources = {
         default = { 'lsp', 'aliasPath', 'snippets', 'buffer', 'lazydev' },
         providers = {
