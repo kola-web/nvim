@@ -267,13 +267,6 @@ local M = {
       })
     end,
   },
-  {
-    '2kabhishek/nerdy.nvim',
-    cmd = 'Nerdy',
-    keys = {
-      { '<leader>si', '<cmd>Nerdy<cr>', desc = 'nerd font icon', mode = { 'n' } },
-    },
-  },
 }
 
 return M
