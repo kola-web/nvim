@@ -132,6 +132,7 @@ local M = {
             select = vim.tbl_deep_extend('force', normal, {}),
           },
         },
+        profiler = { enabled = true },
         quickfile = { enabled = true },
         -- scope = { enabled = true },
         -- scroll = { enabled = true },
@@ -227,10 +228,16 @@ local M = {
       {'<leader>sk', function() Snacks.picker.keymaps() end,                                                       desc = 'keymaps' },
       {'<leader>sm', function() Snacks.picker.marks() end,                                                         desc = 'marks' },
       {'<leader>sh', function() Snacks.picker.highlights() end,                                                    desc = 'highlights' },
-      {'<leader>o',  function() Snacks.picker.lsp_symbols() end,                                                   desc = 'LSP Symbols' },
-      {'<leader>O',  function() Snacks.picker.lsp_workspace_symbols() end,                                         desc = 'LSP Workspace Symbols' },
       {'<leader>be', function() Snacks.explorer() end,                                                             desc = 'explorer' },
       {'<leader>lt', require('utils').select_filetype,                                                             desc = 'select filetype' },
+      {'<leader>pp', function () Snacks.picker.projects() end,                                                     desc = 'select projects' },
+
+      { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition"  },
+      { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+      { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+      { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+      {'<leader>o',  function() Snacks.picker.lsp_symbols(require('utils.init').kind_filter) end,                                                   desc = 'LSP Symbols' },
+      {'<leader>O',  function() Snacks.picker.lsp_workspace_symbols(require('utils.init').kind_filter) end,                                         desc = 'LSP Workspace Symbols' },
     },
     init = function()
       vim.api.nvim_create_autocmd('User', {

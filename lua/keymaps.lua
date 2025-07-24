@@ -113,7 +113,7 @@ keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 1
 keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', { desc = '1080px -> 750px' })
 keymap('n', '<leader>rr', require('utils.quickType').generate_type, { desc = 'quicktype' })
 
-keymap('n', '<leader>lc', function()
+keymap('n', '<leader>lv', function()
   require('utils.init').compare_to_clipboard()
 end, { desc = 'diff clip' })
 

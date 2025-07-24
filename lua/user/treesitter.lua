@@ -16,8 +16,6 @@ local M = {
     end,
     cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
     opts_extend = { 'ensure_installed' },
-    ---@type TSConfig
-    ---@diagnostic disable-next-line: missing-fields
     opts = {
       highlight = { enable = true },
       indent = { enable = true },

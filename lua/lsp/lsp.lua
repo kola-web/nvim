@@ -4,8 +4,8 @@ local M = {
     event = 'VeryLazy',
     dependencies = {
       { 'mason.nvim' },
+      { 'neoconf.nvim' },
       { 'mason-lspconfig.nvim' },
-      { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {} },
       { 'b0o/schemastore.nvim' },
     },
     opts = {
@@ -26,13 +26,63 @@ local M = {
       },
     },
     config = function(_, opts)
-      local icons = require('utils.icons')
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+        callback = function(args)
+          local buffer = args.buf
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
 
+          local diagnostic_goto = function(next, severity)
+            local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+            severity = severity and vim.diagnostic.severity[severity] or nil
+            return function()
+              go({ severity = severity })
+            end
+          end
+
+          local keymap = vim.keymap.set
+          local function map(mode, key, cmd, desc)
+            keymap(mode, key, cmd, { buffer = buffer, noremap = true, silent = true, desc = desc })
+          end
+
+          map('n', 'gd', vim.lsp.buf.definition, 'GoTo definition')
+          map('n', 'gr', vim.lsp.buf.references, 'GoTo references')
+          map('n', 'gI', vim.lsp.buf.implementation, 'GoTo implementation')
+          map('n', 'gy', vim.lsp.buf.type_definition, 'GoTo references')
+          map('n', 'gD', vim.lsp.buf.declaration, 'GoTo declaration')
+          map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Float diagnostic')
+          map('n', '<leader>la', vim.lsp.buf.code_action, 'Code action')
+          map('n', '<leader>lc', vim.lsp.codelens.run, 'Run Codelens')
+          map('n', '<leader>lC', vim.lsp.codelens.refresh, 'Refresh & Display Codelens')
+          map('n', '<leader>lR', function()
+            Snacks.rename.rename_file()
+          end, 'Refresh & Display Codelens')
+          map('n', '<leader>lr', vim.lsp.buf.rename, 'Rename')
+          map('n', '<leader>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', 'diagnostic')
+          map('n', '<leader>le', '<cmd>EslintFixAll<CR>', 'EslintFixAll')
+          map('n', ']]', function()
+            Snacks.words.jump(vim.v.count1)
+          end, 'Next Reference')
+          map('n', '[[', function()
+            Snacks.words.jump(-vim.v.count1)
+          end, 'Prev Reference')
+
+          map('n', ']d', diagnostic_goto(true), 'Next Diagnostic')
+          map('n', '[d', diagnostic_goto(false), 'Prev Diagnostic')
+          map('n', ']e', diagnostic_goto(true, 'ERROR'), 'Next Error')
+          map('n', '[e', diagnostic_goto(false, 'ERROR'), 'Prev Error')
+          map('n', ']w', diagnostic_goto(true, 'WARN'), 'Next Warning')
+          map('n', '[w', diagnostic_goto(false, 'WARN'), 'Prev Warning')
+
+          map('n', '<leader>L', '<cmd>LspRestart<cr>', 'lspRestart')
+        end,
+      })
+
+      local icons = require('utils.icons')
       vim.diagnostic.config({
         severity_sort = true,
         float = { border = 'rounded', source = 'if_many' },
         underline = { severity = vim.diagnostic.severity.ERROR },
-        -- update_in_insert = false,
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
@@ -86,12 +136,9 @@ local M = {
       vim.lsp.enable(require('utils.init').servers)
     end,
   },
-  {
-    'j-hui/fidget.nvim',
-    opts = {
-      -- options
-    },
-  },
+  { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {}, keys = {
+    { '<leader>ln', '<cmd>Neoconf<cr>', desc = 'Neoconf' },
+  } },
 }
 
 return M

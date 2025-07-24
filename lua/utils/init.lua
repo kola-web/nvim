@@ -44,6 +44,42 @@ M.dap_servers = {
   'js',
 }
 
+M.kind_filter = {
+  default = {
+    'Class',
+    'Constructor',
+    'Enum',
+    'Field',
+    'Function',
+    'Interface',
+    'Method',
+    'Module',
+    'Namespace',
+    'Package',
+    'Property',
+    'Struct',
+    'Trait',
+  },
+  markdown = false,
+  help = false,
+  -- you can specify a different filter for each filetype
+  lua = {
+    'Class',
+    'Constructor',
+    'Enum',
+    'Field',
+    'Function',
+    'Interface',
+    'Method',
+    'Module',
+    'Namespace',
+    -- "Package", -- remove package since luals uses it for control flow structures
+    'Property',
+    'Struct',
+    'Trait',
+  },
+}
+
 M.is_win = function()
   return vim.uv.os_uname().sysname:find('Windows') ~= nil
 end
