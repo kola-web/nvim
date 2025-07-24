@@ -1,14 +1,23 @@
 local M = {
   'folke/flash.nvim',
   event = 'VeryLazy',
+  ---@type Flash.Config
   opts = {
-    jump = {
-      nohlsearch = true,
-    },
     modes = {
       char = {
-        -- enabled = false,
-        highlight = { backdrop = false },
+        enabled = true,
+        highlight = {
+          backdrop = false,
+        },
+        char_actions = function(motion)
+          return {
+            [';'] = 'next', -- set to `right` to always go right
+            [','] = 'prev', -- set to `left` to always go left
+            -- jump2d style: same case goes next, opposite case goes prev
+            [motion] = 'next',
+            [motion:match('%l') and motion:upper() or motion:lower()] = 'prev',
+          }
+        end,
       },
     },
   },
@@ -39,7 +48,7 @@ local M = {
         desc = 'Flash jump',
       },
       {
-        '<leader><leader>v',
+        '<leader><leader>a',
         mode = 'n',
         function()
           require('flash').treesitter()
@@ -51,29 +60,16 @@ local M = {
         mode = 'n',
         function()
           require('utils.init').flashWord()
-          -- require('utils.init').label2_jump(false, [[\<]])
         end,
         desc = 'Flash flashWord',
       },
       {
-        '<leader><leader>/',
+        '<c-s>',
         mode = 'n',
         function()
           require('flash').toggle()
         end,
         desc = 'Flash toggle',
-      },
-      {
-        '<leader><leader>l',
-        mode = 'n',
-        function()
-          require('flash').jump({
-            search = { mode = 'search', max_length = 0 },
-            label = { after = { 0, 0 } },
-            pattern = '^',
-          })
-        end,
-        desc = 'Flash line',
       },
     }
   end,

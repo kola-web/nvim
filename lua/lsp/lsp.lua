@@ -86,6 +86,12 @@ local M = {
       vim.lsp.enable(require('utils.init').servers)
     end,
   },
+  {
+    'j-hui/fidget.nvim',
+    opts = {
+      -- options
+    },
+  },
 }
 
 return M

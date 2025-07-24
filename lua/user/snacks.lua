@@ -88,13 +88,11 @@ local M = {
                 },
                 ['<c-v>'] = '',
                 ['<c-l>'] = { 'focus_preview', mode = { 'n', 'i' } },
-                ['l'] = 'confirm',
               },
             },
             list = {
               keys = {
                 ['<c-l>'] = { 'focus_preview', mode = { 'n', 'i' } },
-                ['l'] = 'confirm',
               },
             },
             preview = {
@@ -228,6 +226,7 @@ local M = {
       {'<leader>su', function() Snacks.picker.undo() end,                                                          desc = 'Undo History' },
       {'<leader>sk', function() Snacks.picker.keymaps() end,                                                       desc = 'keymaps' },
       {'<leader>sm', function() Snacks.picker.marks() end,                                                         desc = 'marks' },
+      {'<leader>sh', function() Snacks.picker.highlights() end,                                                    desc = 'highlights' },
       {'<leader>o',  function() Snacks.picker.lsp_symbols() end,                                                   desc = 'LSP Symbols' },
       {'<leader>O',  function() Snacks.picker.lsp_workspace_symbols() end,                                         desc = 'LSP Workspace Symbols' },
       {'<leader>be', function() Snacks.explorer() end,                                                             desc = 'explorer' },

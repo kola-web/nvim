@@ -13,12 +13,16 @@ local M = {
   },
   {
     'NTBBloodbath/color-converter.nvim',
-    opts = {},
+    opts = {
+      rgb_pattern = 'rgba([r],[g],[b], 1)',
+    },
     keys = {
       {
-        '<A-->',
-        '<Plug>ColorConvertCycle',
-        desc = 'ColorConvertCycle',
+        '<leader>rh',
+        function()
+          require('color-cohverter').to_rgb()
+        end,
+        desc = 'hex to rgba',
         silent = true,
       },
     },

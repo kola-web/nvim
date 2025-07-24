@@ -4,7 +4,7 @@ local M = {
   opts = {},
   keys = {
     {
-      '<leader>lg',
+      '<leader>ll',
       '<cmd>lua require("neogen").generate()<CR>',
       desc = 'jsDoc',
     },

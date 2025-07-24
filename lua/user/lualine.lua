@@ -52,17 +52,19 @@ local M = {
               end,
               icon = '',
             },
-            {
-              'filename',
-              file_status = true,
-              path = 1,
-            },
           },
           lualine_x = {
             codecompanion,
             'lsp_status',
             'filetype',
-            'fileformat',
+            {
+              'fileformat',
+              symbols = {
+                unix = 'Unix (LF)',
+                dos = 'Windows (CRLF)',
+                mac = 'Unix (LF)',
+              },
+            },
           },
           lualine_y = {
             'progress',
