@@ -72,6 +72,7 @@ local M = {
           win = {
             input = {
               keys = {
+                ['l'] = 'confirm',
                 ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
                 ['s'] = { 'flash' },
                 ['<c-t>'] = {
@@ -92,6 +93,7 @@ local M = {
             },
             list = {
               keys = {
+                ['l'] = 'confirm',
                 ['<c-l>'] = { 'focus_preview', mode = { 'n', 'i' } },
               },
             },

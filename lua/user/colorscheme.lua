@@ -1,4 +1,4 @@
-local colorscheme = 'solarized-osaka'
+local colorscheme = 'gruvbox-material'
 
 local init = function(theme)
   return function()

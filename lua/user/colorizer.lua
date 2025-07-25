@@ -1,6 +1,6 @@
 local M = {
   {
-    'NvChad/nvim-colorizer.lua',
+    'norcalli/nvim-colorizer.lua',
     opts = {
       user_default_options = {
         RGB = true, -- #RGB hex codes
@@ -20,7 +20,7 @@ local M = {
       {
         '<leader>rh',
         function()
-          require('color-cohverter').to_rgb()
+          require('color-converter').to_rgb()
         end,
         desc = 'hex to rgba',
         silent = true,
