@@ -20,6 +20,14 @@ local M = {
       {
         '<leader>rh',
         function()
+          require('color-converter').to_hex()
+        end,
+        desc = 'rgba to hex',
+        silent = true,
+      },
+      {
+        '<leader>rg',
+        function()
           require('color-converter').to_rgb()
         end,
         desc = 'hex to rgba',
