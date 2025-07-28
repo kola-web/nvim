@@ -233,13 +233,12 @@ local M = {
       {'<leader>be', function() Snacks.explorer() end,                                                             desc = 'explorer' },
       {'<leader>lt', require('utils').select_filetype,                                                             desc = 'select filetype' },
       {'<leader>pp', function () Snacks.picker.projects() end,                                                     desc = 'select projects' },
-
-      { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition"  },
-      { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
-      { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
-      { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-      {'<leader>o',  function() Snacks.picker.lsp_symbols(require('utils.init').kind_filter) end,                                                   desc = 'LSP Symbols' },
-      {'<leader>O',  function() Snacks.picker.lsp_workspace_symbols(require('utils.init').kind_filter) end,                                         desc = 'LSP Workspace Symbols' },
+      { "gd", function() Snacks.picker.lsp_definitions() end,                                                      desc = "Goto Definition"  },
+      { "gr", function() Snacks.picker.lsp_references() end, nowait = true,                                        desc = "References" },
+      { "gI", function() Snacks.picker.lsp_implementations() end,                                                  desc = "Goto Implementation" },
+      { "gy", function() Snacks.picker.lsp_type_definitions() end,                                                 desc = "Goto T[y]pe Definition" },
+      {'<leader>o',  function() Snacks.picker.lsp_symbols(require('utils.init').kind_filter) end,                  desc = 'LSP Symbols' },
+      {'<leader>O',  function() Snacks.picker.lsp_workspace_symbols(require('utils.init').kind_filter) end,        desc = 'LSP Workspace Symbols' },
     },
     init = function()
       vim.api.nvim_create_autocmd('User', {
