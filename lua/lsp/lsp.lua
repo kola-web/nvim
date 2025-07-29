@@ -130,6 +130,8 @@ local M = {
         flags = { allow_incremental_sync = false },
       })
 
+      local is_vue2 = require('utils.init').is_vue2_project()
+
       local emmet_language_server = require('neoconf').get('emmet_language_server') or {}
       vim.lsp.config('emmet_language_server', emmet_language_server)
 

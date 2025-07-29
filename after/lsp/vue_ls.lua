@@ -1,3 +1,5 @@
+-- vue2
+
 local get_typescript_server_path = require('utils.init').get_typescript_server_path
 
 ---@type vim.lsp.Config

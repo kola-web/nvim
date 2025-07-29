@@ -18,6 +18,7 @@ M.servers = {
   'ts_ls',
   -- 'vtsls',
   'vue_ls@2.2.8',
+  'vuels',
   'yamlls',
   'nginx_language_server',
   'powershell_es',
@@ -43,10 +44,22 @@ M.null_servers = {
 M.getEnableServers = function()
   local enabled_servers = {}
   local mason_registry = require('mason-registry')
+  local is_vue2 = M.is_vue2_project()
   for _, server in ipairs(M.servers) do
     -- 去除版本号
     server = server:match('([^@]+)') or server
+
+    if is_vue2 then
+      if server == 'vue_ls' then
+        goto continue
+      end
+    else
+      if server == 'vuels' then
+        goto continue
+      end
+    end
     table.insert(enabled_servers, server)
+    ::continue::
   end
   return enabled_servers
 end
@@ -439,6 +452,24 @@ end
 M.has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+end
+
+M.is_vue2_project = function()
+  local package_json_path = vim.fn.getcwd() .. '/package.json'
+  local file = io.open(package_json_path, 'r')
+  if not file then
+    return false -- If no package.json exists, assume it's not a Vue 2 project.
+  end
+
+  local content = file:read('*a')
+  file:close()
+
+  -- Search for the "vue" key in dependencies with a version starting with "2"
+  local vue_version = content:match('"vue"%s*:%s*"(%^?2[%d%.]*)"')
+  if vue_version then
+    return true
+  end
+  return false
 end
 
 return M
