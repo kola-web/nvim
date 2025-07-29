@@ -16,8 +16,8 @@ M.servers = {
   'pyright',
   'rust_analyzer',
   'ts_ls',
-  'vtsls',
-  'vue_ls',
+  -- 'vtsls',
+  'vue_ls@2.2.8',
   'yamlls',
   'nginx_language_server',
   'powershell_es',
@@ -40,9 +40,16 @@ M.null_servers = {
   'taplo',
 }
 
-M.dap_servers = {
-  'js',
-}
+M.getEnableServers = function()
+  local enabled_servers = {}
+  local mason_registry = require('mason-registry')
+  for _, server in ipairs(M.servers) do
+    -- 去除版本号
+    server = server:match('([^@]+)') or server
+    table.insert(enabled_servers, server)
+  end
+  return enabled_servers
+end
 
 M.kind_filter = {
   default = {
@@ -266,13 +273,12 @@ end
 M.get_typescript_server_path = function(root_dir)
   local util = require('lspconfig.util')
   local mason_registry = require('mason-registry')
-  local global_ts = mason_registry.get_package('typescript-language-server'):get_install_path() .. '/node_modules/typescript/lib'
-  -- local global_ts = mason_registry.get_package('vtsls'):get_install_path() .. '/node_modules/@vtsls/language-server/node_modules/typescript/lib'
+  local global_ts = vim.fn.expand('$MASON/packages') .. '/typescript-language-server' .. '/node_modules/typescript/lib'
   local found_ts = ''
 
   local function check_dir(path)
-    found_ts = util.path.join(path, 'node_modules', 'typescript', 'lib')
-    if util.path.exists(found_ts) then
+    found_ts = table.concat({ path, 'node_modules', 'typescript', 'lib' })
+    if vim.uv.fs_stat(found_ts) then
       return path
     end
   end
@@ -365,7 +371,9 @@ M.select_filetype = function()
   Snacks.picker.select(filetypes, {
     prompt = 'filetype',
   }, function(selected)
-    vim.bo.filetype = selected
+    if selected then
+      vim.bo.filetype = selected
+    end
   end)
 end
 

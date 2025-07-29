@@ -2,8 +2,8 @@ local vue_language_server_path = vim.fn.expand('$MASON/packages') .. '/vue-langu
 
 ---@type vim.lsp.Config
 return {
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-  -- filetypes = { 'vue' },
+  -- filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  filetypes = { 'vue' },
   single_file_support = true,
   settings = {
     vtsls = {

@@ -133,7 +133,7 @@ local M = {
       local emmet_language_server = require('neoconf').get('emmet_language_server') or {}
       vim.lsp.config('emmet_language_server', emmet_language_server)
 
-      vim.lsp.enable(require('utils.init').servers)
+      vim.lsp.enable(require('utils.init').getEnableServers())
     end,
   },
   { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {}, keys = {
