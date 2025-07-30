@@ -127,7 +127,7 @@ local M = {
 
       vim.lsp.config('*', {
         capabilities = vim.deepcopy(capabilities),
-        flags = { allow_incremental_sync = false },
+        root_markers = { '.git' },
       })
 
       local is_vue2 = require('utils.init').is_vue2_project()

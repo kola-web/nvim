@@ -1,12 +1,27 @@
 local vue_language_server_path = vim.fn.expand('$MASON/packages') .. '/vue-language-server' .. '/node_modules/@vue/language-server'
+local is_vue2 = require('utils.init').is_vue2_project()
+local filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' }
+
+if not is_vue2 then
+  table.insert(filetypes, 'vue')
+end
 
 ---@type vim.lsp.Config
 return {
-  -- filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-  filetypes = { 'vue' },
+  filetypes = filetypes,
+  -- filetypes = { 'vue' },
   single_file_support = true,
   settings = {
+    complete_function_calls = true,
     vtsls = {
+      enableMoveToFileCodeAction = true,
+      autoUseWorkspaceTsdk = true,
+      experimental = {
+        maxInlayHintLength = 30,
+        completion = {
+          enableServerSideFuzzyMatch = true,
+        },
+      },
       tsserver = {
         globalPlugins = {
           {
@@ -20,46 +35,33 @@ return {
       },
     },
     typescript = {
-      tsserver = { maxTsServerMemory = 8092 },
+      updateImportsOnFileMove = { enabled = 'always' },
+      suggest = {
+        completeFunctionCalls = true,
+      },
       inlayHints = {
         enumMemberValues = { enabled = true },
+        functionLikeReturnTypes = { enabled = true },
+        parameterNames = { enabled = 'literals' },
+        parameterTypes = { enabled = true },
+        propertyDeclarationTypes = { enabled = true },
+        variableTypes = { enabled = false },
       },
     },
     javascript = {
-      tsserver = { maxTsServerMemory = 8092 },
+      updateImportsOnFileMove = { enabled = 'always' },
+      suggest = {
+        completeFunctionCalls = true,
+      },
       inlayHints = {
         enumMemberValues = { enabled = true },
+        functionLikeReturnTypes = { enabled = true },
+        parameterNames = { enabled = 'literals' },
+        parameterTypes = { enabled = true },
+        propertyDeclarationTypes = { enabled = true },
+        variableTypes = { enabled = false },
       },
     },
   },
-  on_attach = function(client, bufnr)
-    local existing_capabilities = client.server_capabilities
-
-    if existing_capabilities == nil then
-      return
-    end
-
-    existing_capabilities.documentFormattingProvider = nil
-
-    if client.name == 'vtsls' then
-      local existing_filters = existing_capabilities.workspace.fileOperations.didRename.filters or {}
-      local new_glob = '**/*.{ts,cts,mts,tsx,js,cjs,mjs,jsx,vue}'
-
-      for _, filter in ipairs(existing_filters) do
-        if filter.pattern and filter.pattern.matches == 'file' then
-          filter.pattern.glob = new_glob
-          break
-        end
-      end
-
-      existing_capabilities.workspace.fileOperations.didRename.filters = existing_filters
-    end
-
-    -- vue 3.0.3
-    if vim.bo.filetype == 'vue' then
-      existing_capabilities.semanticTokensProvider.full = false
-    else
-      existing_capabilities.semanticTokensProvider.full = true
-    end
-  end,
+  on_attach = function(client, bufnr) end,
 }

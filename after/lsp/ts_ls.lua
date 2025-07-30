@@ -2,6 +2,7 @@ local vue_language_server_path = vim.fn.expand('$MASON/packages') .. '/vue-langu
 
 ---@type vim.lsp.Config
 return {
+  filetypes = {},
   init_options = {
     locale = 'zh-CN',
     preferences = {

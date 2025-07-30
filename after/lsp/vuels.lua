@@ -4,7 +4,7 @@
 return {
   cmd = { 'vls' },
   filetypes = { 'vue' },
-  root_dir = require('lspconfig').util.root_pattern('package.json', 'vue.config.js'),
+  root_markers = { 'package.json', 'vue.config.js' },
   init_options = {
     config = {
       -- 添加路径别名配置 ,项目的根目录中也要配置（https://vuejs.github.io/vetur/guide/setup.html#project-setup）
