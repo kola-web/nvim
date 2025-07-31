@@ -1,7 +1,7 @@
 local M = {
   {
     'saghen/blink.cmp',
-    dependencies = { 'rafamadriz/friendly-snippets', 'kola-web/blink-alias-path' },
+    dependencies = { 'rafamadriz/friendly-snippets', 'kola-web/blink-alias-path', { 'L3MON4D3/LuaSnip', version = 'v2.*' } },
     version = '1.*',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -76,6 +76,7 @@ local M = {
           },
         },
       },
+      snippets = { preset = 'luasnip' },
       signature = { enabled = true },
       sources = {
         default = { 'lsp', 'aliasPath', 'snippets', 'buffer', 'lazydev' },
