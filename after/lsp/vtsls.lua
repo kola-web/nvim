@@ -3,9 +3,9 @@ local vue_language_server_path = vim.fn.expand('$MASON/packages') .. '/vue-langu
 local is_vue2 = require('utils.init').is_vue2_project()
 local filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' }
 
--- if not is_vue2 then
---   table.insert(filetypes, 'vue')
--- end
+if not is_vue2 then
+  table.insert(filetypes, 'vue')
+end
 
 ---@type vim.lsp.Config
 return {
