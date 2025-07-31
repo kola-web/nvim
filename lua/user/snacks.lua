@@ -131,6 +131,7 @@ local M = {
             marks = vim.tbl_deep_extend('force', normal, {}),
             lsp_symbols = vim.tbl_deep_extend('force', normal, {}),
             lsp_workspace_symbols = vim.tbl_deep_extend('force', normal, {}),
+            projects = vim.tbl_deep_extend('force', normal, {}),
           },
         },
         profiler = { enabled = true },

@@ -149,6 +149,9 @@ local M = {
           vim.lsp.enable(server)
         end
       end
+      vim.lsp.config('vtsls', {
+        filetypes = { 'vue' },
+      })
     end,
   },
   {
