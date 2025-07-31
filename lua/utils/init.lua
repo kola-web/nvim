@@ -41,29 +41,6 @@ M.null_servers = {
   'taplo',
 }
 
-M.getEnableServers = function()
-  local enabled_servers = {}
-  local mason_registry = require('mason-registry')
-  local is_vue2 = M.is_vue2_project()
-  for _, server in ipairs(M.servers) do
-    -- 去除版本号
-    server = server:match('([^@]+)') or server
-
-    if is_vue2 then
-      if server == 'vue_ls' then
-        goto continue
-      end
-    else
-      if server == 'vuels' then
-        goto continue
-      end
-    end
-    table.insert(enabled_servers, server)
-    ::continue::
-  end
-  return enabled_servers
-end
-
 M.kind_filter = {
   default = {
     'Class',

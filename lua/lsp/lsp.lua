@@ -130,17 +130,35 @@ local M = {
         root_markers = { '.git' },
       })
 
-      local is_vue2 = require('utils.init').is_vue2_project()
-
       local emmet_language_server = require('neoconf').get('emmet_language_server') or {}
       vim.lsp.config('emmet_language_server', emmet_language_server)
 
-      vim.lsp.enable(require('utils.init').getEnableServers())
+      local is_vue2 = require('utils.init').is_vue2_project()
+      local servers = require('utils.init').servers
+
+      for _, server in pairs(servers) do
+        local status = true
+        if server == 'vue_ls' and is_vue2 then
+          status = false
+        end
+        if server == 'vuels' and not is_vue2 then
+          status = false
+        end
+
+        if status then
+          vim.lsp.enable(server)
+        end
+      end
     end,
   },
-  { 'folke/neoconf.nvim', cmd = 'Neoconf', opts = {}, keys = {
-    { '<leader>ln', '<cmd>Neoconf<cr>', desc = 'Neoconf' },
-  } },
+  {
+    'folke/neoconf.nvim',
+    cmd = 'Neoconf',
+    opts = {},
+    keys = {
+      { '<leader>ln', '<cmd>Neoconf<cr>', desc = 'Neoconf' },
+    },
+  },
 }
 
 return M
