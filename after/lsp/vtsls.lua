@@ -10,7 +10,6 @@ end
 ---@type vim.lsp.Config
 return {
   filetypes = filetypes,
-  -- filetypes = { 'vue' },
   single_file_support = true,
   settings = {
     complete_function_calls = true,

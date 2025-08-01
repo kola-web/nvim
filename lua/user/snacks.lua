@@ -46,7 +46,7 @@ local M = {
         input = { enabled = true },
         indent = { enabled = true },
         image = { enabled = true },
-        notifier = { enabled = true },
+        notifier = { enabled = true, level = vim.log.levels.TRACE },
         picker = {
           enabled = true,
           sort = {
