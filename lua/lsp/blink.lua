@@ -103,6 +103,7 @@ local M = {
             },
           },
           lsp = {
+            score_offset = 100,
             fallbacks = {},
           },
         },
