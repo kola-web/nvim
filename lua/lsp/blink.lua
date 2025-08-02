@@ -1,7 +1,7 @@
 local M = {
   {
     'saghen/blink.cmp',
-    dependencies = { 'rafamadriz/friendly-snippets', 'kola-web/blink-alias-path', { 'L3MON4D3/LuaSnip', version = 'v2.*' } },
+    dependencies = { 'kola-web/blink-alias-path' },
     version = '1.*',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -111,6 +111,24 @@ local M = {
         enabled = false,
         sources = {},
       },
+    },
+  },
+  {
+    'L3MON4D3/LuaSnip',
+    lazy = true,
+    build = 'make install_jsregexp',
+    dependencies = {
+      {
+        'rafamadriz/friendly-snippets',
+        config = function()
+          require('luasnip.loaders.from_vscode').lazy_load()
+          require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snippets' } })
+        end,
+      },
+    },
+    opts = {
+      history = true,
+      delete_check_events = 'TextChanged',
     },
   },
 }
