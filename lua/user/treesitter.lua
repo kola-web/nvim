@@ -29,6 +29,7 @@ local M = {
         'fish',
         'gitignore',
         'html',
+        'http',
         'javascript',
         'jq',
         'jsdoc',

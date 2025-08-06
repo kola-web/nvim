@@ -3,7 +3,8 @@ local M = {
     'fladson/vim-kitty',
   },
   {
-    'MTDL9/vim-log-highlighting',
+    'fei6409/log-highlight.nvim',
+    opts = {},
   },
 }
 

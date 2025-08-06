@@ -16,7 +16,7 @@ M.servers = {
   'pyright',
   'rust_analyzer',
   'ts_ls',
-  'vtsls',
+  -- 'vtsls',
   'vue_ls',
   'vuels',
   'yamlls',
@@ -447,6 +447,31 @@ M.is_vue2_project = function()
     return true
   end
   return false
+end
+
+M.find_latest_volta_node = function()
+  local base = vim.fn.has('win32') == 1 and vim.fn.expand(vim.fn.getenv('LOCALAPPDATA')) or vim.fn.expand('~/.volta/tools/image/node')
+  if vim.fn.isdirectory(base) == 0 then
+    return nil
+  end
+
+  local dirs = vim.fn.systemlist(('ls -1 %s'):format(base))
+  local candidates = {}
+
+  for _, d in ipairs(dirs) do
+    local major = tonumber(d:match('^(%d+)'))
+    if major and major >= 20 then
+      table.insert(candidates, d)
+    end
+  end
+
+  if #candidates == 0 then
+    return nil
+  end
+
+  table.sort(candidates, version_lt)
+  local latest = candidates[#candidates]
+  return ('%s/%s/bin/node'):format(base, latest)
 end
 
 return M

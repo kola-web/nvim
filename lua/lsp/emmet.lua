@@ -13,15 +13,15 @@ local M = {
         },
       }
     end,
-    -- keys = {
-    --   {
-    --     '<C-y>',
-    --     '<Plug>(emmet-expand-abbr)',
-    --     desc = 'emmet',
-    --     silent = true,
-    --     mode = { 'i' },
-    --   },
-    -- },
+    keys = {
+      -- {
+      --   '<Tab>',
+      --   '<Plug>(emmet-expand-abbr)',
+      --   desc = 'emmet',
+      --   silent = true,
+      --   mode = { 'i' },
+      -- },
+    },
   },
 }
 

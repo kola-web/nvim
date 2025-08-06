@@ -1,8 +1,15 @@
-local vue_language_server_path = vim.fn.expand('$MASON/packages') .. '/vue-language-server' .. '/node_modules/@vue/language-server' .. '/node_modules/@vue/typescript-plugin'
+local vue_language_server_path = vim.fn.expand('$MASON/packages') .. '/vue-language-server' .. '/node_modules/@vue/language-server'
+
+local is_vue2 = require('utils.init').is_vue2_project()
+local filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' }
+
+if not is_vue2 then
+  table.insert(filetypes, 'vue')
+end
 
 ---@type vim.lsp.Config
 return {
-  filetypes = {},
+  filetypes = filetypes,
   init_options = {
     locale = 'zh-CN',
     preferences = {
@@ -13,6 +20,8 @@ return {
         name = '@vue/typescript-plugin',
         location = vue_language_server_path,
         languages = { 'vue' },
+        configNamespace = 'typescript',
+        enableForWorkspaceTypeScriptVersions = true,
       },
     },
   },
