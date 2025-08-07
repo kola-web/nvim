@@ -45,11 +45,11 @@ local M = {
             keymap(mode, key, cmd, { buffer = buffer, noremap = true, silent = true, desc = desc })
           end
 
-          map('n', 'gd', vim.lsp.buf.definition, 'GoTo definition')
-          map('n', 'gr', vim.lsp.buf.references, 'GoTo references')
-          map('n', 'gI', vim.lsp.buf.implementation, 'GoTo implementation')
-          map('n', 'gy', vim.lsp.buf.type_definition, 'GoTo references')
-          map('n', 'gD', vim.lsp.buf.declaration, 'GoTo declaration')
+          -- map('n', 'gd', vim.lsp.buf.definition, 'GoTo definition')
+          -- map('n', 'gr', vim.lsp.buf.references, 'GoTo references')
+          -- map('n', 'gI', vim.lsp.buf.implementation, 'GoTo implementation')
+          -- map('n', 'gy', vim.lsp.buf.type_definition, 'GoTo references')
+          -- map('n', 'gD', vim.lsp.buf.declaration, 'GoTo declaration')
           map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', 'Float diagnostic')
           map('n', '<leader>la', vim.lsp.buf.code_action, 'Code action')
           map('n', '<leader>lc', vim.lsp.codelens.run, 'Run Codelens')
