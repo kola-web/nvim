@@ -54,11 +54,6 @@ local M = {
         'vue',
         'yaml',
       },
-      matchup = {
-        enable = true,
-        enable_quotes = true,
-        disable_virtual_text = true,
-      },
     },
     config = function(_, opts)
       local configs = require('nvim-treesitter.configs')
@@ -68,10 +63,6 @@ local M = {
   {
     'windwp/nvim-ts-autotag',
     event = { 'BufReadPre', 'BufNewFile' },
-  },
-  {
-    'andymass/vim-matchup',
-    lazy = false,
   },
 }
 
