@@ -450,28 +450,11 @@ M.is_vue2_project = function()
 end
 
 M.find_latest_volta_node = function()
-  local base = vim.fn.has('win32') == 1 and vim.fn.expand(vim.fn.getenv('LOCALAPPDATA')) or vim.fn.expand('~/.volta/tools/image/node')
-  if vim.fn.isdirectory(base) == 0 then
-    return nil
+  if vim.fn.has('win32') == 1 then
+    return vim.fn.getenv('LOCALAPPDATA') .. '/Volta/tools/image/node/22.16.0/node.exe'
+  else
+    return '~/.volta/tools/image/node/22.16.0/bin/node'
   end
-
-  local dirs = vim.fn.systemlist(('ls -1 %s'):format(base))
-  local candidates = {}
-
-  for _, d in ipairs(dirs) do
-    local major = tonumber(d:match('^(%d+)'))
-    if major and major >= 20 then
-      table.insert(candidates, d)
-    end
-  end
-
-  if #candidates == 0 then
-    return nil
-  end
-
-  table.sort(candidates, version_lt)
-  local latest = candidates[#candidates]
-  return ('%s/%s/bin/node'):format(base, latest)
 end
 
 return M
