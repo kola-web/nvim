@@ -1,13 +1,4 @@
 local M = {
-  {
-    'echasnovski/mini.pairs',
-    event = 'VeryLazy',
-    version = '*',
-    opts = {
-      modes = { insert = true, command = true, terminal = false },
-    },
-  },
-
   -- align
   {
     'echasnovski/mini.align',

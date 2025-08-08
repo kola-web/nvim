@@ -5,7 +5,6 @@ local M = {
     cmd = 'GrugFar',
     opts = {
       headerMaxWidth = 80,
-      keymaps = {},
     },
     keys = {
       {
