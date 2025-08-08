@@ -77,7 +77,7 @@ local M = {
         },
       },
       snippets = { preset = 'luasnip' },
-      signature = { enabled = true },
+      -- signature = { enabled = true },
       sources = {
         default = { 'lsp', 'aliasPath', 'snippets', 'buffer', 'lazydev' },
         providers = {
