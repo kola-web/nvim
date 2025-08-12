@@ -40,6 +40,7 @@ local M = {
       },
       panel = { enabled = false },
       -- LOCALAPPDATA
+      copilot_node_command = require('utils.init').find_latest_volta_node(), -- Use the system node command
       filetypes = {
         ['*'] = true,
         ['grug-far'] = false,
