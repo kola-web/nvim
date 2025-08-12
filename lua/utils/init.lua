@@ -39,6 +39,7 @@ M.null_servers = {
   'shfmt',
   'stylua',
   'taplo',
+  'copilot-language-server',
 }
 
 M.kind_filter = {
