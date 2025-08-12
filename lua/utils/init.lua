@@ -453,7 +453,7 @@ M.find_latest_volta_node = function()
   if vim.fn.has('win32') == 1 then
     return vim.fn.getenv('LOCALAPPDATA') .. '/Volta/tools/image/node/22.16.0/node.exe'
   else
-    return '~/.volta/tools/image/node/22.16.0/bin/node'
+    return ''
   end
 end
 

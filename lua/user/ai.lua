@@ -39,9 +39,7 @@ local M = {
         },
       },
       panel = { enabled = false },
-      -- copilot_node_command = vim.fn.expand('$HOME') .. '/.volta/tools/image/node/22.16.0/bin/node',
       -- LOCALAPPDATA
-      copilot_node_command = require('utils.init').find_latest_volta_node(), -- Use the system node command
       filetypes = {
         ['*'] = true,
         ['grug-far'] = false,
