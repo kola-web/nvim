@@ -40,7 +40,11 @@ local M = {
       },
       panel = { enabled = false },
       -- LOCALAPPDATA
-      copilot_node_command = require('utils.init').find_latest_volta_node(), -- Use the system node command
+      -- copilot_node_command = require('utils.init').find_latest_volta_node(), -- Use the system node command
+      server = {
+        type = 'binary',
+        custom_server_filepath = 'copilot-language-server',
+      },
       filetypes = {
         ['*'] = true,
         ['grug-far'] = false,
