@@ -50,16 +50,36 @@ local M = {
       },
     },
   },
-  -- {
-  --   'Exafunction/windsurf.nvim',
-  --   dependencies = {
-  --     'nvim-lua/plenary.nvim',
-  --     'hrsh7th/nvim-cmp',
-  --   },
-  --   config = function()
-  --     require('codeium').setup({})
-  --   end,
-  -- },
+  {
+    enabled = false,
+    'Exafunction/windsurf.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'hrsh7th/nvim-cmp',
+    },
+    config = function()
+      require('codeium').setup({
+        enable_cmp_source = false,
+        virtual_text = {
+          enabled = true, -- Key bindings for managing completions in virtual text mode.
+          key_bindings = {
+            -- Accept the current completion.
+            accept = '<C-l>',
+            -- Accept the next word.
+            accept_word = false,
+            -- Accept the next line.
+            accept_line = false,
+            -- Clear the virtual text.
+            clear = '<C-]>',
+            -- Cycle to the next completion.
+            next = '<C-j>',
+            -- Cycle to the previous completion.
+            prev = '<C-k>',
+          },
+        },
+      })
+    end,
+  },
   {
     'olimorris/codecompanion.nvim',
     lazy = true,
