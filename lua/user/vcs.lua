@@ -236,7 +236,8 @@ local M = {
     'mhinz/vim-signify',
     event = 'BufReadPre',
     config = function()
-      vim.g.signify_skip = { vcs = { allow = { 'svn' } } }
+      vim.g.signify_vcs_list = { 'svn' }
+      -- vim.g.signify_skip = { vcs = { allow = { 'svn' } } }
       -- vim.g.signify_line_highlight = 0
       -- vim.g.signify_sign_add = '┃'
       -- vim.g.signify_sign_delete = '┃'
