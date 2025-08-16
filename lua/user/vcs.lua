@@ -235,16 +235,14 @@ local M = {
   {
     'mhinz/vim-signify',
     event = 'BufReadPre',
-    config = function()
-      vim.g.signify_vcs_list = { 'svn' }
-      -- vim.g.signify_skip = { vcs = { allow = { 'svn' } } }
-      -- vim.g.signify_line_highlight = 0
-      -- vim.g.signify_sign_add = '┃'
-      -- vim.g.signify_sign_delete = '┃'
-      -- vim.g.signify_sign_change = '┃'
-      -- vim.g.signify_vcs_cmds_diffmode = {
-      --   svn = 'wsl svn cat %f',
-      -- }
+    init = function()
+      vim.g.signify_skip = { vcs = { allow = { 'svn' } } }
+      local is_win = require('utils.init').is_win()
+      if is_win then
+        vim.g.signify_vcs_cmds = {
+          svn = "svn diff --diff-cmd 'C:\\Program Files\\Git\\usr\\bin\\diff.exe' -x -U0 -- %f",
+        }
+      end
     end,
   },
 }
