@@ -56,14 +56,6 @@ local M = {
         desc = 'Flash treesitter',
       },
       {
-        '<cr>',
-        mode = 'n',
-        function()
-          require('utils.init').flashWord()
-        end,
-        desc = 'Flash flashWord',
-      },
-      {
         '<c-s>',
         mode = 'n',
         function()

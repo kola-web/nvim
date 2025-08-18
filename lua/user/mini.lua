@@ -92,6 +92,19 @@ local M = {
       end
     end,
   },
+
+  {
+    'echasnovski/mini.jump2d',
+    version = '*',
+    opts = function()
+      local jump2d = require('mini.jump2d')
+      return {
+        spotter = jump2d.gen_pattern_spotter('[^%s%p]+'),
+        -- labels = 'asdfghjkl;',
+        view = { dim = true, n_steps_ahead = 2 },
+      }
+    end,
+  },
 }
 
 return M
