@@ -1,7 +1,6 @@
 local M = {
   {
     'github/copilot.vim',
-    enabled = false,
     event = 'VeryLazy',
     config = function()
       vim.g.copilot_enabled = true
@@ -17,7 +16,7 @@ local M = {
       { '<C-S-l>', '<Plug>(copilot-suggest)', desc = 'Copilot suggest', mode = { 'i' }, noremap = true, silent = true },
       { '<C-j>', '<Plug>(copilot-next)', desc = 'Copilot next', mode = { 'i' }, noremap = true, silent = true },
       { '<C-k>', '<Plug>(copilot-previous)', desc = 'Copilot prev', mode = { 'i' }, noremap = true, silent = true },
-      { '<C-i>', '<Plug>(copilot-dismiss)', desc = 'Copilot dismiss', mode = { 'i' }, noremap = true, silent = true },
+      { '<C-]>', '<Plug>(copilot-dismiss)', desc = 'Copilot dismiss', mode = { 'i' }, noremap = true, silent = true },
       { '<leader>ao', '<cmd>Copilot panel<cr>', desc = 'Copilot panel' },
       { '<leader>ae', '<cmd>Copilot enable<cr>', desc = 'Copilot enable' },
       { '<leader>ad', '<cmd>Copilot disable<cr>', desc = 'Copilot disable' },
@@ -26,6 +25,7 @@ local M = {
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
+    enabled = false,
     build = ':Copilot auth',
     event = 'BufReadPost',
     opts = {
