@@ -10,48 +10,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- close some filetypes with <q>
-vim.api.nvim_create_autocmd('FileType', {
-  group = augroup('close_with_q'),
-  pattern = {
-    'PlenaryTestPopup',
-    'help',
-    'lspinfo',
-    'man',
-    'notify',
-    'qf',
-    'spectre_panel',
-    'startuptime',
-    'tsplayground',
-    'neotest-output',
-    'checkhealth',
-    'neotest-summary',
-    'neotest-output-panel',
-    'sagadiagnostc',
-    'dropbar_menu',
-    'lazy',
-    'noice',
-    'DressingSelect',
-    'codecompanion',
-    'DiffviewFiles',
-    'grug-far',
-    'rest_nvim_result',
-  },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.schedule(function()
-      vim.keymap.set('n', 'q', function()
-        vim.bo[event.buf].buflisted = false
-        vim.cmd('close')
-      end, {
-        buffer = event.buf,
-        silent = true,
-        desc = 'Quit buffer',
-      })
-    end)
-  end,
-})
-
 -- 禁止新行注释
 vim.api.nvim_create_autocmd('BufEnter', {
   callback = function()
