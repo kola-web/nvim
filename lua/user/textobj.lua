@@ -21,8 +21,8 @@ local M = {
     keys = {
       { mode = { 'x', 'o' }, 'ae', '<cmd>lua require("various-textobjs").entireBuffer()<CR>' },
 
-      { mode = { 'x', 'o' }, 'ic', '<cmd>lua require("various-textobjs").cssColor("inner")<CR>' },
-      { mode = { 'x', 'o' }, 'ac', '<cmd>lua require("various-textobjs").cssColor("outer")<CR>' },
+      { mode = { 'x', 'o' }, 'ic', '<cmd>lua require("various-textobjs").color("inner")<CR>' },
+      { mode = { 'x', 'o' }, 'ac', '<cmd>lua require("various-textobjs").color("outer")<CR>' },
 
       { mode = { 'x', 'o' }, 'ii', '<cmd>lua require("various-textobjs").indentation("inner","inner")<CR>' },
       { mode = { 'x', 'o' }, 'ai', '<cmd>lua require("various-textobjs").indentation("outer","outer")<CR>' },
