@@ -8,7 +8,7 @@ return {
     },
     provideFormatter = false,
     dataPaths = {
-      vim.fn.stdpath('config') .. '/html/wxml.html-data.json',
+      vim.fn.stdpath('config') .. '/html/wxml-data.json',
     },
   },
   handlers = {
