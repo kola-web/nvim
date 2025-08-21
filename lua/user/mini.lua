@@ -102,6 +102,7 @@ local M = {
         spotter = jump2d.gen_pattern_spotter('[^%s%p]+'),
         -- labels = 'asdfghjkl;',
         view = { dim = true, n_steps_ahead = 2 },
+        silent = true,
       }
     end,
   },

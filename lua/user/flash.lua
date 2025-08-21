@@ -40,6 +40,14 @@ local M = {
         desc = 'Treesitter Search',
       },
       {
+        '<leader><leader>w',
+        mode = 'n',
+        function()
+          require('utils.init').flashWord()
+        end,
+        desc = 'Flash flashWord',
+      },
+      {
         '<leader><leader>s',
         mode = 'n',
         function()
