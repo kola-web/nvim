@@ -25,6 +25,9 @@ end)
 -- 启用断行缩进
 vim.o.breakindent = true
 
+-- 将包含 `-,#` 的单词视为一个单词
+vim.opt.iskeyword:append('-,#')
+
 -- 保存撤销历史
 vim.o.undofile = true
 
