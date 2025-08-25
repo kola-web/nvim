@@ -1,13 +1,12 @@
 local M = {
   {
     'nvim-treesitter/nvim-treesitter',
-    branch = 'master',
-    lazy = false,
     build = ':TSUpdate',
-    cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
+    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
+      auto_install = true,
       ensure_installed = {
         'bash',
         'blade',
@@ -44,10 +43,6 @@ local M = {
         'yaml',
       },
     },
-    config = function(_, opts)
-      local configs = require('nvim-treesitter.configs')
-      configs.setup(opts)
-    end,
   },
   {
     'windwp/nvim-ts-autotag',

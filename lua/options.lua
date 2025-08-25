@@ -30,6 +30,7 @@ vim.opt.iskeyword:append('-,#')
 
 -- 保存撤销历史
 vim.o.undofile = true
+vim.o.undolevels = 10000
 
 -- 搜索时忽略大小写，除非搜索词中有 \C 或一个以上大写字母
 vim.o.ignorecase = true
@@ -73,17 +74,23 @@ vim.o.scrolloff = 10
 -- 参见 `:help 'confirm'`
 vim.o.confirm = true
 
+-- 折叠
 vim.o.foldenable = true
-vim.o.foldmethod = 'indent' -- 设置折叠方法为按缩进折叠
-vim.o.foldlevel = 99 -- 设置折叠级别为 99，表示不折叠
-vim.o.foldlevelstart = 9 -- 设置折叠级别开始为 1
+vim.o.foldmethod = 'indent'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 9
 
-vim.opt.spelllang = { 'en', 'cjk' } -- 设置拼写检查语言为英语和中日韩
+-- 禁用折叠
+vim.o.wrap = false
 
-vim.o.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]] -- 设置状态列
+-- 设置拼写检查语言为英语和中日韩
+vim.opt.spelllang = { 'en', 'cjk' }
 
--- 图形化界面
-vim.o.guifont = 'Maple Mono NF CN:h12' -- 在图形化的 neovim 应用程序中使用的字体
+-- 设置状态列
+vim.o.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
+
+-- 在图形化的 neovim 应用程序中使用的字体
+vim.o.guifont = 'Maple Mono NF CN:h12'
 
 -- 修复 markdown 缩进设置
 vim.g.markdown_recommended_style = 0
