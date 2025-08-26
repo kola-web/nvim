@@ -89,6 +89,14 @@ vim.opt.spelllang = { 'en', 'cjk' }
 -- 设置状态列
 vim.o.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 
+-- tab
+vim.o.expandtab = true -- 使用空格代替制表符
+
+-- 缩进
+vim.o.shiftround = true -- 使缩进对齐时舍入到最近的倍数
+vim.o.shiftwidth = 2 -- 设置每次缩进的空格数
+vim.o.smartindent = true -- 自动插入缩进
+
 -- 在图形化的 neovim 应用程序中使用的字体
 vim.o.guifont = 'Maple Mono NF CN:h12'
 
