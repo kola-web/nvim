@@ -9,6 +9,7 @@ local M = {
         highlight = {
           backdrop = false,
         },
+        autohide = true,
         char_actions = function(motion)
           return {
             [';'] = 'next', -- set to `right` to always go right
