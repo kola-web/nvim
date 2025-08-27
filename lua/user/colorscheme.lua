@@ -27,7 +27,6 @@ local M = {
     init = init('gruvbox-material'),
     config = function()
       vim.g.gruvbox_material_background = 'hard'
-      vim.g.gruvbox_material_current_word = 'underline'
     end,
   },
   {
