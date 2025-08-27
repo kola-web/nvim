@@ -7,6 +7,16 @@ if not is_vue2 then
   table.insert(filetypes, 'vue')
 end
 
+local inlayHints = {
+  includeInlayEnumMemberValueHints = true,
+  includeInlayFunctionLikeReturnTypeHints = true,
+  includeInlayFunctionParameterTypeHints = true,
+  includeInlayParameterNameHints = 'all',
+  includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  includeInlayPropertyDeclarationTypeHints = true,
+  includeInlayVariableTypeHints = true,
+}
+
 ---@type vim.lsp.Config
 return {
   filetypes = filetypes,
@@ -25,5 +35,8 @@ return {
       },
     },
   },
-  settings = {},
+  settings = {
+    javascript = { inlayHints = inlayHints },
+    typescript = { inlayHints = inlayHints },
+  },
 }
