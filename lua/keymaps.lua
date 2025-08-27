@@ -73,9 +73,6 @@ keymap('n', 'BP', function()
   require('utils').scratch_open('python')
 end, opts)
 
--- keymap('n', '<C-m>', '%', {noremap=false})
--- keymap("n", "<C-z>", "<nop>", opts)
-
 -- vue jump
 keymap('n', ']s', '/<script<cr>', opts)
 keymap('n', ']c', '/<style<cr>', opts)
