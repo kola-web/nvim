@@ -1,104 +1,125 @@
 -- 这个文件由 plugins.core 自动加载
+
+-- ===========================
+-- 基础配置与领导者键设置
+-- ===========================
+-- 设置领导者键：VSCode环境下使用反斜杠，否则使用空格
 vim.g.mapleader = vim.g.vscode and '\\' or ' '
+-- 设置局部领导者键
 vim.g.maplocalleader = '\\'
 
--- 默认显示行号
-vim.o.number = true
--- 你也可以添加相对行号，有助于跳转。
---  自己试试看是否喜欢！
-vim.o.relativenumber = true
 
--- 启用鼠标模式，例如用于调整分屏大小！
-vim.o.mouse = 'a'
+-- ===========================
+-- 显示与界面设置
+-- ===========================
+-- 启用真彩色支持，使终端显示更丰富的颜色
+vim.opt.termguicolors = true
 
--- 不显示模式，因为已经在状态栏显示了
-vim.o.showmode = false
+-- 行号设置
+vim.opt.number = true          -- 显示绝对行号
+vim.opt.relativenumber = true  -- 显示相对行号（便于快速跳转）
+vim.opt.cursorline = true      -- 高亮当前光标所在行
 
--- 同步操作系统和 Neovim 的剪贴板。
---  在 `UiEnter` 之后设置，因为可能会增加启动时间。
---  如果你希望操作系统剪贴板保持独立，可以移除此选项。
---  参见 `:help 'clipboard'`
+-- 标志列设置
+vim.opt.signcolumn = 'yes'     -- 始终显示左侧标志列（用于LSP提示等）
+
+-- 状态栏与模式设置
+vim.opt.showmode = false       -- 不在底部显示模式（已在状态栏显示）
+vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]  -- 自定义状态列
+
+-- 滚动设置
+vim.opt.scrolloff = 10         -- 光标上下方最少保留10行屏幕空间
+
+
+-- ===========================
+-- 编辑行为设置
+-- ===========================
+-- 鼠标支持
+vim.opt.mouse = 'a'            -- 启用所有模式下的鼠标支持（如调整分屏）
+
+-- 剪贴板设置
+-- 延迟设置以减少启动时间，同步系统剪贴板
 vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
+  vim.opt.clipboard = 'unnamedplus'
 end)
 
--- 启用断行缩进
-vim.o.breakindent = true
+-- 文本换行与缩进
+vim.opt.wrap = false           -- 禁用自动换行
+vim.opt.breakindent = true     -- 启用断行缩进（换行时保持缩进）
 
--- 将包含 `-,#` 的单词视为一个单词
-vim.opt.iskeyword:append('-,#')
+-- 单词识别设置
+vim.opt.iskeyword:append('-,#')  -- 将包含'-'和'#'的字符串视为完整单词
 
--- 保存撤销历史
-vim.o.undofile = true
-vim.o.undolevels = 10000
+-- 搜索行为
+vim.opt.ignorecase = true      -- 搜索时忽略大小写
+vim.opt.smartcase = true       -- 当搜索词包含大写字母时自动区分大小写
+vim.opt.inccommand = 'split'   -- 实时预览替换效果
 
--- 搜索时忽略大小写，除非搜索词中有 \C 或一个以上大写字母
-vim.o.ignorecase = true
-vim.o.smartcase = true
+-- 撤销历史
+vim.opt.undofile = true        -- 保存撤销历史到文件
+vim.opt.undolevels = 10000     -- 最大撤销层级
 
--- 默认保持标志列开启
-vim.o.signcolumn = 'yes'
+-- 操作确认
+vim.opt.confirm = true         -- 执行可能丢失数据的操作时弹出确认对话框
 
--- 减少更新时间
-vim.o.updatetime = 250
 
--- 减少映射序列等待时间
-vim.o.timeoutlen = 300
+-- ===========================
+-- 分屏与窗口设置
+-- ===========================
+-- 分屏方向
+vim.opt.splitright = true      -- 垂直分屏时新窗口在右侧
+vim.opt.splitbelow = true      -- 水平分屏时新窗口在下方
 
--- 配置新分屏的打开方式
-vim.o.splitright = true
-vim.o.splitbelow = true
 
--- 设置 Neovim 在编辑器中显示某些空白字符的方式。
---  参见 `:help 'list'`
---  和 `:help 'listchars'`
---
---  注意 listchars 使用 `vim.opt` 设置，而不是 `vim.o`。
---  它与 `vim.o` 非常相似，但为方便与表交互提供了接口。
---   参见 `:help lua-options`
---   和 `:help lua-options-guide`
-vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- ===========================
+-- 空白字符与缩进设置
+-- ===========================
+-- 空白字符显示
+vim.opt.list = true            -- 显示特殊空白字符
+vim.opt.listchars = {          -- 配置特殊空白字符的显示方式
+  tab = '» ',                  -- 制表符显示为»+空格
+  trail = '·',                 --  trailing空格显示为·
+  nbsp = '␣'                   -- 非断行空格显示为␣
+}
 
--- 实时预览替换效果
-vim.o.inccommand = 'split'
+-- Tab与缩进设置
+vim.opt.expandtab = true       -- 使用空格代替制表符
+vim.opt.shiftwidth = 2         -- 自动缩进的空格数
+vim.opt.shiftround = true      -- 缩进时对齐到最近的倍数
+vim.opt.smartindent = true     -- 自动智能缩进
 
--- 显示光标所在的行
-vim.o.cursorline = true
 
--- 光标上下方最少保留的屏幕行数
-vim.o.scrolloff = 10
+-- ===========================
+-- 性能与超时设置
+-- ===========================
+vim.opt.updatetime = 250       -- 事件更新时间（影响光标保持等功能）
+vim.opt.timeoutlen = 300       -- 映射序列等待时间（影响快捷键响应）
 
--- 如果执行操作因缓冲区未保存而失败（如 `:q`），
--- 则弹出对话框询问是否保存当前文件
--- 参见 `:help 'confirm'`
-vim.o.confirm = true
 
--- 折叠
-vim.o.foldenable = true
-vim.o.foldmethod = 'indent'
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 9
+-- ===========================
+-- 折叠设置
+-- ===========================
+vim.opt.foldenable = true      -- 启用折叠功能
+vim.opt.foldmethod = 'indent'  -- 基于缩进的折叠方式
+vim.opt.foldlevel = 99         -- 折叠层级（99表示几乎不自动折叠）
+vim.opt.foldlevelstart = 9     -- 打开文件时的初始折叠层级
 
--- 禁用折叠
-vim.o.wrap = false
 
--- 设置拼写检查语言为英语和中日韩
-vim.opt.spelllang = { 'en', 'cjk' }
+-- ===========================
+-- 拼写检查
+-- ===========================
+vim.opt.spelllang = { 'en', 'cjk' }  -- 拼写检查支持英语和中日韩语言
 
--- 设置状态列
-vim.o.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 
--- tab
-vim.o.expandtab = true -- 使用空格代替制表符
+-- ===========================
+-- GUI 相关设置
+-- ===========================
+-- 图形化Neovim使用的字体设置
+vim.opt.guifont = 'Maple Mono NF CN:h12'
 
--- 缩进
-vim.o.shiftround = true -- 使缩进对齐时舍入到最近的倍数
-vim.o.shiftwidth = 2 -- 设置每次缩进的空格数
-vim.o.smartindent = true -- 自动插入缩进
 
--- 在图形化的 neovim 应用程序中使用的字体
-vim.o.guifont = 'Maple Mono NF CN:h12'
-
--- 修复 markdown 缩进设置
+-- ===========================
+-- 插件相关设置
+-- ===========================
+-- 修复markdown默认缩进样式
 vim.g.markdown_recommended_style = 0
