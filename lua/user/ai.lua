@@ -1,5 +1,6 @@
 local M = {
   {
+    enabled = false,
     'github/copilot.vim',
     event = 'VeryLazy',
     config = function()
@@ -23,61 +24,21 @@ local M = {
     },
   },
   {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    enabled = false,
-    build = ':Copilot auth',
-    event = 'BufReadPost',
-    opts = {
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        keymap = {
-          accept = '<C-l>', -- handled by nvim-cmp / blink.cmp
-          next = '<C-j>',
-          prev = '<C-k>',
-          dismiss = '<C-]>',
-        },
-      },
-      panel = { enabled = false },
-      -- LOCALAPPDATA
-      copilot_node_command = require('utils.init').find_latest_volta_node(), -- Use the system node command
-      filetypes = {
-        ['*'] = true,
-        ['grug-far'] = false,
-        ['grug-far-history'] = false,
-        ['grug-far-help'] = false,
-      },
-    },
-  },
-  {
-    enabled = false,
-    'Exafunction/windsurf.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'hrsh7th/nvim-cmp',
-    },
+    'monkoose/neocodeium',
+    event = 'VeryLazy',
     config = function()
-      require('codeium').setup({
-        enable_cmp_source = false,
-        virtual_text = {
-          enabled = true, -- Key bindings for managing completions in virtual text mode.
-          key_bindings = {
-            -- Accept the current completion.
-            accept = '<C-l>',
-            -- Accept the next word.
-            accept_word = false,
-            -- Accept the next line.
-            accept_line = false,
-            -- Clear the virtual text.
-            clear = '<C-]>',
-            -- Cycle to the next completion.
-            next = '<C-j>',
-            -- Cycle to the previous completion.
-            prev = '<C-k>',
-          },
-        },
-      })
+      local neocodeium = require('neocodeium')
+      neocodeium.setup()
+      vim.keymap.set('i', '<C-l>', neocodeium.accept)
+      vim.keymap.set('i', '<C-j>', function()
+        neocodeium.cycle_or_complete()
+      end)
+      vim.keymap.set('i', '<C-k>', function()
+        neocodeium.cycle_or_complete(-1)
+      end)
+      vim.keymap.set('i', '<C-]>', function()
+        neocodeium.clear()
+      end)
     end,
   },
   {
