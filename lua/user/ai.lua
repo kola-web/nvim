@@ -25,6 +25,7 @@ local M = {
   },
   {
     'monkoose/neocodeium',
+    enabled = true,
     event = 'VeryLazy',
     config = function()
       local neocodeium = require('neocodeium')
@@ -43,6 +44,46 @@ local M = {
       vim.keymap.set('i', '<C-]>', function()
         neocodeium.clear()
       end)
+    end,
+  },
+  {
+    'milanglacier/minuet-ai.nvim',
+    enabled = false,
+    config = function()
+      require('minuet').setup({
+        virtualtext = {
+          auto_trigger_ft = { '*' },
+          keymap = {
+            -- accept whole completion
+            accept = '<C-l>',
+            -- accept one line
+            accept_line = '<C-S-l>',
+            -- accept n lines (prompts for number)
+            -- e.g. "A-z 2 CR" will accept 2 lines
+            accept_n_lines = '<nil>',
+            -- Cycle to prev completion item, or manually invoke completion
+            prev = '<C-k>',
+            -- Cycle to next completion item, or manually invoke completion
+            next = '<C-j>',
+            dismiss = '<C-]>',
+          },
+        },
+
+        provider = 'openai_compatible',
+        provider_options = {
+          openai_compatible = {
+            end_point = 'https://api.deepseek.com/chat/completions',
+            api_key = function()
+              return os.getenv('DEEPSEEK_KEY')
+            end,
+            name = 'deepseek',
+            optional = {
+              max_tokens = 256,
+              top_p = 0.9,
+            },
+          },
+        },
+      })
     end,
   },
   {
