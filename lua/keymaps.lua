@@ -117,9 +117,6 @@ end, { desc = 'diff clip' })
 keymap('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
 keymap('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
 
-keymap('n', '[q', vim.cmd.cprev, { desc = 'Previous Quickfix' })
-keymap('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
-
 -- fzf-lua
 keymap('t', '<esc>', [[<C-\><C-n>]])
 

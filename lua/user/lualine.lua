@@ -74,7 +74,7 @@ local M = {
             'location',
           },
         },
-        extensions = { 'lazy', 'mason', 'trouble', 'man' },
+        extensions = { 'lazy', 'mason', 'man' },
       }
       return opts
     end,

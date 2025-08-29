@@ -127,6 +127,7 @@ local M = {
             { 'n', 'xB', actions.conflict_choose_all('base'), { desc = '为整个文件选择冲突的BASE版本' } },
             { 'n', 'xA', actions.conflict_choose_all('all'), { desc = '为整个文件选择冲突的所有版本' } },
             { 'n', 'dX', actions.conflict_choose_all('none'), { desc = '删除整个文件的冲突区域' } },
+            { 'n', 'q', '<cmd>DiffviewClose<cr>', { desc = 'Close diffview' } },
           },
           file_history_panel = {
             { 'n', 'g!', actions.options, { desc = '打开选项面板' } },
@@ -200,26 +201,12 @@ local M = {
           vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
         end
 
-        map('n', ']h', function()
-          if vim.wo.diff then
-            vim.cmd.normal({ ']c', bang = true })
-          else
-            gs.nav_hunk('next')
-          end
-        end, 'Next Hunk')
-        map('n', '[h', function()
-          if vim.wo.diff then
-            vim.cmd.normal({ '[c', bang = true })
-          else
-            gs.nav_hunk('prev')
-          end
-        end, 'Prev Hunk')
-        map('n', ']H', function()
-          gs.nav_hunk('last')
-        end, 'Last Hunk')
-        map('n', '[H', function()
-          gs.nav_hunk('first')
-        end, 'First Hunk')
+        -- stylua: ignore start
+        map('n', ']h', function() if vim.wo.diff then vim.cmd.normal({ ']c', bang = true }) else gs.nav_hunk('next') end end, 'Next Hunk')
+        map('n', '[h', function() if vim.wo.diff then vim.cmd.normal({ '[c', bang = true }) else gs.nav_hunk('prev') end end, 'Prev Hunk')
+        map('n', ']H', function()gs.nav_hunk('last')end, 'Last Hunk')
+        map('n', '[H', function()gs.nav_hunk('first')end, 'First Hunk')
+        -- stylua: ignore end
         map({ 'n', 'v' }, '<leader>gs', ':Gitsigns stage_hunk<CR>', 'Stage Hunk')
         map({ 'n', 'v' }, '<leader>gr', ':Gitsigns reset_hunk<CR>', 'Reset Hunk')
         map('n', '<leader>gu', gs.undo_stage_hunk, 'Undo Stage Hunk')
@@ -244,6 +231,15 @@ local M = {
         }
       end
     end,
+  },
+
+  {
+    'NeogitOrg/neogit',
+    dependencies = {},
+    opts = {},
+    keys = {
+      { '<leader>gg', '<cmd>Neogit<cr>', desc = 'Neogit' },
+    },
   },
 }
 

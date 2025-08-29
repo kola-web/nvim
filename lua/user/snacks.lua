@@ -50,6 +50,7 @@ local M = {
           scope = { only_current = true },
         },
         image = { enabled = true },
+        lazygit = { enabled = false },
         notifier = { enabled = true, level = vim.log.levels.TRACE },
         picker = {
           enabled = true,
@@ -80,7 +81,7 @@ local M = {
                 ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
                 ['s'] = { 'flash' },
                 ['<c-t>'] = {
-                  'trouble_open',
+                  'lopen',
                   mode = { 'n', 'i' },
                 },
                 ['<c-j>'] = {
@@ -126,7 +127,7 @@ local M = {
                 end,
               })
             end,
-            trouble_open = require('trouble.sources.snacks').actions.trouble_open,
+            lopen = Snacks.picker.actions.loclist,
           },
           sources = {
             buffers = vim.tbl_deep_extend('force', normal, {}),
@@ -223,9 +224,6 @@ local M = {
       {'<leader>D',  function() Snacks.dashboard.open() end,                                                       desc = 'dashboard', mode = { 'n' } },
       {'<leader>z',  function() Snacks.zen() end,                                                                  desc = 'zen modal', mode = { 'n' } },
       {'<leader>Z',  function() Snacks.zen.zoom() end,                                                             desc = 'Toggle Zoom' },
-      {'<leader>gg', function() Snacks.lazygit() end,                                                              desc = 'lazygit', mode = { 'n' } },
-      {'<leader>gl', function() Snacks.lazygit.log() end,                                                          desc = 'lazygit log file', mode = { 'n' } },
-      {'<leader>gf', function() Snacks.lazygit.log_file() end,                                                     desc = 'Lazygit Current File History' },
       {'<leader>gb', function() Snacks.git.blame_line() end,                                                       desc = 'git blame line', mode = { 'n' } },
       {'<leader>n',  function() Snacks.notifier.show_history() end,                                                desc = 'Notification History' },
       {'<leader>S',  function() Snacks.scratch.select() end,                                                       desc = 'Select Scratch Buffer' },
