@@ -78,8 +78,6 @@ local M = {
             input = {
               keys = {
                 ['l'] = 'confirm',
-                ['<a-s>'] = { 'flash', mode = { 'n', 'i' } },
-                ['s'] = { 'flash' },
                 ['<c-t>'] = {
                   'lopen',
                   mode = { 'n', 'i' },
@@ -109,24 +107,6 @@ local M = {
             },
           },
           actions = {
-            flash = function(picker)
-              require('flash').jump({
-                pattern = '^',
-                label = { after = { 0, 0 } },
-                search = {
-                  mode = 'search',
-                  exclude = {
-                    function(win)
-                      return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= 'snacks_picker_list'
-                    end,
-                  },
-                },
-                action = function(match)
-                  local idx = picker.list:row2idx(match.pos[1])
-                  picker.list:_move(idx, true, true)
-                end,
-              })
-            end,
             lopen = Snacks.picker.actions.loclist,
           },
           sources = {
@@ -145,10 +125,6 @@ local M = {
         -- scroll = { enabled = true },
         statuscolumn = {
           enabled = true,
-          folds = {
-            open = false,
-            git_hl = true,
-          },
         }, -- we set this in options.lua
         terminal = {
           win = {
@@ -219,35 +195,43 @@ local M = {
     end,
     -- stylua: ignore
     keys = {
-      {'<leader>c',  function() Snacks.bufdelete() end,                                                            desc = 'buf del', mode = { 'n' } },
-      {'<leader>bo', function() Snacks.bufdelete.other() end,                                                      desc = 'buf del other', mode = { 'n' } },
-      {'<leader>D',  function() Snacks.dashboard.open() end,                                                       desc = 'dashboard', mode = { 'n' } },
-      {'<leader>z',  function() Snacks.zen() end,                                                                  desc = 'zen modal', mode = { 'n' } },
-      {'<leader>Z',  function() Snacks.zen.zoom() end,                                                             desc = 'Toggle Zoom' },
-      {'<leader>gb', function() Snacks.git.blame_line() end,                                                       desc = 'git blame line', mode = { 'n' } },
-      {'<leader>n',  function() Snacks.notifier.show_history() end,                                                desc = 'Notification History' },
-      {'<leader>S',  function() Snacks.scratch.select() end,                                                       desc = 'Select Scratch Buffer' },
-      {'<leader>un', function() Snacks.notifier.hide() end,                                                        desc = 'Dismiss All Notifications' },
-      {'<C-\\>',     function() Snacks.terminal() end,                                                             desc = 'Toggle Terminal' },
-      {'<leader>f',  function() Snacks.picker.files({ hidden = true, args = { '--path-separator', '/' } }) end,    desc = 'Find Files' },
-      {'<leader>F',  function() Snacks.picker.grep({ layout = { preset = 'ivy' } }) end,                           desc = 'Grep' },
-      {'<leader>bb', function() Snacks.picker.buffers() end,                                                       desc = 'Buffers' },
-      {'<leader>sc', function() Snacks.picker.colorschemes() end,                                                  desc = 'Colorschemes' },
-      {'<leader>su', function() Snacks.picker.undo() end,                                                          desc = 'Undo History' },
-      {'<leader>sk', function() Snacks.picker.keymaps() end,                                                       desc = 'keymaps' },
-      {'<leader>sm', function() Snacks.picker.marks() end,                                                         desc = 'marks' },
-      {'<leader>sh', function() Snacks.picker.highlights() end,                                                    desc = 'highlights' },
-      {'<leader>be', function() Snacks.explorer() end,                                                             desc = 'explorer' },
-      {'<leader>lt', require('utils').select_filetype,                                                             desc = 'select filetype' },
-      {'<leader>pp', function () Snacks.picker.projects() end,                                                     desc = 'select projects' },
+      {'<leader>c',  function() Snacks.bufdelete() end,                                                              desc = 'buf del', mode = { 'n' } },
+      {'<leader>bo', function() Snacks.bufdelete.other() end,                                                        desc = 'buf del other', mode = { 'n' } },
+      {'<leader>D',  function() Snacks.dashboard.open() end,                                                         desc = 'dashboard', mode = { 'n' } },
+      {'<leader>z',  function() Snacks.zen() end,                                                                    desc = 'zen modal', mode = { 'n' } },
+      {'<leader>Z',  function() Snacks.zen.zoom() end,                                                               desc = 'Toggle Zoom' },
+      {'<leader>gb', function() Snacks.git.blame_line() end,                                                         desc = 'git blame line', mode = { 'n' } },
+      {'<leader>n',  function() Snacks.notifier.show_history() end,                                                  desc = 'Notification History' },
+      {'<leader>S',  function() Snacks.scratch.select() end,                                                         desc = 'Select Scratch Buffer' },
+      {'<leader>un', function() Snacks.notifier.hide() end,                                                          desc = 'Dismiss All Notifications' },
+      {'<C-\\>',     function() Snacks.terminal() end,                                                               desc = 'Toggle Terminal' },
 
-      { "gd", function() Snacks.picker.lsp_definitions() end,                                                      desc = "Goto Definition" },
-      { "gD", function() Snacks.picker.lsp_declarations() end,                                                     desc = "Goto Declaration" },
-      { "gr", function() Snacks.picker.lsp_references() end, nowait = true,                                        desc = "References" },
-      { "gI", function() Snacks.picker.lsp_implementations() end,                                                  desc = "Goto Implementation" },
-      { "gy", function() Snacks.picker.lsp_type_definitions() end,                                                 desc = "Goto T[y]pe Definition" },
-      {'<leader>o',  function() Snacks.picker.lsp_symbols(require('utils.init').kind_filter) end,                  desc = 'LSP Symbols' },
-      {'<leader>O',  function() Snacks.picker.lsp_workspace_symbols(require('utils.init').kind_filter) end,        desc = 'LSP Workspace Symbols' },
+      {'<leader>f',  function() Snacks.picker.files({ hidden = true, args = { '--path-separator', '/' } }) end,      desc = 'Find Files' },
+      {'<leader>F',  function() Snacks.picker.grep({ layout = { preset = 'ivy' } }) end,                             desc = 'Grep' },
+      {'<leader>bb', function() Snacks.picker.buffers() end,                                                         desc = 'Buffers' },
+      {'<leader>sc', function() Snacks.picker.colorschemes() end,                                                    desc = 'Colorschemes' },
+      {'<leader>su', function() Snacks.picker.undo() end,                                                            desc = 'undo History' },
+      {'<leader>sU', function() Snacks.picker.resume() end,                                                          desc = 'resume History' },
+      {'<leader>sk', function() Snacks.picker.keymaps() end,                                                         desc = 'keymaps' },
+      {'<leader>sm', function() Snacks.picker.marks() end,                                                           desc = 'marks' },
+      {'<leader>sh', function() Snacks.picker.highlights() end,                                                      desc = 'highlights' },
+      {'<leader>sl', function() Snacks.picker.loclist() end,                                                         desc = "Location List" },
+      {'<leader>sq', function() Snacks.picker.qflist() end,                                                          desc = "Quickfix List" },
+      {'<leader>sd', function() Snacks.picker.diagnostics() end,                                                     desc = "Diagnostics" },
+      {'<leader>sD', function() Snacks.picker.diagnostics_buffer() end,                                              desc = "Buffer Diagnostics" },
+      {'<leader>s/', function() Snacks.picker.grep_buffers() end,                                                    desc = "Grep Open Buffers" },
+
+      {'<leader>be', function() Snacks.explorer() end,                                                               desc = 'explorer' },
+      {'<leader>lt', require('utils').select_filetype,                                                               desc = 'select filetype' },
+      {'<leader>pp', function () Snacks.picker.projects() end,                                                       desc = 'select projects' },
+
+      {"gd", function() Snacks.picker.lsp_definitions() end,                                                         desc = "Goto Definition" },
+      {"gD", function() Snacks.picker.lsp_declarations() end,                                                        desc = "Goto Declaration" },
+      {"gr", function() Snacks.picker.lsp_references() end, nowait = true,                                           desc = "References" },
+      {"gI", function() Snacks.picker.lsp_implementations() end,                                                     desc = "Goto Implementation" },
+      {"gy", function() Snacks.picker.lsp_type_definitions() end,                                                    desc = "Goto T[y]pe Definition" },
+      {'<leader>o',  function() Snacks.picker.lsp_symbols(require('utils.init').kind_filter) end,                    desc = 'LSP Symbols' },
+      {'<leader>O',  function() Snacks.picker.lsp_workspace_symbols(require('utils.init').kind_filter) end,          desc = 'LSP Workspace Symbols' },
     },
     init = function()
       vim.api.nvim_create_autocmd('User', {

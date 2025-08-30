@@ -29,7 +29,6 @@ local M = {
         { '<leader>r', group = 'transform', icon = { icon = ' ' } },
         { '<leader>R', group = 'HTTP', icon = { icon = ' ' } },
         { '<leader>q', group = 'peek', icon = { icon = ' ' } },
-        { '<leader> ', group = 'flash', icon = { icon = ' ' } },
         { '[', group = 'prev', icon = { icon = '󰮳 ' } },
         { ']', group = 'next', icon = { icon = '󰮱 ' } },
         { 'g', group = 'goto' },

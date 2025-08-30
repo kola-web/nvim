@@ -93,6 +93,8 @@ local M = {
     end,
   },
 
+  { 'nvim-mini/mini.jump', version = '*', opts = {} },
+
   {
     'echasnovski/mini.jump2d',
     version = '*',
