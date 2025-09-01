@@ -15,6 +15,9 @@ vim.g.maplocalleader = '\\'
 -- 启用真彩色支持，使终端显示更丰富的颜色
 vim.opt.termguicolors = true
 
+-- 跳转时恢复窗口视图（如折叠、光标等），让 <C-o>/<C-i> 跳转更完整和直观
+vim.opt.jumpoptions = 'view'
+
 -- 行号设置
 vim.opt.number = true          -- 显示绝对行号
 vim.opt.relativenumber = true  -- 显示相对行号（便于快速跳转）
