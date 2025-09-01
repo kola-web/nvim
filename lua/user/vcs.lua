@@ -182,46 +182,6 @@ local M = {
     },
   },
 
-  -- {
-  --   'lewis6991/gitsigns.nvim',
-  --   event = 'VeryLazy',
-  --   opts = {
-  --     current_line_blame = true,
-  --     signs = {
-  --       add = { text = '+' },
-  --       change = { text = '~' },
-  --       delete = { text = '_' },
-  --       topdelete = { text = '‾' },
-  --       changedelete = { text = '~' },
-  --     },
-  --     on_attach = function(buffer)
-  --       local gs = package.loaded.gitsigns
-  --
-  --       local function map(mode, l, r, desc)
-  --         vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-  --       end
-  --
-  --       -- stylua: ignore start
-  --       map('n', ']h', function() if vim.wo.diff then vim.cmd.normal({ ']c', bang = true }) else gs.nav_hunk('next') end end, 'Next Hunk')
-  --       map('n', '[h', function() if vim.wo.diff then vim.cmd.normal({ '[c', bang = true }) else gs.nav_hunk('prev') end end, 'Prev Hunk')
-  --       map('n', ']H', function()gs.nav_hunk('last')end, 'Last Hunk')
-  --       map('n', '[H', function()gs.nav_hunk('first')end, 'First Hunk')
-  --       -- stylua: ignore end
-  --       map({ 'n', 'v' }, '<leader>gs', ':Gitsigns stage_hunk<CR>', 'Stage Hunk')
-  --       map({ 'n', 'v' }, '<leader>gr', ':Gitsigns reset_hunk<CR>', 'Reset Hunk')
-  --       map('n', '<leader>gu', gs.undo_stage_hunk, 'Undo Stage Hunk')
-  --       map('n', '<leader>gS', gs.stage_buffer, 'Stage Buffer')
-  --       map('n', '<leader>gR', gs.reset_buffer, 'Reset Buffer')
-  --       map('n', '<leader>gi', gs.preview_hunk_inline, 'Preview Hunk Inline')
-  --       map('n', '<leader>gp', gs.preview_hunk, 'Preview Preview Hunk')
-  --       map('n', '<leader>gD', gs.toggle_word_diff, 'toggle word diff')
-  --       map('n', '<leader>gq', gs.setqflist, 'git quicklist')
-  --       map('n', '<leader>gl', gs.setloclist, 'git locallist')
-  --       map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', 'GitSigns Select Hunk')
-  --     end,
-  --   },
-  -- },
-
   {
     'mhinz/vim-signify',
     event = 'BufReadPre',
