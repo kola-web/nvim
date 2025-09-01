@@ -162,6 +162,7 @@ local M = {
             { 'n', 'xb', actions.toggle_files, { desc = '切换文件面板' } },
             { 'n', 'g<C-x>', actions.cycle_layout, { desc = '循环浏览可用布局' } },
             { 'n', '?', actions.help('file_history_panel'), { desc = '打开帮助面板' } },
+            { 'n', 'q', '<cmd>DiffviewClose<cr>', { desc = 'Close diffview' } },
           },
           option_panel = {
             { 'n', '<tab>', actions.select_entry, { desc = '更改当前选项' } },
