@@ -59,7 +59,7 @@ local M = {
           indent = { only_current = true },
           scope = { only_current = true },
         },
-        image = { enabled = true },
+        image = { enabled = false },
         lazygit = { enabled = false },
         notifier = { enabled = true, level = vim.log.levels.TRACE },
         picker = {
