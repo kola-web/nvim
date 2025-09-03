@@ -10,7 +10,7 @@ M.servers = {
   'emmet_language_server',
   'eslint',
   'html',
-  'phpactor',
+  'intelephense',
   'jsonls',
   'lua_ls',
   'pyright',
@@ -40,7 +40,6 @@ M.null_servers = {
   'stylua',
   'taplo',
   'copilot-language-server',
-  'php-cs-fixer'
   -- 'kulala-fmt',
 }
 
