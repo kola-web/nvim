@@ -13,10 +13,10 @@ return {
     LogPoint = '.>',
   },
   diagnostics = {
-    Error = '󰅚 ',
-    Warn = '󰀪 ',
-    Hint = '󰌶 ',
-    Info = '󰋽 ',
+    Error = ' ',
+    Warn = ' ',
+    Hint = ' ',
+    Info = ' ',
   },
   git = {
     added = ' ',
@@ -54,7 +54,7 @@ return {
     Package = ' ',
     Property = ' ',
     Reference = ' ',
-    Snippet = ' ',
+    Snippet = '󱄽 ',
     String = ' ',
     Struct = '󰆼 ',
     Supermaven = ' ',

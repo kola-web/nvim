@@ -12,6 +12,8 @@ local M = {
           theme = 'auto',
           globalstatus = true,
           disabled_filetypes = { statusline = { 'dashboard', 'alpha', 'ministarter', 'snacks_dashboard' } },
+          component_separators = { left = '', right = '' },
+          section_separators = { left = '', right = '' },
         },
         sections = {
           lualine_a = { 'mode' },
