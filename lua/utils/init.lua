@@ -139,6 +139,7 @@ M.conformFormat = function()
     jsonc = { name = 'eslint', lsp_format = 'last' },
     dockerfile = { name = 'dockerls', lsp_format = 'prefer' },
     ps1 = { name = 'powershell_es', lsp_format = 'prefer' },
+    http = { name = 'kulala', lsp_format = 'prefer' },
   }
 
   local buf = vim.api.nvim_get_current_buf()
