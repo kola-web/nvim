@@ -140,7 +140,7 @@ M.conformFormat = function()
     dockerfile = { name = 'dockerls', lsp_format = 'prefer' },
     ps1 = { name = 'powershell_es', lsp_format = 'prefer' },
     http = { name = 'kulala', lsp_format = 'prefer' },
-    php = { name = 'intelephense', lsp_format = 'fallback' },
+    php = { name = 'intelephense', lsp_format = 'prefer' },
   }
 
   local buf = vim.api.nvim_get_current_buf()
