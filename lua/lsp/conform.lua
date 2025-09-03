@@ -37,6 +37,8 @@ local M = {
         rust = { 'rustfmt' },
 
         python = { 'isort', 'black' },
+
+        php = { 'php_cs_fixer' },
       },
       formatters = {
         ['blade-formatter'] = {
