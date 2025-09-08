@@ -205,7 +205,10 @@ local M = {
 
   {
     'NeogitOrg/neogit',
-    dependencies = {},
+    dependencies = {
+      'plenary.nvim',
+      'diffview.nvim',
+    },
     opts = {},
     keys = {
       { '<leader>gg', '<cmd>Neogit<cr>', desc = 'Neogit' },
