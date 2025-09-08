@@ -1,4 +1,5 @@
-local colorscheme = 'gruvbox-material'
+-- local colorscheme = 'gruvbox-material'
+local colorscheme = 'dracula'
 
 local init = function(theme)
   return function()
@@ -54,6 +55,12 @@ local M = {
     lazy = true,
     opts = {},
     init = init('gruvbox'),
+  },
+  {
+    'Mofiqul/dracula.nvim',
+    lazy = true,
+    opts = {},
+    init = init('dracula'),
   },
 }
 
