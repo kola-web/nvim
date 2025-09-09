@@ -1,5 +1,5 @@
--- local colorscheme = 'gruvbox-material'
-local colorscheme = 'dracula'
+local colorscheme = 'gruvbox-material'
+-- local colorscheme = 'dracula'
 
 local init = function(theme)
   return function()
