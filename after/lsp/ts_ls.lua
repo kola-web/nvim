@@ -46,7 +46,6 @@ return {
 
     if vim.bo.filetype == 'vue' then
       client.server_capabilities.semanticTokensProvider.full = false
-      client.server_capabilities.documentHighlightProvider = false -- disable automatic under cursor word highlights
     else
       client.server_capabilities.semanticTokensProvider.full = true
     end
