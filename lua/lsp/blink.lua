@@ -34,8 +34,8 @@ local M = {
         ['<C-p>'] = { 'select_prev', 'snippet_backward', 'fallback_to_mappings' },
         ['<C-n>'] = { 'select_next', 'snippet_forward', 'fallback_to_mappings' },
 
-        ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
-        ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+        ['<C-b>'] = { 'scroll_signature_up', 'scroll_documentation_up', 'fallback' },
+        ['<C-f>'] = { 'scroll_signature_down', 'scroll_documentation_down', 'fallback' },
 
         ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
       },
@@ -67,6 +67,11 @@ local M = {
                   return hl
                 end,
               },
+            },
+            columns = {
+              { 'kind_icon' },
+              { 'label', 'label_description', gap = 1 },
+              { 'source_name' },
             },
           },
         },

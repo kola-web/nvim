@@ -1,0 +1,26 @@
+{
+  "ellipsis-multi": {
+    "scope": "css,scss",
+    "prefix": "ellipsis-multi",
+    "body": [
+      "display: -webkit-box;",
+      "overflow: hidden;",
+      "-webkit-line-clamp: $1;",
+      "-webkit-box-orient: vertical;",
+      "word-break: break-all; // 可选，根据需要添加",
+      "$2"
+    ],
+    "description": "多行文本溢出显示省略号"
+  },
+  "ellipsis-single": {
+    "scope": "css,scss",
+    "prefix": "ellipsis-single",
+    "body": [
+      "white-space: nowrap;",
+      "overflow: hidden;",
+      "text-overflow: ellipsis;",
+      "$1"
+    ],
+    "description": "单行文本溢出显示省略号"
+  }
+}

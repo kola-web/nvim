@@ -34,8 +34,16 @@
         "language": [
           "lua"
         ]
+      },
+      {
+        "path": "./css.json",
+        "language": [
+          "css",
+          "scss",
+          "less",
+          "vue"
+        ]
       }
     ]
   }
 }
-
