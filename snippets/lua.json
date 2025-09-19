@@ -1,1 +1,7 @@
-{}
+{
+  "schema": {
+    "prefix": "schema",
+    "body": ["\"\\$schema\":\"$1\","],
+    "description": ""
+  }
+}
