@@ -5,6 +5,7 @@ M.root_patterns = { '.git', '.svn', 'lua' }
 M.servers = {
   'bashls',
   'cssls',
+  'somesass_ls',
   'docker_compose_language_service',
   'dockerls',
   'emmet_language_server',
