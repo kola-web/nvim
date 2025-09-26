@@ -1,8 +1,8 @@
 local M = {
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
@@ -44,7 +44,7 @@ local M = {
       },
     },
     config = function(_, opts)
-      require('nvim-treesitter.configs').setup(opts)
+      require('nvim-treesitter').setup(opts)
     end,
   },
   {
