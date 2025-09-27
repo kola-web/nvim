@@ -159,6 +159,15 @@ local M = {
       { '<leader>ln', '<cmd>Neoconf<cr>', desc = 'Neoconf' },
     },
   },
+  -- {
+  --   'kola-web/css-tools.nvim',
+  --   ft = { 'css', 'scss', 'less' },
+  --   opts = {
+  --     customData = {
+  --       vim.fn.expand(vim.fn.stdpath('config') .. '/custom-data/css-data.json'),
+  --     },
+  --   },
+  -- },
 }
 
 return M

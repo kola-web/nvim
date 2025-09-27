@@ -1,0 +1,50 @@
+{
+  "version": 1.1,
+  "properties": [
+    {
+      "name": "white-space",
+      "description": "指定元素内空白的处理方式，控制文本换行和空白字符的显示",
+      "values": [
+        {
+          "name": "normal",
+          "description": "默认值。空白会被浏览器忽略，文本自动换行到下一行"
+        },
+        {
+          "name": "nowrap",
+          "description": "文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止"
+        },
+        {
+          "name": "pre",
+          "description": "空白会被浏览器保留，其行为方式类似 HTML 中的 <pre> 标签，文本不自动换行"
+        },
+        {
+          "name": "pre-wrap",
+          "description": "保留空白符序列，但正常地进行换行，结合了 pre 和 normal 的特性"
+        },
+        {
+          "name": "pre-line",
+          "description": "合并空白符序列，但保留换行符，文本会自动换行"
+        },
+        {
+          "name": "break-spaces",
+          "description": "与 pre-wrap 类似，但任何保留的空白序列总是占用空间，并且换行机会存在于每个保留的空白符之间"
+        },
+        {
+          "name": "inherit",
+          "description": "从父元素继承 white-space 属性的值"
+        },
+        {
+          "name": "initial",
+          "description": "设置该属性为它的默认值"
+        },
+        {
+          "name": "unset",
+          "description": "如果该属性从父元素继承，则重置为继承的值；否则设置为默认值"
+        }
+      ]
+    }
+  ],
+  "atDirectives": [],
+  "pseudoClasses": [],
+  "pseudoElements": []
+}

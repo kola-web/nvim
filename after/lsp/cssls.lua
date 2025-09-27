@@ -5,13 +5,13 @@ return {
   },
   settings = {
     css = {
-      customdata = { vim.fn.stdpath('config') .. '/custom-data/css.css-data.json' },
+      customData = { vim.fn.expand(vim.fn.stdpath('config') .. '/custom-data/css-data.json') },
     },
     scss = {
-      customdata = { vim.fn.stdpath('config') .. '/custom-data/css.css-data.json' },
+      customData = { vim.fn.expand(vim.fn.stdpath('config') .. '/custom-data/css-data.json') },
     },
     less = {
-      customdata = { vim.fn.stdpath('config') .. '/custom-data/css.css-data.json' },
+      customData = { vim.fn.expand(vim.fn.stdpath('config') .. '/custom-data/css-data.json') },
     },
   },
 }
