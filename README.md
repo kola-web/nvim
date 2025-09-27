@@ -21,3 +21,11 @@ DenoLand.Deno
 ```lua
 lua print(vim.bo.filetype)
 ```
+
+## Q&A
+
+1. wsl 剪切板处理
+
+```bash
+sudo apt install -y xsel xclip
+```
