@@ -6,6 +6,10 @@ local M = {
       lang = {
         autohotkey = '; %s',
         ahk = '; %s',
+        vue = {
+          '<!-- %s -->',
+          script_element = '// %s',
+        },
       },
     },
   },
