@@ -1,8 +1,8 @@
 local M = {
   {
     'nvim-treesitter/nvim-treesitter',
-    branch = 'main',
     build = ':TSUpdate',
+    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
@@ -43,9 +43,6 @@ local M = {
         'yaml',
       },
     },
-    config = function(_, opts)
-      require('nvim-treesitter').setup(opts)
-    end,
   },
   {
     'windwp/nvim-ts-autotag',
