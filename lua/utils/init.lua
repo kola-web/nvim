@@ -5,6 +5,7 @@ M.root_patterns = { '.git', '.svn', 'lua' }
 M.servers = {
   'bashls',
   'cssls',
+  'copilot',
   'docker_compose_language_service',
   'dockerls',
   'emmet_language_server',
@@ -16,7 +17,6 @@ M.servers = {
   'pyright',
   'rust_analyzer',
   'ts_ls',
-  -- 'vtsls',
   'vue_ls',
   'vuels',
   'yamlls',
@@ -39,7 +39,6 @@ M.null_servers = {
   'shfmt',
   'stylua',
   'taplo',
-  'copilot-language-server',
   'php-cs-fixer',
 }
 

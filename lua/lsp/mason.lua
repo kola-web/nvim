@@ -31,14 +31,13 @@ local M = {
   },
   {
     'mason-org/mason-lspconfig.nvim',
+    dependencies = {
+      'mason.nvim',
+      'nvim-lspconfig',
+    },
     opts = {
       ensure_installed = require('utils.init').servers,
-      automatic_enable = {
-        -- exclude = {
-        --   'vue_ls', -- handled by nvim-lua/plenary.nvim
-        --   'vtsls',
-        -- },
-      },
+      automatic_enable = {},
     },
   },
 }
