@@ -26,7 +26,7 @@ local M = {
   {
     'folke/sidekick.nvim',
     opts = {},
-    enabled = false,
+    enabled = true,
     keys = {
       {
         '<C-l>',
