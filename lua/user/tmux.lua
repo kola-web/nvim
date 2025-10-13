@@ -5,19 +5,20 @@ local M = {
     'mrjones2014/smart-splits.nvim',
     lazy = false,
     build = is_win and '' or 'bash ./kitty/install-kittens.bash',
-    -- stylua: ignore
-    keys = {
-      -- add a keymap to browse plugin files
-      { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "move cursor left", },
-      { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "move cursor down" },
-      { "<C-k>", function() require("smart-splits").move_cursor_up() end, desc = "move cursor up" },
-      { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "move cursor right" },
-
-      { "<C-left>", function() require("smart-splits").resize_left() end, desc = "resize left" },
-      { "<C-down>", function() require("smart-splits").resize_down() end, desc = "resize down" },
-      { "<C-up>", function() require("smart-splits").resize_up() end, desc = "resize up" },
-      { "<C-right>", function() require("smart-splits").resize_right() end, desc = "resize right" },
-    },
+    opts = {},
+    init = function()
+      -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
+      vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left)
+      vim.keymap.set('n', '<A-j>', require('smart-splits').resize_down)
+      vim.keymap.set('n', '<A-k>', require('smart-splits').resize_up)
+      vim.keymap.set('n', '<A-l>', require('smart-splits').resize_right)
+      -- moving between splits
+      vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
+      vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
+      vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
+      vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+      vim.keymap.set('n', '<C-\\>', require('smart-splits').move_cursor_previous)
+    end,
   },
 }
 
