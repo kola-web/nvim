@@ -25,7 +25,13 @@ local M = {
   },
   {
     'folke/sidekick.nvim',
-    opts = {},
+    opts = {
+      cli = {
+        tools = {
+          qwen = { cmd = { 'qwen' } },
+        },
+      },
+    },
     enabled = true,
     keys = {
       {
@@ -38,9 +44,10 @@ local M = {
         end,
         expr = true,
         desc = 'Goto/Apply Next Edit Suggestion',
+        mode = { 'i' },
       },
       {
-        '<C-i>',
+        '<C-A-i>',
         function()
           require('sidekick.cli').toggle()
         end,
@@ -59,8 +66,6 @@ local M = {
         function()
           require('sidekick.cli').select()
         end,
-        -- Or to select only installed tools:
-        -- require("sidekick.cli").select({ filter = { installed = true } })
         desc = 'Select CLI',
       },
       {
