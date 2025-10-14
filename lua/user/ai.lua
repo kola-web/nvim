@@ -1,6 +1,6 @@
 local M = {
   {
-    -- enabled = false,
+    enabled = false,
     'github/copilot.vim',
     event = 'VeryLazy',
     config = function()
