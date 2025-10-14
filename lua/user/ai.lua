@@ -1,6 +1,6 @@
 local M = {
   {
-    enabled = false,
+    -- enabled = false,
     'github/copilot.vim',
     event = 'VeryLazy',
     config = function()
@@ -25,14 +25,24 @@ local M = {
   },
   {
     'folke/sidekick.nvim',
-    opts = {
-      cli = {
-        tools = {
-          qwen = { cmd = { 'qwen' } },
-        },
-      },
-    },
     enabled = true,
+    opts = function()
+      return {
+        cli = {
+          ---@type table<string, sidekick.cli.Config|{}>
+          tools = {
+            qwen = {
+              cmd = { 'qwen' },
+              env = {
+                -- $env:HTTP_PROXY = '';$env:HTTPS_PROXY = '';
+                HTTP_PROXY = '',
+                HTTPS_PROXY = '',
+              },
+            },
+          },
+        },
+      }
+    end,
     keys = {
       {
         '<C-l>',

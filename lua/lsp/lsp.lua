@@ -148,9 +148,7 @@ local M = {
           status = false
         end
 
-        if status then
-          vim.lsp.enable(server)
-        end
+        vim.lsp.enable(server, status)
       end
     end,
   },
