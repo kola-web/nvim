@@ -8,8 +8,6 @@ vim.g.mapleader = vim.g.vscode and '\\' or ' '
 -- 设置局部领导者键
 vim.g.maplocalleader = '\\'
 
-vim.g.copilot_disable_notifications = 1
-
 -- ===========================
 -- 显示与界面设置
 -- ===========================

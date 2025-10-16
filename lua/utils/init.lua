@@ -354,4 +354,12 @@ M.find_latest_volta_node = function()
   end
 end
 
+M.openSyatemExplorer = function()
+  if vim.fn.has('win32') == 1 then
+    os.execute('explorer .')
+  else
+    os.execute('open .')
+  end
+end
+
 return M

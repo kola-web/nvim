@@ -14,8 +14,6 @@ M.setup = function()
       { import = 'user' },
       { import = 'user.preview' },
       { import = 'lsp' },
-      -- { import = 'lsp-zero' },
-      -- { import = 'coc' },
     },
     defaults = {
       -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -37,6 +35,25 @@ M.setup = function()
     change_detection = {
       enabled = true,
       notify = false,
+    },
+    ui = {
+      -- If you are using a Nerd Font: set icons to an empty table which will use the
+      -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
+      icons = {
+        cmd = '⌘',
+        config = '🛠',
+        event = '📅',
+        ft = '📂',
+        init = '⚙',
+        keys = '🗝',
+        plugin = '🔌',
+        runtime = '💻',
+        require = '🌙',
+        source = '📄',
+        start = '🚀',
+        task = '📌',
+        lazy = '💤 ',
+      },
     },
     performance = {
       rtp = {

@@ -150,6 +150,8 @@ local M = {
           vim.keymap.set('i', '<C-b>', '<C-o>h', { buffer = buf_id, desc = 'move cursor left' })
 
           vim.keymap.set('n', 'gs', files_grug_far_replace, { buffer = buf_id, desc = 'Search in directory' })
+
+          vim.keymap.set('n', '-', require('utils.init').openSyatemExplorer, { buffer = buf_id, desc = 'open system explorer' })
         end,
       })
 
