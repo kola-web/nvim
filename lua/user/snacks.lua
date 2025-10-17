@@ -246,8 +246,8 @@ local M = {
       {"gr", function() Snacks.picker.lsp_references() end, nowait = true,                                           desc = "References" },
       {"gI", function() Snacks.picker.lsp_implementations() end,                                                     desc = "Goto Implementation" },
       {"gy", function() Snacks.picker.lsp_type_definitions() end,                                                    desc = "Goto T[y]pe Definition" },
-      {'<leader>o',  function() Snacks.picker.lsp_symbols(require('utils.init').kind_filter) end,                    desc = 'LSP Symbols' },
-      {'<leader>O',  function() Snacks.picker.lsp_workspace_symbols(require('utils.init').kind_filter) end,          desc = 'LSP Workspace Symbols' },
+      {'<leader>lo',  function() Snacks.picker.lsp_symbols(require('utils').kind_filter) end,                        desc = 'LSP Symbols' },
+      {'<leader>lO',  function() Snacks.picker.lsp_workspace_symbols(require('utils').kind_filter) end,              desc = 'LSP Workspace Symbols' },
     },
     init = function()
       vim.api.nvim_create_autocmd('User', {

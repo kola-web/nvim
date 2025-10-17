@@ -5,14 +5,6 @@ local M = {
     opts = function()
       local icons = require('utils.icons')
       local treesitter = require('nvim-treesitter')
-      local codecompanion = require('utils.lueline-ai')
-
-      local sideIcons = {
-        Error = { ' ', 'DiagnosticError' },
-        Inactive = { ' ', 'MsgArea' },
-        Warning = { ' ', 'DiagnosticWarn' },
-        Normal = { require('utils.icons').kinds.Copilot, 'Special' },
-      }
 
       local opts = {
         options = {
@@ -53,24 +45,21 @@ local M = {
             },
           },
           lualine_x = {
+            { 'overseer' },
             Snacks.profiler.status(),
-            codecompanion,
-            'lsp_status',
-            'filetype',
             {
               function()
-                local status = require('sidekick.status').get()
-                return status and vim.tbl_get(sideIcons, status.kind, 1)
+                return icons.ai[vim.g.ai]
               end,
               cond = function()
-                return require('sidekick.status').get() ~= nil
-              end,
-              color = function()
-                local status = require('sidekick.status').get()
-                local hl = status and (status.busy and 'DiagnosticWarn' or vim.tbl_get(sideIcons, status.kind, 2))
-                return { fg = Snacks.util.color(hl) }
+                return icons.ai[vim.g.ai] ~= nil
               end,
             },
+            {
+              'lsp_status',
+              icon = '',
+            },
+            'filetype',
             {
               'fileformat',
               symbols = {

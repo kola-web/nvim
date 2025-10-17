@@ -26,6 +26,7 @@ local M = {
   {
     'folke/sidekick.nvim',
     enabled = true,
+    event = 'VeryLazy',
     opts = function()
       return {
         cli = {
@@ -47,10 +48,15 @@ local M = {
       {
         '<C-l>',
         function()
-          -- if there is a next edit, jump to it, otherwise apply it if any
-          if not require('sidekick').nes_jump_or_apply() then
-            return '<C-l>' -- fallback to normal tab
+          if require('sidekick').nes_jump_or_apply() then
+            return
           end
+
+          if vim.lsp.inline_completion.get() then
+            return
+          end
+
+          return '<C-l>'
         end,
         expr = true,
         desc = 'Goto/Apply Next Edit Suggestion',
@@ -122,57 +128,18 @@ local M = {
         silent = true,
         show_label = false,
       })
-      vim.keymap.set('i', '<C-l>', neocodeium.accept)
-      vim.keymap.set('i', '<C-j>', function()
-        neocodeium.cycle_or_complete()
-      end)
-      vim.keymap.set('i', '<C-k>', function()
-        neocodeium.cycle_or_complete(-1)
-      end)
-      vim.keymap.set('i', '<C-]>', function()
-        neocodeium.clear()
-      end)
     end,
-  },
-  {
-    'milanglacier/minuet-ai.nvim',
-    enabled = false,
-    config = function()
-      require('minuet').setup({
-        virtualtext = {
-          auto_trigger_ft = { '*' },
-          keymap = {
-            -- accept whole completion
-            accept = '<C-l>',
-            -- accept one line
-            accept_line = '<C-S-l>',
-            -- accept n lines (prompts for number)
-            -- e.g. "A-z 2 CR" will accept 2 lines
-            accept_n_lines = '<nil>',
-            -- Cycle to prev completion item, or manually invoke completion
-            prev = '<C-k>',
-            -- Cycle to next completion item, or manually invoke completion
-            next = '<C-j>',
-            dismiss = '<C-]>',
-          },
-        },
-
-        provider = 'openai_compatible',
-        provider_options = {
-          openai_compatible = {
-            end_point = 'https://api.deepseek.com/chat/completions',
-            api_key = function()
-              return os.getenv('DEEPSEEK_KEY')
-            end,
-            name = 'deepseek',
-            optional = {
-              max_tokens = 256,
-              top_p = 0.9,
-            },
-          },
-        },
-      })
-    end,
+    keys = {
+      {
+        '<C-l>',
+        function()
+          require('neocodeium').accept()
+        end,
+        desc = 'Neocodeium accept',
+        mode = { 'i' },
+        silent = true,
+      },
+    },
   },
   {
     'olimorris/codecompanion.nvim',

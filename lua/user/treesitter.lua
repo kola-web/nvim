@@ -33,6 +33,8 @@ local M = {
         'powershell',
         'python',
         'regex',
+        'ron',
+        'rust',
         'scss',
         'toml',
         'tsx',

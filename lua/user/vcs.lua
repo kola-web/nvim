@@ -188,7 +188,13 @@ local M = {
     event = 'BufReadPre',
     init = function()
       vim.g.signify_skip = { vcs = { allow = { 'git', 'svn' } } }
-      vim.g.signify_sign_change = '~'
+      vim.g.signify_priority = 5
+      vim.g.signify_sign_show_count = 0
+      vim.g.signify_sign_add = '▎'
+      vim.g.signify_sign_change = '▎'
+      vim.g.signify_sign_change_delete = '▎'
+      vim.g.signify_sign_delete = ""
+      vim.g.signify_sign_delete_first_line = ""
 
       local is_win = require('utils.init').is_win()
       if is_win then

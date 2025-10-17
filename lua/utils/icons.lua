@@ -65,4 +65,8 @@ return {
     Value = ' ',
     Variable = '󰀫 ',
   },
+  ai = {
+    NeoCodeium = '󰘦 ',
+    Copilot = ' ',
+  },
 }
