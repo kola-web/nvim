@@ -48,11 +48,10 @@ local M = {
       {
         '<C-l>',
         function()
-          if require('sidekick').nes_jump_or_apply() then
-            return
+          -- if there is a next edit, jump to it, otherwise apply it if any
+          if not require('sidekick').nes_jump_or_apply() then
+            return '<C-l>'
           end
-
-          return '<C-l>'
         end,
         expr = true,
         desc = 'Goto/Apply Next Edit Suggestion',
