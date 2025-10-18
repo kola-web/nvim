@@ -52,10 +52,6 @@ local M = {
             return
           end
 
-          if vim.lsp.inline_completion.get() then
-            return
-          end
-
           return '<C-l>'
         end,
         expr = true,
