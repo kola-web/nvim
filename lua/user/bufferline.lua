@@ -29,6 +29,8 @@ local M = {
         separator_at_end = false,
       },
       minimum_padding = 0,
+      exclude_ft = { 'qf' },
+      exclude_name = {},
     },
     keys = {
       { '<S-tab>', '<cmd>BufferPrevious<cr>', desc = 'Prev buffer' },

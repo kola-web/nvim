@@ -40,6 +40,7 @@ local M = {
         winblend = 0,
       },
     },
+    templates = { 'builtin', 'user.run_script' },
   },
   -- stylua: ignore
   keys = {
