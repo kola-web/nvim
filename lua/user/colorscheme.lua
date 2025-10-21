@@ -1,5 +1,7 @@
-local colorscheme = 'gruvbox-material'
--- local colorscheme = 'dracula'
+local colorscheme = 'catppuccin'
+-- local colorscheme = 'gruvbox-material'
+-- local colorscheme = 'tokyonight'
+-- local colorscheme = 'kanagawa'
 
 local init = function(theme)
   return function()
@@ -10,6 +12,12 @@ local init = function(theme)
 end
 
 local M = {
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    init = init('catppuccin'),
+  },
   {
     'folke/tokyonight.nvim',
     lazy = true,

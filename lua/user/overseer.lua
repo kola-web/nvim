@@ -23,6 +23,7 @@ local M = {
         ['<C-j>'] = false,
         ['<C-k>'] = false,
         ['<C-l>'] = false,
+        ['oo'] = '<cmd>OverseerQuickAction restart<cr>',
       },
     },
     form = {

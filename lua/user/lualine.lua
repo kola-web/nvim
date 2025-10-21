@@ -55,10 +55,7 @@ local M = {
                 return icons.ai[vim.g.ai] ~= nil
               end,
             },
-            {
-              'lsp_status',
-              icon = '',
-            },
+            'lsp_status',
             'filetype',
             {
               'fileformat',
