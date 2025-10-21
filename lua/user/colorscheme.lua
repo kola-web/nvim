@@ -1,5 +1,5 @@
-local colorscheme = 'catppuccin'
--- local colorscheme = 'gruvbox-material'
+-- local colorscheme = 'catppuccin'
+local colorscheme = 'gruvbox-material'
 -- local colorscheme = 'tokyonight'
 -- local colorscheme = 'kanagawa'
 
