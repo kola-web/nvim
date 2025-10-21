@@ -346,14 +346,6 @@ M.is_vue2_project = function()
   return false
 end
 
-M.find_latest_volta_node = function()
-  if vim.fn.has('win32') == 1 then
-    return vim.fn.getenv('LOCALAPPDATA') .. '/Volta/tools/image/node/22.16.0/node.exe'
-  else
-    return 'node'
-  end
-end
-
 M.openSyatemExplorer = function()
   if vim.fn.has('win32') == 1 then
     os.execute('explorer .')
