@@ -27,7 +27,7 @@ local M = {
         wxss = prettier,
         json = prettier,
         jsonc = prettier,
-        yaml = prettier,
+        yaml = {},
         markdown = prettier,
 
         toml = { 'taplo' },

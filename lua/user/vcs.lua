@@ -182,7 +182,6 @@ local M = {
       { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'DiffviewOpen' },
     },
   },
-
   {
     'mhinz/vim-signify',
     event = 'BufReadPre',
@@ -193,8 +192,9 @@ local M = {
       vim.g.signify_sign_add = '▎'
       vim.g.signify_sign_change = '▎'
       vim.g.signify_sign_change_delete = '▎'
-      vim.g.signify_sign_delete = ""
-      vim.g.signify_sign_delete_first_line = ""
+      vim.g.signify_sign_delete = ''
+      vim.g.signify_sign_delete_first_line = ''
+      vim.g.signify_number_highlight = 1
 
       local is_win = require('utils.init').is_win()
       if is_win then
@@ -204,11 +204,11 @@ local M = {
     keys = {
       { '<leader>gD', '<cmd>SignifyDiff<cr>', desc = 'SignifyDiff' },
       { '<leader>gi', '<cmd>SignifyHunkDiff<cr>', desc = 'SignifyHunkDiff' },
+      { '<leader>gu', '<cmd>SignifyHunkUndo<cr>', desc = 'SignifyHunkUndo' },
       { '[h', '<plug>(signify-prev-hunk)', desc = 'prev hunk' },
       { ']h', '<plug>(signify-next-hunk)', desc = 'next hunk' },
     },
   },
-
   {
     'NeogitOrg/neogit',
     dependencies = {

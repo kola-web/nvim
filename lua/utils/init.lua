@@ -140,6 +140,7 @@ M.conformFormat = function()
     ps1 = { name = 'powershell_es', lsp_format = 'prefer' },
     http = { name = 'kulala', lsp_format = 'prefer' },
     php = { name = 'intelephense', lsp_format = 'prefer' },
+    yaml = { name = 'yamlls', lsp_format = 'prefer' },
   }
 
   local buf = vim.api.nvim_get_current_buf()

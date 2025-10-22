@@ -27,6 +27,7 @@ local M = {
     'folke/sidekick.nvim',
     enabled = true,
     event = 'VeryLazy',
+    dependencies = { 'monkoose/neocodeium' },
     opts = function()
       return {
         cli = {
@@ -50,10 +51,9 @@ local M = {
         function()
           -- if there is a next edit, jump to it, otherwise apply it if any
           if not require('sidekick').nes_jump_or_apply() then
-            return '<C-l>'
+            require('neocodeium').accept()
           end
         end,
-        expr = true,
         desc = 'Goto/Apply Next Edit Suggestion',
         mode = { 'i' },
       },
@@ -124,17 +124,6 @@ local M = {
         show_label = false,
       })
     end,
-    keys = {
-      {
-        '<C-l>',
-        function()
-          require('neocodeium').accept()
-        end,
-        desc = 'Neocodeium accept',
-        mode = { 'i' },
-        silent = true,
-      },
-    },
   },
   {
     'olimorris/codecompanion.nvim',
