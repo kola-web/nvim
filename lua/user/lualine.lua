@@ -46,7 +46,6 @@ local M = {
           },
           lualine_x = {
             { 'overseer' },
-            Snacks.profiler.status(),
             {
               function()
                 return icons.ai[vim.g.ai]

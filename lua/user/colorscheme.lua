@@ -1,7 +1,8 @@
 -- local colorscheme = 'catppuccin'
-local colorscheme = 'gruvbox-material'
+-- local colorscheme = 'gruvbox-material'
 -- local colorscheme = 'tokyonight'
 -- local colorscheme = 'kanagawa'
+local colorscheme = 'everforest'
 
 local init = function(theme)
   return function()
@@ -69,6 +70,15 @@ local M = {
     lazy = true,
     opts = {},
     init = init('dracula'),
+  },
+  {
+    'sainnhe/everforest',
+    lazy = true,
+    opts = {},
+    init = init('everforest'),
+    config = function()
+      vim.g.everforest_background = 'hard'
+    end,
   },
 }
 
