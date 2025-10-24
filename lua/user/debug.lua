@@ -5,11 +5,13 @@ local M = {
     opts = function()
       local web = {
         left = 'console.log("',
+        left_var = 'console.log("',
         right = '")',
-        mid_var = '", ',
         right_var = ')',
+        mid_var = '", ',
       }
       return {
+        highlight_lines = false,
         filetypes = {
           javascript = web,
           typescript = web,

@@ -5,7 +5,7 @@ end
 -- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kola-highlight-yank', { clear = true }),
+  group = augroup('HighlightYank'),
   callback = function()
     vim.hl.on_yank()
   end,
@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- 禁止新行注释
 vim.api.nvim_create_autocmd('BufEnter', {
+  group = augroup('NewLineComment'),
   callback = function()
     vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
   end,
@@ -21,7 +22,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 
 -- File type specific settings
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
-  group = vim.api.nvim_create_augroup('AutoHotkeyComment', {}),
+  group = augroup('AutoHotkeyComment'),
   pattern = { '*.ahk', '*.ahk2' },
   callback = function()
     vim.bo.commentstring = '; %s'
@@ -31,7 +32,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
 
 -- 切换session后删除所有buffer
 vim.api.nvim_create_autocmd({ 'User' }, {
-  group = augroup('session'),
+  group = augroup('Session'),
   pattern = { 'PersistenceLoadPre' },
   callback = function()
     Snacks.bufdelete.all()

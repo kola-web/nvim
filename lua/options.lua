@@ -8,6 +8,8 @@ vim.g.mapleader = vim.g.vscode and '\\' or ' '
 -- 设置局部领导者键
 vim.g.maplocalleader = '\\'
 
+vim.g.ai = 'NeoCodeium'
+
 -- ===========================
 -- 显示与界面设置
 -- ===========================

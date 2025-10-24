@@ -6,7 +6,7 @@ return {
         if params.message:match([[^You've reached.*limit.*Upgrade.*$]]) then
           -- ignore
           -- Snacks.notify.notify(params.message)
-          vim.lsp.enable('copilot', false)
+          -- vim.lsp.enable('copilot', false)
           vim.cmd('Sidekick nes disable')
           vim.g.ai = 'NeoCodeium'
           return vim.NIL

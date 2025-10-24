@@ -144,6 +144,9 @@ local M = {
         if server == 'vuels' and not is_vue2 then
           status = false
         end
+        -- if server == 'copilot' then
+        --   status = false
+        -- end
 
         vim.lsp.enable(server, status)
       end

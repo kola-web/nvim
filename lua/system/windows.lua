@@ -1,6 +1,13 @@
 vim.opt.shell = 'pwsh'
 vim.opt.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command'
 vim.opt.shellxquote = ''
+vim.g.copilot_node_command = 'C:\\Users\\kola\\AppData\\Local\\Volta\\tools\\image\\node\\22.18.0\\node.exe'
+
+if vim.fn.executable('volta') then
+  local current_path = vim.fn.getenv('PATH')
+  local node_bin = vim.fn.expand(vim.fn.getenv('LOCALAPPDATA') .. '/Volta/tools/image/node/22.18.0/')
+  vim.fn.setenv('PATH', node_bin .. ';' .. current_path)
+end
 
 vim.g.mini_component = function(state)
   local fs_actions = require('neo-tree.sources.filesystem.lib.fs_actions')
