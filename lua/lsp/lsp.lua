@@ -80,6 +80,7 @@ local M = {
       })
 
       local icons = require('utils.icons')
+
       vim.diagnostic.config({
         severity_sort = true,
         float = { border = 'rounded', source = 'if_many' },
