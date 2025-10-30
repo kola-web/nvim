@@ -7,6 +7,7 @@ local M = {
       { 'neoconf.nvim' },
       { 'mason-lspconfig.nvim' },
       { 'b0o/schemastore.nvim' },
+      'saghen/blink.cmp',
     },
     opts = {
       inlay_hints = {
@@ -57,9 +58,9 @@ local M = {
           keymap('n', '<leader>lr', vim.lsp.buf.rename, { desc = 'Rename' })
           keymap('n', '<leader>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = 'diagnostic' })
           keymap('n', '<leader>le', '<cmd>EslintFixAll<CR>', { desc = 'EslintFixAll' })
-          keymap('n', '<leader>li', function()
+          keymap('n', '<leader>lo', function()
             vim.lsp.buf.code_action({ apply = true, context = { only = { 'source.organizeImports' } } })
-          end, { desc = 'Organize Imports{desc=' })
+          end, { desc = 'Organize Imports' })
           keymap('n', ']]', function()
             Snacks.words.jump(vim.v.count1)
           end, { desc = 'Next Reference' })

@@ -24,6 +24,7 @@ local M = {
         { '<leader>s', group = 'search', icon = { icon = ' ' } },
         { '<leader>x', group = 'diagnostics/quickfix', icon = { icon = '󱖫 ', color = 'green' } },
         { '<leader>l', group = 'lsp', icon = { icon = ' ' } },
+        { '<leader>L', icon = { icon = ' ' } },
         { '<leader>n', group = 'notification', icon = { icon = ' ' } },
         { '<leader>p', group = 'session', icon = { icon = ' ' } },
         { '<leader>r', group = 'transform', icon = { icon = ' ' } },
