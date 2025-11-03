@@ -40,6 +40,7 @@ M.null_servers = {
   'stylua',
   'taplo',
   'php-cs-fixer',
+  'nginx-config-formatter',
 }
 
 M.kind_filter = {

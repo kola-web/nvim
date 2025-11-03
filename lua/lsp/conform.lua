@@ -39,6 +39,8 @@ local M = {
         python = { 'isort', 'black' },
 
         php = { 'php_cs_fixer' },
+
+        nginx = { 'nginxfmt' },
       },
       formatters = {
         ['blade-formatter'] = {
