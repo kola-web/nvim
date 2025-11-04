@@ -1,5 +1,6 @@
 local M = {
   'stevearc/overseer.nvim',
+  version = 'v1.6.0',
   cmd = {
     'OverseerOpen',
     'OverseerClose',
