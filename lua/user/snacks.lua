@@ -23,7 +23,7 @@ local M = {
       return {
         bigfile = {
           enabled = true,
-          size = 0.1 * 1024 * 1024, -- 0.1MB
+          size = 0.5 * 1024 * 1024, -- 0.5MB
           setup = function(ctx)
             if vim.fn.exists(':NoMatchParen') ~= 0 then
               vim.cmd([[NoMatchParen]])

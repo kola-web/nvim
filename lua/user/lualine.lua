@@ -56,6 +56,7 @@ local M = {
             },
             'lsp_status',
             'filetype',
+            'filesize',
             {
               'fileformat',
               symbols = {
