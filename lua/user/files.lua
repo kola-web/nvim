@@ -151,7 +151,8 @@ local M = {
 
           vim.keymap.set('n', 'gs', files_grug_far_replace, { buffer = buf_id, desc = 'Search in directory' })
 
-          vim.keymap.set('n', '-', require('utils.init').openSyatemExplorer, { buffer = buf_id, desc = 'open system explorer' })
+          vim.keymap.set('n', '_', require('utils.init').openSyatemExplorer, { buffer = buf_id, desc = 'open system explorer' })
+          vim.keymap.set('n', '-', require('utils.init').openCurrentSyatemExplorer, { buffer = buf_id, desc = 'open system current explorer' })
         end,
       })
 

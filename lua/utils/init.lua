@@ -356,4 +356,15 @@ M.openSyatemExplorer = function()
   end
 end
 
+M.openCurrentSyatemExplorer = function()
+  local file = MiniFiles.get_explorer_state().branch
+  local currentPath = file[#file]
+
+  if vim.fn.has('win32') == 1 then
+    os.execute('powershell -Command Invoke-Item -Path ' .. currentPath)
+  else
+    os.execute('open ' .. currentPath)
+  end
+end
+
 return M

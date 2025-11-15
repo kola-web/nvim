@@ -1,12 +1,4 @@
 {
-    "diagnostics.disable": [
-        "unused-local",
-        "missing-fields"
-    ],
-    "diagnostics.globals": [
-        "vim",
-        "vscode",
-        "Snacks"
-    ]
+  "diagnostics.disable": ["unused-local", "missing-fields"],
+  "diagnostics.globals": ["vim", "vscode", "Snacks", "MiniFiles"]
 }
-
