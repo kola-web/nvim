@@ -1,7 +1,7 @@
 local M = {
   {
-    enabled = false,
     'github/copilot.vim',
+    enabled = true,
     event = 'VeryLazy',
     config = function()
       vim.g.copilot_enabled = true
@@ -24,97 +24,8 @@ local M = {
     },
   },
   {
-    'folke/sidekick.nvim',
-    enabled = true,
-    event = 'VeryLazy',
-    dependencies = { 'monkoose/neocodeium' },
-    opts = function()
-      return {
-        cli = {
-          ---@type table<string, sidekick.cli.Config|{}>
-          tools = {
-            qwen = {
-              cmd = { 'qwen' },
-              env = {
-                -- $env:HTTP_PROXY = '';$env:HTTPS_PROXY = '';
-                HTTP_PROXY = '',
-                HTTPS_PROXY = '',
-              },
-            },
-          },
-        },
-      }
-    end,
-    keys = {
-      {
-        '<C-l>',
-        function()
-          -- if there is a next edit, jump to it, otherwise apply it if any
-          if not require('sidekick').nes_jump_or_apply() then
-            require('neocodeium').accept()
-          end
-        end,
-        desc = 'Goto/Apply Next Edit Suggestion',
-        mode = { 'i' },
-      },
-      {
-        '<C-A-i>',
-        function()
-          require('sidekick.cli').toggle()
-        end,
-        desc = 'Sidekick Toggle',
-        mode = { 'n', 't', 'i', 'x' },
-      },
-      {
-        '<leader>aa',
-        function()
-          require('sidekick.cli').toggle()
-        end,
-        desc = 'Sidekick Toggle CLI',
-      },
-      {
-        '<leader>as',
-        function()
-          require('sidekick.cli').select()
-        end,
-        desc = 'Select CLI',
-      },
-      {
-        '<leader>at',
-        function()
-          require('sidekick.cli').send({ msg = '{this}' })
-        end,
-        mode = { 'x', 'n' },
-        desc = 'Send This',
-      },
-      {
-        '<leader>af',
-        function()
-          require('sidekick.cli').send({ msg = '{file}' })
-        end,
-        desc = 'Send File',
-      },
-      {
-        '<leader>av',
-        function()
-          require('sidekick.cli').send({ msg = '{selection}' })
-        end,
-        mode = { 'x' },
-        desc = 'Send Visual Selection',
-      },
-      {
-        '<leader>ap',
-        function()
-          require('sidekick.cli').prompt()
-        end,
-        mode = { 'n', 'x' },
-        desc = 'Sidekick Select Prompt',
-      },
-    },
-  },
-  {
     'monkoose/neocodeium',
-    enabled = true,
+    enabled = false,
     event = 'VeryLazy',
     config = function()
       local neocodeium = require('neocodeium')
@@ -123,6 +34,17 @@ local M = {
         silent = true,
         show_label = false,
       })
+
+      vim.keymap.set('i', '<C-l>', neocodeium.accept)
+      vim.keymap.set('i', '<C-j>', function()
+        neocodeium.cycle_or_complete()
+      end)
+      vim.keymap.set('i', '<C-k>', function()
+        neocodeium.cycle_or_complete(-1)
+      end)
+      vim.keymap.set('i', '<C-]>', function()
+        neocodeium.clear()
+      end)
     end,
   },
   {
