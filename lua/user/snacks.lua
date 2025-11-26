@@ -130,6 +130,10 @@ local M = {
             lsp_workspace_symbols = vim.tbl_deep_extend('force', normal, {}),
             projects = vim.tbl_deep_extend('force', normal, {}),
             recent = vim.tbl_deep_extend('force', normal, {}),
+            explorer = {
+              hidden = true,
+              ignored = true,
+            },
           },
         },
         profiler = { enabled = true },

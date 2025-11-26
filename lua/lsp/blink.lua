@@ -9,7 +9,7 @@ local M = {
       keymap = {
         preset = 'none',
         ['<C-y>'] = { 'show', 'show_documentation', 'hide_documentation' },
-        ['<C-e>'] = { 'hide' },
+        ['<C-e>'] = { 'hide', 'fallback' },
         ['<Tab>'] = {
           function(cmp)
             if cmp.snippet_active() then

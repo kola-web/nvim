@@ -1,4 +1,7 @@
+local utils = require('utils')
+
 -- Shorten function name
+
 local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true, noremap = true }
@@ -61,7 +64,6 @@ keymap('n', 'BB', '<cmd>enew<cr>', opts)
 -- keymap('n', 'BL', '<cmd>enew<cr><cmd>set filetype=lua<cr>', opts)
 
 -- stylua: ignore start
-local utils = require('utils')
 keymap('n', 'BC', function() utils.scratch_open(vim.bo.filetype) end, opts)
 keymap('n', 'BS', function() utils.scratch_open('json') end, opts)
 keymap('n', 'BJ', function() utils.scratch_open('javascript') end, opts)
@@ -110,7 +112,7 @@ keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) /
 keymap('n', '<leader>rr', require('utils.quickType').generate_type, { desc = 'quicktype' })
 
 keymap('n', '<leader>lv', function()
-  require('utils').compare_to_clipboard()
+  utils.compare_to_clipboard()
 end, { desc = 'diff clip' })
 
 keymap('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
