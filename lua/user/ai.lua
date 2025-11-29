@@ -14,37 +14,22 @@ local M = {
     end,
     keys = {
       { '<C-l>', 'copilot#Accept("")', desc = 'Copilot panel', mode = { 'i' }, expr = true, replace_keycodes = false, silent = true },
-      { '<C-S-l>', '<Plug>(copilot-suggest)', desc = 'Copilot suggest', mode = { 'i' }, noremap = true, silent = true },
       { '<C-j>', '<Plug>(copilot-next)', desc = 'Copilot next', mode = { 'i' }, noremap = true, silent = true },
       { '<C-k>', '<Plug>(copilot-previous)', desc = 'Copilot prev', mode = { 'i' }, noremap = true, silent = true },
       { '<C-]>', '<Plug>(copilot-dismiss)', desc = 'Copilot dismiss', mode = { 'i' }, noremap = true, silent = true },
-      { '<leader>ao', '<cmd>Copilot panel<cr>', desc = 'Copilot panel' },
-      { '<leader>ae', '<cmd>Copilot enable<cr>', desc = 'Copilot enable' },
-      { '<leader>ad', '<cmd>Copilot disable<cr>', desc = 'Copilot disable' },
     },
   },
   {
     'monkoose/neocodeium',
-    enabled = false,
     event = 'VeryLazy',
     config = function()
       local neocodeium = require('neocodeium')
       neocodeium.setup({
+        enabled = false,
         debounce = true,
         silent = true,
         show_label = false,
       })
-
-      vim.keymap.set('i', '<C-l>', neocodeium.accept)
-      vim.keymap.set('i', '<C-j>', function()
-        neocodeium.cycle_or_complete()
-      end)
-      vim.keymap.set('i', '<C-k>', function()
-        neocodeium.cycle_or_complete(-1)
-      end)
-      vim.keymap.set('i', '<C-]>', function()
-        neocodeium.clear()
-      end)
     end,
   },
   {

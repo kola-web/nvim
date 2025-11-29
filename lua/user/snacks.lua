@@ -283,6 +283,8 @@ local M = {
           Snacks.toggle.inlay_hints():map('<leader>uh')
           Snacks.toggle.zoom():map('<leader>uZ')
           Snacks.toggle.zen():map('<leader>uz')
+
+          require('utils.copilot').interceptLimit()
         end,
       })
     end,
