@@ -1,4 +1,6 @@
 local M = {
+  -- 点重复
+  { 'tpope/vim-repeat' },
   {
     'chrishrb/gx.nvim',
     keys = { { 'gx', '<cmd>Browse<cr>', mode = { 'n', 'x' } } },
