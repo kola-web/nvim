@@ -4,7 +4,8 @@ local M = {
     snippetDir = vim.fn.stdpath('config') .. '/snippets',
     editSnippetPopup = {
       keymaps = {
-        deleteSnippet = '<C-c>',
+        deleteSnippet = '<leader>ld', -- same as `genghis` mapping for deleting file
+        duplicateSnippet = '<leader>lw', -- same as `genghis` mapping for duplicating file
       },
     },
   },

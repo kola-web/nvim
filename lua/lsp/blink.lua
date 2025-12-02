@@ -81,7 +81,8 @@ local M = {
           },
         },
       },
-      snippets = { preset = 'luasnip' },
+      snippets = { preset = 'default' },
+      -- snippets = { preset = 'luasnip' },
       -- signature = { enabled = true },
       sources = {
         default = { 'lsp', 'aliasPath', 'snippets', 'buffer', 'lazydev' },
@@ -113,29 +114,28 @@ local M = {
         },
       },
       cmdline = {
-        enabled = false,
-        sources = {},
+        enabled = true,
       },
     },
   },
-  {
-    'L3MON4D3/LuaSnip',
-    lazy = true,
-    build = 'make install_jsregexp',
-    dependencies = {
-      {
-        'rafamadriz/friendly-snippets',
-        config = function()
-          require('luasnip.loaders.from_vscode').lazy_load()
-          require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snippets' } })
-        end,
-      },
-    },
-    opts = {
-      history = true,
-      delete_check_events = 'TextChanged',
-    },
-  },
+  -- {
+  --   'L3MON4D3/LuaSnip',
+  --   lazy = true,
+  --   build = 'make install_jsregexp',
+  --   dependencies = {
+  --     {
+  --       'rafamadriz/friendly-snippets',
+  --       config = function()
+  --         require('luasnip.loaders.from_vscode').lazy_load()
+  --         require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snippets' } })
+  --       end,
+  --     },
+  --   },
+  --   opts = {
+  --     history = true,
+  --     delete_check_events = 'TextChanged',
+  --   },
+  -- },
 }
 
 return M
