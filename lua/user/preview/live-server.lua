@@ -1,12 +1,8 @@
 local M = {
   'brianhuster/live-preview.nvim',
-  dependencies = {
-    -- 'brianhuster/autosave.nvim', -- Not required, but recomended for autosaving and sync scrolling
-  },
-  opts = {
-    autokill = true,
-    -- picker = 'fzf-lua',
-  },
+  config = function()
+    require('livepreview.config').set()
+  end,
   keys = {
     { '<leader>qh', '<cmd>LivePreview start<cr>', desc = 'Open buffer in live preview' },
   },

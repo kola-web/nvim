@@ -40,7 +40,6 @@ local M = {
       return {
         n_lines = 500,
         custom_textobjects = {
-          f = false,
           t = false,
           -- <div #name name="name" :text="greetingMessage" v-slot="slotProps" #[dynamicSlotName] v-slot:[dynamicSlotName] ></div>
           x = {
