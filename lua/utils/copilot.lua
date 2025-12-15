@@ -26,6 +26,7 @@ end
 
 M.disableCopilot = function()
   vim.cmd([[Copilot disable]])
+  vim.lsp.enable('GitHub Copilot', false)
 
   vim.keymap.del('i', '<C-l>')
   vim.keymap.del('i', '<C-j>')

@@ -1,21 +1,15 @@
 local M = {
-  -- align
-  {
-    'echasnovski/mini.align',
-    version = '*',
-    opts = {
+  'nvim-mini/mini.nvim',
+  version = '*',
+  config = function()
+    require('mini.align').setup({
       mappings = {
         start = 'ge',
         start_with_preview = 'gE',
       },
-    },
-  },
+    })
 
-  -- surround
-  {
-    'echasnovski/mini.surround',
-    version = '*',
-    opts = {
+    require('mini.surround').setup({
       mappings = {
         add = 'ys', -- Add surrounding in Normal and Visual modes
         delete = 'ds', -- Delete surrounding
@@ -39,14 +33,9 @@ local M = {
           end,
         },
       },
-    },
-  },
+    })
 
-  -- 替换、排序
-  {
-    'echasnovski/mini.operators',
-    version = '*',
-    opts = {
+    require('mini.operators').setup({
       evaluate = {
         prefix = nil,
         func = nil,
@@ -67,23 +56,16 @@ local M = {
         prefix = 'gs',
         func = nil,
       },
-    },
-  },
+    })
 
-  {
-    'echasnovski/mini.splitjoin',
-    version = '*',
-    opts = {
+    require('mini.splitjoin').setup({
       mappings = {
         toggle = '<leader>j',
       },
-    },
-  },
+    })
 
-  {
-    'echasnovski/mini.icons',
-    version = '*',
-    opts = {
+    local icons = require('mini.icons')
+    icons.setup({
       file = {
         ['.eslintrc.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
         ['.node-version'] = { glyph = '', hl = 'MiniIconsGreen' },
@@ -96,30 +78,19 @@ local M = {
         ['yarn.lock'] = { glyph = '', hl = 'MiniIconsBlue' },
       },
       filetype = {},
-    },
-    init = function()
-      package.preload['nvim-web-devicons'] = function()
-        require('mini.icons').mock_nvim_web_devicons()
-        return package.loaded['nvim-web-devicons']
-      end
-    end,
-  },
+    })
+    icons.mock_nvim_web_devicons()
 
-  { 'nvim-mini/mini.jump', version = '*', opts = {} },
+    require('mini.jump').setup()
 
-  {
-    'echasnovski/mini.jump2d',
-    version = '*',
-    opts = function()
-      local jump2d = require('mini.jump2d')
-      return {
-        spotter = jump2d.gen_pattern_spotter('[^%s%p]+'),
-        -- labels = 'asdfghjkl;',
-        view = { dim = true, n_steps_ahead = 2 },
-        silent = true,
-      }
-    end,
-  },
+    local jump2d = require('mini.jump2d')
+    jump2d.setup({
+      spotter = jump2d.gen_pattern_spotter('[^%s%p]+'),
+      -- labels = 'asdfghjkl;',
+      view = { dim = true, n_steps_ahead = 2 },
+      silent = true,
+    })
+  end,
 }
 
 return M

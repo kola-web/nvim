@@ -1,10 +1,11 @@
 -- local colorscheme = 'catppuccin'
+local colorscheme = 'gruvbox'
 -- local colorscheme = 'gruvbox-material'
 -- local colorscheme = 'tokyonight'
 -- local colorscheme = 'kanagawa'
 -- local colorscheme = 'everforest'
 -- local colorscheme = 'solarized-osaka'
-local colorscheme = 'monokai-pro'
+-- local colorscheme = 'monokai-pro'
 
 local init = function(theme)
   return function()

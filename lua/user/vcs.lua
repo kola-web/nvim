@@ -194,7 +194,7 @@ local M = {
       vim.g.signify_sign_change_delete = '▎'
       vim.g.signify_sign_delete = ''
       vim.g.signify_sign_delete_first_line = ''
-      vim.g.signify_number_highlight = 1
+      vim.g.signify_number_highlight = 0
 
       local is_win = require('utils.init').is_win()
       if is_win then

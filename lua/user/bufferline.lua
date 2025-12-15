@@ -19,10 +19,14 @@ local M = {
     'romgrk/barbar.nvim',
     event = 'VeryLazy',
     init = function()
+      vim.o.showtabline = 2
+      vim.o.tabline = ' '
       vim.g.barbar_auto_setup = false
     end,
     opts = {
       animation = false,
+      tabpages = true,
+      clickable = false,
       sidebar_filetypes = {},
       icons = {
         separator = { left = '│', right = '│' },
