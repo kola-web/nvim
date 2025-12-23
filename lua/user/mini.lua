@@ -60,7 +60,7 @@ local M = {
 
     require('mini.splitjoin').setup({
       mappings = {
-        toggle = '<leader>j',
+        toggle = '<leader>J',
       },
     })
 

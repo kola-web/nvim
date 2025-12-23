@@ -41,9 +41,9 @@ keymap('', '<S-h>', '^', opts)
 -- keymap("n", "<C-z>", "<nop>", opts)
 
 -- vue jump
-keymap('n', ']t', '/<template<cr>', opts)
-keymap('n', ']s', '/<script<cr>', opts)
-keymap('n', ']c', '/<style<cr>', opts)
+keymap('n', '<leader>jt', '/<template<cr>', opts)
+keymap('n', '<leader>js', '/<script<cr>', opts)
+keymap('n', '<leader>jc', '/<style<cr>', opts)
 
 -- Resize with arrows
 -- keymap("n", "<C-Up>", ":resize -2<CR>", opts)
