@@ -85,7 +85,7 @@ local M = {
 
     local jump2d = require('mini.jump2d')
     jump2d.setup({
-      spotter = jump2d.gen_pattern_spotter('[^%s%p]+'),
+      spotter = jump2d.gen_spotter.pattern('[^%s%p]+'),
       -- labels = 'asdfghjkl;',
       view = { dim = true, n_steps_ahead = 2 },
       silent = true,

@@ -10,6 +10,7 @@ local M = {
         ['grug-far'] = false,
         ['grug-far-history'] = false,
         ['grug-far-help'] = false,
+        ['codecompanion'] = false,
       }
     end,
     keys = {
@@ -35,14 +36,35 @@ local M = {
   {
     'olimorris/codecompanion.nvim',
     lazy = false,
-    enabled = false,
     event = { 'InsertEnter', 'CmdlineEnter' },
     opts = {
-      adapters = {},
-      strategies = {},
       opts = {
         log_level = 'DEBUG',
         language = 'Chinese',
+      },
+      --Refer to: https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
+      adapters = {
+        http = {
+          ollama = function()
+            return require('codecompanion.adapters').extend('ollama', {
+              env = {
+                url = 'http://localhost:11434',
+              },
+              adapter = 'ollama',
+              schema = {
+                model = {
+                  default = 'gemma3:4b',
+                },
+              },
+            })
+          end,
+        },
+      },
+      strategies = {
+        --NOTE: Change the adapter as required
+        chat = { adapter = 'ollama' },
+        inline = { adapter = 'ollama' },
+        agent = { adapter = 'ollama' },
       },
     },
     keys = {
