@@ -13,10 +13,13 @@ M.interceptLimit = function()
 
     -- 如果是目标提示，直接跳过（调用 on_choice 传递 nil，不显示弹窗）
     if is_copilot_limit_prompt then
+      vim.g.aiStatus = 'neocodeium'
       M.disableCopilot()
       M.enableNeoCodeium()
       on_choice(nil, nil)
       return
+    else
+      vim.g.aiStatus = 'copilot'
     end
 
     -- 非目标弹窗，调用 snacks.nvim 的原始 picker

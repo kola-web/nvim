@@ -45,7 +45,16 @@ local M = {
             },
           },
           lualine_x = {
-            { 'overseer' },
+            {
+              function()
+                return vim.g.aiStatus
+              end,
+              icon = icons.ai.Ai,
+              cond = function()
+                return vim.g.aiStatus ~= nil
+              end,
+            },
+            'overseer',
             'lsp_status',
             'filetype',
             'filesize',

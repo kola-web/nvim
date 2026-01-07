@@ -66,6 +66,7 @@ return {
     Variable = '󰀫 ',
   },
   ai = {
+    Ai = ' ',
     NeoCodeium = '󰘦 ',
     Copilot = ' ',
   },
