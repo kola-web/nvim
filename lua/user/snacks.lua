@@ -58,8 +58,8 @@ local M = {
         input = { enabled = true },
         indent = {
           enabled = true,
-          -- indent = { only_current = true },
-          -- scope = { only_current = true },
+          indent = { only_current = true },
+          scope = { only_current = true },
         },
         image = { enabled = false },
         lazygit = { enabled = false },

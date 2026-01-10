@@ -5,6 +5,11 @@ local M = {
     cmd = 'GrugFar',
     opts = {
       headerMaxWidth = 80,
+      engines = {
+        ripgrep = {
+          extraArgs = '-P',
+        },
+      },
       keymaps = {
         -- replace = { n = '<localleader>r' },
         -- qflist = { n = '<localleader>q' },
@@ -39,16 +44,32 @@ local M = {
         '<leader>rs',
         function()
           local grug = require('grug-far')
-          local ext = vim.bo.buftype == '' and vim.fn.expand('%:e')
           grug.open({
             transient = true,
             prefills = {
-              filesFilter = ext and ext ~= '' and '*.' .. ext or nil,
+              -- filesFilter = ext and ext ~= '' and '*.' .. ext or nil,
             },
           })
         end,
         mode = { 'n', 'v' },
         desc = 'Search and Replace',
+      },
+      {
+        '<leader>ri',
+        function()
+          local grug = require('grug-far')
+          grug.open({
+            transient = true,
+            prefills = {
+              search = '([\'"(])(/images/)(.*)(\\1)',
+              replacement = '$1{{imageUrl}}$3?t={{Timestamp}}$4',
+              filesFilter = '*.wxml',
+              flags = '-g !src/custom-tab-bar',
+            },
+          })
+        end,
+        mode = { 'n' },
+        desc = 'Replace images',
       },
     },
   },
