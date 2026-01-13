@@ -150,11 +150,3 @@ keymap('n', '<leader>w', '<Cmd>silent! update | redraw<CR>', { desc = 'save file
 -- terminal mappings
 keymap('t', '<C-\\>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
 
-keymap({ 'i', 's', 'n' }, '<esc>', function()
-  vim.cmd('noh')
-  vim.snippet.stop()
-  return '<esc>'
-end, {
-  expr = true,
-  desc = 'Escape and clear hlsearch/snippet',
-})
