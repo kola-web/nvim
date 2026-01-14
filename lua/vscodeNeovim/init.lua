@@ -13,7 +13,6 @@ local enabled = {
   'nvim-treesitter',
   'vim-repeat',
   'nvim-surround',
-  'vim-abolish',
   'mini.operators',
   'mini.ai',
   'nvim-various-textobjs',

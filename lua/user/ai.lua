@@ -33,53 +33,34 @@ local M = {
       })
     end,
   },
-  -- {
-  --   'olimorris/codecompanion.nvim',
-  --   lazy = false,
-  --   event = { 'InsertEnter', 'CmdlineEnter' },
-  --   dependencies = {
-  --     'franco-ruggeri/codecompanion-spinner.nvim',
-  --   },
-  --   opts = {
-  --     display = {},
-  --     opts = {
-  --       log_level = 'DEBUG',
-  --       language = 'Chinese',
-  --     },
-  --     extensions = {
-  --       spinner = {},
-  --     },
-  --     --Refer to: https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
-  --     adapters = {
-  --       http = {
-  --         ollama = function()
-  --           return require('codecompanion.adapters').extend('ollama', {
-  --             env = {
-  --               url = 'http://localhost:11434',
-  --             },
-  --             adapter = 'ollama',
-  --             schema = {
-  --               model = {
-  --                 default = 'gemma3:4b',
-  --               },
-  --             },
-  --           })
-  --         end,
-  --       },
-  --     },
-  --     strategies = {
-  --       --NOTE: Change the adapter as required
-  --       chat = { adapter = 'ollama' },
-  --       inline = { adapter = 'ollama' },
-  --       agent = { adapter = 'ollama' },
-  --     },
-  --   },
-  --   keys = {
-  --     { '<leader>aa', '<cmd>CodeCompanionActions<cr>', desc = 'CodeCompanionActions', mode = { 'n', 'v' }, noremap = true, silent = true },
-  --     { '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'CodeCompanionChat Toggle', mode = { 'n', 'v' }, noremap = true, silent = true },
-  --     { '<leader>al', '<cmd>CodeCompanionChat Add<cr>', desc = 'CodeCompanionChat Add', mode = { 'v' }, noremap = true, silent = true },
-  --   },
-  -- },
+  {
+    'olimorris/codecompanion.nvim',
+    lazy = false,
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    dependencies = {
+      'franco-ruggeri/codecompanion-spinner.nvim',
+    },
+    opts = {
+      display = {},
+      opts = {
+        log_level = 'DEBUG',
+        language = 'Chinese',
+      },
+      extensions = {
+        spinner = {},
+      },
+      strategies = {
+        chat = { adapter = 'copilot' },
+        inline = { adapter = 'copilot' },
+        agent = { adapter = 'copilot' },
+      },
+    },
+    keys = {
+      { '<leader>aa', '<cmd>CodeCompanionActions<cr>', desc = 'CodeCompanionActions', mode = { 'n', 'v' }, noremap = true, silent = true },
+      { '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'CodeCompanionChat Toggle', mode = { 'n', 'v' }, noremap = true, silent = true },
+      { '<leader>al', '<cmd>CodeCompanionChat Add<cr>', desc = 'CodeCompanionChat Add', mode = { 'v' }, noremap = true, silent = true },
+    },
+  },
 }
 
 return M

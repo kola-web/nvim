@@ -73,10 +73,6 @@ keymap('v', 'p', '"_dP', opts)
 keymap('v', '<', '<gv', opts)
 keymap('v', '>', '>gv', opts)
 
---abolish.vim
-keymap('n', 'ga', '<Plug>(abolish-coerce-word)')
-keymap('v', 'ga', '<Plug>(abolish-coerce)')
-
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 keymap('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next search result' })
 keymap('x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })

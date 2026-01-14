@@ -149,4 +149,3 @@ keymap('n', '<leader>w', '<Cmd>silent! update | redraw<CR>', { desc = 'save file
 
 -- terminal mappings
 keymap('t', '<C-\\>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
-
