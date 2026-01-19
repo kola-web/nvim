@@ -61,7 +61,7 @@ local M = {
           grug.open({
             transient = true,
             prefills = {
-              search = '([\'"(])(/images/)(.*)(\\1|\\))',
+              search = '([\'"])(/images/)(.*?)(\\1)',
               replacement = '$1{{imageUrl}}$3?t={{Timestamp}}$4',
               filesFilter = '*.wxml',
               flags = '-g !src/custom-tab-bar',

@@ -21,6 +21,11 @@ local M = {
     name = 'catppuccin',
     priority = 1000,
     init = init('catppuccin'),
+    opts = {
+      flavour = 'mocha',
+      default_integrations = false,
+      auto_integrations = true,
+    },
   },
   {
     'folke/tokyonight.nvim',

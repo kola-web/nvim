@@ -43,7 +43,6 @@ local M = {
       { '<leader>qc', ':PeekClose<CR>', desc = 'PeekClose' },
     },
   },
-
   -- {
   --   'dhruvasagar/vim-table-mode',
   --   ft = { 'markdown' },

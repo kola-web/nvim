@@ -29,3 +29,4 @@ lua print(vim.bo.filetype)
 ```bash
 sudo apt install -y xsel xclip
 ```
+

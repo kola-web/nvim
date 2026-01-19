@@ -8,6 +8,8 @@ vim.g.mapleader = vim.g.vscode and '\\' or ' '
 -- 设置局部领导者键
 vim.g.maplocalleader = '\\'
 
+vim.g.aiStatus = 'copilot'
+
 -- ===========================
 -- 显示与界面设置
 -- ===========================
@@ -74,6 +76,7 @@ vim.opt.splitbelow = true -- 水平分屏时新窗口在下方
 -- 空白字符与缩进设置
 -- ===========================
 -- 空白字符显示
+vim.opt.conceallevel = 0 -- 显示隐藏文本
 vim.opt.list = true -- 显示特殊空白字符
 vim.opt.listchars = { -- 配置特殊空白字符的显示方式
   tab = '» ', -- 制表符显示为»+空格
