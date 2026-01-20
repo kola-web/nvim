@@ -66,14 +66,47 @@ local M = {
     build = vim.fn.has('win32') ~= 0 and 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' or 'make',
     event = 'VeryLazy',
     version = false, -- 永远不要将此值设置为 "*"！永远不要！
-    ---@module 'avante'
-    ---@type avante.Config
-    opts = {
-      provider = 'copilot',
-      selection = {
-        hint_display = 'none',
-      },
-    },
+    opts = function()
+      ---@module 'avante'
+      ---@type avante.Config
+      return {
+        provider = 'qianwen',
+        auto_suggestions_provider = 'qianwen_nes',
+        dual_boost = {
+          enabled = false,
+        },
+        providers = {
+          deepseek = {
+            __inherited_from = 'openai',
+            api_key_name = 'DEEPSEEK_API_KEY',
+            endpoint = 'https://api.deepseek.com/v1',
+            model = 'deepseek-coder',
+            extra_request_body = {
+              temperature = 0,
+              max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+              --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+            },
+          },
+          qianwen = {
+            __inherited_from = 'openai',
+            api_key_name = 'QWEN_API_KEY',
+            endpoint = 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+            model = 'qwen3-coder-plus',
+          },
+          -- next edit suggestions
+          qianwen_nes = {
+            __inherited_from = 'openai',
+            api_key_name = 'QWEN_API_KEY',
+            endpoint = 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+            model = 'qwen3-coder-flash',
+          },
+          ollama = {
+            model = 'qwen3-coder:latest',
+            is_env_set = require('avante.providers.ollama').check_endpoint_alive,
+          },
+        },
+      }
+    end,
     dependencies = {
       {
         -- 支持图像粘贴
