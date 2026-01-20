@@ -1,7 +1,7 @@
 local M = {
   {
     'saghen/blink.cmp',
-    dependencies = { 'kola-web/blink-alias-path' },
+    dependencies = { 'kola-web/blink-alias-path', 'Kaiser-Yang/blink-cmp-avante' },
     version = '1.*',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -83,7 +83,7 @@ local M = {
       },
       snippets = { preset = 'luasnip' },
       sources = {
-        default = { 'lsp', 'aliasPath', 'snippets', 'buffer', 'lazydev' },
+        default = { 'lsp', 'aliasPath', 'snippets', 'buffer', 'lazydev', 'avante' },
         providers = {
           lazydev = {
             name = 'LazyDev',
@@ -109,6 +109,7 @@ local M = {
           lsp = {
             fallbacks = {},
           },
+          avante = { module = 'blink-cmp-avante', name = 'Avante' },
         },
       },
       cmdline = {
