@@ -33,59 +33,138 @@ local M = {
       })
     end,
   },
-  -- {
-  --   'olimorris/codecompanion.nvim',
-  --   lazy = false,
-  --   event = { 'InsertEnter', 'CmdlineEnter' },
-  --   dependencies = {
-  --     'franco-ruggeri/codecompanion-spinner.nvim',
-  --   },
-  --   opts = {
-  --     display = {},
-  --     opts = {
-  --       log_level = 'DEBUG',
-  --       language = 'Chinese',
-  --     },
-  --     extensions = {
-  --       spinner = {},
-  --     },
-  --     strategies = {
-  --       chat = { adapter = 'copilot' },
-  --       inline = { adapter = 'copilot' },
-  --       agent = { adapter = 'copilot' },
-  --     },
-  --   },
-  --   keys = {
-  --     { '<leader>aa', '<cmd>CodeCompanionActions<cr>', desc = 'CodeCompanionActions', mode = { 'n', 'v' }, noremap = true, silent = true },
-  --     { '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'CodeCompanionChat Toggle', mode = { 'n', 'v' }, noremap = true, silent = true },
-  --     { '<leader>al', '<cmd>CodeCompanionChat Add<cr>', desc = 'CodeCompanionChat Add', mode = { 'v' }, noremap = true, silent = true },
-  --   },
-  -- },
+  {
+    'olimorris/codecompanion.nvim',
+    enabled = true,
+    lazy = false,
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    dependencies = {
+      'franco-ruggeri/codecompanion-spinner.nvim',
+    },
+    init = function()
+      vim.cmd([[cab cc CodeCompanion]])
+    end,
+
+    opts = {
+      opts = {
+        log_level = 'DEBUG',
+        language = 'Chinese',
+      },
+      display = {
+        action_palette = {
+          provider = 'snacks',
+        },
+        diff = {
+          enabled = true,
+        },
+        inline = {
+          layout = 'buffer', -- vertical|horizontal|buffer
+        },
+      },
+      strategies = {
+        chat = { adapter = 'aliyun_qwen' },
+        inline = { adapter = 'aliyun_qwen' },
+        agent = { adapter = 'aliyun_qwen' },
+      },
+      adapters = {
+        http = {
+          aliyun_qwen = function()
+            return require('codecompanion.adapters').extend('openai_compatible', {
+              name = 'aliyun_qwen',
+              env = {
+                url = 'https://dashscope.aliyuncs.com',
+                api_key = function()
+                  return os.getenv('QWEN_API_KEY')
+                end,
+                chat_url = '/compatible-mode/v1/chat/completions',
+              },
+              schema = {
+                model = {
+                  default = 'qwen3-coder-plus',
+                },
+              },
+            })
+          end,
+        },
+      },
+      prompt_library = {
+        markdown = {
+          dirs = {
+            vim.fn.getcwd() .. '/.prompts', -- Can be relative
+            vim.fn.stdpath('config') .. '/prompts',
+          },
+        },
+      },
+    },
+    keys = {
+      {
+        '<leader>aa',
+        function()
+          require('codecompanion').actions({})
+          vim.cmd.stopinsert()
+        end,
+        desc = 'CodeCompanionActions',
+        mode = { 'n', 'v' },
+        noremap = true,
+        silent = true,
+      },
+      { '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'CodeCompanionChat Toggle', mode = { 'n', 'v' }, noremap = true, silent = true },
+      { '<leader>ar', '<cmd>CodeCompanionChat refresh<cr>', desc = 'CodeCompanionChat refresh', mode = { 'n' }, noremap = true, silent = true },
+      { '<leader>al', '<cmd>CodeCompanionChat Add<cr>', desc = 'CodeCompanionChat Add', mode = { 'v' }, noremap = true, silent = true },
+    },
+  },
+  {
+    'folke/sidekick.nvim',
+    enabled = false,
+    opts = {
+      -- 在这里添加任何选项
+      cli = {
+        win = {
+          split = {
+            width = 100,
+          },
+        },
+      },
+      nes = {
+        enabled = false,
+      },
+    },
+    keys = {
+      {
+        '<leader>aa',
+        function()
+          require('sidekick.cli').toggle({ name = 'qwen', focus = true })
+        end,
+        desc = 'Sidekick Toggle CLI',
+      },
+      {
+        '<leader>ap',
+        function()
+          require('sidekick.cli').prompt()
+          -- vim.cmd.stopinsert()
+        end,
+        mode = { 'n', 'x' },
+        desc = 'Sidekick Select Prompt',
+      },
+    },
+  },
   {
     'yetone/avante.nvim',
+    enabled = false,
     build = vim.fn.has('win32') ~= 0 and 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' or 'make',
     event = 'VeryLazy',
-    version = false, -- 永远不要将此值设置为 "*"！永远不要！
+    version = false,
     opts = function()
       ---@module 'avante'
       ---@type avante.Config
       return {
         provider = 'qianwen',
-        auto_suggestions_provider = 'qianwen_nes',
-        dual_boost = {
-          enabled = false,
-        },
         providers = {
           deepseek = {
             __inherited_from = 'openai',
             api_key_name = 'DEEPSEEK_API_KEY',
             endpoint = 'https://api.deepseek.com/v1',
             model = 'deepseek-coder',
-            extra_request_body = {
-              temperature = 0,
-              max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-              --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-            },
           },
           qianwen = {
             __inherited_from = 'openai',
@@ -93,47 +172,9 @@ local M = {
             endpoint = 'https://dashscope.aliyuncs.com/compatible-mode/v1',
             model = 'qwen3-coder-plus',
           },
-          -- next edit suggestions
-          qianwen_nes = {
-            __inherited_from = 'openai',
-            api_key_name = 'QWEN_API_KEY',
-            endpoint = 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-            model = 'qwen3-coder-flash',
-          },
-          ollama = {
-            model = 'qwen3-coder:latest',
-            is_env_set = require('avante.providers.ollama').check_endpoint_alive,
-          },
         },
       }
     end,
-    dependencies = {
-      {
-        -- 支持图像粘贴
-        'HakonHarnes/img-clip.nvim',
-        event = 'VeryLazy',
-        opts = {
-          -- 推荐设置
-          default = {
-            embed_image_as_base64 = false,
-            prompt_for_file_name = false,
-            drag_and_drop = {
-              insert_mode = true,
-            },
-            -- Windows 用户必需
-            use_absolute_path = true,
-          },
-        },
-      },
-      {
-        -- 如果您有 lazy=true，请确保正确设置
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          file_types = { 'markdown', 'Avante' },
-        },
-        ft = { 'markdown', 'Avante' },
-      },
-    },
   },
 }
 

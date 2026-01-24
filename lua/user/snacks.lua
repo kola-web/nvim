@@ -20,6 +20,7 @@ local M = {
         end,
       }
 
+      --- @type snacks.config
       return {
         bigfile = {
           enabled = true,
