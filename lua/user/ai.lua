@@ -35,7 +35,7 @@ local M = {
   },
   {
     'olimorris/codecompanion.nvim',
-    enabled = true,
+    enabled = false,
     lazy = false,
     event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = {
@@ -115,7 +115,7 @@ local M = {
   },
   {
     'folke/sidekick.nvim',
-    enabled = false,
+    enabled = true,
     opts = {
       -- 在这里添加任何选项
       cli = {

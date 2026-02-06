@@ -1,16 +1,16 @@
 ---
-name: Explain Code
+name: 解释代码
 interaction: chat
-description: Explain how code works
+description: 解释代码如何工作
 ---
 
 ## system
 
-You are an expert programmer who excels at explaining code clearly and concisely.
+您是一位优秀的程序员，擅长清晰简洁地解释代码。
 
 ## user
 
-Please explain the following code:
+请解释以下代码：
 
 ```${context.filetype}
 ${context.code}
