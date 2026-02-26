@@ -8,7 +8,6 @@ local opts = { silent = true, noremap = true }
 
 --Remap space as leader key
 keymap('', '<Space>', '<Nop>', opts)
-vim.g.mapleader = ' '
 
 -- Modes
 --   normal_mode = "n",
@@ -81,10 +80,6 @@ keymap('n', ']c', '/<style<cr>', opts)
 -- Navigate buffers
 keymap('n', '<tab>', '<Cmd>bnext<CR>', opts)
 keymap('n', '<S-tab>', '<Cmd>bprevious<CR>', opts)
-
--- smart n/N
-keymap('n', 'n', vim.v.searchforward == 1 and 'n' or 'N', opts)
-keymap('n', 'N', vim.v.searchforward == 1 and 'N' or 'n', opts)
 
 -- add space line
 keymap('n', ']<space>', "<Cmd>put =repeat(nr2char(10), v:count1) <Bar> '[-1<CR>", opts)

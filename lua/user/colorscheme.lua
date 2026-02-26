@@ -16,6 +16,7 @@ local init = function(theme)
 end
 
 local M = {
+  -- 主題色配置，只保留常用的几个
   {
     'catppuccin/nvim',
     name = 'catppuccin',
@@ -28,17 +29,18 @@ local M = {
     },
   },
   {
+    'ellisonleao/gruvbox.nvim',
+    lazy = true,
+    opts = {},
+    init = init('gruvbox'),
+  },
+  {
     'folke/tokyonight.nvim',
     lazy = true,
-    opts = {
-      -- style = 'storm',
-      -- transparent = false,
-      -- plugins = {
-      --   markdown = true,
-      -- },
-    },
+    opts = {},
     init = init('tokyonight'),
   },
+  -- 其他主题按需加载
   {
     'sainnhe/gruvbox-material',
     lazy = true,
@@ -67,12 +69,6 @@ local M = {
     lazy = true,
     opts = {},
     init = init('tokyodark'),
-  },
-  {
-    'ellisonleao/gruvbox.nvim',
-    lazy = true,
-    opts = {},
-    init = init('gruvbox'),
   },
   {
     'Mofiqul/dracula.nvim',

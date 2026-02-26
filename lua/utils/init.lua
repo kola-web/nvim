@@ -3,25 +3,24 @@ local M = {}
 M.root_patterns = { '.git', '.svn', 'lua' }
 
 M.servers = {
-  'bashls',
-  'cssls',
-  'docker_compose_language_service',
-  'dockerls',
-  'emmet_language_server',
-  'eslint',
-  'html',
-  'intelephense',
-  'jsonls',
-  'lua_ls',
-  'pyright',
-  'rust_analyzer',
-  'ts_ls',
-  'vue_ls',
-  'vuels',
-  'yamlls',
-  'nginx_language_server',
-  'powershell_es',
-  'pylsp',
+  -- 核心语言支持
+  'lua_ls',           -- Lua
+  'ts_ls',            -- TypeScript/JavaScript
+  'vue_ls',           -- Vue 3
+  'vuels',            -- Vue 2 (备用)
+  'html',             -- HTML
+  'cssls',            -- CSS
+  'jsonls',           -- JSON
+  'eslint',           -- ESLint
+  'emmet_language_server', -- Emmet
+  -- 其他常用语言
+  'pyright',          -- Python
+  'bashls',           -- Bash
+  'yamlls',           -- YAML
+  'dockerls',         -- Docker
+  'intelephense',     -- PHP
+  'nginx_language_server', -- Nginx
+  'powershell_es',    -- PowerShell
 }
 
 M.null_servers = {
@@ -83,7 +82,7 @@ M.is_win = function()
 end
 
 M.compare_to_clipboard = function()
-  local ftype = vim.api.nvim_eval('&filetype')
+  local ftype = vim.bo.filetype
   vim.cmd('vsplit')
   vim.cmd('enew')
   vim.cmd('normal! P')
@@ -230,28 +229,43 @@ M.scratch_open = function(fileType)
 end
 
 M.scratch_result = function(result)
+  if not result then
+    print('Error: No result to display')
+    return
+  end
+
   local filetype = vim.bo.filetype
   local icon, icon_hl = Snacks.util.icon(filetype, 'filetype')
-  Snacks.win({
-    title = {
-      { ' ' },
-      { icon .. string.rep(' ', 2 - vim.api.nvim_strwidth(icon)), icon_hl },
-      { ' ' },
-      { vim.bo.filetype .. ' result' },
-      { ' ' },
-    },
-    text = result.stdout,
-    width = 100,
-    height = 30,
-    bo = { buftype = '', buflisted = false, bufhidden = 'hide', swapfile = false },
-    minimal = false,
-    noautocmd = false,
-    zindex = 100,
-    wo = { winhighlight = 'NormalFloat:Normal' },
-    border = 'rounded',
-    title_pos = 'center',
-    footer_pos = 'center',
-  })
+
+  -- 获取输出文本，优先使用stdout，如果没有则使用stderr
+  local output = result.stdout or result.stderr or 'No output'
+
+  local success, err = pcall(function()
+    Snacks.win({
+      title = {
+        { ' ' },
+        { icon .. string.rep(' ', 2 - vim.api.nvim_strwidth(icon)), icon_hl },
+        { ' ' },
+        { vim.bo.filetype .. ' result' },
+        { ' ' },
+      },
+      text = output,
+      width = 100,
+      height = 30,
+      bo = { buftype = '', buflisted = false, bufhidden = 'hide', swapfile = false },
+      minimal = false,
+      noautocmd = false,
+      zindex = 100,
+      wo = { winhighlight = 'NormalFloat:Normal' },
+      border = 'rounded',
+      title_pos = 'center',
+      footer_pos = 'center',
+    })
+  end)
+
+  if not success then
+    print('Error displaying result: ' .. (err or 'unknown error'))
+  end
 end
 
 M.select_filetype = function()
@@ -267,44 +281,67 @@ end
 
 M.add_to_gitignore = function()
   local file = MiniFiles.get_fs_entry()
+  if not file or not file.path then
+    print('Error: No file selected')
+    return
+  end
+
   local currentPath = file.path
   local projectRoot = vim.fn.getcwd()
+
+  -- 检查是否在git仓库中
+  local gitDir = projectRoot .. '/.git'
+  if vim.fn.isdirectory(gitDir) == 0 then
+    print('Error: Not in a git repository')
+    return
+  end
+
   local relativePath = currentPath:sub(#projectRoot + 2):gsub('[\r\n]+$', '') -- 去除末尾换行符
   local gitignorePath = projectRoot .. '/.gitignore'
 
   -- 打开或创建 .gitignore 文件
-  local gitignoreFile = io.open(gitignorePath, 'a+')
+  local gitignoreFile, err = io.open(gitignorePath, 'a+')
   if not gitignoreFile then
-    print('无法打开或创建 .gitignore 文件')
+    print('Error: Cannot open or create .gitignore file: ' .. (err or 'unknown error'))
     return
   end
 
   -- 检查文件路径是否已经存在
   local exists = false
-  for line in gitignoreFile:lines() do
-    if line == relativePath then
-      exists = true
-      break
+  local content = gitignoreFile:read('*all')
+  if content then
+    for line in content:gmatch('[^\r\n]+') do
+      if line == relativePath then
+        exists = true
+        break
+      end
     end
   end
 
   -- 如果不存在，则追加路径
   if not exists then
-    gitignoreFile:write(relativePath .. '\n')
-    print('已将 ' .. relativePath .. ' 添加到 .gitignore')
+    gitignoreFile:seek('end')
+    local success, writeErr = gitignoreFile:write(relativePath .. '\n')
+    if success then
+      print('Added ' .. relativePath .. ' to .gitignore')
+    else
+      print('Error: Cannot write to .gitignore: ' .. (writeErr or 'unknown error'))
+    end
   else
-    print(relativePath .. ' 已存在于 .gitignore 中')
+    print(relativePath .. ' already exists in .gitignore')
   end
 
   gitignoreFile:close()
 
-  -- 使用 Git 删除文件
-  local deleteCommand = 'git rm --cached ' .. vim.fn.shellescape(relativePath)
-  local result = os.execute(deleteCommand)
-  if result == 0 then
-    print('已使用 Git 删除 ' .. relativePath)
-  else
-    print('无法使用 Git 删除 ' .. relativePath)
+  -- 检查文件是否存在再尝试git rm
+  if vim.fn.filereadable(currentPath) == 1 then
+    local deleteCommand = 'git rm --cached ' .. vim.fn.shellescape(relativePath) .. ' 2>/dev/null'
+    local result = os.execute(deleteCommand)
+    if result == 0 then
+      print('Removed ' .. relativePath .. ' from git tracking')
+    else
+      print('Note: Could not remove ' .. relativePath .. ' from git tracking (may not be tracked)')
+    end
   end
 end
 
@@ -312,15 +349,27 @@ M.copy_file_path = function()
   local file = MiniFiles.get_fs_entry()
   local currentPath = file.path
 
-  -- 检查当前操作系统并使用相应的命令复制到剪贴板
-  if vim.fn.has('mac') == 1 then
-    os.execute('echo "' .. currentPath .. '" | pbcopy')
-  elseif vim.fn.has('unix') == 1 then
-    os.execute('echo "' .. currentPath .. '" | xclip -selection clipboard')
-  elseif vim.fn.has('win32') == 1 then
-    os.execute('echo ' .. currentPath .. ' | clip')
+  -- 使用现代API检查操作系统并复制到剪贴板
+  local success = false
+  if vim.uv.os_uname().sysname == 'Darwin' then
+    success = os.execute('echo "' .. currentPath .. '" | pbcopy') == 0
+  elseif vim.uv.os_uname().sysname == 'Windows_NT' then
+    success = os.execute('echo ' .. currentPath .. ' | clip') == 0
   else
-    print('Unsupported OS')
+    -- Linux或其他Unix系统
+    local xclip_available = vim.fn.executable('xclip') == 1
+    if xclip_available then
+      success = os.execute('echo "' .. currentPath .. '" | xclip -selection clipboard') == 0
+    else
+      print('xclip not found, unable to copy to clipboard')
+      return
+    end
+  end
+
+  if success then
+    print('File path copied to clipboard: ' .. currentPath)
+  else
+    print('Failed to copy file path to clipboard')
   end
 end
 

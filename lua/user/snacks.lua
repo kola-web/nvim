@@ -53,7 +53,7 @@ local M = {
           },
         },
         explorer = {
-          enabled = true,
+          enabled = false, -- 禁用snacks explorer，使用mini.files
         },
         git = { enabled = true },
         input = { enabled = true },
@@ -248,7 +248,7 @@ local M = {
       {'<leader>sD', function() Snacks.picker.diagnostics_buffer() end,                                              desc = "Buffer Diagnostics" },
       {'<leader>s/', function() Snacks.picker.grep_buffers() end,                                                    desc = "Grep Open Buffers" },
 
-      {'<leader>be', function() Snacks.explorer() end,                                                               desc = 'explorer' },
+      -- {'<leader>be', function() Snacks.explorer() end,                                                               desc = 'explorer' }, -- 已禁用，使用mini.files
       {'<leader>lt', require('utils').select_filetype,                                                               desc = 'select filetype' },
       {'<leader>pp', function () Snacks.picker.projects() end,                                                       desc = 'select projects' },
 
