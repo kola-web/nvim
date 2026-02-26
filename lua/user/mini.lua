@@ -81,15 +81,15 @@ local M = {
     })
     icons.mock_nvim_web_devicons()
 
-    require('mini.jump').setup()
-
-    local jump2d = require('mini.jump2d')
-    jump2d.setup({
-      spotter = jump2d.gen_spotter.pattern('[^%s%p]+'),
-      -- labels = 'asdfghjkl;',
-      view = { dim = true, n_steps_ahead = 2 },
-      silent = true,
-    })
+    -- require('mini.jump').setup()
+    --
+    -- local jump2d = require('mini.jump2d')
+    -- jump2d.setup({
+    --   spotter = jump2d.gen_spotter.pattern('[^%s%p]+'),
+    --   -- labels = 'asdfghjkl;',
+    --   view = { dim = true, n_steps_ahead = 2 },
+    --   silent = true,
+    -- })
   end,
 }
 
