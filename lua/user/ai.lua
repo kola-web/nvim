@@ -12,6 +12,14 @@ local M = {
         ['grug-far-help'] = false,
         ['codecompanion'] = false,
       }
+      vim.g.copilot_filetypes = {
+        ['markdown'] = false,
+        ['wxml'] = false,
+        ['html'] = false,
+        ['scss'] = false,
+        ['css'] = false,
+        ['wxss'] = false,
+      }
     end,
     keys = {
       { '<C-l>', 'copilot#Accept("")', desc = 'Copilot panel', mode = { 'i' }, expr = true, replace_keycodes = false, silent = true },
