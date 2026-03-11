@@ -10,13 +10,28 @@ local M = {
         },
       },
       highlight = { backdrop = false },
+      label = {
+        uppercase = false,
+        current = true,
+        rainbow = {
+          enabled = true,
+          -- 颜色深浅度（1-9）
+          shade = 1,
+        },
+      },
     },
     keys = {
       {
         '<cr>',
         mode = { 'n', 'x', 'o' },
         function()
-          require('flash').jump()
+          local buftype = vim.bo.buftype
+          if buftype == 'quickfix' then
+            vim.fn['setqflist']({}, 'a')
+            vim.cmd([[execute "normal! \<CR>"]])
+          else
+            require('flash').jump()
+          end
         end,
         desc = 'Flash',
       },

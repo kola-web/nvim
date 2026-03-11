@@ -7,18 +7,16 @@ local M = {
       vim.g.copilot_enabled = true
       vim.g.copilot_no_tab_map = true
       vim.g.copilot_filetypes = {
-        ['grug-far'] = false,
-        ['grug-far-history'] = false,
-        ['grug-far-help'] = false,
-        ['codecompanion'] = false,
-      }
-      vim.g.copilot_filetypes = {
         ['markdown'] = false,
         ['wxml'] = false,
         ['html'] = false,
         ['scss'] = false,
         ['css'] = false,
         ['wxss'] = false,
+        ['grug-far'] = false,
+        ['grug-far-history'] = false,
+        ['grug-far-help'] = false,
+        ['codecompanion'] = false,
       }
     end,
     keys = {
@@ -155,34 +153,6 @@ local M = {
         desc = 'Sidekick Select Prompt',
       },
     },
-  },
-  {
-    'yetone/avante.nvim',
-    enabled = false,
-    build = vim.fn.has('win32') ~= 0 and 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' or 'make',
-    event = 'VeryLazy',
-    version = false,
-    opts = function()
-      ---@module 'avante'
-      ---@type avante.Config
-      return {
-        provider = 'qianwen',
-        providers = {
-          deepseek = {
-            __inherited_from = 'openai',
-            api_key_name = 'DEEPSEEK_API_KEY',
-            endpoint = 'https://api.deepseek.com/v1',
-            model = 'deepseek-coder',
-          },
-          qianwen = {
-            __inherited_from = 'openai',
-            api_key_name = 'QWEN_API_KEY',
-            endpoint = 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-            model = 'qwen3-coder-plus',
-          },
-        },
-      }
-    end,
   },
 }
 
