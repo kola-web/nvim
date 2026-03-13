@@ -25,13 +25,23 @@ local M = {
         '<cr>',
         mode = { 'n', 'x', 'o' },
         function()
+          -- 参考 mini.jump2d 的实现，排除特殊窗口类型
           local buftype = vim.bo.buftype
-          if buftype == 'quickfix' then
-            vim.fn['setqflist']({}, 'a')
-            vim.cmd([[execute "normal! \<CR>"]])
-          else
-            require('flash').jump()
+          local filetype = vim.bo.filetype
+
+          -- 排除的 buftype: quickfix, nofile, help, prompt, terminal
+          local exclude_buftypes = { quickfix = true, nofile = true, help = true, prompt = true, terminal = true }
+          -- 排除的 filetype: TelescopePrompt, snacks_input, snacks_picker_list 等
+          local exclude_filetypes = { ['TelescopePrompt'] = true, ['snacks_input'] = true }
+
+          if exclude_buftypes[buftype] or exclude_filetypes[filetype] then
+            -- 使用 feedkeys 模拟默认的 <CR> 行为，更可靠
+            local key = vim.api.nvim_replace_termcodes('<CR>', true, false, true)
+            vim.api.nvim_feedkeys(key, 'n', false)
+            return
           end
+
+          require('flash').jump()
         end,
         desc = 'Flash',
       },

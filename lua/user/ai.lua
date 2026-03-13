@@ -50,58 +50,90 @@ local M = {
     init = function()
       vim.cmd([[cab cc CodeCompanion]])
     end,
-
-    opts = {
-      opts = {
-        log_level = 'DEBUG',
-        language = 'Chinese',
-      },
-      display = {
-        action_palette = {
-          provider = 'snacks',
+    config = function()
+      require('codecompanion').setup({
+        opts = {
+          language = 'Chinese',
         },
-        diff = {
-          enabled = true,
-        },
-        inline = {
-          layout = 'buffer', -- vertical|horizontal|buffer
-        },
-      },
-      strategies = {
-        chat = { adapter = 'aliyun_qwen' },
-        inline = { adapter = 'aliyun_qwen' },
-        agent = { adapter = 'aliyun_qwen' },
-      },
-      adapters = {
-        http = {
-          aliyun_qwen = function()
-            return require('codecompanion.adapters').extend('openai_compatible', {
-              name = 'aliyun_qwen',
-              env = {
-                url = 'https://dashscope.aliyuncs.com',
-                api_key = function()
-                  return os.getenv('QWEN_API_KEY')
-                end,
-                chat_url = '/compatible-mode/v1/chat/completions',
-              },
-              schema = {
-                model = {
-                  default = 'qwen3-coder-plus',
-                },
-              },
-            })
-          end,
-        },
-      },
-      prompt_library = {
-        markdown = {
-          dirs = {
-            vim.fn.getcwd() .. '/.prompts', -- Can be relative
-            vim.fn.stdpath('config') .. '/prompts',
+        display = {
+          action_palette = {
+            provider = 'snacks',
+          },
+          diff = {
+            enabled = true,
+            word_highlights = {
+              additions = true,
+              deletions = true,
+            },
           },
         },
-      },
-    },
+        interactions = {
+          chat = {
+            adapter = 'ollama',
+            tools = {
+              opts = {
+                default_tools = {
+                  'agent',
+                },
+              },
+            },
+          },
+          inline = { adapter = 'ollama' },
+          agent = { adapter = 'ollama' },
+        },
+        adapters = {
+          http = {
+            aliyun_qwen = function()
+              return require('codecompanion.adapters').extend('openai_compatible', {
+                name = 'aliyun_qwen',
+                env = {
+                  url = 'https://dashscope.aliyuncs.com',
+                  api_key = function()
+                    return os.getenv('QWEN_API_KEY')
+                  end,
+                  chat_url = '/compatible-mode/v1/chat/completions',
+                },
+                schema = {
+                  model = {
+                    default = 'qwen3-coder-plus',
+                  },
+                },
+              })
+            end,
+            ollama = function()
+              return require('codecompanion.adapters').extend('ollama', {
+                schema = {
+                  model = {
+                    default = 'qwen3.5',
+                  },
+                },
+                env = {
+                  url = 'http://localhost:11434',
+                  api_key = function()
+                    return os.getenv('OLLAMA_API_KEY')
+                  end,
+                },
+                headers = {
+                  ['Content-Type'] = 'application/json',
+                  ['Authorization'] = 'Bearer ${api_key}',
+                },
+                parameters = {
+                  sync = true,
+                },
+              })
+            end,
+          },
+        },
+        prompt_library = {
+          markdown = {
+            dirs = {
+              vim.fn.getcwd() .. '/.prompts', -- Can be relative
+              vim.fn.stdpath('config') .. '/prompts',
+            },
+          },
+        },
+      })
+    end,
     keys = {
       {
         '<leader>aa',

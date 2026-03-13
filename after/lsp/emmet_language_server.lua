@@ -24,8 +24,8 @@ return {
       ['css.floatUnitr'] = 'px',
     },
     includeLanguages = {
-      javascriptreact = 'html',
-      typescriptreact = 'html',
+      -- javascriptreact = 'html',
+      -- typescriptreact = 'html',
       blade = 'html',
     },
     --- @type boolean Defaults to `true`

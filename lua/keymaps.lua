@@ -20,22 +20,11 @@ keymap('', '<Space>', '<Nop>', opts)
 keymap('i', '<C-e>', '<End>', opts)
 keymap('i', '<C-a>', '<Home>', opts)
 
--- better up/down (使用函数而非表达式映射，避免 Windows Terminal 中长按卡顿)
-local function better_move(key, gkey)
-  return function()
-    local count = vim.v.count
-    if count == 0 then
-      return gkey
-    else
-      return key
-    end
-  end
-end
-
-keymap({ 'n', 'x' }, 'j', better_move('j', 'gj'), { expr = true, silent = true })
-keymap({ 'n', 'x' }, '<Down>', better_move('j', 'gj'), { expr = true, silent = true })
-keymap({ 'n', 'x' }, 'k', better_move('k', 'gk'), { expr = true, silent = true })
-keymap({ 'n', 'x' }, '<Up>', better_move('k', 'gk'), { expr = true, silent = true })
+-- better up/down
+keymap({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+keymap({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+keymap({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+keymap({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
 -- Move to window using the <ctrl> hjkl keys
 keymap('n', '<C-h>', '<C-w>h', { desc = 'Go to Left Window', remap = true })
