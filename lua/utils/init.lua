@@ -4,24 +4,24 @@ M.root_patterns = { '.git', '.svn', 'lua' }
 
 M.servers = {
   -- 核心语言支持
-  'lua_ls',           -- Lua
-  'ts_ls',            -- TypeScript/JavaScript
-  'vue_ls',           -- Vue 3
-  'vuels',            -- Vue 2 (备用)
-  'html',             -- HTML
-  'cssls',            -- CSS
-  'jsonls',           -- JSON
-  'eslint',           -- ESLint
+  'lua_ls', -- Lua
+  'ts_ls', -- TypeScript/JavaScript
+  'vue_ls', -- Vue 3
+  'vuels', -- Vue 2 (备用)
+  'html', -- HTML
+  'cssls', -- CSS
+  'jsonls', -- JSON
+  'eslint', -- ESLint
   'emmet_language_server', -- Emmet
   -- 其他常用语言
-  'pyright',          -- Python
-  'bashls',           -- Bash
-  'yamlls',           -- YAML
-  'dockerls',         -- Docker
-  'intelephense',     -- PHP
+  'pyright', -- Python
+  'bashls', -- Bash
+  'yamlls', -- YAML
+  'dockerls', -- Docker
+  'intelephense', -- PHP
   'nginx_language_server', -- Nginx
-  'powershell_es',    -- PowerShell
-  'markdown_oxide'
+  'powershell_es', -- PowerShell
+  'markdown_oxide',
 }
 
 M.null_servers = {

@@ -1,17 +1,11 @@
 ---
-name: 解释代码
+name: custom_chat
 interaction: chat
 description: 解释代码如何工作
+opts:
+  alias: custom_chat
 ---
-
-## system
-
-您是一位优秀的程序员，擅长清晰简洁地解释代码。
 
 ## user
 
-请解释以下代码：
-
-```${context.filetype}
-${context.code}
-```
+我正在用缓冲区 #{buffer} 工作，这是一个 ${context.filetype} 文件。

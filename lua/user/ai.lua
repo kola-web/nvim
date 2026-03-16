@@ -50,90 +50,98 @@ local M = {
     init = function()
       vim.cmd([[cab cc CodeCompanion]])
     end,
-    config = function()
-      require('codecompanion').setup({
-        opts = {
-          language = 'Chinese',
+    opts = {
+      opts = {
+        language = 'Chinese',
+      },
+      display = {
+        action_palette = {
+          provider = 'snacks',
         },
-        display = {
-          action_palette = {
-            provider = 'snacks',
-          },
-          diff = {
-            enabled = true,
-            word_highlights = {
-              additions = true,
-              deletions = true,
-            },
+        diff = {
+          enabled = true,
+          word_highlights = {
+            additions = true,
+            deletions = true,
           },
         },
-        interactions = {
-          chat = {
-            adapter = 'ollama',
-            tools = {
-              opts = {
-                default_tools = {
-                  'agent',
-                },
+      },
+      interactions = {
+        chat = {
+          adapter = 'ollama',
+          tools = {
+            opts = {
+              default_tools = {
+                'agent',
               },
             },
           },
-          inline = { adapter = 'ollama' },
-          agent = { adapter = 'ollama' },
         },
-        adapters = {
-          http = {
-            aliyun_qwen = function()
-              return require('codecompanion.adapters').extend('openai_compatible', {
-                name = 'aliyun_qwen',
-                env = {
-                  url = 'https://dashscope.aliyuncs.com',
-                  api_key = function()
-                    return os.getenv('QWEN_API_KEY')
-                  end,
-                  chat_url = '/compatible-mode/v1/chat/completions',
+        inline = { adapter = 'ollama' },
+        agent = { adapter = 'ollama' },
+      },
+      adapters = {
+        http = {
+          aliyun_qwen = function()
+            return require('codecompanion.adapters').extend('openai_compatible', {
+              name = 'aliyun_qwen',
+              env = {
+                url = 'https://dashscope.aliyuncs.com',
+                api_key = function()
+                  return os.getenv('QWEN_API_KEY')
+                end,
+                chat_url = '/compatible-mode/v1/chat/completions',
+              },
+              schema = {
+                model = {
+                  default = 'qwen3-coder-plus',
                 },
-                schema = {
-                  model = {
-                    default = 'qwen3-coder-plus',
-                  },
+              },
+            })
+          end,
+          ollama = function()
+            return require('codecompanion.adapters').extend('ollama', {
+              schema = {
+                model = {
+                  default = 'qwen3.5',
                 },
-              })
-            end,
-            ollama = function()
-              return require('codecompanion.adapters').extend('ollama', {
-                schema = {
-                  model = {
-                    default = 'qwen3.5',
-                  },
-                },
-                env = {
-                  url = 'http://localhost:11434',
-                  api_key = function()
-                    return os.getenv('OLLAMA_API_KEY')
-                  end,
-                },
-                headers = {
-                  ['Content-Type'] = 'application/json',
-                  ['Authorization'] = 'Bearer ${api_key}',
-                },
-                parameters = {
-                  sync = true,
-                },
-              })
-            end,
+              },
+              env = {
+                url = 'http://localhost:11434',
+                api_key = function()
+                  return os.getenv('OLLAMA_API_KEY')
+                end,
+              },
+              headers = {
+                ['Content-Type'] = 'application/json',
+                ['Authorization'] = 'Bearer ${api_key}',
+              },
+              parameters = {
+                sync = true,
+              },
+            })
+          end,
+        },
+      },
+      prompt_library = {
+        markdown = {
+          dirs = {
+            vim.fn.getcwd() .. '/.prompts', -- Can be relative
+            vim.fn.stdpath('config') .. '/prompts',
           },
         },
-        prompt_library = {
-          markdown = {
-            dirs = {
-              vim.fn.getcwd() .. '/.prompts', -- Can be relative
-              vim.fn.stdpath('config') .. '/prompts',
-            },
+      },
+      extensions = {
+        spinner = {
+          -- enabled = true, -- This is the default
+          opts = {
+            -- Your spinner configuration goes here
+            -- style = 'cursor-relative',
+            style = 'snacks',
           },
         },
-      })
-    end,
+      },
+    },
     keys = {
       {
         '<leader>aa',
@@ -147,6 +155,7 @@ local M = {
         silent = true,
       },
       { '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'CodeCompanionChat Toggle', mode = { 'n', 'v' }, noremap = true, silent = true },
+      { '<leader>ai', '<cmd>CodeCompanion /custom_chat<cr>', desc = 'CodeCompanion CustomChat', mode = { 'n', 'v' }, noremap = true, silent = true },
       { '<leader>ar', '<cmd>CodeCompanionChat refresh<cr>', desc = 'CodeCompanionChat refresh', mode = { 'n' }, noremap = true, silent = true },
       { '<leader>al', '<cmd>CodeCompanionChat Add<cr>', desc = 'CodeCompanionChat Add', mode = { 'v' }, noremap = true, silent = true },
     },
