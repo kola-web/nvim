@@ -18,7 +18,7 @@ M.servers = {
   'bashls', -- Bash
   'yamlls', -- YAML
   'dockerls', -- Docker
-  'intelephense', -- PHP
+  'phpactor', -- PHP
   'nginx_language_server', -- Nginx
   'powershell_es', -- PowerShell
   'markdown_oxide',

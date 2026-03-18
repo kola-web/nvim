@@ -11,6 +11,7 @@ return {
     'pug',
     'typescriptreact',
     'blade',
+    'php',
   },
   init_options = {
     --- @type string[]
