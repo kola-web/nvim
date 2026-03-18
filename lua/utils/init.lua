@@ -18,7 +18,7 @@ M.servers = {
   'bashls', -- Bash
   'yamlls', -- YAML
   'dockerls', -- Docker
-  'phpactor', -- PHP
+  'intelephense', -- PHP
   'nginx_language_server', -- Nginx
   'powershell_es', -- PowerShell
   'markdown_oxide',
@@ -38,7 +38,7 @@ M.null_servers = {
   'shfmt',
   'stylua',
   'taplo',
-  'php-cs-fixer',
+  'intelephense',
   'nginx-config-formatter',
 }
 
@@ -139,7 +139,7 @@ M.conformFormat = function()
     dockerfile = { name = 'dockerls', lsp_format = 'prefer' },
     ps1 = { name = 'powershell_es', lsp_format = 'prefer' },
     http = { name = 'kulala', lsp_format = 'prefer' },
-    php = { name = 'intelephense', lsp_format = 'prefer' },
+    php = { name = 'intelephense', lsp_format = 'last' },
     yaml = { name = 'yamlls', lsp_format = 'prefer' },
   }
 
