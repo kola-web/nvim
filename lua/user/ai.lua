@@ -68,7 +68,7 @@ local M = {
       },
       interactions = {
         chat = {
-          adapter = 'ollama',
+          adapter = 'aliyun_qwen',
           tools = {
             opts = {
               default_tools = {
@@ -77,8 +77,8 @@ local M = {
             },
           },
         },
-        inline = { adapter = 'ollama' },
-        agent = { adapter = 'ollama' },
+        inline = { adapter = 'aliyun_qwen' },
+        agent = { adapter = 'aliyun_qwen' },
       },
       adapters = {
         http = {
@@ -99,28 +99,6 @@ local M = {
               },
             })
           end,
-          ollama = function()
-            return require('codecompanion.adapters').extend('ollama', {
-              schema = {
-                model = {
-                  default = 'qwen3.5',
-                },
-              },
-              env = {
-                url = 'http://localhost:11434',
-                api_key = function()
-                  return os.getenv('OLLAMA_API_KEY')
-                end,
-              },
-              headers = {
-                ['Content-Type'] = 'application/json',
-                ['Authorization'] = 'Bearer ${api_key}',
-              },
-              parameters = {
-                sync = true,
-              },
-            })
-          end,
         },
       },
       prompt_library = {
@@ -133,7 +111,7 @@ local M = {
       },
       extensions = {
         spinner = {
-          -- enabled = true, -- This is the default
+          -- -- enabled = true, -- This is the default
           opts = {
             -- Your spinner configuration goes here
             -- style = 'cursor-relative',
