@@ -43,6 +43,7 @@ local M = {
         'vimdoc',
         'vue',
         'yaml',
+        'ini',
       },
     },
   },
