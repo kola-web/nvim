@@ -2,7 +2,8 @@ local M = {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    branch = 'main',
+    version = false, -- last release is way too old and doesn't work on Windows
     opts = {
       highlight = { enable = true, additional_vim_regex_highlighting = false },
       indent = { enable = true },
@@ -54,3 +55,4 @@ local M = {
 }
 
 return M
+
