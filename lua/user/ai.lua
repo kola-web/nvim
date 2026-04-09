@@ -68,7 +68,7 @@ local M = {
       },
       interactions = {
         chat = {
-          adapter = 'aliyun_qwen',
+          adapter = 'txyun_plan',
           tools = {
             opts = {
               default_tools = {
@@ -77,8 +77,8 @@ local M = {
             },
           },
         },
-        inline = { adapter = 'aliyun_qwen' },
-        agent = { adapter = 'aliyun_qwen' },
+        inline = { adapter = 'txyun_plan' },
+        agent = { adapter = 'txyun_plan' },
       },
       adapters = {
         http = {
@@ -95,6 +95,23 @@ local M = {
               schema = {
                 model = {
                   default = 'qwen3-coder-plus',
+                },
+              },
+            })
+          end,
+          txyun_plan = function()
+            return require('codecompanion.adapters').extend('openai_compatible', {
+              name = 'txyun_plan',
+              env = {
+                url = 'https://api.lkeap.cloud.tencent.com/plan/v3',
+                api_key = function()
+                  return os.getenv('TX_API_KEY')
+                end,
+                chat_url = '/chat/completions',
+              },
+              schema = {
+                model = {
+                  default = 'kimi-k2.5',
                 },
               },
             })
