@@ -1,12 +1,12 @@
 local M = {
-  { -- Highlight, edit, and navigate code
+  { -- 高亮、编辑和导航代码
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
     build = ':TSUpdate',
     branch = 'main',
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
+    -- [[ 配置 Treesitter ]] 参见 `:help nvim-treesitter-intro`
     config = function()
-      -- ensure basic parser are installed
+      -- 确保基本解析器已安装
       local parsers = {
         'bash',
         'blade',
@@ -23,7 +23,6 @@ local M = {
         'jsdoc',
         'json',
         'json5',
-        'jsonc',
         'kdl',
         'lua',
         'luadoc',
@@ -50,19 +49,19 @@ local M = {
       ---@param buf integer
       ---@param language string
       local function treesitter_try_attach(buf, language)
-        -- check if parser exists and load it
+        -- 检查解析器是否存在并加载它
         if not vim.treesitter.language.add(language) then
           return
         end
-        -- enables syntax highlighting and other treesitter features
+        -- 启用语法高亮和其他 Treesitter 功能
         vim.treesitter.start(buf, language)
 
-        -- enables treesitter based folds
-        -- for more info on folds see `:help folds`
+        -- 启用基于 Treesitter 的折叠
+        -- 有关折叠的更多信息，参见 `:help folds`
         -- vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
         -- vim.wo.foldmethod = 'expr'
 
-        -- enables treesitter based indentation
+        -- 启用基于 Treesitter 的缩进
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end
 
@@ -79,15 +78,15 @@ local M = {
           local installed_parsers = require('nvim-treesitter').get_installed('parsers')
 
           if vim.tbl_contains(installed_parsers, language) then
-            -- enable the parser if it is installed
+            -- 如果解析器已安装，则启用它
             treesitter_try_attach(buf, language)
           elseif vim.tbl_contains(available_parsers, language) then
-            -- if a parser is available in `nvim-treesitter` auto install it, and enable it after the installation is done
+            -- 如果 `nvim-treesitter` 中有可用的解析器，则自动安装，并在安装完成后启用它
             require('nvim-treesitter').install(language):await(function()
               treesitter_try_attach(buf, language)
             end)
           else
-            -- try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
+            -- 尝试启用 Treesitter 功能，以防解析器存在但无法从 `nvim-treesitter` 获取
             treesitter_try_attach(buf, language)
           end
         end,

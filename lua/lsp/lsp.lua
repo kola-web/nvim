@@ -83,10 +83,10 @@ local M = {
 
       local icons = require('utils.icons')
       vim.diagnostic.config({
+        update_in_insert = false,
         severity_sort = true,
         float = { border = 'rounded', source = 'if_many' },
-        underline = { severity = vim.diagnostic.severity.ERROR },
-        -- underline = true,
+        underline = { severity = { min = vim.diagnostic.severity.WARN } },
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,

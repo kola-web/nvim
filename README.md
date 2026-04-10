@@ -14,6 +14,7 @@ zig.zig
 7zip.7zip
 DEVCOM.LuaJIT
 DenoLand.Deno
+LLVM.LLVM
 ```
 
 获取当前buffer的filetype
