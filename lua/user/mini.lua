@@ -81,6 +81,23 @@ local M = {
     })
     icons.mock_nvim_web_devicons()
 
+    require('mini.ai').setup({
+      n_lines = 500,
+      custom_textobjects = {
+        t = false,
+        -- <div #name name="name" :text="greetingMessage" v-slot="slotProps" #[dynamicSlotName] v-slot:[dynamicSlotName] ></div>
+        x = {
+          {
+            '%s([@:]?[%w:-]+=").-"',
+            "%s([@:]?[%w-]+=').-'",
+            '%s([%w-]+={).-}',
+            '%s([#]?[%w-]+)%[.-%]',
+          },
+          '^().*()$',
+        },
+      },
+    })
+
     -- require('mini.jump').setup()
     --
     -- local jump2d = require('mini.jump2d')

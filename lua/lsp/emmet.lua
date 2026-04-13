@@ -1,6 +1,6 @@
 local M = {
   {
-    'kola-web/emmet-vim',
+    'mattn/emmet-vim',
     lazy = false,
     init = function()
       vim.g.emmet_install_only_plug = 1

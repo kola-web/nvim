@@ -2,13 +2,18 @@ local M = {
   {
     'Bekaboo/dropbar.nvim',
     event = 'VeryLazy',
-    opts = {
-      icons = {
-        kinds = {
-          symbols = require('mini.icons'),
-        },
-      },
+    dependencies = {
+      'mini.nvim',
     },
+    opts = function()
+      return {
+        icons = {
+          kinds = {
+            symbols = require('mini.icons'),
+          },
+        },
+      }
+    end,
     keys = {
       {
         '<leader>;',
