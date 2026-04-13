@@ -1,6 +1,7 @@
 local M = {
   'nvim-mini/mini.nvim',
   version = '*',
+  event = 'VeryLazy',
   config = function()
     require('mini.align').setup({
       mappings = {

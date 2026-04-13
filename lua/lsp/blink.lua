@@ -1,6 +1,7 @@
 local M = {
   {
     'saghen/blink.cmp',
+    event = 'InsertEnter',
     dependencies = { 'kola-web/blink-alias-path' },
     version = '1.*',
     ---@module 'blink.cmp'

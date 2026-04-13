@@ -42,8 +42,8 @@ local M = {
   {
     'olimorris/codecompanion.nvim',
     enabled = true,
-    lazy = false,
     event = { 'InsertEnter', 'CmdlineEnter' },
+    cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionActions' },
     dependencies = {
       'franco-ruggeri/codecompanion-spinner.nvim',
     },

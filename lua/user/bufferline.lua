@@ -2,6 +2,9 @@ local M = {
   {
     'romgrk/barbar.nvim',
     event = 'VeryLazy',
+    dependencies = {
+      'mini.nvim',
+    },
     init = function()
       vim.o.showtabline = 2
       vim.o.tabline = ' '
