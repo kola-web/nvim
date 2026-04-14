@@ -1,5 +1,3 @@
-local misc = require('mini.misc')
-
 require('mini.align').setup({
   mappings = {
     start = 'ge',
@@ -76,11 +74,11 @@ icons.setup({
     ['yarn.lock'] = { glyph = '', hl = 'MiniIconsBlue' },
   },
   filetype = {},
+  use_file_extension = function(ext, file)
+    return true
+  end,
 })
-
-misc.safely('later', function()
-  icons.mock_nvim_web_devicons()
-end)
+icons.mock_nvim_web_devicons()
 
 require('mini.ai').setup({
   n_lines = 500,

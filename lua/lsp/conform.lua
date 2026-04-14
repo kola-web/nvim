@@ -1,8 +1,13 @@
-local util = require('conform.util')
+local conform_ok, conform = pcall(require, 'conform')
+if not conform_ok then
+  return
+end
+
 local prettier = { 'prettier', stop_after_first = true }
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-require('conform').setup({
+
+conform.setup({
   format = {
     timeout_ms = 10000,
     async = false,
@@ -12,7 +17,6 @@ require('conform').setup({
     lua = { 'stylua' },
     fish = { 'fish_indent' },
     sh = { 'shfmt' },
-
     javascript = prettier,
     typescript = prettier,
     vue = prettier,
@@ -24,17 +28,11 @@ require('conform').setup({
     jsonc = prettier,
     yaml = {},
     markdown = prettier,
-
     toml = { 'taplo' },
-
     blade = { 'blade-formatter' },
-
     rust = { 'rustfmt' },
-
     python = { 'isort', 'black' },
-
     php = { 'php_cs_fixer' },
-
     nginx = { 'nginxfmt' },
   },
   formatters = {
@@ -46,4 +44,4 @@ require('conform').setup({
 
 vim.keymap.set('n', '<leader>m', function()
   require('utils.init').conformFormat()
-end, { desc = 'format' })
+end, { desc = 'Format code' })

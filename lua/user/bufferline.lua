@@ -7,18 +7,19 @@ require('barbar').setup({
   tabpages = true,
   clickable = false,
   sidebar_filetypes = {},
+  -- auto_hide = true,
   icons = {
     separator = { left = '│', right = '│' },
     separator_at_end = false,
 
-    filetype = {
-      custom_colors = false,
-      enabled = false,
-    },
+    -- filetype = {
+    --   custom_colors = false,
+    --   enabled = false,
+    -- },
   },
   minimum_padding = 0,
-  exclude_ft = { 'qf' },
-  exclude_name = {},
+  exclude_ft = { 'qf', '' },
+  exclude_name = { '[buffer %d+]' },
 })
 
 vim.keymap.set('n', '<S-tab>', '<cmd>BufferPrevious<cr>', { desc = 'Prev buffer' })

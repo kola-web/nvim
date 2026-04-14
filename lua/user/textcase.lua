@@ -1,10 +1,4 @@
-local M = {
-  'johmsalas/text-case.nvim',
-  lazy = false,
-  opts = {},
-  keys = {
-    'ga', -- Default invocation prefix
-  },
-}
-
-return M
+local textcase_ok, textcase = pcall(require, 'textcase')
+if textcase_ok then
+  textcase.setup({})
+end

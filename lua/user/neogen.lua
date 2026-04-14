@@ -1,14 +1,6 @@
-local M = {
-  'danymat/neogen',
-  dependencies = 'nvim-treesitter/nvim-treesitter',
-  opts = {},
-  keys = {
-    {
-      '<leader>ll',
-      '<cmd>lua require("neogen").generate()<CR>',
-      desc = 'jsDoc',
-    },
-  },
-}
+local neogen_ok, neogen = pcall(require, 'neogen')
+if neogen_ok then
+  neogen.setup({})
+end
 
-return M
+vim.keymap.set('n', '<leader>ll', '<cmd>lua require("neogen").generate()<CR>', { desc = 'jsDoc' })

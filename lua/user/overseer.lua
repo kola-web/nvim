@@ -1,22 +1,6 @@
-local M = {
-  'stevearc/overseer.nvim',
-  version = 'v1.6.0',
-  cmd = {
-    'OverseerOpen',
-    'OverseerClose',
-    'OverseerToggle',
-    'OverseerSaveBundle',
-    'OverseerLoadBundle',
-    'OverseerDeleteBundle',
-    'OverseerRunCmd',
-    'OverseerRun',
-    'OverseerInfo',
-    'OverseerBuild',
-    'OverseerQuickAction',
-    'OverseerTaskAction',
-    'OverseerClearCache',
-  },
-  opts = {
+local overseer_ok, overseer = pcall(require, 'overseer')
+if overseer_ok then
+  overseer.setup({
     dap = false,
     task_list = {
       bindings = {
@@ -43,17 +27,13 @@ local M = {
       },
     },
     templates = { 'builtin', 'user.run_script' },
-  },
-  -- stylua: ignore
-  keys = {
-    { "<leader>ow", "<cmd>OverseerToggle<cr>",      desc = "Task list" },
-    { "<leader>oo", "<cmd>OverseerRun<cr>",         desc = "Run task" },
-    { "<leader>oq", "<cmd>OverseerQuickAction<cr>", desc = "Action recent task" },
-    { "<leader>oi", "<cmd>OverseerInfo<cr>",        desc = "Overseer Info" },
-    { "<leader>ob", "<cmd>OverseerBuild<cr>",       desc = "Task builder" },
-    { "<leader>ot", "<cmd>OverseerTaskAction<cr>",  desc = "Task action" },
-    { "<leader>oc", "<cmd>OverseerClearCache<cr>",  desc = "Clear cache" },
-  },
-}
+  })
+end
 
-return M
+vim.keymap.set('n', '<leader>ow', '<cmd>OverseerToggle<cr>', { desc = 'Task list' })
+vim.keymap.set('n', '<leader>oo', '<cmd>OverseerRun<cr>', { desc = 'Run task' })
+vim.keymap.set('n', '<leader>oq', '<cmd>OverseerQuickAction<cr>', { desc = 'Action recent task' })
+vim.keymap.set('n', '<leader>oi', '<cmd>OverseerInfo<cr>', { desc = 'Overseer Info' })
+vim.keymap.set('n', '<leader>ob', '<cmd>OverseerBuild<cr>', { desc = 'Task builder' })
+vim.keymap.set('n', '<leader>ot', '<cmd>OverseerTaskAction<cr>', { desc = 'Task action' })
+vim.keymap.set('n', '<leader>oc', '<cmd>OverseerClearCache<cr>', { desc = 'Clear cache' })

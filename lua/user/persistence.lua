@@ -1,14 +1,25 @@
-local M = {
-  'folke/persistence.nvim',
-  event = 'BufReadPre',
-  opts = {},
-  -- stylua: ignore
-  keys = {
-    { "<leader>pr", function() require("persistence").load() end, desc = "Restore Session" },
-    { "<leader>pl", function() require("persistence").select() end,desc = "Select Session" },
-    { "<leader>pL", function() require("persistence").load({ last = true }) end, desc = "load the last session" },
-    { "<leader>pd", function() require("persistence").stop() end, desc = "session won't be saved on exit" },
-  },
-}
+local persistence_ok, persistence = pcall(require, 'persistence')
+if persistence_ok then
+  persistence.setup({})
+end
 
-return M
+vim.keymap.set('n', '<leader>pr', function()
+  if persistence_ok then
+    persistence.load()
+  end
+end, { desc = 'Restore Session' })
+vim.keymap.set('n', '<leader>pl', function()
+  if persistence_ok then
+    persistence.select()
+  end
+end, { desc = 'Select Session' })
+vim.keymap.set('n', '<leader>pL', function()
+  if persistence_ok then
+    persistence.load({ last = true })
+  end
+end, { desc = 'load the last session' })
+vim.keymap.set('n', '<leader>pd', function()
+  if persistence_ok then
+    persistence.stop()
+  end
+end, { desc = "session won't be saved on exit" })

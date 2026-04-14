@@ -1,7 +1,6 @@
-local M = {
-  'folke/which-key.nvim',
-  event = 'VeryLazy',
-  opts = {
+local which_key_ok, which_key = pcall(require, 'which-key')
+if which_key_ok then
+  which_key.setup({
     preset = 'helix',
     defaults = {},
     spec = {
@@ -36,7 +35,5 @@ local M = {
         { 'z', group = 'fold' },
       },
     },
-  },
-}
-
-return M
+  })
+end
