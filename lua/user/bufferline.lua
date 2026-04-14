@@ -1,34 +1,29 @@
-local M = {
-  {
-    'romgrk/barbar.nvim',
-    event = 'VeryLazy',
-    init = function()
-      vim.o.showtabline = 2
-      vim.o.tabline = ' '
-      vim.g.barbar_auto_setup = false
-    end,
-    opts = {
-      animation = false,
-      tabpages = true,
-      clickable = false,
-      sidebar_filetypes = {},
-      icons = {
-        separator = { left = '│', right = '│' },
-        separator_at_end = false,
-      },
-      minimum_padding = 0,
-      exclude_ft = { 'qf' },
-      exclude_name = {},
-    },
-    keys = {
-      { '<S-tab>', '<cmd>BufferPrevious<cr>', desc = 'Prev buffer' },
-      { '<tab>', '<cmd>BufferNext<cr>', desc = 'Next buffer' },
-      { '(', '<cmd>BufferMovePrevious<cr>', desc = 'move prev' },
-      { ')', '<cmd>BufferMoveNext<cr>', desc = 'move move' },
-      { '<leader>br', '<cmd>BufferRestore<cr>', desc = 'Restore buffer' },
-      { '<leader>bp', '<Cmd>BufferPin<CR>', desc = 'Toggle Pin' },
+vim.o.showtabline = 2
+vim.o.tabline = ' '
+vim.g.barbar_auto_setup = false
+
+require('barbar').setup({
+  animation = false,
+  tabpages = true,
+  clickable = false,
+  sidebar_filetypes = {},
+  icons = {
+    separator = { left = '│', right = '│' },
+    separator_at_end = false,
+
+    filetype = {
+      custom_colors = false,
+      enabled = false,
     },
   },
-}
+  minimum_padding = 0,
+  exclude_ft = { 'qf' },
+  exclude_name = {},
+})
 
-return M
+vim.keymap.set('n', '<S-tab>', '<cmd>BufferPrevious<cr>', { desc = 'Prev buffer' })
+vim.keymap.set('n', '<tab>', '<cmd>BufferNext<cr>', { desc = 'Next buffer' })
+vim.keymap.set('n', '(', '<cmd>BufferMovePrevious<cr>', { desc = 'move prev' })
+vim.keymap.set('n', ')', '<cmd>BufferMoveNext<cr>', { desc = 'move move' })
+vim.keymap.set('n', '<leader>br', '<cmd>BufferRestore<cr>', { desc = 'Restore buffer' })
+vim.keymap.set('n', '<leader>bp', '<Cmd>BufferPin<CR>', { desc = 'Toggle Pin' })

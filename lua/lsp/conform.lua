@@ -1,66 +1,49 @@
-local M = {
-  'stevearc/conform.nvim',
-  event = { 'BufWritePre' },
-  cmd = 'ConformInfo',
-  opts = function()
-    local util = require('conform.util')
-    local prettier = { 'prettier', stop_after_first = true }
-    -- local prettierd = { 'prettierd', stop_after_first = true }
+local util = require('conform.util')
+local prettier = { 'prettier', stop_after_first = true }
 
-    return {
-      format = {
-        timeout_ms = 10000,
-        async = false,
-        quiet = false,
-      },
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        fish = { 'fish_indent' },
-        sh = { 'shfmt' },
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+require('conform').setup({
+  format = {
+    timeout_ms = 10000,
+    async = false,
+    quiet = false,
+  },
+  formatters_by_ft = {
+    lua = { 'stylua' },
+    fish = { 'fish_indent' },
+    sh = { 'shfmt' },
 
-        javascript = prettier,
-        typescript = prettier,
-        vue = prettier,
-        html = prettier,
-        css = prettier,
-        scss = prettier,
-        wxss = prettier,
-        json = prettier,
-        jsonc = prettier,
-        yaml = {},
-        markdown = prettier,
+    javascript = prettier,
+    typescript = prettier,
+    vue = prettier,
+    html = prettier,
+    css = prettier,
+    scss = prettier,
+    wxss = prettier,
+    json = prettier,
+    jsonc = prettier,
+    yaml = {},
+    markdown = prettier,
 
-        toml = { 'taplo' },
+    toml = { 'taplo' },
 
-        blade = { 'blade-formatter' },
+    blade = { 'blade-formatter' },
 
-        rust = { 'rustfmt' },
+    rust = { 'rustfmt' },
 
-        python = { 'isort', 'black' },
+    python = { 'isort', 'black' },
 
-        php = { 'php_cs_fixer' },
+    php = { 'php_cs_fixer' },
 
-        nginx = { 'nginxfmt' },
-      },
-      formatters = {
-        ['blade-formatter'] = {
-          prepend_args = { '-i', '2' },
-        },
-      },
-    }
-  end,
-  init = function()
-    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  end,
-  keys = {
-    {
-      '<leader>m',
-      function()
-        require('utils.init').conformFormat()
-      end,
-      desc = 'format',
+    nginx = { 'nginxfmt' },
+  },
+  formatters = {
+    ['blade-formatter'] = {
+      prepend_args = { '-i', '2' },
     },
   },
-}
+})
 
-return M
+vim.keymap.set('n', '<leader>m', function()
+  require('utils.init').conformFormat()
+end, { desc = 'format' })

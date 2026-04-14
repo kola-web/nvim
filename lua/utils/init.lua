@@ -33,7 +33,6 @@ M.null_servers = {
   'js-debug-adapter',
   'prettier',
   'prettierd',
-  'rustfmt',
   'shellcheck',
   'shfmt',
   'stylua',

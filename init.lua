@@ -23,11 +23,18 @@ if not vim.g.vscode then
 
   require('keymaps')
   require('autocommands')
-  require('user.colorscheme')
 end
 
 if vim.g.neovide then
   require('system.neovide')
 end
 
-require('Lazy').setup()
+require('pack')
+require('user.colorscheme')
+require('user.mini')
+require('user.files')
+require('user.bufferline')
+require('user.snacks')
+require('lsp.lsp')
+require('lsp.blink')
+require('lsp.conform')

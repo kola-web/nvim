@@ -1,113 +1,110 @@
-local M = {
-  'nvim-mini/mini.nvim',
-  version = '*',
-  config = function()
-    require('mini.align').setup({
-      mappings = {
-        start = 'ge',
-        start_with_preview = 'gE',
-      },
-    })
+local misc = require('mini.misc')
 
-    require('mini.surround').setup({
-      mappings = {
-        add = 'ys', -- Add surrounding in Normal and Visual modes
-        delete = 'ds', -- Delete surrounding
-        find = nil, -- Find surrounding (to the right)
-        find_left = nil, -- Find surrounding (to the left)
-        highlight = nil, -- Highlight surrounding
-        replace = 'cs', -- Replace surrounding
-        update_n_lines = nil, -- Update `n_lines`
-        suffix_last = nil, -- Suffix to search with "prev" method
-        suffix_next = nil, -- Suffix to search with "next" method
-      },
-      custom_surroundings = {
-        T = {
-          input = { '<(%w+)[^<>]->.-</%1>', '^<()%w+().*</()%w+()>$' },
-          output = function()
-            local tag_name = MiniSurround.user_input('Tag name')
-            if tag_name == nil then
-              return nil
-            end
-            return { left = tag_name, right = tag_name }
-          end,
-        },
-      },
-    })
+require('mini.align').setup({
+  mappings = {
+    start = 'ge',
+    start_with_preview = 'gE',
+  },
+})
 
-    require('mini.operators').setup({
-      evaluate = {
-        prefix = nil,
-        func = nil,
-      },
-      exchange = {
-        prefix = 'S',
-        reindent_linewise = true,
-      },
-      multiply = {
-        prefix = 'gm',
-        func = nil,
-      },
-      replace = {
-        prefix = 's',
-        reindent_linewise = true,
-      },
-      sort = {
-        prefix = 'gs',
-        func = nil,
-      },
-    })
+require('mini.surround').setup({
+  mappings = {
+    add = 'ys', -- Add surrounding in Normal and Visual modes
+    delete = 'ds', -- Delete surrounding
+    find = nil, -- Find surrounding (to the right)
+    find_left = nil, -- Find surrounding (to the left)
+    highlight = nil, -- Highlight surrounding
+    replace = 'cs', -- Replace surrounding
+    update_n_lines = nil, -- Update `n_lines`
+    suffix_last = nil, -- Suffix to search with "prev" method
+    suffix_next = nil, -- Suffix to search with "next" method
+  },
+  custom_surroundings = {
+    T = {
+      input = { '<(%w+)[^<>]->.-</%1>', '^<()%w+().*</()%w+()>$' },
+      output = function()
+        local tag_name = MiniSurround.user_input('Tag name')
+        if tag_name == nil then
+          return nil
+        end
+        return { left = tag_name, right = tag_name }
+      end,
+    },
+  },
+})
 
-    require('mini.splitjoin').setup({
-      mappings = {
-        toggle = '<leader>J',
+require('mini.operators').setup({
+  evaluate = {
+    prefix = nil,
+    func = nil,
+  },
+  exchange = {
+    prefix = 'S',
+    reindent_linewise = true,
+  },
+  multiply = {
+    prefix = 'gm',
+    func = nil,
+  },
+  replace = {
+    prefix = 's',
+    reindent_linewise = true,
+  },
+  sort = {
+    prefix = 'gs',
+    func = nil,
+  },
+})
+
+require('mini.splitjoin').setup({
+  mappings = {
+    toggle = '<leader>J',
+  },
+})
+
+local icons = require('mini.icons')
+icons.setup({
+  file = {
+    ['.eslintrc.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
+    ['.node-version'] = { glyph = '', hl = 'MiniIconsGreen' },
+    ['.prettierrc'] = { glyph = '', hl = 'MiniIconsPurple' },
+    ['.yarnrc.yml'] = { glyph = '', hl = 'MiniIconsBlue' },
+    ['eslint.config.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
+    ['package.json'] = { glyph = '', hl = 'MiniIconsGreen' },
+    ['tsconfig.json'] = { glyph = '', hl = 'MiniIconsAzure' },
+    ['tsconfig.build.json'] = { glyph = '', hl = 'MiniIconsAzure' },
+    ['yarn.lock'] = { glyph = '', hl = 'MiniIconsBlue' },
+  },
+  filetype = {},
+})
+
+misc.safely('later', function()
+  icons.mock_nvim_web_devicons()
+end)
+
+require('mini.ai').setup({
+  n_lines = 500,
+  custom_textobjects = {
+    t = false,
+    -- <div #name name="name" :text="greetingMessage" v-slot="slotProps" #[dynamicSlotName] v-slot:[dynamicSlotName] ></div>
+    x = {
+      {
+        '%s([@:]?[%w:-]+=").-"',
+        "%s([@:]?[%w-]+=').-'",
+        '%s([%w-]+={).-}',
+        '%s([#]?[%w-]+)%[.-%]',
       },
-    })
+      '^().*()$',
+    },
+  },
+})
 
-    local icons = require('mini.icons')
-    icons.setup({
-      file = {
-        ['.eslintrc.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
-        ['.node-version'] = { glyph = '', hl = 'MiniIconsGreen' },
-        ['.prettierrc'] = { glyph = '', hl = 'MiniIconsPurple' },
-        ['.yarnrc.yml'] = { glyph = '', hl = 'MiniIconsBlue' },
-        ['eslint.config.js'] = { glyph = '󰱺', hl = 'MiniIconsYellow' },
-        ['package.json'] = { glyph = '', hl = 'MiniIconsGreen' },
-        ['tsconfig.json'] = { glyph = '', hl = 'MiniIconsAzure' },
-        ['tsconfig.build.json'] = { glyph = '', hl = 'MiniIconsAzure' },
-        ['yarn.lock'] = { glyph = '', hl = 'MiniIconsBlue' },
-      },
-      filetype = {},
-    })
-    icons.mock_nvim_web_devicons()
-
-    require('mini.ai').setup({
-      n_lines = 500,
-      custom_textobjects = {
-        t = false,
-        -- <div #name name="name" :text="greetingMessage" v-slot="slotProps" #[dynamicSlotName] v-slot:[dynamicSlotName] ></div>
-        x = {
-          {
-            '%s([@:]?[%w:-]+=").-"',
-            "%s([@:]?[%w-]+=').-'",
-            '%s([%w-]+={).-}',
-            '%s([#]?[%w-]+)%[.-%]',
-          },
-          '^().*()$',
-        },
-      },
-    })
-
-    -- require('mini.jump').setup()
-    --
-    -- local jump2d = require('mini.jump2d')
-    -- jump2d.setup({
-    --   spotter = jump2d.gen_spotter.pattern('[^%s%p]+'),
-    --   -- labels = 'asdfghjkl;',
-    --   view = { dim = true, n_steps_ahead = 2 },
-    --   silent = true,
-    -- })
-  end,
-}
-
-return M
+-- require('mini.jump').setup()
+--
+-- local jump2d = require('mini.jump2d')
+-- jump2d.setup({
+--   spotter = jump2d.gen_spotter.pattern('[^%s%p]+'),
+--   -- labels = 'asdfghjkl;',
+--   view = { dim = true, n_steps_ahead = 2 },
+--   silent = true,
+-- })
