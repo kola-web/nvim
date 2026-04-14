@@ -2,6 +2,7 @@ local M = {
   {
     'andrewferrier/debugprint.nvim',
     version = '*',
+    event = 'VeryLazy',
     opts = function()
       local web = {
         left = 'console.log("',
