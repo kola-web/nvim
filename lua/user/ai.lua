@@ -128,13 +128,3 @@ vim.keymap.set({ 'n', 'v' }, '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', 
 vim.keymap.set({ 'n', 'v' }, '<leader>ai', '<cmd>CodeCompanion /custom_chat<cr>', { desc = 'CodeCompanion CustomChat', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>ar', '<cmd>CodeCompanionChat refresh<cr>', { desc = 'CodeCompanionChat refresh', noremap = true, silent = true })
 vim.keymap.set('v', '<leader>al', '<cmd>CodeCompanionChat Add<cr>', { desc = 'CodeCompanionChat Add', noremap = true, silent = true })
-
-local sidekick_ok, _ = pcall(require, 'sidekick')
-if sidekick_ok then
-  vim.keymap.set('n', '<leader>aa', function()
-    require('sidekick.cli').toggle({ name = 'qwen', focus = true })
-  end, { desc = 'Sidekick Toggle CLI' })
-  vim.keymap.set({ 'n', 'x' }, '<leader>ap', function()
-    require('sidekick.cli').prompt()
-  end, { desc = 'Sidekick Select Prompt' })
-end

@@ -1,5 +1,26 @@
 local icons = require('utils.icons')
 
+vim.diagnostic.config({
+  update_in_insert = false,
+  severity_sort = true,
+  float = { border = 'rounded', source = 'if_many' },
+  underline = { severity = { min = vim.diagnostic.severity.WARN } },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+      [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+      [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+      [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
+    },
+  },
+  virtual_text = {
+    source = 'if_many',
+    spacing = 2,
+    current_line = true,
+    virtual_lines = true,
+  },
+})
+
 local diagnostic_goto = function(next, severity)
   return function()
     vim.diagnostic.jump({
@@ -18,7 +39,6 @@ local function on_lsp_attach(args)
   keymap('n', 'gl', vim.diagnostic.open_float, { desc = 'Float diagnostic', buffer = buffer })
   keymap('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'Code action', buffer = buffer })
   keymap('n', '<leader>lc', vim.lsp.codelens.run, { desc = 'Run Codelens', buffer = buffer })
-  keymap('n', '<leader>lC', vim.lsp.codelens.refresh, { desc = 'Refresh & Display Codelens', buffer = buffer })
   keymap('n', '<leader>lR', function()
     Snacks.rename.rename_file()
   end, { desc = 'Rename file', buffer = buffer })
@@ -46,27 +66,6 @@ end
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('kola-lsp-attach', { clear = true }),
   callback = on_lsp_attach,
-})
-
-vim.diagnostic.config({
-  update_in_insert = false,
-  severity_sort = true,
-  float = { border = 'rounded', source = 'if_many' },
-  underline = { severity = { min = vim.diagnostic.severity.WARN } },
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
-      [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
-      [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
-      [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
-    },
-  },
-  virtual_text = {
-    source = 'if_many',
-    spacing = 2,
-    current_line = true,
-    virtual_lines = true,
-  },
 })
 
 local has_blink, blink = pcall(require, 'blink.cmp')
@@ -100,26 +99,6 @@ for _, server in pairs(servers) do
   end
   vim.lsp.enable(server, status)
 end
-
-local mason_servers = require('utils.init').null_servers
-require('mason').setup({ ensure_installed = mason_servers })
-local mr = require('mason-registry')
-
-mr.refresh(function()
-  for _, tool in ipairs(mason_servers) do
-    local p = mr.get_package(tool)
-    if not p:is_installed() then
-      p:install()
-    end
-  end
-end)
-
-local mason_lspconfig_servers = require('utils.init').servers
-
-require('mason-lspconfig').setup({
-  ensure_installed = mason_lspconfig_servers,
-  automatic_enable = {},
-})
 
 vim.keymap.set('n', '<leader>ln', '<cmd>Neoconf<cr>', { desc = 'Neoconf' })
 vim.keymap.set('n', '<leader>L', '<cmd>LspRestart<cr>', { desc = 'lspRestart' })

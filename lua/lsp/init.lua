@@ -5,6 +5,7 @@ local lsp_modules = {
   'lsp.blink',
   'lsp.conform',
   'lsp.emmet',
+  'lsp.mason'
 }
 
 function M.setup()
