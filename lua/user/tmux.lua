@@ -46,8 +46,8 @@ vim.keymap.set('n', '<C-l>', function()
     require('smart-splits').move_cursor_right()
   end
 end, {})
-vim.keymap.set('n', '<C-\\>', function()
-  if smart_splits_ok then
-    require('smart-splits').move_cursor_previous()
-  end
-end, {})
+-- vim.keymap.set('n', '<C-\\>', function()
+--   if smart_splits_ok then
+--     require('smart-splits').move_cursor_previous()
+--   end
+-- end, {})

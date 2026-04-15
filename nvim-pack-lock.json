@@ -73,11 +73,6 @@
       "rev": "ba9c408fc0130fc4548760c3933a81b58fc50de8",
       "src": "https://github.com/chrishrb/gx.nvim"
     },
-    "harpoon": {
-      "rev": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3",
-      "src": "https://github.com/ThePrimeagen/harpoon",
-      "version": "'harpoon2'"
-    },
     "kulala.nvim": {
       "rev": "6656c9d332735ca6a27725e0fb45a1715c4372d9",
       "src": "https://github.com/mistweaverco/kulala.nvim"

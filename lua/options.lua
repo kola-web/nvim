@@ -119,3 +119,9 @@ vim.opt.guifont = 'Maple Mono NF CN:h12'
 -- ===========================
 -- 修复markdown默认缩进样式
 vim.g.markdown_recommended_style = 0
+
+vim.o.pummaxwidth = 100 -- Limit maximum width of popup menu
+vim.o.completetimeout = 100
+
+vim.o.pumborder = 'bold' -- Use border in built-in completion menu
+require('vim._core.ui2').enable({ enable = true })
