@@ -208,7 +208,7 @@ local M = {
       {'<leader>D',  function() Snacks.dashboard.open() end,                                                         desc = 'dashboard', mode = { 'n' } },
       {'<leader>z',  function() Snacks.zen() end,                                                                    desc = 'zen modal', mode = { 'n' } },
       {'<leader>Z',  function() Snacks.zen.zoom() end,                                                               desc = 'Toggle Zoom' },
-      {'<leader>gb', function() Snacks.git.blame_line() end,                                                         desc = 'git blame line', mode = { 'n' } },
+      {'<leader>gl', function() Snacks.git.blame_line() end,                                                         desc = 'git blame line', mode = { 'n' } },
       {'<leader>n',  function() Snacks.notifier.show_history() end,                                                  desc = 'Notification History' },
       {'<leader>S',  function() Snacks.scratch.select() end,                                                         desc = 'Select Scratch Buffer' },
       {'<leader>un', function() Snacks.notifier.hide() end,                                                          desc = 'Dismiss All Notifications' },
