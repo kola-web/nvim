@@ -184,7 +184,7 @@ local M = {
                   function(self)
                     vim.cmd('write')
                     local command = { 'python', vim.api.nvim_buf_get_name(self.buf) }
-                  local result = vim.system(command, { text = true }):wait()
+                    local result = vim.system(command, { text = true }):wait()
                     utils.scratch_result(result)
                   end,
                   desc = 'Source buffer',
