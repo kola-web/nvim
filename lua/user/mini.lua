@@ -78,7 +78,6 @@ icons.setup({
     return true
   end,
 })
-icons.mock_nvim_web_devicons()
 
 require('mini.ai').setup({
   n_lines = 500,

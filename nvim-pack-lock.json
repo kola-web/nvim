@@ -25,6 +25,10 @@
       "rev": "680c445eb357c72129d175ea5d481aa9e92ae6a5",
       "src": "https://github.com/olimorris/codecompanion.nvim"
     },
+    "codediff.nvim": {
+      "rev": "832f1ecc5f8b15a44cf7537e31d3266d657775b1",
+      "src": "https://github.com/esmuellert/codediff.nvim"
+    },
     "color-converter.nvim": {
       "rev": "5888e92cbccf0de202d2b617f6a8f3011a43bd52",
       "src": "https://github.com/NTBBloodbath/color-converter.nvim"

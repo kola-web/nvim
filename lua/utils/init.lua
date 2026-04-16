@@ -94,28 +94,23 @@ M.compare_to_clipboard = function()
 end
 
 M.is_vue = function()
-  local util = require('lspconfig.util')
   local cwd = vim.fn.getcwd()
-  local project_root = util.find_node_modules_ancestor(cwd)
-  local vue_path = util.path.join(project_root, 'node_modules', 'vue')
+  local node_modules = vim.fs.find('node_modules', { path = cwd, upward = true })[1]
+  local project_root = node_modules and vim.fs.dirname(node_modules) or cwd
+  local vue_path = table.concat({ project_root, 'node_modules', 'vue' }, '/')
   local is_vue = vim.fn.isdirectory(vue_path) == 1
   return is_vue
 end
 
 M.is_eslint = function()
-  local util = require('lspconfig.util')
   local cwd = vim.fn.getcwd()
-  local project_root = util.find_node_modules_ancestor(cwd)
+  local node_modules = vim.fs.find('node_modules', { path = cwd, upward = true })[1]
+  local project_root = node_modules and vim.fs.dirname(node_modules) or cwd
   local is_eslint = vim.fn.findfile('eslint.config.js', project_root) ~= '' or vim.fn.findfile('eslint.config.ts', project_root) ~= ''
   return is_eslint
 end
 
-local function add_fold(match)
-  vim.api.nvim_win_call(match.win, function()
-    local fold = vim.fn.foldclosed(match.pos[1])
-    match.fold = fold ~= -1 and fold or nil
-  end)
-end
+
 
 M.closeOtherAllBuffer = function()
   local bufs = vim.api.nvim_list_bufs()

@@ -1,13 +1,14 @@
-local dropbar_ok, dropbar = pcall(require, 'dropbar')
-if dropbar_ok then
-  dropbar.setup({
-    icons = {
-      kinds = {
-        symbols = require('mini.icons'),
-      },
+vim.pack.add({
+  'https://github.com/Bekaboo/dropbar.nvim',
+})
+
+require('dropbar').setup({
+  icons = {
+    kinds = {
+      symbols = require('mini.icons'),
     },
-  })
-end
+  },
+})
 
 vim.keymap.set('n', '<leader>;', function()
   if dropbar_ok then

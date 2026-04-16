@@ -1,3 +1,7 @@
+vim.pack.add({
+  'https://github.com/folke/which-key.nvim',
+})
+
 local which_key_ok, which_key = pcall(require, 'which-key')
 if which_key_ok then
   which_key.setup({

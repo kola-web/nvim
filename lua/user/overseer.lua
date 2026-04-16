@@ -1,34 +1,36 @@
-local overseer_ok, overseer = pcall(require, 'overseer')
-if overseer_ok then
-  overseer.setup({
-    dap = false,
-    task_list = {
-      bindings = {
-        ['<C-h>'] = false,
-        ['<C-j>'] = false,
-        ['<C-k>'] = false,
-        ['<C-l>'] = false,
-        ['oo'] = '<cmd>OverseerQuickAction restart<cr>',
-      },
+vim.pack.add({
+  'https://github.com/stevearc/overseer.nvim',
+})
+
+local overseer = require('overseer')
+overseer.setup({
+  dap = false,
+  task_list = {
+    bindings = {
+      ['<C-h>'] = false,
+      ['<C-j>'] = false,
+      ['<C-k>'] = false,
+      ['<C-l>'] = false,
+      ['oo'] = '<cmd>OverseerQuickAction restart<cr>',
     },
-    form = {
-      win_opts = {
-        winblend = 0,
-      },
+  },
+  form = {
+    win_opts = {
+      winblend = 0,
     },
-    confirm = {
-      win_opts = {
-        winblend = 0,
-      },
+  },
+  confirm = {
+    win_opts = {
+      winblend = 0,
     },
-    task_win = {
-      win_opts = {
-        winblend = 0,
-      },
+  },
+  task_win = {
+    win_opts = {
+      winblend = 0,
     },
-    templates = { 'builtin', 'user.run_script' },
-  })
-end
+  },
+  templates = { 'builtin', 'user.run_script' },
+})
 
 vim.keymap.set('n', '<leader>ow', '<cmd>OverseerToggle<cr>', { desc = 'Task list' })
 vim.keymap.set('n', '<leader>oo', '<cmd>OverseerRun<cr>', { desc = 'Run task' })

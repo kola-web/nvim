@@ -1,23 +1,21 @@
-local scissors_ok, scissors = pcall(require, 'scissors')
-if scissors_ok then
-  scissors.setup({
-    snippetDir = vim.fn.stdpath('config') .. '/snippets',
-    editSnippetPopup = {
-      keymaps = {
-        deleteSnippet = '<leader>ld',
-        duplicateSnippet = '<leader>lw',
-      },
+vim.pack.add({
+  'https://github.com/chrisgrieser/nvim-scissors',
+})
+
+local scissors = require('scissors')
+scissors.setup({
+  snippetDir = vim.fn.stdpath('config') .. '/snippets',
+  editSnippetPopup = {
+    keymaps = {
+      deleteSnippet = '<leader>ld',
+      duplicateSnippet = '<leader>lw',
     },
-  })
-end
+  },
+})
 
 vim.keymap.set('n', '<leader>l;', function()
-  if scissors_ok then
-    scissors.addNewSnippet()
-  end
+  scissors.addNewSnippet()
 end, { desc = 'snippet add' })
 vim.keymap.set('n', '<leader>l:', function()
-  if scissors_ok then
-    scissors.editSnippet()
-  end
+  scissors.editSnippet()
 end, { desc = 'snippet edit' })

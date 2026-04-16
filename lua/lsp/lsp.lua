@@ -1,3 +1,9 @@
+vim.pack.add({
+  'https://github.com/neovim/nvim-lspconfig',
+  'https://github.com/folke/neoconf.nvim',
+  'https://github.com/b0o/schemastore.nvim',
+})
+
 local icons = require('utils.icons')
 
 vim.diagnostic.config({

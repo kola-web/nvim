@@ -1,3 +1,10 @@
+vim.pack.add({
+  'https://github.com/github/copilot.vim',
+  'https://github.com/monkoose/neocodeium',
+  'https://github.com/olimorris/codecompanion.nvim',
+  'https://github.com/franco-ruggeri/codecompanion-spinner.nvim',
+})
+
 vim.g.copilot_enabled = true
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_filetypes = {
@@ -30,99 +37,98 @@ end
 
 vim.cmd([[cab cc CodeCompanion]])
 
-local codecompanion_ok, codecompanion = pcall(require, 'codecompanion')
-if codecompanion_ok then
-  codecompanion.setup({
-    opts = {
-      language = 'Chinese',
+local codecompanion = require('codecompanion')
+codecompanion.setup({
+  opts = {
+    language = 'Chinese',
+  },
+  display = {
+    action_palette = {
+      provider = 'snacks',
     },
-    display = {
-      action_palette = {
-        provider = 'snacks',
+    chat = {
+      icons = {
+        chat_fold = ' ',
       },
-      diff = {
-        enabled = true,
-        word_highlights = {
-          additions = true,
-          deletions = true,
-        },
-      },
+      fold_reasoning = true,
+      show_reasoning = true,
     },
-    interactions = {
-      chat = {
-        adapter = 'txyun_plan',
-        tools = {
-          opts = {
-            default_tools = {
-              'agent',
-            },
+  },
+  interactions = {
+    chat = {
+      adapter = 'txyun_plan',
+      tools = {
+        opts = {
+          default_tools = {
+            'agent',
           },
         },
       },
-      inline = { adapter = 'txyun_plan' },
-      agent = { adapter = 'txyun_plan' },
-    },
-    adapters = {
-      http = {
-        aliyun_qwen = function()
-          return require('codecompanion.adapters').extend('openai_compatible', {
-            name = 'aliyun_qwen',
-            env = {
-              url = 'https://dashscope.aliyuncs.com',
-              api_key = function()
-                return os.getenv('QWEN_API_KEY')
-              end,
-              chat_url = '/compatible-mode/v1/chat/completions',
-            },
-            schema = {
-              model = {
-                default = 'qwen3-coder-plus',
-              },
-            },
-          })
-        end,
-        txyun_plan = function()
-          return require('codecompanion.adapters').extend('openai_compatible', {
-            name = 'txyun_plan',
-            env = {
-              url = 'https://api.lkeap.cloud.tencent.com/plan/v3',
-              api_key = function()
-                return os.getenv('TX_API_KEY')
-              end,
-              chat_url = '/chat/completions',
-            },
-            schema = {
-              model = {
-                default = 'kimi-k2.5',
-              },
-            },
-          })
-        end,
+      opts = {
+        completion_provider = 'blink',
       },
     },
-    prompt_library = {
-      markdown = {
-        dirs = {
-          vim.fn.getcwd() .. '/.prompts',
-          vim.fn.stdpath('config') .. '/prompts',
-        },
+    inline = { adapter = 'txyun_plan' },
+    agent = { adapter = 'txyun_plan' },
+  },
+  adapters = {
+    http = {
+      aliyun_qwen = function()
+        return require('codecompanion.adapters').extend('openai_compatible', {
+          name = 'aliyun_qwen',
+          env = {
+            url = 'https://dashscope.aliyuncs.com',
+            api_key = function()
+              return os.getenv('QWEN_API_KEY')
+            end,
+            chat_url = '/compatible-mode/v1/chat/completions',
+          },
+          schema = {
+            model = {
+              default = 'qwen3-coder-plus',
+            },
+          },
+        })
+      end,
+      txyun_plan = function()
+        return require('codecompanion.adapters').extend('openai_compatible', {
+          name = 'txyun_plan',
+          env = {
+            url = 'https://api.lkeap.cloud.tencent.com/plan/v3',
+            api_key = function()
+              return os.getenv('TX_API_KEY')
+            end,
+            chat_url = '/chat/completions',
+          },
+          schema = {
+            model = {
+              default = 'kimi-k2.5',
+            },
+          },
+        })
+      end,
+    },
+  },
+  prompt_library = {
+    markdown = {
+      dirs = {
+        vim.fn.getcwd() .. '/.prompts',
+        vim.fn.stdpath('config') .. '/prompts',
       },
     },
-    extensions = {
-      spinner = {
-        opts = {
-          style = 'snacks',
-        },
+  },
+  extensions = {
+    spinner = {
+      opts = {
+        style = 'snacks',
       },
     },
-  })
-end
+  },
+})
 
 vim.keymap.set({ 'n', 'v' }, '<leader>aa', function()
-  if codecompanion_ok then
-    require('codecompanion').actions({})
-    vim.cmd.stopinsert()
-  end
+  require('codecompanion').actions({})
+  vim.cmd.stopinsert()
 end, { desc = 'CodeCompanionActions', noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v' }, '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', { desc = 'CodeCompanionChat Toggle', noremap = true, silent = true })
 vim.keymap.set({ 'n', 'v' }, '<leader>ai', '<cmd>CodeCompanion /custom_chat<cr>', { desc = 'CodeCompanion CustomChat', noremap = true, silent = true })

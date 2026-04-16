@@ -1,4 +1,6 @@
-local textcase_ok, textcase = pcall(require, 'textcase')
-if textcase_ok then
-  textcase.setup({})
-end
+vim.pack.add({
+  'https://github.com/johmsalas/text-case.nvim',
+})
+
+local textcase = require('textcase')
+textcase.setup({})

@@ -1,7 +1,7 @@
-local conform_ok, conform = pcall(require, 'conform')
-if not conform_ok then
-  return
-end
+vim.pack.add({
+  'https://github.com/stevearc/conform.nvim',
+})
+local conform = require('conform')
 
 local prettier = { 'prettier', stop_after_first = true }
 

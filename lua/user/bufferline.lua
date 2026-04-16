@@ -1,3 +1,7 @@
+vim.pack.add({
+  'https://github.com/romgrk/barbar.nvim',
+})
+
 vim.o.showtabline = 2
 vim.o.tabline = ' '
 vim.g.barbar_auto_setup = false

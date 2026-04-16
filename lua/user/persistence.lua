@@ -1,25 +1,19 @@
-local persistence_ok, persistence = pcall(require, 'persistence')
-if persistence_ok then
-  persistence.setup({})
-end
+vim.pack.add({
+  'https://github.com/folke/persistence.nvim',
+})
+
+local persistence = require('persistence')
+persistence.setup({})
 
 vim.keymap.set('n', '<leader>pr', function()
-  if persistence_ok then
-    persistence.load()
-  end
+  persistence.load()
 end, { desc = 'Restore Session' })
 vim.keymap.set('n', '<leader>pl', function()
-  if persistence_ok then
-    persistence.select()
-  end
+  persistence.select()
 end, { desc = 'Select Session' })
 vim.keymap.set('n', '<leader>pL', function()
-  if persistence_ok then
-    persistence.load({ last = true })
-  end
+  persistence.load({ last = true })
 end, { desc = 'load the last session' })
 vim.keymap.set('n', '<leader>pd', function()
-  if persistence_ok then
-    persistence.stop()
-  end
+  persistence.stop()
 end, { desc = "session won't be saved on exit" })

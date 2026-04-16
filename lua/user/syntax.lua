@@ -1,4 +1,7 @@
-local log_highlight_ok, log_highlight = pcall(require, 'log-highlight')
-if log_highlight_ok then
-  log_highlight.setup({})
-end
+vim.pack.add({
+  'https://github.com/fladson/vim-kitty',
+  'https://github.com/fei6409/log-highlight.nvim',
+})
+
+local log_highlight = require('log-highlight')
+log_highlight.setup({})

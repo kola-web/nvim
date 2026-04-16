@@ -1,7 +1,11 @@
-local blink_ok, blink = pcall(require, 'blink.cmp')
-if not blink_ok then
-  return
-end
+vim.pack.add({
+  { src = 'https://github.com/saghen/blink.cmp', version = vim.version.range('1.x') },
+  'https://github.com/kola-web/blink-alias-path',
+  'https://github.com/L3MON4D3/LuaSnip',
+  'https://github.com/rafamadriz/friendly-snippets',
+  'https://github.com/folke/lazydev.nvim',
+})
+local blink = require('blink.cmp')
 
 blink.setup({
   keymap = {

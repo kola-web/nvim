@@ -1,22 +1,24 @@
-local flash_ok, flash = pcall(require, 'flash')
-if flash_ok then
-  flash.setup({
-    modes = {
-      char = {
-        highlight = { backdrop = false },
-      },
+vim.pack.add({
+  'https://github.com/folke/flash.nvim',
+})
+
+local flash = require('flash')
+flash.setup({
+  modes = {
+    char = {
+      highlight = { backdrop = false },
     },
-    highlight = { backdrop = false },
-    label = {
-      uppercase = false,
-      current = true,
-      rainbow = {
-        enabled = true,
-        shade = 1,
-      },
+  },
+  highlight = { backdrop = false },
+  label = {
+    uppercase = false,
+    current = true,
+    rainbow = {
+      enabled = true,
+      shade = 1,
     },
-  })
-end
+  },
+})
 
 vim.keymap.set({ 'n', 'x', 'o' }, '<cr>', function()
   local buftype = vim.bo.buftype
@@ -30,28 +32,21 @@ vim.keymap.set({ 'n', 'x', 'o' }, '<cr>', function()
     vim.api.nvim_feedkeys(key, 'n', false)
     return
   end
-
-  if flash_ok then
-    flash.jump()
-  end
+  flash.jump()
 end, { desc = 'Flash' })
+
 vim.keymap.set({ 'n', 'o', 'x' }, '<S-CR>', function()
-  if flash_ok then
-    flash.treesitter()
-  end
+  flash.treesitter()
 end, { desc = 'Flash Treesitter' })
+
 vim.keymap.set('o', 'r', function()
-  if flash_ok then
-    flash.remote()
-  end
+  flash.remote()
 end, { desc = 'Remote Flash' })
+
 vim.keymap.set({ 'o', 'x' }, 'R', function()
-  if flash_ok then
-    flash.treesitter_search()
-  end
+  flash.treesitter_search()
 end, { desc = 'Treesitter Search' })
+
 vim.keymap.set('c', '<c-s>', function()
-  if flash_ok then
-    flash.toggle()
-  end
+  flash.toggle()
 end, { desc = 'Toggle Flash Search' })

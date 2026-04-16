@@ -1,30 +1,27 @@
-local colorizer_ok, colorizer = pcall(require, 'colorizer')
-if colorizer_ok then
-  colorizer.setup({
-    user_default_options = {
-      RGB = true,
-      RRGGBB = true,
-      RRGGBBAA = true,
-      css = true,
-      names = false,
-    },
-  })
-end
+vim.pack.add({
+  'https://github.com/NvChad/nvim-colorizer.lua',
+  'https://github.com/NTBBloodbath/color-converter.nvim',
+})
 
-local color_converter_ok, color_converter = pcall(require, 'color-converter')
-if color_converter_ok then
-  color_converter.setup({
-    rgb_pattern = 'rgba([r],[g],[b], 1)',
-  })
-end
+local colorizer = require('colorizer')
+colorizer.setup({
+  user_default_options = {
+    RGB = true,
+    RRGGBB = true,
+    RRGGBBAA = true,
+    css = true,
+    names = false,
+  },
+})
+
+local color_converter = require('color-converter')
+color_converter.setup({
+  rgb_pattern = 'rgba([r],[g],[b], 1)',
+})
 
 vim.keymap.set('n', '<leader>rh', function()
-  if color_converter_ok then
-    require('color-converter').to_hex()
-  end
+  require('color-converter').to_hex()
 end, { desc = 'rgba to hex', silent = true })
 vim.keymap.set('n', '<leader>rg', function()
-  if color_converter_ok then
-    require('color-converter').to_rgb()
-  end
+  require('color-converter').to_rgb()
 end, { desc = 'hex to rgba', silent = true })

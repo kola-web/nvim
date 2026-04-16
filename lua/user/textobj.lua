@@ -1,11 +1,7 @@
-vim.g.netrw_nogx = 1
-
-local gx_ok, gx = pcall(require, 'gx')
-if gx_ok then
-  gx.setup({})
-end
-
-vim.keymap.set({ 'n', 'x' }, 'gx', '<cmd>Browse<cr>', {})
+vim.pack.add({
+  'https://github.com/tpope/vim-repeat',
+  'https://github.com/chrisgrieser/nvim-various-textobjs',
+})
 
 local various_textobjs_ok, various_textobjs = pcall(require, 'various-textobjs')
 if various_textobjs_ok then
