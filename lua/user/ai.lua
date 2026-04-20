@@ -50,26 +50,32 @@ codecompanion.setup({
       icons = {
         chat_fold = ' ',
       },
-      fold_reasoning = true,
-      show_reasoning = true,
     },
   },
   interactions = {
     chat = {
-      adapter = 'txyun_plan',
+      adapter = 'txyun_glm',
       tools = {
         opts = {
           default_tools = {
-            'agent',
+            'insert_edit_into_file',
+            'cmd_runner',
+            'file_search',
+            'grep_search',
+            'read_file',
           },
         },
       },
-      opts = {
-        completion_provider = 'blink',
+      editor_context = {
+        ['buffer'] = {
+          opts = {
+            default_params = 'diff',
+          },
+        },
       },
     },
-    inline = { adapter = 'txyun_plan' },
-    agent = { adapter = 'txyun_plan' },
+    inline = { adapter = 'txyun_glm' },
+    agent = { adapter = 'txyun_glm' },
   },
   adapters = {
     http = {
@@ -90,9 +96,9 @@ codecompanion.setup({
           },
         })
       end,
-      txyun_plan = function()
+      txyun_kimi = function()
         return require('codecompanion.adapters').extend('openai_compatible', {
-          name = 'txyun_plan',
+          name = 'txyun_kimi',
           env = {
             url = 'https://api.lkeap.cloud.tencent.com/plan/v3',
             api_key = function()
@@ -104,6 +110,44 @@ codecompanion.setup({
             model = {
               default = 'kimi-k2.5',
             },
+          },
+        })
+      end,
+      txyun_glm = function()
+        return require('codecompanion.adapters').extend('openai_compatible', {
+          name = 'txyun_glm',
+          env = {
+            url = 'https://api.lkeap.cloud.tencent.com/plan/v3',
+            api_key = function()
+              return os.getenv('TX_API_KEY')
+            end,
+            chat_url = '/chat/completions',
+          },
+          schema = {
+            model = {
+              default = 'glm-5.1',
+            },
+          },
+          -- 添加这个 formatter 来直接处理 API 响应
+          handlers = {
+            chat_output = function(self, data, event)
+              if not data then
+                return
+              end
+
+              -- 解析 JSON 响应
+              local ok, json = pcall(vim.json.decode, data)
+              if not ok or not json.choices then
+                return
+              end
+
+              local delta = json.choices[1].delta
+              if delta and delta.content then
+                -- 在这里直接清理内容
+                delta.content = delta.content:gsub('\r\n', '\n'):gsub('\n\n\n+', '\n\n')
+                return delta.content
+              end
+            end,
           },
         })
       end,

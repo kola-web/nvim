@@ -62,4 +62,3 @@ require('user.todo-comments')
 require('user.treesitter')
 require('user.vcs')
 require('user.which-key')
-

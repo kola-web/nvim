@@ -5,6 +5,9 @@ vim.pack.add({
 })
 
 local icons = require('utils.icons')
+local utils = require('utils.init')
+
+require('neoconf').setup()
 
 vim.diagnostic.config({
   update_in_insert = false,
@@ -92,8 +95,8 @@ vim.lsp.config('*', {
 local emmet_language_server = require('neoconf').get('emmet_language_server') or {}
 vim.lsp.config('emmet_language_server', emmet_language_server)
 
-local is_vue2 = require('utils.init').is_vue2_project()
-local servers = require('utils.init').servers
+local is_vue2 = utils.is_vue2_project()
+local servers = utils.servers
 
 for _, server in pairs(servers) do
   local status = true

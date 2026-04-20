@@ -2,6 +2,8 @@ vim.pack.add({
   'https://github.com/folke/snacks.nvim',
 })
 
+local utils = require('utils.init')
+
 -- Terminal Mappings
 local function term_nav(dir)
   ---@param self snacks.terminal
@@ -39,7 +41,7 @@ require('snacks').setup({
     indent = { only_current = true },
     scope = { only_current = true },
   },
-  image = { enabled = false },
+  image = { enabled = true },
   lazygit = { enabled = false },
   notifier = { enabled = true, level = vim.log.levels.TRACE },
   picker = {
@@ -151,7 +153,7 @@ require('snacks').setup({
               vim.cmd('write')
               local command = { 'node', vim.api.nvim_buf_get_name(self.buf) }
               local result = vim.system(command, { text = true }):wait()
-              require('utils').scratch_result(result)
+              utils.scratch_result(result)
             end,
             desc = 'Source buffer',
             mode = { 'n', 'x' },
@@ -166,7 +168,7 @@ require('snacks').setup({
               vim.cmd('write')
               local command = { 'node', vim.api.nvim_buf_get_name(self.buf) }
               local result = vim.system(command, { text = true }):wait()
-              require('utils').scratch_result(result)
+              utils.scratch_result(result)
             end,
             desc = 'Source buffer',
             mode = { 'n', 'x' },
@@ -181,7 +183,7 @@ require('snacks').setup({
               vim.cmd('write')
               local command = { 'python', vim.api.nvim_buf_get_name(self.buf) }
               local result = vim.system(command, { text = true }):wait()
-              require('utils').scratch_result(result)
+              utils.scratch_result(result)
             end,
             desc = 'Source buffer',
             mode = { 'n', 'x' },
@@ -274,7 +276,7 @@ vim.keymap.set('n', '<leader>s/', function()
   Snacks.picker.grep_buffers()
 end, { desc = 'Grep Open Buffers' })
 vim.keymap.set('n', '<leader>lt', function()
-  require('utils').select_filetype()
+  utils.select_filetype()
 end, { desc = 'select filetype' })
 vim.keymap.set('n', '<leader>pp', function()
   Snacks.picker.projects()
@@ -295,10 +297,10 @@ vim.keymap.set('n', 'gy', function()
   Snacks.picker.lsp_type_definitions()
 end, { desc = 'Goto T[y]pe Definition' })
 vim.keymap.set('n', '<leader>so', function()
-  Snacks.picker.lsp_symbols(require('utils').kind_filter)
+  Snacks.picker.lsp_symbols(utils.kind_filter)
 end, { desc = 'LSP Symbols' })
 vim.keymap.set('n', '<leader>sO', function()
-  Snacks.picker.lsp_workspace_symbols(require('utils').kind_filter)
+  Snacks.picker.lsp_workspace_symbols(utils.kind_filter)
 end, { desc = 'LSP Workspace Symbols' })
 
 -- Setup some globals for debugging (lazy-loaded)
