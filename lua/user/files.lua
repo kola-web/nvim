@@ -149,13 +149,6 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'MiniFilesActionRename',
-  callback = function(event)
-    Snacks.rename.on_rename_file(event.data.from, event.data.to)
-  end,
-})
-
 vim.keymap.set('n', '<leader>e', function()
   require('mini.files').open(vim.api.nvim_buf_get_name(0), true)
 end, { desc = 'Open mini.files (Directory of Current File)' })

@@ -36,62 +36,78 @@ vim.g.mini_file_mini_component = function()
   local file = MiniFiles.get_explorer_state().branch
   local currentPath = file[#file]
   local templatePath = vim.fn.expand('$HOME/AppData/Local/nvim/template/wxmlComponent')
-  local destPath = currentPath .. '/wxmlComponent'
 
-  -- 使用异步 job 避免阻塞
-  vim.fn.jobstart({
-    'pwsh',
-    '-NoLogo',
-    '-NoProfile',
-    '-Command',
-    string.format(
-      'Copy-Item -Recurse -Path "%s" -Destination "%s"; Get-ChildItem -Recurse -Path "%s" | ForEach-Object { $_.IsReadOnly = $false }',
-      templatePath,
-      currentPath,
-      destPath
-    ),
-  }, {
-    on_exit = function(_, exit_code)
-      vim.schedule(function()
-        if exit_code == 0 then
-          MiniFiles.synchronize()
-          vim.notify('Component created successfully', vim.log.levels.INFO)
-        else
-          vim.notify('Failed to create component', vim.log.levels.ERROR)
-        end
-      end)
-    end,
-  })
+  -- 询问组件名称
+  vim.ui.input({ prompt = 'Component name: ' }, function(name)
+    if not name or name == '' then
+      return
+    end
+
+    local destPath = currentPath .. '/' .. name
+
+    -- 使用异步 job 避免阻塞
+    vim.fn.jobstart({
+      'pwsh',
+      '-NoLogo',
+      '-NoProfile',
+      '-Command',
+      string.format(
+        'Copy-Item -Recurse -Path "%s" -Destination "%s"; Get-ChildItem -Recurse -Path "%s" | ForEach-Object { $_.IsReadOnly = $false }',
+        templatePath,
+        destPath,
+        destPath
+      ),
+    }, {
+      on_exit = function(_, exit_code)
+        vim.schedule(function()
+          if exit_code == 0 then
+            MiniFiles.synchronize()
+            vim.notify('Component "' .. name .. '" created successfully', vim.log.levels.INFO)
+          else
+            vim.notify('Failed to create component', vim.log.levels.ERROR)
+          end
+        end)
+      end,
+    })
+  end)
 end
 
 vim.g.mini_file_mini_page = function()
   local file = MiniFiles.get_explorer_state().branch
   local currentPath = file[#file]
   local templatePath = vim.fn.expand('$HOME/AppData/Local/nvim/template/wxmlPage')
-  local destPath = currentPath .. '/wxmlPage'
 
-  -- 使用异步 job 避免阻塞
-  vim.fn.jobstart({
-    'pwsh',
-    '-NoLogo',
-    '-NoProfile',
-    '-Command',
-    string.format(
-      'Copy-Item -Recurse -Path "%s" -Destination "%s"; Get-ChildItem -Recurse -Path "%s" | ForEach-Object { $_.IsReadOnly = $false }',
-      templatePath,
-      currentPath,
-      destPath
-    ),
-  }, {
-    on_exit = function(_, exit_code)
-      vim.schedule(function()
-        if exit_code == 0 then
-          MiniFiles.synchronize()
-          vim.notify('Page created successfully', vim.log.levels.INFO)
-        else
-          vim.notify('Failed to create page', vim.log.levels.ERROR)
-        end
-      end)
-    end,
-  })
+  -- 询问页面名称
+  vim.ui.input({ prompt = 'Page name: ' }, function(name)
+    if not name or name == '' then
+      return
+    end
+
+    local destPath = currentPath .. '/' .. name
+
+    -- 使用异步 job 避免阻塞
+    vim.fn.jobstart({
+      'pwsh',
+      '-NoLogo',
+      '-NoProfile',
+      '-Command',
+      string.format(
+        'Copy-Item -Recurse -Path "%s" -Destination "%s"; Get-ChildItem -Recurse -Path "%s" | ForEach-Object { $_.IsReadOnly = $false }',
+        templatePath,
+        destPath,
+        destPath
+      ),
+    }, {
+      on_exit = function(_, exit_code)
+        vim.schedule(function()
+          if exit_code == 0 then
+            MiniFiles.synchronize()
+            vim.notify('Page "' .. name .. '" created successfully', vim.log.levels.INFO)
+          else
+            vim.notify('Failed to create page', vim.log.levels.ERROR)
+          end
+        end)
+      end,
+    })
+  end)
 end

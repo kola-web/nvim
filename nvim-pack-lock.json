@@ -165,6 +165,10 @@
       "rev": "ad78e9d925c95d675b32dd7ba6d253f96ce063fe",
       "src": "https://github.com/chrisgrieser/nvim-various-textobjs"
     },
+    "opencode.nvim": {
+      "rev": "b3cdd746a5ca321b6884badefa0ba22c86c3d45e",
+      "src": "https://github.com/nickjvandyke/opencode.nvim"
+    },
     "overseer.nvim": {
       "rev": "f818eefff81f4b12fb7cf236f1b6c16768a2fcbc",
       "src": "https://github.com/stevearc/overseer.nvim"

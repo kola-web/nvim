@@ -2,7 +2,6 @@ vim.pack.add({
   'https://github.com/github/copilot.vim',
   'https://github.com/monkoose/neocodeium',
   'https://github.com/olimorris/codecompanion.nvim',
-  'https://github.com/franco-ruggeri/codecompanion-spinner.nvim',
 })
 
 vim.g.copilot_enabled = true
@@ -47,55 +46,31 @@ codecompanion.setup({
       provider = 'snacks',
     },
     chat = {
-      icons = {
-        chat_fold = ' ',
-      },
+      show_settings = true,
+      render_headers = false,
     },
   },
   interactions = {
-    chat = {
-      adapter = 'txyun_glm',
-      tools = {
-        opts = {
-          default_tools = {
-            'insert_edit_into_file',
-            'cmd_runner',
-            'file_search',
-            'grep_search',
-            'read_file',
-          },
-        },
-      },
-      editor_context = {
-        ['buffer'] = {
-          opts = {
-            default_params = 'diff',
-          },
-        },
-      },
-    },
-    inline = { adapter = 'txyun_glm' },
-    agent = { adapter = 'txyun_glm' },
+    chat = { adapter = 'txyun_kimi', keymaps = {
+      close = { modes = { n = 'q', i = '<C-c>' } },
+      stop = { modes = { n = '<C-c>' } },
+    } },
+    inline = { adapter = 'opencode' },
+    agent = { adapter = 'txyun_minimax' },
   },
   adapters = {
-    http = {
-      aliyun_qwen = function()
-        return require('codecompanion.adapters').extend('openai_compatible', {
-          name = 'aliyun_qwen',
-          env = {
-            url = 'https://dashscope.aliyuncs.com',
-            api_key = function()
-              return os.getenv('QWEN_API_KEY')
-            end,
-            chat_url = '/compatible-mode/v1/chat/completions',
-          },
-          schema = {
-            model = {
-              default = 'qwen3-coder-plus',
-            },
+    acp = {
+      opencode = function()
+        return require('codecompanion.adapters').extend('claude_code', {
+          name = 'opencode',
+          formatted_name = 'OpenCode',
+          commands = {
+            default = { 'opencode', 'acp' },
           },
         })
       end,
+    },
+    http = {
       txyun_kimi = function()
         return require('codecompanion.adapters').extend('openai_compatible', {
           name = 'txyun_kimi',
@@ -105,6 +80,7 @@ codecompanion.setup({
               return os.getenv('TX_API_KEY')
             end,
             chat_url = '/chat/completions',
+            models_endpoint = '/models',
           },
           schema = {
             model = {
@@ -113,9 +89,9 @@ codecompanion.setup({
           },
         })
       end,
-      txyun_glm = function()
+      txyun_minimax = function()
         return require('codecompanion.adapters').extend('openai_compatible', {
-          name = 'txyun_glm',
+          name = 'txyun_minimax',
           env = {
             url = 'https://api.lkeap.cloud.tencent.com/plan/v3',
             api_key = function()
@@ -125,29 +101,8 @@ codecompanion.setup({
           },
           schema = {
             model = {
-              default = 'glm-5.1',
+              default = 'minimax-m2.7',
             },
-          },
-          -- 添加这个 formatter 来直接处理 API 响应
-          handlers = {
-            chat_output = function(self, data, event)
-              if not data then
-                return
-              end
-
-              -- 解析 JSON 响应
-              local ok, json = pcall(vim.json.decode, data)
-              if not ok or not json.choices then
-                return
-              end
-
-              local delta = json.choices[1].delta
-              if delta and delta.content then
-                -- 在这里直接清理内容
-                delta.content = delta.content:gsub('\r\n', '\n'):gsub('\n\n\n+', '\n\n')
-                return delta.content
-              end
-            end,
           },
         })
       end,
@@ -158,13 +113,6 @@ codecompanion.setup({
       dirs = {
         vim.fn.getcwd() .. '/.prompts',
         vim.fn.stdpath('config') .. '/prompts',
-      },
-    },
-  },
-  extensions = {
-    spinner = {
-      opts = {
-        style = 'snacks',
       },
     },
   },
