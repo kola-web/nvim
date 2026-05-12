@@ -124,7 +124,7 @@ end
 
 M.conformFormat = function()
   local extra_lang_args = {
-    javasciprt = { name = 'eslint', lsp_format = 'last' },
+    javascript = { name = 'eslint', lsp_format = 'last' },
     typescript = { name = 'eslint', lsp_format = 'last' },
     javascriptreact = { name = 'eslint', lsp_format = 'last' },
     vue = { name = 'eslint', lsp_format = 'last' },
@@ -178,11 +178,8 @@ M.open = function(uri, opts)
   if not opts.system and M.file_exists(uri) then
     return M.float({ style = '', file = uri })
   end
-  local Config = require('lazy.core.config')
   local cmd
-  if not opts.system and Config.options.ui.browser then
-    cmd = { Config.options.ui.browser, uri }
-  elseif vim.fn.has('win32') == 1 then
+  if vim.fn.has('win32') == 1 then
     cmd = { 'explorer', uri }
   elseif vim.fn.has('macunix') == 1 then
     cmd = { 'open', uri }
