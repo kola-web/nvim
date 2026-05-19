@@ -45,11 +45,15 @@ codecompanion.setup({
     action_palette = {
       provider = 'snacks',
     },
-    chat = {
-      show_token_count = true,
-    },
     diff = {
       provider = 'snacks',
+    },
+    chat = {
+      icons = {
+        chat_fold = ' ',
+      },
+      fold_reasoning = false,
+      show_reasoning = false,
     },
   },
   interactions = {
@@ -97,41 +101,6 @@ codecompanion.setup({
       end,
     },
     http = {
-      txyun_kimi = function()
-        return require('codecompanion.adapters').extend('openai_compatible', {
-          name = 'txyun_kimi',
-          env = {
-            url = 'https://api.lkeap.cloud.tencent.com/plan/v3',
-            api_key = function()
-              return os.getenv('TX_API_KEY')
-            end,
-            chat_url = '/chat/completions',
-            models_endpoint = '/models',
-          },
-          schema = {
-            model = {
-              default = 'kimi-k2.5',
-            },
-          },
-        })
-      end,
-      txyun_minimax = function()
-        return require('codecompanion.adapters').extend('openai_compatible', {
-          name = 'txyun_minimax',
-          env = {
-            url = 'https://api.lkeap.cloud.tencent.com/plan/v3',
-            api_key = function()
-              return os.getenv('TX_API_KEY')
-            end,
-            chat_url = '/chat/completions',
-          },
-          schema = {
-            model = {
-              default = 'minimax-m2.7',
-            },
-          },
-        })
-      end,
       txyun_glm = function()
         return require('codecompanion.adapters').extend('openai_compatible', {
           name = 'txyun_glm',
@@ -146,6 +115,10 @@ codecompanion.setup({
           schema = {
             model = {
               default = 'glm-5-1',
+              choices = {
+                'minimax-m2.7',
+                'glm-5-1',
+              },
             },
           },
         })

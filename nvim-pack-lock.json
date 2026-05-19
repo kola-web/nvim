@@ -8,6 +8,10 @@
       "rev": "645d108a5242ec7b378cbe643eb6d04d4223f034",
       "src": "https://github.com/stevearc/aerial.nvim"
     },
+    "avante.nvim": {
+      "rev": "80c4fdf3c7960b6dc9f1c67660bd6bcbc6c3002c",
+      "src": "https://github.com/yetone/avante.nvim"
+    },
     "barbar.nvim": {
       "rev": "539d73def39c9172b4d4d769f14090e08f37b29d",
       "src": "https://github.com/romgrk/barbar.nvim"
