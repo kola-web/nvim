@@ -54,6 +54,24 @@ local function on_lsp_attach(args)
   local client = vim.lsp.get_client_by_id(args.data.client_id)
   local keymap = vim.keymap.set
 
+  if client.name == 'ts_ls' or client.name == 'vtsls' then
+    if client.server_capabilities and client.server_capabilities.semanticTokensProvider then
+      client.server_capabilities.semanticTokensProvider.full = vim.bo[buffer].filetype ~= 'vue'
+    end
+  end
+
+  if client.name == 'vue_ls' then
+    if client.server_capabilities and client.server_capabilities.semanticTokensProvider then
+      client.server_capabilities.semanticTokensProvider.full = false
+    end
+  end
+
+  if client.name == 'vuels' then
+    if client.server_capabilities then
+      client.server_capabilities.documentHighlightProvider = false
+    end
+  end
+
   keymap('n', 'gl', vim.diagnostic.open_float, { desc = 'Float diagnostic', buffer = buffer })
   keymap('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'Code action', buffer = buffer })
   keymap('n', '<leader>lc', vim.lsp.codelens.run, { desc = 'Run Codelens', buffer = buffer })

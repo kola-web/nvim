@@ -17,7 +17,7 @@ return {
         if type(name) ~= 'string' then
           return false
         end
-        return os.execute('test -e ' .. name)
+        return vim.uv.fs_stat(name) ~= nil
       end
 
       if not vim.tbl_isempty(result) and #result == 1 then

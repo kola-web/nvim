@@ -22,8 +22,8 @@ require('barbar').setup({
     -- },
   },
   minimum_padding = 0,
-  exclude_ft = { 'qf', '' },
-  exclude_name = { '[buffer %d+]' },
+  -- exclude_ft = { 'qf', '' },
+  -- exclude_name = { '[buffer %d+]' },
 })
 
 vim.keymap.set('n', '<S-tab>', '<cmd>BufferPrevious<cr>', { desc = 'Prev buffer' })
