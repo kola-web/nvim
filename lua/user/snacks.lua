@@ -152,8 +152,31 @@ require('snacks').setup({
             function(self)
               vim.cmd('write')
               local command = { 'node', vim.api.nvim_buf_get_name(self.buf) }
-              local result = vim.system(command, { text = true }):wait()
-              utils.scratch_result(result)
+              -- 使用 jobstart 替代 vim.system 避免 Windows 流问题
+              local output = {}
+              vim.fn.jobstart(command, {
+                stdout_buffered = true,
+                stderr_buffered = true,
+                on_stdout = function(_, data)
+                  if data then
+                    vim.list_extend(output, data)
+                  end
+                end,
+                on_stderr = function(_, data)
+                  if data then
+                    vim.list_extend(output, data)
+                  end
+                end,
+                on_exit = function(_, exit_code)
+                  vim.schedule(function()
+                    local result = {
+                      code = exit_code,
+                      stdout = table.concat(output, '\n'),
+                    }
+                    utils.scratch_result(result)
+                  end)
+                end,
+              })
             end,
             desc = 'Source buffer',
             mode = { 'n', 'x' },
@@ -167,8 +190,31 @@ require('snacks').setup({
             function(self)
               vim.cmd('write')
               local command = { 'node', vim.api.nvim_buf_get_name(self.buf) }
-              local result = vim.system(command, { text = true }):wait()
-              utils.scratch_result(result)
+              -- 使用 jobstart 替代 vim.system 避免 Windows 流问题
+              local output = {}
+              vim.fn.jobstart(command, {
+                stdout_buffered = true,
+                stderr_buffered = true,
+                on_stdout = function(_, data)
+                  if data then
+                    vim.list_extend(output, data)
+                  end
+                end,
+                on_stderr = function(_, data)
+                  if data then
+                    vim.list_extend(output, data)
+                  end
+                end,
+                on_exit = function(_, exit_code)
+                  vim.schedule(function()
+                    local result = {
+                      code = exit_code,
+                      stdout = table.concat(output, '\n'),
+                    }
+                    utils.scratch_result(result)
+                  end)
+                end,
+              })
             end,
             desc = 'Source buffer',
             mode = { 'n', 'x' },
@@ -182,8 +228,31 @@ require('snacks').setup({
             function(self)
               vim.cmd('write')
               local command = { 'python', vim.api.nvim_buf_get_name(self.buf) }
-              local result = vim.system(command, { text = true }):wait()
-              utils.scratch_result(result)
+              -- 使用 jobstart 替代 vim.system 避免 Windows 流问题
+              local output = {}
+              vim.fn.jobstart(command, {
+                stdout_buffered = true,
+                stderr_buffered = true,
+                on_stdout = function(_, data)
+                  if data then
+                    vim.list_extend(output, data)
+                  end
+                end,
+                on_stderr = function(_, data)
+                  if data then
+                    vim.list_extend(output, data)
+                  end
+                end,
+                on_exit = function(_, exit_code)
+                  vim.schedule(function()
+                    local result = {
+                      code = exit_code,
+                      stdout = table.concat(output, '\n'),
+                    }
+                    utils.scratch_result(result)
+                  end)
+                end,
+              })
             end,
             desc = 'Source buffer',
             mode = { 'n', 'x' },

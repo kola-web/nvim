@@ -52,8 +52,8 @@ codecompanion.setup({
       icons = {
         chat_fold = ' ',
       },
-      fold_reasoning = false,
-      show_reasoning = false,
+      fold_reasoning = true,
+      show_reasoning = true,
     },
   },
   interactions = {
@@ -62,6 +62,11 @@ codecompanion.setup({
       keymaps = {
         close = { modes = { n = 'q', i = '<C-c>' } },
         stop = { modes = { n = '<C-c>' } },
+      },
+      opts = {
+        context_management = {
+          enabled = true,
+        },
       },
       tools = {
         opts = {
@@ -85,8 +90,8 @@ codecompanion.setup({
         },
       },
     },
-    inline = { adapter = 'txyun_glm' },
-    agent = { adapter = 'txyun_glm' },
+    inline = { adapter = 'opencode' },
+    agent = { adapter = 'opencode' },
   },
   adapters = {
     acp = {
@@ -112,13 +117,43 @@ codecompanion.setup({
             chat_url = '/chat/completions',
             models_endpoint = '/models',
           },
+          handlers = {
+            --- Override chat_output to:
+            ---   1. Parse reasoning_content from GLM's streaming response (same as DeepSeek)
+            ---   2. Suppress empty/whitespace-only content that creates blank lines
+            ---
+            --- We use chat_output instead of parse_message_meta because
+            --- parse_message_meta is only called when result.extra exists,
+            --- but pure-whitespace content chunks (e.g. content = "\n")
+            --- often have no extra fields, so they bypass parse_message_meta.
+            chat_output = function(self, data, tools)
+              local result = require('codecompanion.adapters.http.openai').handlers.chat_output(self, data, tools)
+              if result and result.status == 'success' then
+                -- Map reasoning_content from extra to output.reasoning
+                if result.extra and result.extra.reasoning_content then
+                  result.output.reasoning = { content = result.extra.reasoning_content }
+                end
+                -- Suppress empty/whitespace-only content to prevent blank lines
+                local content = result.output.content
+                if content ~= nil then
+                  if content == '' or content:match('^%s*$') then
+                    result.output.content = nil
+                  else
+                    -- Trim leading newlines that create extra blank lines
+                    -- when transitioning from reasoning to response
+                    result.output.content = content:gsub('^\n+', '')
+                    if result.output.content == '' then
+                      result.output.content = nil
+                    end
+                  end
+                end
+              end
+              return result
+            end,
+          },
           schema = {
             model = {
               default = 'glm-5-1',
-              choices = {
-                'minimax-m2.7',
-                'glm-5-1',
-              },
             },
           },
         })

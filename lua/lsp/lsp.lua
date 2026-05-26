@@ -28,6 +28,15 @@ vim.diagnostic.config({
     current_line = true,
     virtual_lines = true,
   },
+  jump = {
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float({
+        bufnr = bufnr,
+        scope = 'cursor',
+        focus = false,
+      })
+    end,
+  },
 })
 
 local diagnostic_goto = function(next, severity)
