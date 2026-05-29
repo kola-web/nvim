@@ -50,7 +50,7 @@ codecompanion.setup({
     },
     chat = {
       icons = {
-        chat_fold = ' ',
+        chat_fold = '',
       },
       fold_reasoning = true,
       show_reasoning = true,
@@ -70,6 +70,7 @@ codecompanion.setup({
       },
       tools = {
         opts = {
+          auto_approve = true,
           default_tools = { 'tools' },
         },
         groups = {
