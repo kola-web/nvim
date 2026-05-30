@@ -125,4 +125,3 @@ vim.o.pummaxwidth = 100 -- Limit maximum width of popup menu
 vim.o.completetimeout = 100
 
 vim.o.pumborder = 'bold' -- Use border in built-in completion menu
-require('vim._core.ui2').enable({ enable = true })

@@ -24,6 +24,7 @@ require('snacks').setup({
   bigfile = {
     enabled = true,
     size = 1 * 1024 * 1024, -- 0.5MB
+    line_length = 1 * 1024 * 1024, -- average line length (useful for minified files)
     setup = function(ctx)
       if vim.fn.exists(':NoMatchParen') ~= 0 then
         vim.cmd([[NoMatchParen]])

@@ -18,7 +18,7 @@ require('mini.surround').setup({
     suffix_next = nil, -- Suffix to search with "next" method
   },
   custom_surroundings = {
-    T = {
+    t = {
       input = { '<(%w+)[^<>]->.-</%1>', '^<()%w+().*</()%w+()>$' },
       output = function()
         local tag_name = MiniSurround.user_input('Tag name')
@@ -67,10 +67,26 @@ require('mini.ai').setup({
     -- <div #name name="name" :text="greetingMessage" v-slot="slotProps" #[dynamicSlotName] v-slot:[dynamicSlotName] ></div>
     x = {
       {
-        '%s([@:]?[%w:-]+=").-"',
-        "%s([@:]?[%w-]+=').-'",
-        '%s([%w-]+={).-}',
+        -- Double-quoted: name="val", :prop="val", @click.stop="fn", v-slot:name="val", v-model.trim="val"
+        '%s([@:]?[%w:.-]+=").-"',
+        -- Single-quoted: name='val', :prop='val'
+        "%s([@:]?[%w:.-]+=').-'",
+        -- JSX curly braces: onClick={fn}, :prop={val}, @click={handler}
+        "%s([@:]?[%w:.-]+={).-}",
+        -- Template literal JSX: className={`btn ${active}`}
+        '%s([%w-]+=`).-`',
+        -- Vue dynamic slot / Angular binding: #[dynamicSlotName] or [ngIf]
         '%s([#]?[%w-]+)%[.-%]',
+        -- Vue v-slot:[dynamicSlotName]
+        '%s(v%-slot:%[).-%]',
+        -- JSX spread: {...props}
+        '%s({%.%.%.}).-}',
+        -- Unquoted HTML attributes: type=text, name=value
+        '%s([%w-]+=)[^%s>"\']+',
+        -- Vue #name shorthand (v-slot shorthand, static, no value)
+        '%s(#[%w-]+)[%s/>]',
+        -- Boolean/valueless attributes: disabled, v-else, v-once, v-cloak, etc.
+        '%s([%w-]+)[%s/>]',
       },
       '^().*()$',
     },
