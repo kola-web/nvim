@@ -1,11 +1,8 @@
 vim.pack.add({
-  'https://github.com/stevearc/aerial.nvim',
+  'https://github.com/hedyhli/outline.nvim',
 })
 
-require('aerial').setup({
-  layout = {
-    default_direction = 'prefer_left',
-  },
+require('outline').setup({
 })
 
-vim.keymap.set('n', '<leader>so', '<cmd>AerialToggle<cr>', { desc = 'LSP Symbols' })
+vim.keymap.set('n', '<leader>so', '<cmd>Outline<cr>', { desc = 'LSP Symbols' })

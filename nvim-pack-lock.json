@@ -177,6 +177,10 @@
       "rev": "b3cdd746a5ca321b6884badefa0ba22c86c3d45e",
       "src": "https://github.com/nickjvandyke/opencode.nvim"
     },
+    "outline.nvim": {
+      "rev": "2a132953b944561d45b52e4541ebfff71934a742",
+      "src": "https://github.com/hedyhli/outline.nvim"
+    },
     "overseer.nvim": {
       "rev": "f818eefff81f4b12fb7cf236f1b6c16768a2fcbc",
       "src": "https://github.com/stevearc/overseer.nvim"

@@ -43,7 +43,7 @@ require('snacks').setup({
     scope = { only_current = true },
   },
   image = { enabled = true },
-  lazygit = { enabled = false },
+  lazygit = { enabled = true },
   notifier = { enabled = true, level = vim.log.levels.TRACE },
   picker = {
     enabled = true,
@@ -287,6 +287,9 @@ end, { desc = 'Toggle Zoom' })
 vim.keymap.set('n', '<leader>gb', function()
   Snacks.git.blame_line()
 end, { desc = 'git blame line' })
+vim.keymap.set('n', '<leader>gg', function()
+  Snacks.lazygit()
+end, { desc = 'Buffer Diagnostics' })
 vim.keymap.set('n', '<leader>n', function()
   Snacks.notifier.show_history()
 end, { desc = 'Notification History' })

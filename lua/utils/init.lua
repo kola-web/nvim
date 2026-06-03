@@ -21,7 +21,7 @@ M.servers = {
   'intelephense', -- PHP
   'nginx_language_server', -- Nginx
   'powershell_es', -- PowerShell
-  'markdown_oxide',
+  'marksman',
 }
 
 M.null_servers = {

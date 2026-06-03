@@ -1,7 +1,6 @@
 vim.pack.add({
   'https://github.com/esmuellert/codediff.nvim',
   'https://github.com/mhinz/vim-signify',
-  'https://github.com/NeogitOrg/neogit',
 })
 require('codediff').setup()
 vim.keymap.set('n', '<leader>gd', '<cmd>CodeDiff<cr>', { desc = 'CodeDiff' })
@@ -28,10 +27,3 @@ vim.keymap.set('n', '<leader>gi', '<cmd>SignifyHunkDiff<cr>', { desc = 'SignifyH
 vim.keymap.set('n', '<leader>gu', '<cmd>SignifyHunkUndo<cr>', { desc = 'SignifyHunkUndo' })
 vim.keymap.set('n', '[h', '<plug>(signify-prev-hunk)', { desc = 'prev hunk' })
 vim.keymap.set('n', ']h', '<plug>(signify-next-hunk)', { desc = 'next hunk' })
-
-local neogit_ok, neogit = pcall(require, 'neogit')
-if neogit_ok then
-  neogit.setup({})
-end
-
-vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<cr>', { desc = 'Neogit' })
