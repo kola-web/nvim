@@ -110,8 +110,6 @@ M.is_eslint = function()
   return is_eslint
 end
 
-
-
 M.closeOtherAllBuffer = function()
   local bufs = vim.api.nvim_list_bufs()
   local current_buf = vim.api.nvim_get_current_buf()
@@ -405,6 +403,14 @@ M.openCurrentSyatemExplorer = function()
   else
     os.execute('open ' .. currentPath)
   end
+end
+
+M.wrap_book_bracket_to_text_tag = function()
+  -- 替换上面的 pcall 块为：
+  local line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
+  local inner = line:sub(left[2] + 1, right[2] - 1)
+  local new_line = line:sub(1, left[2] - 1) .. '<text>' .. inner .. '</text>' .. line:sub(right[2] + 1)
+  vim.api.nvim_buf_set_lines(0, row - 1, row, false, { new_line })
 end
 
 return M

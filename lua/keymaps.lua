@@ -106,6 +106,10 @@ keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 1
 keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', { desc = '1080px -> 750px' })
 keymap('n', '<leader>rr', require('utils.quickType').generate_type, { desc = 'quicktype' })
 
+vim.keymap.set({ 'n' }, '<leader>rt', require('utils').wrap_book_bracket_to_text_tag, {
+  desc = '将光标所在《xxx》替换为 <text>xxx</text>',
+})
+
 keymap('n', '<leader>lv', function()
   utils.compare_to_clipboard()
 end, { desc = 'diff clip' })

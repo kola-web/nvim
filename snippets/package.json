@@ -1,25 +1,20 @@
 {
   "author": "kola",
-  "name": "kola-snippets",
-  "engines": {
-    "vscode": "^1.11.0"
-  },
   "contributes": {
     "snippets": [
       {
-        "path": "./vue.json",
         "language": [
           "vue"
-        ]
+        ],
+        "path": "./vue.json"
       },
       {
-        "path": "./json.json",
         "language": [
           "json"
-        ]
+        ],
+        "path": "./json.json"
       },
       {
-        "path": "./javascript.json",
         "language": [
           "javascript",
           "javascriptreact",
@@ -27,23 +22,34 @@
           "typescriptreact",
           "svelte",
           "vue"
-        ]
+        ],
+        "path": "./javascript.json"
       },
       {
-        "path": "./lua.json",
         "language": [
           "lua"
-        ]
+        ],
+        "path": "./lua.json"
       },
       {
-        "path": "./css.json",
         "language": [
           "css",
           "scss",
           "less",
           "vue"
-        ]
+        ],
+        "path": "./css.json"
+      },
+      {
+        "language": [
+          "html"
+        ],
+        "path": "./html.json"
       }
     ]
-  }
+  },
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "name": "kola-snippets"
 }

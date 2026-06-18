@@ -1,0 +1,6 @@
+{
+  "cbg": {
+    "body": "background: url('$1') no-repeat top center/100% $2;$0",
+    "prefix": "cbg"
+  }
+}
