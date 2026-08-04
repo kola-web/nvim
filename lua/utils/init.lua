@@ -11,7 +11,7 @@ M.servers = {
   'html', -- HTML
   'cssls', -- CSS
   'jsonls', -- JSON
-  'eslint', -- ESLint
+  -- 'eslint', -- ESLint
   'emmet_language_server', -- Emmet
   -- 其他常用语言
   'pyright', -- Python
@@ -22,6 +22,7 @@ M.servers = {
   'nginx_language_server', -- Nginx
   'powershell_es', -- PowerShell
   'marksman',
+  'biome',
 }
 
 M.null_servers = {
@@ -406,10 +407,37 @@ M.openCurrentSyatemExplorer = function()
 end
 
 M.wrap_book_bracket_to_text_tag = function()
-  -- 替换上面的 pcall 块为：
+  -- 获取当前光标位置
+  local row = vim.api.nvim_win_get_cursor(0)[1]
+  local col = vim.api.nvim_win_get_cursor(0)[2]
   local line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
-  local inner = line:sub(left[2] + 1, right[2] - 1)
-  local new_line = line:sub(1, left[2] - 1) .. '<text>' .. inner .. '</text>' .. line:sub(right[2] + 1)
+  if not line then
+    vim.notify('当前行无内容', vim.log.levels.WARN)
+    return
+  end
+
+  -- 查找行内第一个 《 和 》 的位置（字节索引，1-based）
+  local l = line:find('《', 1, true)
+  local r = line:find('》', 1, true)
+  if not l or not r or l >= r then
+    vim.notify('当前行没有配对的《》', vim.log.levels.WARN)
+    return
+  end
+
+  -- 检查光标是否位于 《》 之间（不包括括号本身）
+  if col <= l or col > r then
+    vim.notify('光标不在《》内部', vim.log.levels.WARN)
+    return
+  end
+
+  -- 使用 gsub 替换第一个《...》为 <text>...</text>（只替换一次）
+  local new_line, count = line:gsub('《(.-)》', '<text>《%1》</text>', 1)
+  if count == 0 then
+    vim.notify('替换失败', vim.log.levels.ERROR)
+    return
+  end
+
+  -- 替换当前行
   vim.api.nvim_buf_set_lines(0, row - 1, row, false, { new_line })
 end
 
