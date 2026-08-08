@@ -63,4 +63,3 @@ require('user.vcs')
 require('user.which-key')
 require('user.outline')
 require('user.kulala')
-
