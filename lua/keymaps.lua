@@ -148,3 +148,13 @@ keymap('n', '<leader>w', '<Cmd>silent! update | redraw<CR>', { desc = 'save file
 
 -- terminal mappings
 keymap('t', '<C-\\>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
+
+-- normal模式 <leader>oz 用Zed打开当前项目根目录
+vim.keymap.set('n', '<leader>oz', function()
+  local cwd = vim.fn.getcwd()
+  if vim.fn.executable('zed') ~= 1 then
+    vim.notify('zed CLI not found, please install from Zed command palette', vim.log.levels.ERROR)
+    return
+  end
+  vim.fn.jobstart({ 'zed', cwd }, { detach = true })
+end, { desc = 'Open project in Zed', noremap = true, silent = true })
