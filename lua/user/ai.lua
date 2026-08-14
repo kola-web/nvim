@@ -41,21 +41,6 @@ codecompanion.setup({
   opts = {
     language = 'Chinese',
   },
-  display = {
-    action_palette = {
-      provider = 'snacks',
-    },
-    diff = {
-      provider = 'snacks',
-    },
-    chat = {
-      icons = {
-        chat_fold = '',
-      },
-      fold_reasoning = true,
-      show_reasoning = true,
-    },
-  },
   interactions = {
     chat = {
       adapter = 'txyun_glm',
@@ -63,28 +48,6 @@ codecompanion.setup({
         close = { modes = { n = 'q', i = '<C-c>' } },
         stop = { modes = { n = '<C-c>' } },
       },
-      -- tools = {
-      --   opts = {
-      --     auto_approve = true,
-      --     default_tools = { 'tools' },
-      --   },
-      --   groups = {
-      --     ['tools'] = {
-      --       description = 'commonly used tools',
-      --       prompt = "I'm giving you access to the ${tools} to help you perform coding tasks",
-      --       tools = {
-      --         'read_file',
-      --         'cmd_runner',
-      --         'create_file',
-      --         'file_search',
-      --         'grep_search',
-      --         'list_code_usages',
-      --         'get_changed_files',
-      --         'insert_edit_into_file',
-      --       },
-      --     },
-      --   },
-      -- },
     },
     inline = { adapter = 'txyun_glm' },
     agent = { adapter = 'txyun_glm' },
