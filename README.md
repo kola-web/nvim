@@ -36,3 +36,4 @@ sudo apt install -y xsel xclip
 ```lua
 lua local unused = vim.iter(vim.pack.get()):filter(function(p) return not p.active end):map(function(p) return p.spec.name end):totable(); vim.pack.del(unused)
 ```
+

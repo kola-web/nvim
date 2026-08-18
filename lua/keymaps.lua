@@ -149,20 +149,15 @@ keymap('n', '<leader>w', '<Cmd>silent! update | redraw<CR>', { desc = 'save file
 -- terminal mappings
 keymap('t', '<C-\\>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
 
--- normal模式 <leader>oz 用Zed打开当前项目根目录
-keymap('n', '<leader>oz', function()
+-- 按下 <leader>oz 用 Zed 打开当前项目、当前文件、定位到相同行
+vim.keymap.set('n', '<leader>oz', function()
+  local file = vim.api.nvim_buf_get_name(0)
+  if file == '' then
+    return
+  end
   local cwd = vim.fn.getcwd()
-  if vim.fn.executable('zed') ~= 1 then
-    vim.notify('zed CLI not found, please install from Zed command palette', vim.log.levels.ERROR)
-    return
-  end
-
-  local filepath = vim.api.nvim_buf_get_name(0)
-  if filepath == '' then
-    return
-  end
-  local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
-  -- zed 支持 path:line 格式
-  local target = string.format('%s:%d', filepath, row)
-  vim.fn.jobstart({ 'zed', target }, { detach = true })
-end, { desc = 'Open current project in Zed', noremap = true, silent = true })
+  local line = vim.api.nvim_win_get_cursor(0)[1]
+  -- zed 命令：zed [项目根目录] [文件:行号]
+  local cmd = { 'zed', cwd, file .. ':' .. line }
+  vim.fn.jobstart(cmd, { detach = true })
+end, { desc = 'Open current file & project in Zed, keep cursor line' })
