@@ -34,8 +34,6 @@ if neocodeium_ok then
   })
 end
 
-vim.cmd([[cab cc CodeCompanion]])
-
 local codecompanion = require('codecompanion')
 codecompanion.setup({
   opts = {

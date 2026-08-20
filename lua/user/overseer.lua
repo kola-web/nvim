@@ -38,4 +38,4 @@ vim.keymap.set('n', '<leader>oq', '<cmd>OverseerQuickAction<cr>', { desc = 'Acti
 vim.keymap.set('n', '<leader>oi', '<cmd>OverseerInfo<cr>', { desc = 'Overseer Info' })
 vim.keymap.set('n', '<leader>ob', '<cmd>OverseerBuild<cr>', { desc = 'Task builder' })
 vim.keymap.set('n', '<leader>ot', '<cmd>OverseerTaskAction<cr>', { desc = 'Task action' })
-vim.keymap.set('n', '<leader>oc', '<cmd>OverseerClearCache<cr>', { desc = 'Clear cache' })
+vim.keymap.set('n', '<leader>od', '<cmd>OverseerClearCache<cr>', { desc = 'Clear cache' })
