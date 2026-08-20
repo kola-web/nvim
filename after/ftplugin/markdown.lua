@@ -86,4 +86,4 @@ vim.keymap.set('i', ',3', '### <CR><++><Esc>kA', vim.tbl_extend('force', opts, {
 vim.keymap.set('i', ',4', '#### <CR><++><Esc>kA', vim.tbl_extend('force', opts, { desc = 'Markdown: h4 heading' }))
 
 -- ZedAI 可视模式复制带文件行号引用
-vim.keymap.set('v', '<leader>z', zed_ai_yank_selection, vim.tbl_extend('force', opts, { desc = 'Markdown: yank selection for ZedAI @file#Lxx-Lyy' }))
+vim.keymap.set('v', '<leader>az', zed_ai_yank_selection, vim.tbl_extend('force', opts, { desc = 'Markdown: yank selection for ZedAI @file#Lxx-Lyy' }))
