@@ -33,6 +33,7 @@ if which_key_ok then
         { '<leader>r', group = 'transform', icon = { icon = ' ' } },
         { '<leader>R', group = 'HTTP', icon = { icon = ' ' } },
         { '<leader>q', group = 'peek', icon = { icon = ' ' } },
+        { '<leader>P', group = 'pack', icon = { icon = '󰏗 ' } },
         { '[', group = 'prev', icon = { icon = '󰮳 ' } },
         { ']', group = 'next', icon = { icon = '󰮱 ' } },
         { 'g', group = 'goto' },
