@@ -1,8 +1,8 @@
-const _app = getApp<IAppOption>();
+const app = getApp<IAppOption>();
 
 Page({
   data: {},
   onLoad() {},
 });
 
-export {}
+export {};

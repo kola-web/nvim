@@ -3,7 +3,6 @@ vim.pack.add({
 })
 
 vim.o.showtabline = 2
-vim.o.tabline = ' '
 vim.g.barbar_auto_setup = false
 
 require('barbar').setup({
@@ -11,19 +10,20 @@ require('barbar').setup({
   tabpages = true,
   clickable = false,
   sidebar_filetypes = {},
-  -- auto_hide = true,
-  icons = {
-    separator = { left = '│', right = '│' },
-    separator_at_end = false,
-
-    -- filetype = {
-    --   custom_colors = false,
-    --   enabled = false,
-    -- },
-  },
+  auto_hide = false,
   minimum_padding = 0,
-  -- exclude_ft = { 'qf', '' },
-  -- exclude_name = { '[buffer %d+]' },
+  maximum_padding = 1,
+  maximum_length = 20, -- buffer名字最大长度，避免占满屏幕
+  no_name_title = ' ',
+  exclude_ft = {
+    'qf',
+    'git',
+    'trouble',
+    'toggleterm',
+    'NvimTree',
+    'help',
+    'man',
+  },
 })
 
 vim.keymap.set('n', '<S-tab>', '<cmd>BufferPrevious<cr>', { desc = 'Prev buffer' })
