@@ -41,6 +41,14 @@ vim.api.nvim_create_autocmd('PackChanged', {
       vim.cmd('TSUpdate')
       return
     end
+
+    if name == 'peek.nvim' and (kind == 'install' or kind == 'update') then
+      local result = vim.system({ 'deno', 'task', '--quiet', 'build:fast' }, { cwd = ev.data.path }):wait()
+
+      if result.code ~= 0 then
+        vim.notify('Failed to build peek.nvim:\n' .. result.stderr, vim.log.levels.ERROR)
+      end
+    end
   end,
 })
 

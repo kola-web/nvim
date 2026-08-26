@@ -11,7 +11,8 @@ end
 -- 清理磁盘上已无引用的插件
 -- 判断标准:当前配置不再通过 vim.pack.add() 注册(active == false)的残留插件
 local function clean_unused_plugins()
-  local unused = vim.iter(vim.pack.get())
+  local unused = vim
+    .iter(vim.pack.get())
     :filter(function(p)
       return not p.active
     end)
@@ -19,25 +20,7 @@ local function clean_unused_plugins()
       return p.spec.name
     end)
     :totable()
-
-  if #unused == 0 then
-    vim.notify('[pack] 没有未引用的插件', vim.log.levels.INFO)
-    return
-  end
-
-  -- 多选确认,避免误删
-  vim.ui.select(unused, {
-    prompt = '选择要卸载的未引用插件 (Enter 确认)',
-    kind = 'warning',
-    multi_select = true,
-  }, function(choices)
-    if not choices or #choices == 0 then
-      return
-    end
-    -- del 默认 force = false,不会误删当前会话仍在使用的插件
-    vim.pack.del(choices)
-    vim.notify('[pack] 已卸载: ' .. table.concat(choices, ', '), vim.log.levels.INFO)
-  end)
+  vim.pack.del(unused)
 end
 
 vim.keymap.set('n', '<leader>Pu', update_all_plugins, { desc = '[P]ack [u]pdate all plugins' })

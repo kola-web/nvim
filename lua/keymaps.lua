@@ -162,7 +162,6 @@ keymap('n', '<leader>oz', function()
   vim.fn.jobstart(cmd, { detach = true })
 end, { desc = 'Open current file & project in Zed, keep cursor line' })
 
-
 -- open in VSCode
 keymap('n', '<leader>oc', function()
   local file = vim.api.nvim_buf_get_name(0)
@@ -174,5 +173,3 @@ keymap('n', '<leader>oc', function()
   local cmd = { 'code', cwd, '--goto', file .. ':' .. line }
   vim.fn.jobstart(cmd, { detach = true })
 end, { desc = 'Open current file & project in VSCode, keep cursor line' })
-
-
