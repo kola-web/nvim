@@ -152,9 +152,6 @@ keymap('t', '<C-\\>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
 -- 按下 <leader>oz 用 Zed 打开当前项目、当前文件、定位到相同行
 keymap('n', '<leader>oz', function()
   local file = vim.api.nvim_buf_get_name(0)
-  if file == '' then
-    return
-  end
   local cwd = vim.fn.getcwd()
   local line = vim.api.nvim_win_get_cursor(0)[1]
   -- zed 命令：zed [项目根目录] [文件:行号]
@@ -165,9 +162,6 @@ end, { desc = 'Open current file & project in Zed, keep cursor line' })
 -- open in VSCode
 keymap('n', '<leader>oc', function()
   local file = vim.api.nvim_buf_get_name(0)
-  if file == '' then
-    return
-  end
   local cwd = vim.fn.getcwd()
   local line = vim.api.nvim_win_get_cursor(0)[1]
   local cmd = { 'code', cwd, '--goto', file .. ':' .. line }
