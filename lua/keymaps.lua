@@ -167,3 +167,65 @@ keymap('n', '<leader>oc', function()
   local cmd = { 'code', cwd, '--goto', file .. ':' .. line }
   vim.fn.jobstart(cmd, { detach = true })
 end, { desc = 'Open current file & project in VSCode, keep cursor line' })
+
+-- open file explorer, compatible Windows / Mac / Linux
+keymap('n', '<leader>oe', function()
+  local filepath = vim.api.nvim_buf_get_name(0)
+  if filepath == nil or filepath == '' then
+    vim.notify('无文件buffer', vim.log.levels.WARN)
+    return
+  end
+
+  -- ✨直接取nvim启动打开的文件夹 cwd
+  local root_dir = vim.fn.getcwd()
+
+  -- 跨平台打开资源管理器
+  if vim.fn.has('win32') == 1 then
+    vim.fn.system(string.format([[cmd /c start "" "%s"]], root_dir))
+  elseif vim.fn.has('mac') == 1 then
+    vim.fn.system({ 'open', root_dir })
+  else
+    vim.fn.system({ 'xdg-open', root_dir })
+  end
+end, { desc = 'Open folder in file explorer' })
+
+-- SVN update 当前文件所在目录
+keymap('n', '<leader>os', function()
+  local cwd = vim.fn.expand('%:p:h')
+  vim.notify('svn update: ' .. cwd, vim.log.levels.INFO)
+  vim.fn.jobstart({ 'svn', 'update', cwd }, {
+    stdout_buffered = true,
+    stderr_buffered = true,
+    on_stdout = function(_, data)
+      if not data then
+        return
+      end
+      -- 清除\r回车符，过滤空字符串
+      local out = {}
+      for _, line in ipairs(data) do
+        local s = line:gsub('\r', '')
+        if s ~= '' then
+          table.insert(out, s)
+        end
+      end
+      if #out > 0 then
+        vim.notify(table.concat(out, '\n'), vim.log.levels.INFO)
+      end
+    end,
+    on_stderr = function(_, data)
+      if not data then
+        return
+      end
+      local err = {}
+      for _, line in ipairs(data) do
+        local s = line:gsub('\r', '')
+        if s ~= '' then
+          table.insert(err, s)
+        end
+      end
+      if #err > 0 then
+        vim.notify(table.concat(err, '\n'), vim.log.levels.ERROR)
+      end
+    end,
+  })
+end, { desc = 'SVN update 当前文件目录', noremap = true, silent = false })
