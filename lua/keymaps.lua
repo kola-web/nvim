@@ -190,7 +190,7 @@ keymap('n', '<leader>oe', function()
 end, { desc = 'Open folder in file explorer' })
 
 -- SVN update 当前文件所在目录
-keymap('n', '<leader>os', function()
+keymap('n', '<leader>us', function()
   local cwd = vim.fn.expand('%:p:h')
   vim.notify('svn update: ' .. cwd, vim.log.levels.INFO)
   vim.fn.jobstart({ 'svn', 'update', cwd }, {

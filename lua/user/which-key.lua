@@ -20,7 +20,7 @@ if which_key_ok then
         { '<leader>j', group = 'splitjoin', icon = { icon = '󰯌 ' } },
         { '<leader>h', icon = { icon = ' ' } },
         { '<leader>o', icon = { icon = '󰙅 ' } },
-        { '<leader>u', icon = { icon = '󰕌 ' } },
+        { '<leader>u', group = 'update', icon = { icon = '󰕌 ' } },
         { '<leader>;', group = 'dropbar', icon = { icon = '󰨇 ' } },
         { '<leader>i', group = 'run', icon = { icon = ' ' } },
         { '<leader>g', group = 'git', icon = { icon = '󰊢 ' } },
