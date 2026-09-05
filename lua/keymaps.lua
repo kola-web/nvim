@@ -229,3 +229,66 @@ keymap('n', '<leader>us', function()
     end,
   })
 end, { desc = 'SVN update 当前文件目录', noremap = true, silent = false })
+
+vim.keymap.set('n', '<leader>ug', function()
+  local filepath = vim.fn.expand('%:p')
+  if filepath == '' then
+    vim.notify("没有打开文件，无法查找git仓库", vim.log.levels.WARN)
+    return
+  end
+
+  local function find_nearest_git_root(start_path)
+    local path = start_path
+    while true do
+      local git_dir = vim.fn.fnamemodify(path, ':p') .. '.git'
+      if vim.fn.isdirectory(git_dir) == 1 then
+        return vim.fn.fnamemodify(path, ':p')
+      end
+      local parent = vim.fn.fnamemodify(path, ':h')
+      if parent == path then
+        return nil
+      end
+      path = parent
+    end
+  end
+
+  local git_root = find_nearest_git_root(vim.fn.fnamemodify(filepath, ':h'))
+  if not git_root then
+    vim.notify("未找到git仓库(.git)，向上遍历完毕", vim.log.levels.ERROR)
+    return
+  end
+
+  vim.notify('git pull 最近仓库根目录: ' .. git_root, vim.log.levels.INFO)
+
+  -- 增加 -c core.quotepath=false 关闭八进制文件名转义
+  vim.fn.jobstart({ 'git', '-c','core.quotepath=false', '-C', git_root, 'pull' }, {
+    stdout_buffered = true,
+    stderr_buffered = true,
+    on_stdout = function(_, data)
+      if not data then return end
+      local out = {}
+      for _, line in ipairs(data) do
+        local s = line:gsub('\r', '')
+        if s ~= '' then
+          table.insert(out, s)
+        end
+      end
+      if #out > 0 then
+        vim.notify(table.concat(out, '\n'), vim.log.levels.INFO)
+      end
+    end,
+    on_stderr = function(_, data)
+      if not data then return end
+      local err = {}
+      for _, line in ipairs(data) do
+        local s = line:gsub('\r', '')
+        if s ~= '' then
+          table.insert(err, s)
+        end
+      end
+      if #err > 0 then
+        vim.notify(table.concat(err, '\n'), vim.log.levels.ERROR)
+      end
+    end,
+  })
+end, { desc = 'Git pull：更新当前文件最近的git仓库', noremap = true, silent = false })
