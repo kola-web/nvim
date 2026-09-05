@@ -114,8 +114,8 @@ keymap('n', '<leader>lv', function()
   utils.compare_to_clipboard()
 end, { desc = 'diff clip' })
 
-keymap('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
-keymap('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
+keymap('n', '<leader>ql', '<cmd>lopen<cr>', { desc = 'Location List' })
+keymap('n', '<leader>qq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
 
 -- fzf-lua
 keymap('t', '<esc>', [[<C-\><C-n>]])

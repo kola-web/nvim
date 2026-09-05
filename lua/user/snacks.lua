@@ -44,7 +44,12 @@ require('snacks').setup({
   },
   image = { enabled = true },
   lazygit = { enabled = true },
-  notifier = { enabled = true, level = vim.log.levels.TRACE },
+  notifier = {
+    enabled = true,
+    timeout = 5000, -- 默认 3000ms，任务完成/错误提示多留 2 秒
+    style = 'fancy', -- compact / minimal / fancy（fancy 类似 nvim-notify 风格）
+    -- level 默认已是 TRACE（全部显示），无需配置
+  },
   picker = {
     enabled = true,
     sort = {
