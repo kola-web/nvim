@@ -11,12 +11,23 @@ local web = {
   right_var = ')',
   mid_var = '", ',
 }
+
+-- Neovim 配置调试：print 打在 :messages 里不好找，用 vim.notify 直接弹通知
+local lua = {
+  left = 'vim.notify("',
+  left_var = 'vim.notify("',
+  right = '")',
+  right_var = ')',
+  mid_var = '", ',
+}
+
 debugprint.setup({
   highlight_lines = false,
   filetypes = {
     javascript = web,
     typescript = web,
     vue = web,
+    lua = lua,
   },
   keymaps = {
     normal = {
