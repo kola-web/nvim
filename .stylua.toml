@@ -1,6 +1,17 @@
+# stylua 格式化配置（作用于本目录及子目录的 .lua 文件）
+# 参考: https://github.com/JohnnyMorganz/StyLua
+
+# 单行最大宽度；你偏好单行书写（如 keymap.set 系列），180 足够
 column_width = 180
+# 统一 LF 行尾，跨平台 / git 友好
 line_endings = "Unix"
+# 2 空格缩进
 indent_type = "Spaces"
 indent_width = 2
+# 偏好单引号；AutoPreferSingle 会在安全时把双引号转为单引号
 quote_style = "AutoPreferSingle"
+# 函数调用始终保留括号（stylua 默认值，显式写出便于查阅）
 call_parentheses = "Always"
+# 不折叠简单语句为单行（默认 Always 会把"多行单语句的 if/while"折成一行，
+# 与保留自己书写结构的诉求相悖；设为 Never 后布局由你控制）
+collapse_simple_statement = "Never"

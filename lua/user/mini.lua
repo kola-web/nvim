@@ -72,7 +72,7 @@ require('mini.ai').setup({
         -- Single-quoted: name='val', :prop='val'
         "%s([@:]?[%w:.-]+=').-'",
         -- JSX curly braces: onClick={fn}, :prop={val}, @click={handler}
-        "%s([@:]?[%w:.-]+={).-}",
+        '%s([@:]?[%w:.-]+={).-}',
         -- Template literal JSX: className={`btn ${active}`}
         '%s([%w-]+=`).-`',
         -- Vue dynamic slot / Angular binding: #[dynamicSlotName] or [ngIf]
