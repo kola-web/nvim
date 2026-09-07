@@ -20,6 +20,41 @@ local normal = {
   end,
 }
 
+-- 通用脚本运行器：为 scratch buffer 生成 <cr> 运行键
+-- 保存文件 → jobstart 子进程执行 → utils.scratch_result 浮窗展示输出
+-- 用 jobstart 而非 vim.system，规避 Windows 管道/流问题
+local function make_source_runner(run_cmd)
+  return {
+    '<cr>',
+    function(self)
+      vim.cmd('write')
+      local command = vim.list_extend(vim.deepcopy(run_cmd), { vim.api.nvim_buf_get_name(self.buf) })
+      local output = {}
+      vim.fn.jobstart(command, {
+        stdout_buffered = true,
+        stderr_buffered = true,
+        on_stdout = function(_, data)
+          if data then
+            vim.list_extend(output, data)
+          end
+        end,
+        on_stderr = function(_, data)
+          if data then
+            vim.list_extend(output, data)
+          end
+        end,
+        on_exit = function(_, exit_code)
+          vim.schedule(function()
+            utils.scratch_result({ code = exit_code, stdout = table.concat(output, '\n') })
+          end)
+        end,
+      })
+    end,
+    desc = 'Source buffer',
+    mode = { 'n', 'x' },
+  }
+end
+
 require('snacks').setup({
   bigfile = {
     enabled = true,
@@ -158,115 +193,19 @@ require('snacks').setup({
   },
   words = { enabled = true },
   scratch = {
+    -- 三份重复的 node/node/python 运行配置收敛为工厂调用（改一处即全部生效）
+    -- lua 走 nvim 内建 luafile，无需子进程
     win_by_ft = {
-      typescript = {
+      typescript = { keys = { source = make_source_runner({ 'node' }) } },
+      javascript = { keys = { source = make_source_runner({ 'node' }) } },
+      python = { keys = { source = make_source_runner({ 'python' }) } },
+      lua = {
         keys = {
           ['source'] = {
             '<cr>',
-            function(self)
+            function()
               vim.cmd('write')
-              local command = { 'node', vim.api.nvim_buf_get_name(self.buf) }
-              -- 使用 jobstart 替代 vim.system 避免 Windows 流问题
-              local output = {}
-              vim.fn.jobstart(command, {
-                stdout_buffered = true,
-                stderr_buffered = true,
-                on_stdout = function(_, data)
-                  if data then
-                    vim.list_extend(output, data)
-                  end
-                end,
-                on_stderr = function(_, data)
-                  if data then
-                    vim.list_extend(output, data)
-                  end
-                end,
-                on_exit = function(_, exit_code)
-                  vim.schedule(function()
-                    local result = {
-                      code = exit_code,
-                      stdout = table.concat(output, '\n'),
-                    }
-                    utils.scratch_result(result)
-                  end)
-                end,
-              })
-            end,
-            desc = 'Source buffer',
-            mode = { 'n', 'x' },
-          },
-        },
-      },
-      javascript = {
-        keys = {
-          ['source'] = {
-            '<cr>',
-            function(self)
-              vim.cmd('write')
-              local command = { 'node', vim.api.nvim_buf_get_name(self.buf) }
-              -- 使用 jobstart 替代 vim.system 避免 Windows 流问题
-              local output = {}
-              vim.fn.jobstart(command, {
-                stdout_buffered = true,
-                stderr_buffered = true,
-                on_stdout = function(_, data)
-                  if data then
-                    vim.list_extend(output, data)
-                  end
-                end,
-                on_stderr = function(_, data)
-                  if data then
-                    vim.list_extend(output, data)
-                  end
-                end,
-                on_exit = function(_, exit_code)
-                  vim.schedule(function()
-                    local result = {
-                      code = exit_code,
-                      stdout = table.concat(output, '\n'),
-                    }
-                    utils.scratch_result(result)
-                  end)
-                end,
-              })
-            end,
-            desc = 'Source buffer',
-            mode = { 'n', 'x' },
-          },
-        },
-      },
-      python = {
-        keys = {
-          ['source'] = {
-            '<cr>',
-            function(self)
-              vim.cmd('write')
-              local command = { 'python', vim.api.nvim_buf_get_name(self.buf) }
-              -- 使用 jobstart 替代 vim.system 避免 Windows 流问题
-              local output = {}
-              vim.fn.jobstart(command, {
-                stdout_buffered = true,
-                stderr_buffered = true,
-                on_stdout = function(_, data)
-                  if data then
-                    vim.list_extend(output, data)
-                  end
-                end,
-                on_stderr = function(_, data)
-                  if data then
-                    vim.list_extend(output, data)
-                  end
-                end,
-                on_exit = function(_, exit_code)
-                  vim.schedule(function()
-                    local result = {
-                      code = exit_code,
-                      stdout = table.concat(output, '\n'),
-                    }
-                    utils.scratch_result(result)
-                  end)
-                end,
-              })
+              vim.cmd('luafile %')
             end,
             desc = 'Source buffer',
             mode = { 'n', 'x' },
@@ -299,13 +238,14 @@ vim.keymap.set('n', '<leader>gb', function()
 end, { desc = 'git blame line' })
 vim.keymap.set('n', '<leader>gg', function()
   Snacks.lazygit()
-end, { desc = 'Buffer Diagnostics' })
+end, { desc = 'LazyGit' })
 vim.keymap.set('n', '<leader>n', function()
   Snacks.notifier.show_history()
 end, { desc = 'Notification History' })
 vim.keymap.set('n', '<leader>S', function()
-  Snacks.scratch.select()
-end, { desc = 'Select Scratch Buffer' })
+  -- open() 无 scratch 时新建（ft 继承当前文件类型），已有时切换；select() 无 scratch 时 No results
+  Snacks.scratch.open()
+end, { desc = 'New Scratch Buffer' })
 vim.keymap.set('n', '<leader>un', function()
   Snacks.notifier.hide()
 end, { desc = 'Dismiss All Notifications' })
@@ -325,12 +265,12 @@ end, { desc = 'Buffers' })
 vim.keymap.set('n', '<leader>sc', function()
   Snacks.picker.colorschemes()
 end, { desc = '[S]earch [C]olorschemes' })
-vim.keymap.set('n', '<leader>su', function()
-  Snacks.picker.undo()
-end, { desc = '[S]earch [U]ndo ' })
 vim.keymap.set('n', '<leader>sU', function()
   Snacks.picker.resume()
 end, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>su', function()
+  Snacks.picker.undo()
+end, { desc = '[S]earch [U]ndo ' })
 vim.keymap.set('n', '<leader>sk', function()
   Snacks.picker.keymaps()
 end, { desc = '[S]earch [K]eymaps' })
@@ -358,7 +298,7 @@ end, { desc = 'Buffer Diagnostics' })
 vim.keymap.set('n', '<leader>s/', function()
   Snacks.picker.grep_buffers()
 end, { desc = 'Grep Open Buffers' })
-vim.keymap.set('n', '<leader>lt', function()
+vim.keymap.set('n', '<leader>vt', function()
   utils.select_filetype()
 end, { desc = 'select filetype' })
 vim.keymap.set('n', '<leader>pp', function()

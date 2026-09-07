@@ -13,9 +13,9 @@ scissors.setup({
   },
 })
 
-vim.keymap.set('n', '<leader>l;', function()
+vim.keymap.set('n', '<leader>v;', function()
   scissors.addNewSnippet()
 end, { desc = 'snippet add' })
-vim.keymap.set('n', '<leader>l:', function()
+vim.keymap.set('n', '<leader>v:', function()
   scissors.editSnippet()
 end, { desc = 'snippet edit' })

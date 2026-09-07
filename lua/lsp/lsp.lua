@@ -73,7 +73,16 @@ local function on_lsp_attach(args)
   end
 
   keymap('n', 'gl', vim.diagnostic.open_float, { desc = 'Float diagnostic', buffer = buffer })
+  -- K(hover) 由 nvim 0.12 内建默认映射提供，无需重复定义
   keymap('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'Code action', buffer = buffer })
+  keymap('n', '<leader>li', function()
+    local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = buffer })
+    vim.lsp.inlay_hint.enable(not enabled, { bufnr = buffer })
+  end, { desc = 'Toggle Inlay Hints', buffer = buffer })
+  keymap('n', '<leader>lH', vim.lsp.buf.signature_help, { desc = 'Signature Help', buffer = buffer })
+  keymap('n', '<leader>lq', function()
+    vim.diagnostic.setqflist()
+  end, { desc = 'Diagnostics to Quickfix', buffer = buffer })
   keymap('n', '<leader>lc', vim.lsp.codelens.run, { desc = 'Run Codelens', buffer = buffer })
   keymap('n', '<leader>lR', function()
     Snacks.rename.rename_file()

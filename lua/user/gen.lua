@@ -5,4 +5,4 @@ vim.pack.add({
 local neogen = require('neogen')
 neogen.setup({})
 
-vim.keymap.set('n', '<leader>ll', '<cmd>lua require("neogen").generate()<CR>', { desc = 'jsDoc' })
+vim.keymap.set('n', '<leader>vj', '<cmd>lua require("neogen").generate()<CR>', { desc = 'jsDoc' })

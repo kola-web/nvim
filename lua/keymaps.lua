@@ -26,13 +26,12 @@ keymap({ 'n', 'x' }, '<Down>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', exp
 keymap({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
 keymap({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
 
--- Move to window using the <ctrl> hjkl keys
+-- 窗口移动/缩放：基础降级层（smart-splits 正常时后加载覆盖为增强版；
+-- 插件缺失/出错时这些基础映射兜底可用）
 keymap('n', '<C-h>', '<C-w>h', { desc = 'Go to Left Window', remap = true })
 keymap('n', '<C-j>', '<C-w>j', { desc = 'Go to Lower Window', remap = true })
 keymap('n', '<C-k>', '<C-w>k', { desc = 'Go to Upper Window', remap = true })
 keymap('n', '<C-l>', '<C-w>l', { desc = 'Go to Right Window', remap = true })
-
--- Resize window using <ctrl> arrow keys
 keymap('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
 keymap('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
 keymap('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
@@ -77,7 +76,7 @@ keymap('n', 'BP', function() utils.scratch_open('python') end, opts)
 keymap('n', ']s', '/<script<cr>', opts)
 keymap('n', ']c', '/<style<cr>', opts)
 
--- Navigate buffers
+-- Navigate buffers：基础降级层（bufferline.nvim 正常时后加载覆盖为增强版）
 keymap('n', '<tab>', '<Cmd>bnext<CR>', opts)
 keymap('n', '<S-tab>', '<Cmd>bprevious<CR>', opts)
 
@@ -110,12 +109,9 @@ vim.keymap.set({ 'n' }, '<leader>rt', require('utils').wrap_book_bracket_to_text
   desc = '将光标所在《xxx》替换为 <text>xxx</text>',
 })
 
-keymap('n', '<leader>lv', function()
+keymap('n', '<leader>vv', function()
   utils.compare_to_clipboard()
 end, { desc = 'diff clip' })
-
-keymap('n', '<leader>ql', '<cmd>lopen<cr>', { desc = 'Location List' })
-keymap('n', '<leader>qq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
 
 -- fzf-lua
 keymap('t', '<esc>', [[<C-\><C-n>]])
