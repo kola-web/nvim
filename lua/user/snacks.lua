@@ -73,6 +73,14 @@ require('snacks').setup({
       'dist_pro',
     },
     ui_select = true,
+    kinds = {
+      -- overseer 任务选择器（<leader>xo）默认 normal 模式，与 lsp_symbols 等 source 行为一致
+      overseer_template = {
+        on_show = function()
+          vim.cmd.stopinsert()
+        end,
+      },
+    },
     win = {
       input = {
         keys = {

@@ -35,7 +35,7 @@ function M.resolve(cwd)
   return nil, ('未找到 %s / %s（已查找: %s）'):format('dist.ps1', 'dist.sh', cwd)
 end
 
-return vim.tbl_extend('force', M, {
+return {
   name = '提交图片',
   desc = '执行项目 dist 脚本（Windows: dist.ps1 / 其他: dist.sh），仅查找当前目录',
   builder = function()
@@ -67,4 +67,4 @@ return vim.tbl_extend('force', M, {
       return M.resolve(cwd) ~= nil
     end,
   },
-})
+}
