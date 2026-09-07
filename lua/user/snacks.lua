@@ -20,39 +20,12 @@ local normal = {
   end,
 }
 
--- 通用脚本运行器：为 scratch buffer 生成 <cr> 运行键
--- 保存文件 → jobstart 子进程执行 → utils.scratch_result 浮窗展示输出
--- 用 jobstart 而非 vim.system，规避 Windows 管道/流问题
-local function make_source_runner(run_cmd)
-  return {
-    '<cr>',
-    function(self)
-      vim.cmd('write')
-      local command = vim.list_extend(vim.deepcopy(run_cmd), { vim.api.nvim_buf_get_name(self.buf) })
-      local output = {}
-      vim.fn.jobstart(command, {
-        stdout_buffered = true,
-        stderr_buffered = true,
-        on_stdout = function(_, data)
-          if data then
-            vim.list_extend(output, data)
-          end
-        end,
-        on_stderr = function(_, data)
-          if data then
-            vim.list_extend(output, data)
-          end
-        end,
-        on_exit = function(_, exit_code)
-          vim.schedule(function()
-            utils.scratch_result({ code = exit_code, stdout = table.concat(output, '\n') })
-          end)
-        end,
-      })
-    end,
-    desc = 'Source buffer',
-    mode = { 'n', 'x' },
-  }
+-- scratch 的 <cr> 运行：统一代理到 overseer 'run script' 任务
+-- 复用 run_script.lua 的单份查表逻辑（quickfix 诊断/时长/自动重启/成功失败视图），
+-- 不再各自维护 jobstart 实现；scratch buffer 有真实路径，write 后即可跑
+local function run_scratch()
+  vim.cmd('write')
+  require('overseer').run_task({ name = 'run script' })
 end
 
 require('snacks').setup({
@@ -193,25 +166,12 @@ require('snacks').setup({
   },
   words = { enabled = true },
   scratch = {
-    -- 三份重复的 node/node/python 运行配置收敛为工厂调用（改一处即全部生效）
-    -- lua 走 nvim 内建 luafile，无需子进程
+    -- 各语言统一代理到 overseer 'run script'（单份逻辑，见 run_script.lua）
     win_by_ft = {
-      typescript = { keys = { source = make_source_runner({ 'node' }) } },
-      javascript = { keys = { source = make_source_runner({ 'node' }) } },
-      python = { keys = { source = make_source_runner({ 'python' }) } },
-      lua = {
-        keys = {
-          ['source'] = {
-            '<cr>',
-            function()
-              vim.cmd('write')
-              vim.cmd('luafile %')
-            end,
-            desc = 'Source buffer',
-            mode = { 'n', 'x' },
-          },
-        },
-      },
+      typescript = { keys = { source = { '<cr>', run_scratch, desc = 'Run via overseer', mode = { 'n', 'x' } } } },
+      javascript = { keys = { source = { '<cr>', run_scratch, desc = 'Run via overseer', mode = { 'n', 'x' } } } },
+      python = { keys = { source = { '<cr>', run_scratch, desc = 'Run via overseer', mode = { 'n', 'x' } } } },
+      lua = { keys = { source = { '<cr>', run_scratch, desc = 'Run via overseer', mode = { 'n', 'x' } } } },
     },
   },
   zen = {

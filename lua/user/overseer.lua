@@ -50,7 +50,8 @@ vim.keymap.set('n', '<leader>xl', '<cmd>OverseerToggle<cr>',      { desc = 'Task
 vim.keymap.set('n', '<leader>xo', '<cmd>OverseerRun<cr>',         { desc = 'Run task' })
 vim.keymap.set('n', '<leader>xq', '<cmd>OverseerTaskAction<cr>',  { desc = 'Action on task' })
 vim.keymap.set('n', '<leader>xa', '<cmd>OverseerTaskAction<cr>',  { desc = 'Task action' })
-vim.keymap.set('n', '<leader>xc', "<cmd>lua require('overseer').clear_task_cache({})<cr>", { desc = 'Clear cache' })
+vim.keymap.set('n', '<leader>xc', "<cmd>lua require('overseer').clear_task_cache()<cr>", { desc = 'Clear cache' })
+vim.keymap.set('n', '<leader>xr', function() require('overseer').run_task({ name = 'run script' }) end, { desc = '运行当前脚本' })
 -- 注：overseer 3.x 已移除 OverseerInfo / OverseerQuickAction / OverseerClearCache 命令；
 --     Info 无对应命令不再绑键；QuickAction 由 OverseerTaskAction 取代
 
