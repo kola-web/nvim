@@ -104,8 +104,8 @@ keymap('n', '<leader>ro', '<cmd>%s#\\(\\d\\+\\)rpx#\\=printf("%d",submatch(1) / 
 keymap('n', '<leader>re', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%f",submatch(1) / 100.0)."rem"#g<cr>', { desc = 'px -> rem' })
 keymap('n', '<leader>rl', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%.2f",submatch(1) / 1080.0 * 750)."px"#g<cr>', { desc = '1080px -> 750px' })
 keymap('n', '<leader>rr', require('utils.quickType').generate_type, { desc = 'quicktype' })
-
-vim.keymap.set({ 'n' }, '<leader>rt', require('utils').wrap_book_bracket_to_text_tag, {
+keymap('n', '<leader>rt', require('utils.swap_ternary').swap_ternary, { desc = 'Swap ternary' })
+keymap('n', '<leader>rx', require('utils').wrap_book_bracket_to_text_tag, {
   desc = '将光标所在《xxx》替换为 <text>xxx</text>',
 })
 
@@ -229,7 +229,7 @@ end, { desc = 'SVN update 当前文件目录', noremap = true, silent = false })
 vim.keymap.set('n', '<leader>ug', function()
   local filepath = vim.fn.expand('%:p')
   if filepath == '' then
-    vim.notify("没有打开文件，无法查找git仓库", vim.log.levels.WARN)
+    vim.notify('没有打开文件，无法查找git仓库', vim.log.levels.WARN)
     return
   end
 
@@ -250,18 +250,20 @@ vim.keymap.set('n', '<leader>ug', function()
 
   local git_root = find_nearest_git_root(vim.fn.fnamemodify(filepath, ':h'))
   if not git_root then
-    vim.notify("未找到git仓库(.git)，向上遍历完毕", vim.log.levels.ERROR)
+    vim.notify('未找到git仓库(.git)，向上遍历完毕', vim.log.levels.ERROR)
     return
   end
 
   vim.notify('git pull 最近仓库根目录: ' .. git_root, vim.log.levels.INFO)
 
   -- 增加 -c core.quotepath=false 关闭八进制文件名转义
-  vim.fn.jobstart({ 'git', '-c','core.quotepath=false', '-C', git_root, 'pull' }, {
+  vim.fn.jobstart({ 'git', '-c', 'core.quotepath=false', '-C', git_root, 'pull' }, {
     stdout_buffered = true,
     stderr_buffered = true,
     on_stdout = function(_, data)
-      if not data then return end
+      if not data then
+        return
+      end
       local out = {}
       for _, line in ipairs(data) do
         local s = line:gsub('\r', '')
@@ -274,7 +276,9 @@ vim.keymap.set('n', '<leader>ug', function()
       end
     end,
     on_stderr = function(_, data)
-      if not data then return end
+      if not data then
+        return
+      end
       local err = {}
       for _, line in ipairs(data) do
         local s = line:gsub('\r', '')
