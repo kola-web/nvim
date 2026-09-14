@@ -1,7 +1,5 @@
 # windows环境下需要安装的软件
 
-
-
 ```txt
 Neovim.Neovim
 Microsoft.Git
@@ -33,9 +31,8 @@ lua print(vim.bo.filetype)
 sudo apt install -y xsel xclip
 ```
 
-
 # 删除冗余插件
+
 ```lua
 lua local unused = vim.iter(vim.pack.get()):filter(function(p) return not p.active end):map(function(p) return p.spec.name end):totable(); vim.pack.del(unused)
 ```
-

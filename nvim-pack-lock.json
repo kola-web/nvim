@@ -22,7 +22,7 @@
       "src": "https://github.com/olimorris/codecompanion.nvim"
     },
     "codediff.nvim": {
-      "rev": "832f1ecc5f8b15a44cf7537e31d3266d657775b1",
+      "rev": "4b3ad7eb99dd0f02e64bbaf562ca1e87e8c07cc9",
       "src": "https://github.com/esmuellert/codediff.nvim"
     },
     "color-converter.nvim": {
