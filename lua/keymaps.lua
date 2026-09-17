@@ -185,46 +185,63 @@ keymap('n', '<leader>oe', function()
   end
 end, { desc = 'Open folder in file explorer' })
 
--- SVN update 当前文件所在目录
+-- SVN 丢弃本地所有更改并更新到远端（revert -R + update）当前文件所在目录
 keymap('n', '<leader>us', function()
   local cwd = vim.fn.expand('%:p:h')
-  vim.notify('svn update: ' .. cwd, vim.log.levels.INFO)
-  vim.fn.jobstart({ 'svn', 'update', cwd }, {
+  vim.notify('svn revert -R + update: ' .. cwd .. '（将丢弃本地所有更改）', vim.log.levels.INFO)
+  -- 先撤销本地所有修改，再更新到远端最新
+  vim.fn.jobstart({ 'svn', 'revert', '-R', cwd }, {
     stdout_buffered = true,
     stderr_buffered = true,
-    on_stdout = function(_, data)
-      if not data then
+    on_exit = function(_, code)
+      if code ~= 0 then
+        vim.notify('svn revert 失败，已中止 update', vim.log.levels.ERROR)
         return
       end
-      -- 清除\r回车符，过滤空字符串
-      local out = {}
-      for _, line in ipairs(data) do
-        local s = line:gsub('\r', '')
-        if s ~= '' then
-          table.insert(out, s)
-        end
-      end
-      if #out > 0 then
-        vim.notify(table.concat(out, '\n'), vim.log.levels.INFO)
-      end
-    end,
-    on_stderr = function(_, data)
-      if not data then
-        return
-      end
-      local err = {}
-      for _, line in ipairs(data) do
-        local s = line:gsub('\r', '')
-        if s ~= '' then
-          table.insert(err, s)
-        end
-      end
-      if #err > 0 then
-        vim.notify(table.concat(err, '\n'), vim.log.levels.ERROR)
-      end
+      vim.fn.jobstart({ 'svn', 'update', cwd }, {
+        stdout_buffered = true,
+        stderr_buffered = true,
+        on_stdout = function(_, data)
+          if not data then
+            return
+          end
+          local out = {}
+          for _, line in ipairs(data) do
+            local s = line:gsub('\r', '')
+            if s ~= '' then
+              table.insert(out, s)
+            end
+          end
+          if #out > 0 then
+            vim.notify(table.concat(out, '\n'), vim.log.levels.INFO)
+          end
+        end,
+        on_stderr = function(_, data)
+          if not data then
+            return
+          end
+          local err = {}
+          for _, line in ipairs(data) do
+            local s = line:gsub('\r', '')
+            if s ~= '' then
+              table.insert(err, s)
+            end
+          end
+          if #err > 0 then
+            vim.notify(table.concat(err, '\n'), vim.log.levels.ERROR)
+          end
+        end,
+        on_exit = function(_, c2)
+          if c2 == 0 then
+            vim.notify('svn 已更新到远端最新: ' .. cwd, vim.log.levels.INFO)
+          else
+            vim.notify('svn update 失败（退出码 ' .. c2 .. '）', vim.log.levels.ERROR)
+          end
+        end,
+      })
     end,
   })
-end, { desc = 'SVN update 当前文件目录', noremap = true, silent = false })
+end, { desc = 'SVN 丢弃本地更改并更新到远端（revert -R + update）', noremap = true, silent = false })
 
 vim.keymap.set('n', '<leader>ug', function()
   local filepath = vim.fn.expand('%:p')
@@ -254,41 +271,68 @@ vim.keymap.set('n', '<leader>ug', function()
     return
   end
 
-  vim.notify('git pull 最近仓库根目录: ' .. git_root, vim.log.levels.INFO)
+  -- 取当前分支；detached HEAD 时 rev-parse 返回 HEAD，无法确定远端分支，中止
+  local branch = vim.fn.system({ 'git', '-C', git_root, 'rev-parse', '--abbrev-ref', 'HEAD' }):gsub('%s+$', '')
+  if branch == '' or branch == 'HEAD' then
+    vim.notify('无法确定当前分支（可能处于 detached HEAD），已中止', vim.log.levels.ERROR)
+    return
+  end
 
-  -- 增加 -c core.quotepath=false 关闭八进制文件名转义
-  vim.fn.jobstart({ 'git', '-c', 'core.quotepath=false', '-C', git_root, 'pull' }, {
+  vim.notify(
+    ('git 强制重置为远端: origin/%s @ %s（将丢弃本地所有更改）'):format(branch, git_root),
+    vim.log.levels.INFO
+  )
+
+  -- 串行执行：先 fetch origin，成功后再 reset --hard origin/<branch>
+  vim.fn.jobstart({ 'git', '-c', 'core.quotepath=false', '-C', git_root, 'fetch', 'origin' }, {
     stdout_buffered = true,
     stderr_buffered = true,
-    on_stdout = function(_, data)
-      if not data then
+    on_exit = function(_, code)
+      if code ~= 0 then
+        vim.notify('git fetch 失败（退出码 ' .. code .. '），已中止 reset', vim.log.levels.ERROR)
         return
       end
-      local out = {}
-      for _, line in ipairs(data) do
-        local s = line:gsub('\r', '')
-        if s ~= '' then
-          table.insert(out, s)
-        end
-      end
-      if #out > 0 then
-        vim.notify(table.concat(out, '\n'), vim.log.levels.INFO)
-      end
-    end,
-    on_stderr = function(_, data)
-      if not data then
-        return
-      end
-      local err = {}
-      for _, line in ipairs(data) do
-        local s = line:gsub('\r', '')
-        if s ~= '' then
-          table.insert(err, s)
-        end
-      end
-      if #err > 0 then
-        vim.notify(table.concat(err, '\n'), vim.log.levels.ERROR)
-      end
+      vim.fn.jobstart({ 'git', '-c', 'core.quotepath=false', '-C', git_root, 'reset', '--hard', 'origin/' .. branch }, {
+        stdout_buffered = true,
+        stderr_buffered = true,
+        on_stdout = function(_, data)
+          if not data then
+            return
+          end
+          local out = {}
+          for _, line in ipairs(data) do
+            local s = line:gsub('\r', '')
+            if s ~= '' then
+              table.insert(out, s)
+            end
+          end
+          if #out > 0 then
+            vim.notify(table.concat(out, '\n'), vim.log.levels.INFO)
+          end
+        end,
+        on_stderr = function(_, data)
+          if not data then
+            return
+          end
+          local err = {}
+          for _, line in ipairs(data) do
+            local s = line:gsub('\r', '')
+            if s ~= '' then
+              table.insert(err, s)
+            end
+          end
+          if #err > 0 then
+            vim.notify(table.concat(err, '\n'), vim.log.levels.ERROR)
+          end
+        end,
+        on_exit = function(_, c2)
+          if c2 == 0 then
+            vim.notify('已重置到远端 origin/' .. branch, vim.log.levels.INFO)
+          else
+            vim.notify('git reset --hard 失败（退出码 ' .. c2 .. '）', vim.log.levels.ERROR)
+          end
+        end,
+      })
     end,
   })
-end, { desc = 'Git pull：更新当前文件最近的git仓库', noremap = true, silent = false })
+end, { desc = 'Git 强制重置到远端（fetch + reset --hard，丢弃本地更改）', noremap = true, silent = false })

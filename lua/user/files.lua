@@ -134,8 +134,8 @@ vim.api.nvim_create_autocmd('User', {
     map_split(buf_id, '<C-w>S', 'horizontal', true)
     map_split(buf_id, '<C-w>V', 'vertical', true)
 
-    vim.keymap.set('n', 'wc', vim.g.mini_file_mini_component, { buffer = buf_id, desc = 'mini_component' })
-    vim.keymap.set('n', 'wp', vim.g.mini_file_mini_page, { buffer = buf_id, desc = 'mini_page' })
+    vim.keymap.set('n', 'wc', require('utils.init').create_mini_component, { buffer = buf_id, desc = '从模板创建小程序组件' })
+    vim.keymap.set('n', 'wp', require('utils.init').create_mini_page, { buffer = buf_id, desc = '从模板创建小程序页面' })
     vim.keymap.set('n', '<C-y>', copy_file_path, { buffer = buf_id, desc = 'copy_file_path' })
     vim.keymap.set('n', 'gi', add_to_gitignore, { buffer = buf_id, desc = 'Add to .gitignore' })
     -- insert mode  move corsor right

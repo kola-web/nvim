@@ -1,23 +1,2 @@
-vim.g.mini_file_mini_component = function(state)
-  local file = MiniFiles.get_explorer_state().branch
-  local currentPath = file[#file]
-  vim.fn.system({
-    'cp',
-    '-R',
-    '/Users/lijialin/.config/nvim/template/' .. 'wxmlComponent',
-    currentPath,
-  })
-  MiniFiles.synchronize()
-end
-
-vim.g.mini_file_mini_page = function(state)
-  local file = MiniFiles.get_explorer_state().branch
-  local currentPath = file[#file]
-  vim.fn.system({
-    'cp',
-    '-R',
-    '/Users/lijialin/.config/nvim/template/' .. 'wxmlPage',
-    currentPath,
-  })
-  MiniFiles.synchronize()
-end
+-- mini.files 的 wp/wc 已统一收敛到 utils.init.create_mini_from_template（跨平台）
+-- 原 vim.g.mini_file_mini_component / mini_file_mini_page 定义已移除

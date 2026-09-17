@@ -364,6 +364,90 @@ M.copy_file_path = function()
   end
 end
 
+-- ============ 微信小程序模板创建（mini.files 的 wp / wc） ============
+
+--- 小程序模板根目录（跨平台）
+--- @return string
+M.wxml_template_root = function()
+  local home = vim.fn.expand('$HOME')
+  if M.is_win() then
+    return home .. '/AppData/Local/nvim/template'
+  end
+  return home .. '/.config/nvim/template'
+end
+
+--- 递归复制目录（vim.uv 实现，跨平台；新建文件无只读属性）
+--- @param src string
+--- @param dst string
+--- @return boolean
+local function copy_recursive(src, dst)
+  local stat = vim.uv.fs_stat(src)
+  if not stat then
+    return false
+  end
+  if stat.type ~= 'directory' then
+    return vim.uv.fs_copyfile(src, dst)
+  end
+  vim.uv.fs_mkdir(dst, tonumber('0755', 8))
+  local handle = vim.uv.fs_scandir(src)
+  if not handle then
+    return false
+  end
+  while true do
+    local name, typ = vim.uv.fs_scandir_next(handle)
+    if not name then
+      break
+    end
+    if not copy_recursive(src .. '/' .. name, dst .. '/' .. name) then
+      return false
+    end
+  end
+  return true
+end
+
+--- 在 mini.files 当前目录下从模板创建小程序 component / page
+--- @param kind 'component'|'page'
+M.create_mini_from_template = function(kind)
+  local state = MiniFiles.get_explorer_state()
+  local branch = state and state.branch
+  local currentPath = branch and branch[#branch]
+  if not currentPath then
+    vim.notify('mini.files 无当前目录', vim.log.levels.ERROR)
+    return
+  end
+  local kind_name = kind == 'component' and 'Component' or 'Page'
+  local template_name = kind == 'component' and 'wxmlComponent' or 'wxmlPage'
+  local template_path = M.wxml_template_root() .. '/' .. template_name
+  if vim.fn.isdirectory(template_path) == 0 then
+    vim.notify('模板目录不存在: ' .. template_path, vim.log.levels.ERROR)
+    return
+  end
+  vim.ui.input({ prompt = kind_name .. ' name: ' }, function(name)
+    if not name or name == '' then
+      return
+    end
+    local dest = currentPath .. '/' .. name
+    if vim.fn.isdirectory(dest) == 1 then
+      vim.notify('已存在同名目录: ' .. name, vim.log.levels.WARN)
+      return
+    end
+    if copy_recursive(template_path, dest) then
+      MiniFiles.synchronize()
+      vim.notify(kind_name .. ' "' .. name .. '" 已创建', vim.log.levels.INFO)
+    else
+      vim.notify('创建 ' .. kind_name .. ' 失败: ' .. dest, vim.log.levels.ERROR)
+    end
+  end)
+end
+
+M.create_mini_component = function()
+  M.create_mini_from_template('component')
+end
+
+M.create_mini_page = function()
+  M.create_mini_from_template('page')
+end
+
 M.has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil

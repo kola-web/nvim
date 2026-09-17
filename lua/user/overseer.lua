@@ -62,6 +62,7 @@ vim.keymap.set('n', '<leader>xwg', function() require('overseer').run_task({ nam
 vim.keymap.set('n', '<leader>xwn', function() require('overseer').run_task({ name = 'wx build-npm' }) end, { desc = 'WX 构建 npm' })
 vim.keymap.set('n', '<leader>xwc', function() require('overseer').run_task({ name = 'wx ci upload' }) end, { desc = 'WX miniprogram-ci 上传' })
 vim.keymap.set('n', '<leader>xwe', function() require('overseer').run_task({ name = '环境切换' }) end,     { desc     = '切换 dev/pro 环境' })
+vim.keymap.set('n', '<leader>xwi', function() require('overseer').run_task({ name = '初始化环境配置' }) end, { desc = '初始化 .env 环境配置' })
 
 -- 项目任务（<leader>xp + 功能）
 vim.keymap.set('n', '<leader>xpb', function() require('overseer').run_task({ name = '打包上线' }) end,   { desc = '打包上线' })
