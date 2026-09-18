@@ -41,6 +41,8 @@ overseer.setup({
     'user.image_upload',
     'user.env_switch',
     'user.dev_server',
+    'user.git_force_reset',
+    'user.svn_force_update',
   },
 })
 
