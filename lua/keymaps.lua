@@ -95,7 +95,7 @@ keymap('v', '>', '>gv', opts)
 keymap('n', '<leader>h', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', { desc = 'Redraw / clear hlsearch / diff update' })
 
 -- replace & complie
-keymap('n', '<leader>rc', require('utils.compile_scss'), { desc = 'toggle scss compile' })
+keymap('n', '<leader>xs', require('utils.compile_scss'), { desc = 'toggle scss compile' })
 keymap('n', '<leader>rd', '<cmd>%s/<div/<view/g<cr><cmd>%s/<\\/div/<\\/view/g<cr>', { desc = 'div -> view' })
 keymap('n', '<leader>rv', '<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr>', { desc = 'view -> div' })
 keymap('n', '<leader>rp', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', { desc = 'px -> rpx' })
@@ -146,14 +146,21 @@ keymap('n', '<leader>w', '<Cmd>silent! update | redraw<CR>', { desc = 'save file
 keymap('t', '<C-\\>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
 
 -- 按下 <leader>oz 用 Zed 打开当前项目、当前文件、定位到相同行
+-- keymap('n', '<leader>oz', function()
+--   local file = vim.api.nvim_buf_get_name(0)
+--   local cwd = vim.fn.getcwd()
+--   local line = vim.api.nvim_win_get_cursor(0)[1]
+--   -- zed 命令：zed [项目根目录] [文件:行号]
+--   local cmd = { 'zed', cwd, file .. ':' .. line }
+--   vim.fn.jobstart(cmd, { detach = true })
+-- end, { desc = 'Open current file & project in Zed, keep cursor line' })
+
+-- 按下 <leader>oz 用 Zed 打开当前项目
 keymap('n', '<leader>oz', function()
-  local file = vim.api.nvim_buf_get_name(0)
   local cwd = vim.fn.getcwd()
-  local line = vim.api.nvim_win_get_cursor(0)[1]
-  -- zed 命令：zed [项目根目录] [文件:行号]
-  local cmd = { 'zed', cwd, file .. ':' .. line }
+  local cmd = { 'zed', cwd }
   vim.fn.jobstart(cmd, { detach = true })
-end, { desc = 'Open current file & project in Zed, keep cursor line' })
+end, { desc = 'Open current project in Zed' })
 
 -- open in VSCode
 keymap('n', '<leader>oc', function()
@@ -184,7 +191,6 @@ keymap('n', '<leader>oe', function()
     vim.fn.system({ 'xdg-open', root_dir })
   end
 end, { desc = 'Open folder in file explorer' })
-
 
 -- SVN 强制覆盖 / Git 强制重置（overseer 任务实现，成功后自动刷新当前 buffer）
 keymap('n', '<leader>us', function()
