@@ -181,6 +181,11 @@ require('snacks').setup({
   },
 })
 
+-- 统一 vim.ui 入口到 snacks（消除 checkhealth 的 ui_select/ui_input ERROR）
+-- picker 的 ui_select=true 会自动绑定 select，这里显式确保并补齐 input
+vim.ui.select = require('snacks.picker').select
+vim.ui.input = require('snacks.input').input
+
 vim.keymap.set('n', '<leader>c', function()
   Snacks.bufdelete()
 end, { desc = 'buf del' })
