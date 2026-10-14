@@ -526,6 +526,19 @@
     ],
     "prefix": "vlist"
   },
+  "vorder": {
+    "body": [
+      "{",
+      "  title: \"序号\",",
+      "  width: 60,",
+      "  fixed: \"left\",",
+      "  customRender: (_text, _record, index) => {",
+      "    return this.pagination.pageSize * (this.pagination.current - 1) + index + 1;",
+      "  },",
+      "},"
+    ],
+    "prefix": "vorder"
+  },
   "vtab": {
     "body": [
       "<template>",

@@ -44,10 +44,7 @@ return {
     local cmd
     if vim.fn.has('win32') == 1 then
       -- fetch 成功才 reset；失败则写错误并退出
-      cmd = {
-        'pwsh',
-        '-NoLogo',
-        '-NoProfile',
+      cmd = vim.list_extend(require('utils.overseer_util').pwsh(), {
         '-Command',
         table.concat({
           "$ErrorActionPreference = 'Stop'",
@@ -56,7 +53,7 @@ return {
           "git -C '" .. q .. "' reset --hard origin/" .. branch,
           'exit $LASTEXITCODE',
         }, '; '),
-      }
+      })
     else
       cmd = {
         'bash',

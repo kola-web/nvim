@@ -1,6 +1,9 @@
 vim.pack.add({
-  'https://github.com/ellisonleao/gruvbox.nvim',
+  'https://github.com/sainnhe/gruvbox-material',
 })
+vim.g.gruvbox_material_background = 'soft'
+vim.g.gruvbox_material_enable_italic = 1
+vim.g.gruvbox_material_better_performance = 1
 vim.cmd([[
-  colorscheme gruvbox
+  colorscheme gruvbox-material
 ]])

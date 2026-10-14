@@ -15,10 +15,7 @@ return {
     local cmd
     if vim.fn.has('win32') == 1 then
       -- revert 成功才 update；失败则写错误并退出
-      cmd = {
-        'pwsh',
-        '-NoLogo',
-        '-NoProfile',
+      cmd = vim.list_extend(require('utils.overseer_util').pwsh(), {
         '-Command',
         table.concat({
           "$ErrorActionPreference = 'Stop'",
@@ -27,7 +24,7 @@ return {
           "svn update '" .. q .. "'",
           'exit $LASTEXITCODE',
         }, '; '),
-      }
+      })
     else
       cmd = { 'bash', '-lc', "svn revert -R '" .. q .. "' && svn update '" .. q .. "'" }
     end

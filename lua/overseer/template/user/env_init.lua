@@ -90,7 +90,7 @@ end
 function M.quick_task(msg)
   local cmd
   if vim.fn.has('win32') == 1 then
-    cmd = { 'pwsh', '-NoLogo', '-NoProfile', '-Command', ("Write-Output '%s'"):format(msg:gsub("'", "''")) }
+    cmd = vim.list_extend(require('utils.overseer_util').pwsh(), { '-Command', ("Write-Output '%s'"):format(msg:gsub("'", "''")) })
   else
     cmd = { 'bash', '-lc', ('echo "%s"'):format(msg:gsub('"', '\\"')) }
   end

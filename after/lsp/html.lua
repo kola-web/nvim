@@ -1,5 +1,6 @@
 return {
-  filetypes = { 'html' },
+  -- wxml 使用独立 filetype（见 filetype.lua），需显式纳入 html LSP 以保留 wxml-data 补全
+  filetypes = { 'html', 'wxml' },
   init_options = {
     configurationSection = { 'html', 'css', 'javascript' },
     embeddedLanguages = {

@@ -42,6 +42,10 @@ return {
     robot = { type = 'integer', default = 1, desc = '机器人编号 1-30' },
   },
   builder = function(params)
+    -- 微信开发者工具 CLI 是 Windows 限定（cli.bat），macOS/Linux/WSL 直接失败提示
+    if vim.fn.has('win32') ~= 1 then
+      return require('utils.overseer_util').fail_task('wx ci upload', '微信开发者工具 CLI 仅支持 Windows（cli.bat）')
+    end
     local root = wx.project_root()
     local appid = wx.appid(root)
     local key = wx.ci_key(root)

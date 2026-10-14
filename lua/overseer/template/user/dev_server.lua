@@ -39,9 +39,9 @@ return {
       vim.notify('[dev server] ' .. err, vim.log.levels.ERROR)
       return util.fail_task('dev server', err)
     end
-    -- Windows 上 pnpm 是 .ps1/.cmd，jobstart 无法直接执行，用 pwsh 包装
+    -- Windows 上 pnpm 是 .ps1/.cmd，jobstart 无法直接执行，用 pwsh 包装（真实路径，见 utils/pwsh.lua）
     local is_win = vim.fn.has('win32') == 1
-    local cmd = is_win and { 'pwsh', '-NoLogo', '-NoProfile', '-Command', 'pnpm dev' }
+    local cmd = is_win and vim.list_extend(util.pwsh(), { '-Command', 'pnpm dev' })
       or { 'pnpm', 'dev' }
     return {
       cmd = cmd,

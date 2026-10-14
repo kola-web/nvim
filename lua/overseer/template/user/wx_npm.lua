@@ -4,6 +4,10 @@ return {
   name = 'wx build-npm',
   desc = '微信开发者工具：触发 npm 构建（需开启服务端口）',
   builder = function()
+    -- 微信开发者工具 CLI 是 Windows 限定（cli.bat），macOS/Linux/WSL 直接失败提示
+    if vim.fn.has('win32') ~= 1 then
+      return require('utils.overseer_util').fail_task('wx build-npm', '微信开发者工具 CLI 仅支持 Windows（cli.bat）')
+    end
     local root = wx.project_root()
     local cli = wx.cli()
     if not root then

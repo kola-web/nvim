@@ -47,7 +47,7 @@ return {
 
     local cmd
     if script:match('%.ps1$') then
-      cmd = { 'pwsh', '-NoLogo', '-NoProfile', '-File', script }
+      cmd = vim.list_extend(require('utils.overseer_util').pwsh(), { '-File', script })
     else
       cmd = { 'bash', script }
     end

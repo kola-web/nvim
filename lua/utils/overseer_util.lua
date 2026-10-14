@@ -5,6 +5,14 @@
 
 local M = {}
 
+--- pwsh 命令前缀：{ 真实pwsh路径, -NoLogo, -NoProfile }，后续追加 -Command / -File 参数
+--- 仅 Windows 可用：Windows 上 pwsh 若为 Microsoft Store 别名，jobstart 无法直接执行（E475），必须用真实路径
+--- macOS/Linux/WSL 请走各自的 bash 分支（调用方均以 vim.fn.has('win32') 保护）
+function M.pwsh()
+  assert(vim.fn.has('win32') == 1, 'utils.overseer_util.pwsh 仅支持 Windows')
+  return { require('utils.pwsh').get(), '-NoLogo', '-NoProfile' }
+end
+
 --- 构造一个立即失败的任务（输出错误信息 → 退出码 1 → 弹 FAILURE 通知）
 --- @param name string 任务名
 --- @param msg string 错误信息
@@ -12,7 +20,7 @@ local M = {}
 function M.fail_task(name, msg)
   local cmd
   if vim.fn.has('win32') == 1 then
-    cmd = { 'pwsh', '-NoLogo', '-NoProfile', '-Command', ("Write-Error '%s'; exit 1"):format(msg:gsub("'", "''")) }
+    cmd = vim.list_extend(M.pwsh(), { '-Command', ("Write-Error '%s'; exit 1"):format(msg:gsub("'", "''")) })
   else
     cmd = { 'bash', '-lc', ('echo "%s" >&2; exit 1'):format(msg:gsub('"', '\\"')) }
   end

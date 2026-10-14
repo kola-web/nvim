@@ -153,6 +153,10 @@ require('snacks').setup({
     enabled = true,
   },
   terminal = {
+    -- 终端 shell：仅 Windows 用 pwsh 7 完整路径（数组形式跳过 M.parse 空格拆分；
+    -- vim.o.shell 为系统 PowerShell 5.1，仅供第三方插件拼接）；
+    -- macOS/Linux/WSL 不覆盖（默认 vim.o.shell，Unix shell 无此问题）
+    shell = vim.fn.has('win32') == 1 and { require('utils.pwsh').get() } or nil,
     win = {
       keys = {
         nav_h = { '<C-h>', term_nav('h'), desc = 'Go to Left Window', expr = true, mode = 't' },

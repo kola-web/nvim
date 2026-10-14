@@ -1,4 +1,9 @@
-vim.opt.shell = 'pwsh'
+-- vim.o.shell 会被第三方插件（如 vim-signify）直接拿来拼接命令字符串执行，
+-- 因此必须是「无空格 + 可被 jobstart 直接执行」的路径：
+--   Store 版 pwsh 的 WindowsApps 别名不可执行（E475）；完整路径含空格会被拼坏（E903: "C:\Program"）。
+-- 故统一用系统自带 PowerShell（真实 exe、无空格、PATH 内）。
+-- snacks 终端与 overseer 任务需要 pwsh 7 时，显式用 utils.pwsh 的完整路径数组（不受空格影响）。
+vim.opt.shell = 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'
 vim.opt.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command'
 vim.opt.shellxquote = ''
 -- Get LOCALAPPDATA environment variable

@@ -339,7 +339,7 @@ return {
     end
     if vim.fn.has('win32') == 1 then
       script = (PW:gsub('__ROOT__', sl(root))):gsub('__APP_FILE__', sl(app)):gsub('__CONFIG_FILE__', sl(config))
-      cmd = { 'pwsh', '-NoLogo', '-NoProfile', '-File', tmp }
+      cmd = vim.list_extend(require('utils.overseer_util').pwsh(), { '-File', tmp })
     else
       script = (SH:gsub('__ROOT__', sl(root))):gsub('__APP_FILE__', sl(app)):gsub('__CONFIG_FILE__', sl(config))
       cmd = { 'bash', tmp }
