@@ -2,7 +2,7 @@ vim.filetype.add({
   -- 扩展名
   extension = {
     pn = 'potion',
-    wxml = 'wxml', -- 独立 filetype：ftplugin 用 vue parser 高亮 {{ }}，html LSP 单独 attach（见 after/lsp/html.lua）
+    wxml = 'html', -- 微信小程序模板复用 html filetype：高亮/LSP/格式化统一走 html
     wxss = 'css',
     wxs = 'javascript',
     wpy = 'vue',

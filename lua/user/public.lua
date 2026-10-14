@@ -17,6 +17,10 @@ icons.setup({
     ['tsconfig.build.json'] = { glyph = '', hl = 'MiniIconsAzure' },
     ['yarn.lock'] = { glyph = '', hl = 'MiniIconsBlue' },
   },
+  extension = {
+    -- 微信小程序模板（HTML 文档图标 + 微信绿）
+    wxml = { glyph = '󰌝', hl = 'MiniIconsGreen' },
+  },
   filetype = {},
   use_file_extension = function(ext, file)
     return true
