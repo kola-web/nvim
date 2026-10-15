@@ -9,7 +9,6 @@ vim.filetype.add({
     ['code-snippets'] = 'jsonc', -- Included in the plugin
     template = 'nginx',
     ['code-profile'] = 'json',
-    ['http'] = 'http',
   },
   -- 文件名
   filename = {
