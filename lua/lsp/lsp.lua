@@ -89,7 +89,17 @@ local function on_lsp_attach(args)
   end, { desc = 'Rename file', buffer = buffer })
   keymap('n', '<leader>lr', vim.lsp.buf.rename, { desc = 'Rename', buffer = buffer })
   keymap('n', '<leader>ld', '<cmd>lua vim.diagnostic.setloclist()<CR>', { desc = 'diagnostic', buffer = buffer })
-  keymap('n', '<leader>le', '<cmd>EslintFixAll<CR>', { desc = 'EslintFixAll', buffer = buffer })
+  keymap('n', '<leader>le', function()
+    local has_eslint = false
+    for _, c in ipairs(vim.lsp.get_clients({ bufnr = buffer })) do
+      if c.name == 'eslint' then has_eslint = true break end
+    end
+    if has_eslint then
+      vim.cmd('EslintFixAll')
+    else
+      vim.notify('当前 buffer 没有 eslint LSP（项目可能没有 .eslintrc 配置）', vim.log.levels.WARN)
+    end
+  end, { desc = 'EslintFixAll', buffer = buffer })
   keymap('n', '<leader>lo', function()
     vim.lsp.buf.code_action({ apply = true, context = { only = { 'source.organizeImports' } } })
   end, { desc = 'Organize Imports', buffer = buffer })

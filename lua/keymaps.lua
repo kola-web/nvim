@@ -95,7 +95,8 @@ keymap('v', '>', '>gv', opts)
 keymap('n', '<leader>h', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', { desc = 'Redraw / clear hlsearch / diff update' })
 
 -- replace & complie
-keymap('n', '<leader>xs', require('utils.compile_scss'), { desc = 'toggle scss compile' })
+keymap('n', '<leader>xS', function() require('overseer').run_task({ name = 'compile scss' }) end, { desc = 'Compile current scss' })
+keymap('n', '<leader>xps', function() require('overseer').run_task({ name = 'watch scss' }) end, { desc = 'Watch scss' })
 keymap('n', '<leader>rd', '<cmd>%s/<div/<view/g<cr><cmd>%s/<\\/div/<\\/view/g<cr>', { desc = 'div -> view' })
 keymap('n', '<leader>rv', '<cmd>%s/<view/<div/g<cr><cmd>%s/<\\/view/<\\/div/g<cr>', { desc = 'view -> div' })
 keymap('n', '<leader>rp', '<cmd>%s#\\(\\d\\+\\)px#\\=printf("%d",submatch(1))."rpx"#g<cr>', { desc = 'px -> rpx' })

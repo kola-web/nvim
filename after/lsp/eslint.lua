@@ -24,7 +24,10 @@ return {
     'pcss',
     'postcss',
   },
-  root_markers = { 'eslint.config.js', 'eslint.config.cjs', 'eslint.config.mjs' },
+  root_markers = {
+    'eslint.config.js', 'eslint.config.cjs', 'eslint.config.mjs', -- flat config
+    '.eslintrc', '.eslintrc.js', '.eslintrc.cjs', '.eslintrc.yaml', '.eslintrc.yml', '.eslintrc.json', -- 老配置
+  },
   settings = {
     rulesCustomizations = {
       { rule = 'style/*', severity = 'off', fixable = true },

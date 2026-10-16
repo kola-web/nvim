@@ -11,7 +11,7 @@ M.servers = {
   'html', -- HTML
   'cssls', -- CSS
   'jsonls', -- JSON
-  -- 'eslint', -- ESLint
+  'eslint', -- ESLint
   'emmet_language_server', -- Emmet
   -- 其他常用语言
   'pyright', -- Python
@@ -22,7 +22,6 @@ M.servers = {
   'nginx_language_server', -- Nginx
   'powershell_es', -- PowerShell
   'marksman',
-  'biome',
 }
 
 M.null_servers = {
