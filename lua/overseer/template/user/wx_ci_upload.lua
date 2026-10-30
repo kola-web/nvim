@@ -1,4 +1,5 @@
 local wx = require('utils.wx')
+local util = require('utils.overseer_util')
 
 -- 把 JS API 脚本写到临时文件（脚本位于 temp，用 NODE_PATH 指向项目 node_modules 以解析 miniprogram-ci）
 local function write_script()
@@ -50,16 +51,13 @@ return {
     local appid = wx.appid(root)
     local key = wx.ci_key(root)
     if not root or not appid then
-      vim.notify('当前目录不是小程序项目（缺少 project.config.json / appid）', vim.log.levels.ERROR)
-      return
+      return util.fail_task('wx ci upload', '当前目录不是小程序项目（缺少 project.config.json / appid）')
     end
     if not key then
-      vim.notify('未找到代码上传密钥，请放到项目根目录 private.<appid>.key 或设置 WX_CI_KEY', vim.log.levels.ERROR)
-      return
+      return util.fail_task('wx ci upload', '未找到代码上传密钥，请放到项目根目录 private.<appid>.key 或设置 WX_CI_KEY')
     end
     if vim.fn.executable('node') ~= 1 then
-      vim.notify('未找到 node', vim.log.levels.ERROR)
-      return
+      return util.fail_task('wx ci upload', '未找到 node')
     end
 
     local script = write_script()

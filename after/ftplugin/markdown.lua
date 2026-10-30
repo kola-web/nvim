@@ -28,7 +28,8 @@ local function PasteTsvToMdTable()
   vim.api.nvim_put(out, 'l', true, true)
 end
 
---- 可视模式复制md片段，携带ZedAI @file#Lxx-Lyy 引用到系统剪贴板
+--- 可视模式复制md片段，生成 markdown 文件引用链接到系统剪贴板
+--- 输出格式：[@filename.ext (line:col)](file:///绝对路径#Lline:col)
 local function zed_ai_yank_selection(include_text)
   return function()
     local mode = vim.fn.mode()
@@ -39,18 +40,27 @@ local function zed_ai_yank_selection(include_text)
     local start_pos = vim.fn.getpos('v')
     local end_pos = vim.fn.getpos('.')
     local start_line = math.min(start_pos[2], end_pos[2])
-    local end_line = math.max(start_pos[2], end_pos[2])
+    local start_col = start_pos[3]
     local filepath = vim.fn.expand('%:p')
-    local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
-    local selected_text = table.concat(lines, '\n')
-    local zed_context
+    local filename = vim.fn.expand('%:t')
+    -- Windows 绝对路径转 file:// URL（反斜杠转正斜杠）
+    local file_url = 'file:///' .. filepath:gsub('\\', '/')
+    local link = ('[@%s (%d:%d)](%s#L%d:%d)'):format(
+      filename,
+      start_line,
+      start_col,
+      file_url,
+      start_line,
+      start_col
+    )
+    local out = link
     if include_text then
-      zed_context = string.format('@%s#L%d-L%d\n%s', filepath, start_line, end_line, selected_text)
-    else
-      zed_context = string.format('@%s#L%d-L%d', filepath, start_line, end_line)
+      local end_line = math.max(start_pos[2], end_pos[2])
+      local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+      out = link .. '\n' .. table.concat(lines, '\n')
     end
-    vim.fn.setreg('+', zed_context)
-    vim.notify(string.format('ZedAI上下文已复制 %s#L%d-L%d', vim.fn.expand('%:t'), start_line, end_line))
+    vim.fn.setreg('+', out)
+    vim.notify(string.format('已复制: @%s (%d:%d)', filename, start_line, start_col))
   end
 end
 
@@ -92,7 +102,7 @@ vim.keymap.set('i', ',2', '## <CR><++><Esc>kA', vim.tbl_extend('force', opts, { 
 vim.keymap.set('i', ',3', '### <CR><++><Esc>kA', vim.tbl_extend('force', opts, { desc = 'Markdown: h3 heading' }))
 vim.keymap.set('i', ',4', '#### <CR><++><Esc>kA', vim.tbl_extend('force', opts, { desc = 'Markdown: h4 heading' }))
 
--- ZedAI 可视模式复制带文件行号引用
-vim.keymap.set('v', '<leader>az', zed_ai_yank_selection(false), vim.tbl_extend('force', opts, { desc = 'Markdown: yank selection for ZedAI @file#Lxx-Lyy' }))
-vim.keymap.set('v', '<leader>aZ', zed_ai_yank_selection(true), vim.tbl_extend('force', opts, { desc = 'Markdown: yank selection + text for ZedAI' }))
+-- 文件引用链接（可视模式）：[@file (line:col)](file:///...#Lline:col)
+vim.keymap.set('v', '<leader>az', zed_ai_yank_selection(false), vim.tbl_extend('force', opts, { desc = 'Markdown: yank file link' }))
+vim.keymap.set('v', '<leader>aZ', zed_ai_yank_selection(true), vim.tbl_extend('force', opts, { desc = 'Markdown: yank file link + selected text' }))
 

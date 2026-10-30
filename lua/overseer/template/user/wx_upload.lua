@@ -1,4 +1,5 @@
 local wx = require('utils.wx')
+local util = require('utils.overseer_util')
 
 return {
   name = 'wx upload',
@@ -10,17 +11,15 @@ return {
   builder = function(params)
     -- 微信开发者工具 CLI 是 Windows 限定（cli.bat），macOS/Linux/WSL 直接失败提示
     if vim.fn.has('win32') ~= 1 then
-      return require('utils.overseer_util').fail_task('wx upload', '微信开发者工具 CLI 仅支持 Windows（cli.bat）')
+      return util.fail_task('wx upload', '微信开发者工具 CLI 仅支持 Windows（cli.bat）')
     end
     local root = wx.project_root()
     local cli = wx.cli()
     if not root then
-      vim.notify('当前目录不是小程序项目（缺少 project.config.json）', vim.log.levels.ERROR)
-      return
+      return util.fail_task('wx upload', '当前目录不是小程序项目（缺少 project.config.json）')
     end
     if not cli then
-      vim.notify('未找到 cli.bat，请设置环境变量 WX_CLI 指向其路径', vim.log.levels.ERROR)
-      return
+      return util.fail_task('wx upload', '未找到 cli.bat，请设置环境变量 WX_CLI 指向其路径')
     end
 
     return {

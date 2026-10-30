@@ -65,7 +65,11 @@ function M.picker()
         { item.preview, 'Comment' },
       }
     end,
-    confirm = function(item)
+    confirm = function(picker, item)
+      -- snacks picker 的 confirm 回调签名为 (picker, item, action)，第一个参数是 picker 对象
+      if not item then
+        return
+      end
       local script = item.text
       local is_win = vim.fn.has('win32') == 1
       local cmd = is_win
@@ -80,6 +84,7 @@ function M.picker()
           { 'on_complete_notify', statuses = { 'FAILURE' } },
         },
       }):start()
+      picker:close()
     end,
   })
 end
