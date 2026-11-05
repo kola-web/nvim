@@ -54,6 +54,8 @@ return {
 
     return {
       cmd = cmd,
+      -- 任务 cwd 跟随脚本所在目录, 保证脚本内相对路径按脚本目录解析
+      cwd = vim.fn.fnamemodify(script, ':h'),
       name = '提交图片',
       components = {
         'default',

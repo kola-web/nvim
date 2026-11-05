@@ -64,6 +64,9 @@ return {
 
     return {
       cmd = cmd,
+      -- 任务 cwd 跟随脚本所在目录: dist.ps1/sh 常用相对路径(如 ./web_src)定位子目录,
+      -- 若 cwd 停在子目录(如 web_src)而脚本在上层, 相对路径会解析错误
+      cwd = vim.fn.fnamemodify(script, ':h'),
       name = '打包上线',
       components = {
         'default',

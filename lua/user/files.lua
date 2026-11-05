@@ -126,7 +126,7 @@ end
 -- 原理: 路径写入共享状态文件, 任何 nvim 实例都可读取,
 --       不依赖寄存器(寄存器是单实例的), 也不怕系统剪贴板被覆盖
 -- 键位: cy(复制) cx(剪切) cp(粘贴到当前目录/光标所在目录)
---       cs(粘贴为指向源文件的符号链接, 跨项目引用; Windows 需开发者模式/管理员)
+--       cs(粘贴为指向源文件/目录的链接, 跨项目引用; Windows 目录走 junction, 免开发者模式)
 -- ============================================================
 local XCLIP_FILE = vim.fn.stdpath('state') .. '/minifiles-cross-clipboard.txt'
 
@@ -159,10 +159,15 @@ local function xclip_read()
 end
 
 local function xclip_delete(p)
-  local stat = vim.loop.fs_stat(p)
+  -- 用 lstat(不跟随链接): 符号链接只删链接本身, 绝不能递归删到链接指向的目标
+  local stat = vim.loop.fs_lstat(p)
   if stat == nil then return end
-  if stat.type == 'file' then
-    vim.loop.fs_unlink(p)
+  if stat.type == 'link' or stat.type == 'file' then
+    -- Windows 的目录 junction / 目录符号链接属于"目录型 reparse point",
+    -- fs_unlink(DeleteFileW) 删不掉, 需要 fs_rmdir(RemoveDirectoryW) —— 只移除链接本身
+    if vim.loop.fs_unlink(p) ~= true and vim.loop.fs_lstat(p) ~= nil then
+      vim.loop.fs_rmdir(p)
+    end
   elseif stat.type == 'directory' then
     for entry, _ in vim.fs.dir(p, { hidden = true }) do
       xclip_delete(vim.fs.joinpath(p, entry))
@@ -272,15 +277,20 @@ local function xclip_paste_symlink()
     return
   end
 
-  local name = vim.fn.fnamemodify(src, ':t')
-  local dst = vim.fs.joinpath(target_dir, name)
+  -- 源路径规范化: fnamemodify(':p') 对目录会追加尾斜杠, 去掉它(盘根除外)
   local src_abs = vim.fn.fnamemodify(src, ':p')
-  if src_abs == vim.fn.fnamemodify(dst, ':p') then
+  if not src_abs:match('^%a:[/\\]$') and src_abs ~= '/' and src_abs ~= '\\' then
+    src_abs = src_abs:gsub('[/\\]+$', '')
+  end
+  local name = vim.fn.fnamemodify(src_abs, ':t')
+  local dst = vim.fs.joinpath(target_dir, name)
+  if src_abs == vim.fn.fnamemodify(dst, ':p'):gsub('[/\\]+$', '') then
     vim.notify('mini.files: 源和目标相同', vim.log.levels.WARN)
     return
   end
-  if vim.loop.fs_stat(src_abs) == nil then
-    vim.notify(('mini.files: 源文件不存在: %s'):format(src_abs), vim.log.levels.WARN)
+  local src_stat = vim.loop.fs_stat(src_abs)
+  if src_stat == nil then
+    vim.notify(('mini.files: 源不存在: %s'):format(src_abs), vim.log.levels.WARN)
     return
   end
   if vim.loop.fs_stat(dst) ~= nil then
@@ -292,15 +302,44 @@ local function xclip_paste_symlink()
     xclip_delete(dst)
   end
 
-  -- vim.loop.fs_symlink(target, new_link): 跨平台(win/mac), Windows 上
-  -- 创建符号链接需要开发者模式或管理员权限, 否则 EPERM
-  local ok, err = pcall(vim.loop.fs_symlink, src_abs, dst)
-  if ok then
-    vim.notify(('mini.files: 已创建符号链接\n%s → %s'):format(dst, src_abs), vim.log.levels.INFO)
+  -- 创建链接: 文件用普通符号链接; 目录在 Windows 上优先 junction
+  -- (junction 不需要开发者模式/管理员权限, 仅限本地卷), 失败再退回普通目录符号链接。
+  -- 注意: luv 的 flags 表字段是 dir / junction, 不是数字形式的 { flags = N }
+  --       —— 写错会被静默忽略, 目录链接创建失败却不报错(表现为"按了没反应")
+  local is_windows = type(jit) == 'table' and jit.os == 'Windows'
+  local kinds
+  if src_stat.type ~= 'directory' then
+    kinds = { 'plain' }
+  elseif is_windows then
+    kinds = { 'junction', 'dir', 'plain' }
+  else
+    kinds = { 'dir', 'plain' }
+  end
+
+  local created, last_err = false, '未知错误'
+  for _, kind in ipairs(kinds) do
+    local flags = kind == 'junction' and { junction = true } or (kind == 'dir' and { dir = true }) or nil
+    local ok, ret, err
+    if flags == nil then
+      ok, ret, err = pcall(vim.loop.fs_symlink, src_abs, dst)
+    else
+      ok, ret, err = pcall(vim.loop.fs_symlink, src_abs, dst, flags)
+    end
+    -- 同步版返回 true 或 nil + err; 个别情况下失败也可能留下链接, 以 lstat 为准
+    if ok and (ret == true or vim.loop.fs_lstat(dst) ~= nil) then
+      created = true
+      break
+    end
+    last_err = err or (ok and '创建失败(无错误信息)' or tostring(ret))
+  end
+
+  if created then
+    vim.fn.setreg('+', src_abs)
+    vim.notify(('mini.files: 已创建链接\n%s → %s'):format(dst, src_abs), vim.log.levels.INFO)
     require('mini.files').synchronize()
   else
     vim.notify(
-      ('mini.files: 创建符号链接失败: %s\nWindows 需开启「开发者模式」或以管理员运行 nvim; mac 通常无需特殊权限'):format(tostring(err)),
+      ('mini.files: 创建链接失败: %s\n目标: %s'):format(tostring(last_err), dst),
       vim.log.levels.ERROR
     )
   end
