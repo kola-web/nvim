@@ -97,3 +97,59 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.conceallevel = 0
   end,
 })
+
+-- q 关闭各类功能窗格（quickfix / help / 插件浮窗列表等）
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup('EasyQuit'),
+  pattern = {
+    'qf', 'help', 'man', 'notify', 'nofile', 'lspinfo', 'lazy', 'mason',
+    'checkhealth', 'null-ls-info', 'oil', 'aerial', 'Trouble', 'trouble',
+    'OverseerList', 'kulala', 'NvimTree', 'neo-tree', 'undotree',
+    'gitcommit', 'startuptime', 'fugitive', 'vimfiler',
+  },
+  callback = function(args)
+    vim.bo[args.buf].buflisted = false
+    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = args.buf, silent = true, desc = 'Close window' })
+  end,
+})
+
+-- diff 模式下给两侧窗口加 winbar 标签，区分“当前文件”和“对比内容”
+vim.api.nvim_set_hl(0, 'DiffLabelCurrent', { bg = '#1f3d2b', fg = '#86d6a8', bold = true })
+vim.api.nvim_set_hl(0, 'DiffLabelOther', { bg = '#3d2f1f', fg = '#d6a886', bold = true })
+
+local function label_diff_windows()
+  local wins = vim.api.nvim_tabpage_list_wins(0)
+  local diff_wins = {}
+  for _, w in ipairs(wins) do
+    if vim.wo[w].diff then
+      table.insert(diff_wins, w)
+    end
+  end
+  if #diff_wins < 2 then
+    return
+  end
+  if vim.wo[diff_wins[1]].winbar:find('DiffLabelCurrent', 1, true) then
+    return
+  end
+
+  local vertical = vim.fn.winwidth(diff_wins[1]) ~= vim.o.columns
+  table.sort(diff_wins, function(a, b)
+    local ia = vim.api.nvim_win_get_position(a)
+    local ib = vim.api.nvim_win_get_position(b)
+    if vertical then
+      return ia[2] < ib[2]
+    end
+    return ia[1] < ib[1]
+  end)
+
+  vim.wo[diff_wins[1]].winbar = '%#DiffLabelCurrent#  [当前文件] %t%*'
+  for i = 2, #diff_wins do
+    vim.wo[diff_wins[i]].winbar = '%#DiffLabelOther#  [对比] %t%*'
+  end
+end
+
+vim.api.nvim_create_autocmd({ 'WinEnter', 'BufWinEnter', 'User' }, {
+  group = augroup('DiffLabels'),
+  pattern = { '*', 'DiffUpdated' },
+  callback = label_diff_windows,
+})

@@ -141,18 +141,12 @@ vim.lsp.config('*', {
 local emmet_language_server = require('neoconf').get('emmet_language_server') or {}
 vim.lsp.config('emmet_language_server', emmet_language_server)
 
-local is_vue2 = utils.is_vue2_project()
 local servers = utils.servers
 
+-- vue_ls / vuels / ts_ls 是否挂载改由各 server 的 root_dir 按 buffer 所属项目决定，
+-- 不再根据启动时的 cwd 做全局开关。
 for _, server in pairs(servers) do
-  local status = true
-  if server == 'vue_ls' and is_vue2 then
-    status = false
-  end
-  if server == 'vuels' and not is_vue2 then
-    status = false
-  end
-  vim.lsp.enable(server, status)
+  vim.lsp.enable(server)
 end
 
 vim.keymap.set('n', '<leader>ln', '<cmd>Neoconf<cr>', { desc = 'Neoconf' })

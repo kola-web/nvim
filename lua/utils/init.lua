@@ -81,16 +81,60 @@ M.is_win = function()
   return vim.uv.os_uname().sysname:find('Windows') ~= nil
 end
 
+-- 对比当前 buffer（含未保存修改）与剪贴板内容。
+-- 优先用 codediff.nvim（与 <leader>gh 同一套 UI）；codediff 不可用
+-- （mac/WSL 未跑过 :CodeDiff install、原生库缺失等）时自动回退到内置 diff。
 M.compare_to_clipboard = function()
-  local ftype = vim.bo.filetype
+  local cur = vim.api.nvim_get_current_buf()
+  local cur_path = vim.api.nvim_buf_get_name(cur)
+  if cur_path == '' then
+    vim.notify('[diff] 当前 buffer 没有文件名，无法对比', vim.log.levels.WARN)
+    return
+  end
+
+  local clipboard = vim.fn.getreg('"')
+  if clipboard == '' then
+    vim.notify('[diff] 剪贴板为空', vim.log.levels.WARN)
+    return
+  end
+  local clip_lines = vim.split(clipboard, '\n', { trimempty = false })
+
+  -- 1) 尝试 codediff
+  local ext = vim.fn.fnamemodify(cur_path, ':e')
+  local suffix = ext ~= '' and ('.' .. ext) or ''
+  local tmp_a = vim.fn.tempname() .. suffix
+  local tmp_b = vim.fn.tempname() .. suffix
+  vim.fn.writefile(vim.api.nvim_buf_get_lines(cur, 0, -1, false), tmp_a)
+  vim.fn.writefile(clip_lines, tmp_b)
+
+  local ok, err = pcall(function()
+    vim.cmd('CodeDiff file ' .. vim.fn.fnameescape(tmp_a) .. ' ' .. vim.fn.fnameescape(tmp_b))
+  end)
+  if ok then
+    return
+  end
+
+  -- 2) 回退：内置 vsplit diff（winbar 标签由 autocommands.lua 自动加）
+  vim.notify('[diff] codediff 不可用，已回退内置 diff（' .. tostring(err) .. '）', vim.log.levels.WARN)
   vim.cmd('vsplit')
   vim.cmd('enew')
-  vim.cmd('normal! P')
-  vim.cmd('setlocal buftype=nowrite')
-  vim.cmd('set filetype=' .. ftype)
+  local scratch_buf = vim.api.nvim_get_current_buf()
+  local scratch_win = vim.api.nvim_get_current_win()
+  vim.api.nvim_buf_set_lines(scratch_buf, 0, -1, false, clip_lines)
+  vim.bo[scratch_buf].buftype = 'nowrite'
+  vim.bo[scratch_buf].buflisted = false
+  vim.bo[scratch_buf].bufhidden = 'wipe'
+  vim.bo[scratch_buf].filetype = vim.bo[cur].filetype
   vim.cmd('diffthis')
-  vim.cmd([[execute "normal! \<C-w>h"]])
+  vim.cmd('wincmd h')
   vim.cmd('diffthis')
+
+  local close = function()
+    pcall(vim.cmd, 'diffoff!')
+    pcall(vim.api.nvim_win_close, scratch_win, true)
+    pcall(vim.api.nvim_buf_delete, scratch_buf, { force = true })
+  end
+  vim.keymap.set('n', 'q', close, { buffer = scratch_buf, desc = 'Close diff' })
 end
 
 M.is_vue = function()
