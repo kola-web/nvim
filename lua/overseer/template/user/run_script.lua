@@ -5,12 +5,18 @@ return {
   builder = function()
     local file = vim.fn.expand('%:p')
     local ft = vim.bo.filetype
-    -- c/cpp：Windows 无 sh，用 bash -c 包装「编译 && 运行」（需 mingw gcc/g++，git bash 自带 bash）
-    local out = file:gsub('%.[^.]*$', '.exe')
+    local is_win = vim.fn.has('win32') == 1
+    -- Windows 下 gcc 产物是 .exe；mac/Linux 无后缀
+    local out = file:gsub('%.[^.]*$', is_win and '.exe' or '')
+    -- macOS 12+ 默认只有 python3，没有 python
+    local python = 'python'
+    if not is_win and vim.fn.executable('python') ~= 1 and vim.fn.executable('python3') == 1 then
+      python = 'python3'
+    end
     local runners = {
       sh = { 'bash', file },
       go = { 'go', 'run', file },
-      python = { 'python', file },
+      python = { python, file },
       javascript = { 'node', file },
       typescript = { 'npx', '--yes', 'tsx', file },
       c = { 'bash', '-c', ('gcc "%s" -o "%s" && "%s"'):format(file, out, out) },

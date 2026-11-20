@@ -5,16 +5,13 @@ return {
   name = 'wx build-npm',
   desc = '微信开发者工具：触发 npm 构建（需开启服务端口）',
   builder = function()
-    if vim.fn.has('win32') ~= 1 then
-      return util.fail_task('wx build-npm', '微信开发者工具 CLI 仅支持 Windows（cli.bat）')
-    end
     local root = wx.project_root()
     local cli = wx.cli()
     if not root then
       return util.fail_task('wx build-npm', '当前目录不是小程序项目（缺少 project.config.json）')
     end
     if not cli then
-      return util.fail_task('wx build-npm', '未找到 cli.bat，请设置环境变量 WX_CLI 指向其路径')
+      return util.fail_task('wx build-npm', '未找到微信开发者工具 CLI，请设置环境变量 WX_CLI 指向 cli.bat / Contents/MacOS/cli')
     end
 
     return {

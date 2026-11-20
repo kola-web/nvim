@@ -28,18 +28,26 @@ function M.appid(root)
   return nil
 end
 
--- 定位微信开发者工具 cli.bat；可用环境变量 WX_CLI 覆盖
+-- 定位微信开发者工具 cli；可用环境变量 WX_CLI 覆盖
+-- Windows 是 cli.bat；macOS 是 app 包内的可执行 cli（无扩展名）
 function M.cli()
   local env = vim.fn.getenv('WX_CLI')
   if env and env ~= '' and vim.fn.filereadable(env) == 1 then
     return env
   end
   local candidates = {
+    -- Windows
     'C:/Program Files (x86)/Tencent/微信web开发者工具/cli.bat',
     'C:/Program Files/Tencent/微信web开发者工具/cli.bat',
     'C:/Program Files (x86)/Tencent/微信开发者工具/cli.bat',
     'C:/Program Files/Tencent/微信开发者工具/cli.bat',
     vim.fn.expand('~/AppData/Local/微信开发者工具/cli.bat'),
+    -- macOS
+    '/Applications/wechatwebdevtools.app/Contents/MacOS/cli',
+    '/Applications/微信开发者工具.app/Contents/MacOS/cli',
+    vim.fn.expand('~/Applications/wechatwebdevtools.app/Contents/MacOS/cli'),
+    -- Linux（官方无 GUI 版时常见的手动放置位置）
+    '/opt/wechat-devtools/bin/cli',
   }
   for _, p in ipairs(candidates) do
     if vim.fn.filereadable(p) == 1 then
@@ -47,6 +55,16 @@ function M.cli()
     end
   end
   return nil
+end
+
+-- cli 是否可直接执行（macOS/Linux 是脚本，Windows 是 .bat）
+function M.is_win()
+  return vim.fn.has('win32') == 1
+end
+
+-- 给路径加 shell 单引号（用于 bash -lc 拼接）
+function M.shq(s)
+  return "'" .. (s:gsub("'", "'\\''")) .. "'"
 end
 
 -- 预览二维码图片的临时路径

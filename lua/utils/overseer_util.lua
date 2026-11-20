@@ -22,7 +22,13 @@ function M.fail_task(name, msg)
   if vim.fn.has('win32') == 1 then
     cmd = vim.list_extend(M.pwsh(), { '-Command', ("Write-Error '%s'; exit 1"):format(msg:gsub("'", "''")) })
   else
-    cmd = { 'bash', '-lc', ('echo "%s" >&2; exit 1'):format(msg:gsub('"', '\\"')) }
+    -- bash 双引号内需要转义 \ " ` $，否则路径/信息里的特殊字符会被 shell 展开
+    local esc = msg
+      :gsub('\\', '\\\\')
+      :gsub('"', '\\"')
+      :gsub('`', '\\`')
+      :gsub('%$', '\\$')
+    cmd = { 'bash', '-lc', ('echo "%s" >&2; exit 1'):format(esc) }
   end
   return {
     cmd = cmd,
